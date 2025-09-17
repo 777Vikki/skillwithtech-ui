@@ -10,9 +10,5 @@ import { Header } from './layout/header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  text = '';
-
-  changeText(value: string) {
-    console.log(value);
-  }
+  
 }

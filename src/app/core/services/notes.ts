@@ -53,4 +53,8 @@ export class NotesService {
     let plainText = doc.body.textContent || "";
     return plainText;
   }
+
+  checkMobileScreen(): boolean {
+    return window.innerWidth <= 768;
+  }
 }
