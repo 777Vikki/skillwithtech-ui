@@ -1,0 +1,18 @@
+<header class="header">
+    <!-- Left: Page name and dropdown -->
+    <div class="page-info">
+        <p-select [options]="notes" [(ngModel)]="selectedNote" optionLabel="name" placeholder="Select a Note"
+            (onChange)="onSelectNote()" class="w-full md:w-56" />
+
+        <!-- <select class="page-dropdown">
+            <option>Dashboard</option>
+            <option>Employees</option>
+            <option>Settings</option>
+        </select> -->
+    </div>
+
+    <!-- Right: Logo + Profile -->
+    <div class="right-section">
+        <div class="profile-avatar"> VM </div>
+    </div>
+</header>
