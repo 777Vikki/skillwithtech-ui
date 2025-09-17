@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 export class TextEditor implements OnInit {
   formBuilder = inject(FormBuilder);
 
+  @Input() editorText: string | undefined;
   @Input() editorStyle = {};
   @Input() showCancleBtn = false;
 
@@ -23,7 +24,10 @@ export class TextEditor implements OnInit {
   });
 
   ngOnInit() {
-    this.editorStyle = Object.assign({}, { height: '320px' }, this.editorStyle)
+    this.editorStyle = Object.assign({}, { height: '320px' }, this.editorStyle);
+    this.textEditorForm.patchValue({
+      text: this.editorText
+    });
   }
 
   onCancle() {
@@ -35,7 +39,9 @@ export class TextEditor implements OnInit {
   }
 
   onSubmit() {
-    const editorText = this.textEditorForm.value.text ?? '';
-    this.emitEditorText.emit(editorText);
+    let text = this.textEditorForm.value.text ?? '';
+    text = text.replace(/&nbsp;/g, ' ');
+    text = text.replace(/(<p>\s*<\/p>)/g, '</br>');
+    this.emitEditorText.emit(text);
   }
 }

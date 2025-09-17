@@ -1,4 +1,5 @@
 <div class="note-container">
+    @if(!isMobile) {
     <div class="disktop-view">
         <div class="note-section">
             <div class="note-section-header">
@@ -33,6 +34,22 @@
             <app-description [topic]="selectedTopic" (emitEditorText)="onAddDescription($event)"></app-description>
         </div>
     </div>
+    } @else {
+    <div class="mobile-view">
+        @for(section of sections; track section.sectionId) {
+        <div class="note-section">
+            <div class="note-section-item" [innerHTML]="section.name"></div>
+            @for(topic of section.topics; track topic.topicId) {
+            <div class="note-topic">
+                <div class="note-topic-item" [innerHTML]="topic.text"></div>
+                <div class="note-description-item" [innerHTML]="topic.description"></div>
+            </div>
+            }
+        </div>
+
+        }
+    </div>
+    }
 </div>
 
 @if(show) {

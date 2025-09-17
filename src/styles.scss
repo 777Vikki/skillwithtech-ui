@@ -4,6 +4,15 @@ h3 {
     margin: 0px;
 }
 
+pre {
+    background-color: #b2a8a840;
+    white-space: break-spaces;
+}
+
+strong {
+    overflow-wrap: break-word;
+}
+
 .link {
     cursor: pointer;
     color: blue;

@@ -6,58 +6,58 @@ export const angularTestingList = () => {
             "noteType": "Angular",
             "topics": [
                 {
-                    "text": "<p><strong>What&nbsp;is&nbsp;Angular?</strong></p>",
+                    "text": "<p><strong>What is Angular?</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 1,
-                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular&nbsp;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is&nbsp;a&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript-based&nbsp;front-end&nbsp;framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;developed&nbsp;by&nbsp;Google&nbsp;for&nbsp;building&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">single-page&nbsp;applications&nbsp;(SPAs)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.&nbsp;It&nbsp;provides&nbsp;a&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">component-based&nbsp;architecture</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;built-in&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency&nbsp;injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;two-way&nbsp;data&nbsp;binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;and&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">powerful&nbsp;RxJS-based&nbsp;state&nbsp;management</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p><p></p><p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular&nbsp;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is&nbsp;a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;full-fledged&nbsp;front-end&nbsp;framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;that&nbsp;provides&nbsp;a&nbsp;complete&nbsp;solution&nbsp;for&nbsp;building&nbsp;web&nbsp;applications.&nbsp;It&nbsp;includes&nbsp;built-in&nbsp;support&nbsp;for&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">routing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">forms</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;and</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;HTTP&nbsp;communication</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;through&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">HttpClient</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular&nbsp;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">two-way&nbsp;data&nbsp;binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;which&nbsp;automatically&nbsp;synchronizes&nbsp;the&nbsp;model&nbsp;and&nbsp;the&nbsp;view.&nbsp;It&nbsp;uses&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency&nbsp;injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">&nbsp;to&nbsp;make&nbsp;services&nbsp;reusable&nbsp;and&nbsp;improve&nbsp;testability.&nbsp;Angular&nbsp;also&nbsp;leverages&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">RxJS&nbsp;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">for&nbsp;efficient&nbsp;asynchronous&nbsp;data&nbsp;handling&nbsp;and&nbsp;supports&nbsp;</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,&nbsp;which&nbsp;enhances&nbsp;maintainability,&nbsp;scalability,&nbsp;and&nbsp;developer&nbsp;productivity.</span></p>"
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript-based front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> developed by Google for building </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">single-page applications (SPAs)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. It provides a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">component-based architecture</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, built-in </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">powerful RxJS-based state management</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> full-fledged front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> that provides a complete solution for building web applications. It includes built-in support for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">routing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">forms</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> HTTP communication</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> through </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">HttpClient</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which automatically synchronizes the model and the view. It uses </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to make services reusable and improve testability. Angular also leverages </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">RxJS </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">for efficient asynchronous data handling and supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which enhances maintainability, scalability, and developer productivity.</span></p>"
                 },
                 {
-                    "text": "<p><strong>How&nbsp;is&nbsp;it&nbsp;different&nbsp;from&nbsp;other&nbsp;JavaScript&nbsp;frameworks?</strong></p>",
+                    "text": "<p><strong>How is it different from other JavaScript frameworks?</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 2,
-                    "description": ""
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> full-fledged front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> that provides a complete solution for building web applications. It includes built-in support for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">routing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">forms</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> HTTP communication</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> through </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">HttpClient</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which automatically synchronizes the model and the view. It uses </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to make services reusable and improve testability. Angular also leverages </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">RxJS </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">for efficient asynchronous data handling and supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which enhances maintainability, scalability, and developer productivity.</span></p>"
                 },
                 {
-                    "text": "<p><strong>What&nbsp;are&nbsp;the&nbsp;key&nbsp;features&nbsp;of&nbsp;Angular?</strong></p>",
+                    "text": "<p><strong>What are the key features of Angular?</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 3,
-                    "description": ""
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers several key features such as Component-Based Architecture, Two-Way Data Binding, Dependency Injection (DI), powerful Directives, RxJS for Reactive Programming, Built-in Routing, robust Forms Handling, State Management using tools like NgRx, and Cross-Platform Support for building web, mobile, and desktop applications.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">These features make Angular a powerful and scalable framework for building enterprise-level applications efficiently.</span></p>"
                 },
                 {
-                    "text": "<p><strong>If&nbsp;we&nbsp;can&nbsp;create&nbsp;dynamic&nbsp;pages&nbsp;using&nbsp;JavaScript,&nbsp;why&nbsp;do&nbsp;we&nbsp;need&nbsp;Angular?</strong></p>",
+                    "text": "<p><strong>If we can create dynamic pages using JavaScript, why do we need Angular?</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 4,
-                    "description": ""
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">JavaScript </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">can create dynamic pages, but </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">provides a structured framework for building large-scale, maintainable applications. It offers features like component-based architecture, two-way data binding, dependency injection, routing, and state management, which help manage complexity, improve code reusability, and speed up development — especially for enterprise-grade apps.</span></p>"
                 },
                 {
-                    "text": "<p><strong>Explain&nbsp;the&nbsp;differences&nbsp;between&nbsp;AngularJS&nbsp;and&nbsp;Angular.</strong></p>",
+                    "text": "<p><strong>Explain the differences between AngularJS and Angular.</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 5,
-                    "description": ""
+                    "description": "<ol><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS is based on the </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">MVC (Model-View-Controller)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> architecture, whereas Angular follows a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">component-based architecture</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">JavaScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">not optimized for mobile</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">mobile-friendly</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS has been </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">discontinued</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">actively maintained by Google</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></li></ol>"
                 },
                 {
-                    "text": "<p><strong>What&nbsp;is&nbsp;Angular&nbsp;Application&nbsp;load&nbsp;flow?</strong></p>",
+                    "text": "<p><strong>What is Angular Application load flow?</strong></p>",
                     "sectionId": 1,
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 6,
-                    "description": ""
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">The browser loads </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">index.html</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which usually contains a root element (like </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">&lt;app-root&gt;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">). Then </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">main.ts</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> executes. This is the entry point (the first TypeScript file that runs), and its job is to bootstrap the Angular application.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Earlier, Angular used </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">platformBrowserDynamic().bootstrapModule(AppModule)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> for NgModules. But after the introduction of standalone components, it now uses </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">bootstrapApplication()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to bootstrap a component directly.</span></p></br></br><pre data-language=\"plain\">\nmain.ts\n\nimport { bootstrapApplication } from &#39;@angular/platform-browser&#39;;\nimport { appConfig } from &#39;./app/app.config&#39;;\nimport { App } from &#39;./app/app&#39;;\nbootstrapApplication(App, appConfig)\n  .catch((err) =&gt; console.error(err));\n</pre></br><p>Next, Angular initializes AppComponent, whose selector (&lt;app-root&gt;) matches the element in index.html.</p><p>For dependency injection setup, bootstrapApplication() also accepts providers such as HttpClient, Router, etc.</p></br></br><pre data-language=\"plain\">\napp.config.ts\n\nimport { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from &#39;@angular/core&#39;;\nimport { provideRouter } from &#39;@angular/router&#39;;\nimport { routes } from &#39;./app.routes&#39;;\nimport { provideHttpClient } from &#39;@angular/common/http&#39;;\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideBrowserGlobalErrorListeners(),\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideHttpClient(),\n    provideRouter(routes)\n  ]\n};\n</pre></br><p>Angular then builds the component tree starting from the root component, runs change detection, and updates the DOM.</p>"
                 }
             ],
             "subSections": []
         },
         {
-            "name": "<p><strong>Angular&nbsp;CLI</strong></p>",
+            "name": "<p><strong>Angular CLI</strong></p>",
             "sectionId": 2,
             "noteType": "Angular",
             "topics": [],
@@ -78,7 +78,7 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>ng-template&nbsp;and&nbsp;ng-container</strong></p>",
+            "name": "<p><strong>ng-template and ng-container</strong></p>",
             "sectionId": 5,
             "noteType": "Angular",
             "topics": [],
@@ -92,21 +92,21 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Service&nbsp;and&nbsp;Injectable</strong></p>",
+            "name": "<p><strong>Service and Injectable</strong></p>",
             "sectionId": 7,
             "noteType": "Angular",
             "topics": [],
             "subSections": []
         },
         {
-            "name": "<p><strong>Angular&nbsp;lifecycle&nbsp;hooks</strong></p>",
+            "name": "<p><strong>Angular lifecycle hooks</strong></p>",
             "sectionId": 8,
             "noteType": "Angular",
             "topics": [],
             "subSections": []
         },
         {
-            "name": "<p><strong>Data&nbsp;Binding</strong></p>",
+            "name": "<p><strong>Data Binding</strong></p>",
             "sectionId": 9,
             "noteType": "Angular",
             "topics": [],
@@ -134,7 +134,7 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Zone.js,&nbsp;NgZone&nbsp;and&nbsp;Change&nbsp;Detection</strong></p>",
+            "name": "<p><strong>Zone.js, NgZone and Change Detection</strong></p>",
             "sectionId": 13,
             "noteType": "Angular",
             "topics": [],
@@ -148,14 +148,14 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Component&nbsp;Communication</strong></p>",
+            "name": "<p><strong>Component Communication</strong></p>",
             "sectionId": 15,
             "noteType": "Angular",
             "topics": [],
             "subSections": []
         },
         {
-            "name": "<p><strong>ViewChild&nbsp;and&nbsp;ContentChild</strong></p>",
+            "name": "<p><strong>ViewChild and ContentChild</strong></p>",
             "sectionId": 16,
             "noteType": "Angular",
             "topics": [],
@@ -169,7 +169,7 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Performance&nbsp;Optimization</strong></p>",
+            "name": "<p><strong>Performance Optimization</strong></p>",
             "sectionId": 18,
             "noteType": "Angular",
             "topics": [],
@@ -190,7 +190,7 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>angular.json&nbsp;file</strong></p>",
+            "name": "<p><strong>angular.json file</strong></p>",
             "sectionId": 21,
             "noteType": "Angular",
             "topics": [],
@@ -204,7 +204,7 @@ export const angularTestingList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Challenges&nbsp;Faced&nbsp;in&nbsp;Angular&nbsp;Project</strong></p>",
+            "name": "<p><strong>Challenges Faced in Angular Project</strong></p>",
             "sectionId": 23,
             "noteType": "Angular",
             "topics": [],

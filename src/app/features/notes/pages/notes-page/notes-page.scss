@@ -75,4 +75,34 @@
             height: calc(100vh - 85px);
         }
     }
+
+    .mobile-view {
+        border: 1px solid black;
+
+        .note-section {
+            border: 1px solid black;
+            margin: 4px;
+
+            .note-section-item {
+                border-bottom: 1px solid black;
+                padding: 4px;
+                color: red;
+            }
+
+            .note-topic {
+                margin: 4px;
+                border: 1px solid black;
+
+                .note-topic-item {
+                    padding: 4px;
+                    border-bottom: 1px dashed black;
+                    background-color: #80808038;
+                }
+
+                .note-description-item {
+                    padding: 4px;
+                }
+            }
+        }
+    }
 }

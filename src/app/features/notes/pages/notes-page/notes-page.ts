@@ -22,6 +22,7 @@ export class NotesPage implements OnInit {
   actions: INoteAction | undefined;
   selectedSection: ISection | undefined;
   selectedTopic: ITopic | undefined;
+  isMobile = this.noteService.checkMobileScreen();
 
   ngOnInit(): void {
     this.noteService.getNotesSection()
