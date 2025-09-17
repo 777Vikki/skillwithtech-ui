@@ -1,0 +1,14 @@
+<div class="text-editor-container">
+    <form [formGroup]="textEditorForm" (ngSubmit)="onSubmit()">
+        <div>
+            <p-editor formControlName="text" [style]="editorStyle" />
+        </div>
+        <div class="editor-button">
+            <p-button type="submit" [disabled]="textEditorForm.invalid" label="Submit" severity="success" />
+            <p-button (click)="onClear()" [disabled]="textEditorForm.invalid" label="Clear" severity="secondary" />
+            @if(showCancleBtn) {
+            <p-button (click)="onCancle()" label="Cancle" severity="secondary" />
+            }
+        </div>
+    </form>
+</div>

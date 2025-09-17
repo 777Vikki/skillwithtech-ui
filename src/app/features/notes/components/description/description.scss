@@ -1,0 +1,45 @@
+.note-desc {
+    .note-description-header {
+        padding: 8px;
+        border-bottom: 1px solid black;
+    }
+
+    .note-description-container {
+        overflow-y: auto;
+        height: calc(100vh - 125px);
+    }
+}
+
+.no-ans {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    align-items: center;
+
+    .no-ans-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.ans-container {
+    padding: 8px 8px 0px 8px;
+
+    .ans-box {
+        border: 1px solid black;
+        border-radius: 4px;
+
+        .ans-box-header {
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid black;
+        }
+
+        .topic-description {
+            padding: 8px;
+        }
+    }
+}

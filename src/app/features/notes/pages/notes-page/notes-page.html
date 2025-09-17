@@ -1,0 +1,40 @@
+<div class="note-container">
+    <div class="disktop-view">
+        <div class="note-section">
+            <div class="note-section-header">
+                <h3>Section <span class="link" (click)="addSection()">+</span></h3>
+            </div>
+            <div class="note-section-container">
+                @for(section of sections; track section.sectionId; let i = $index) {
+                <div class="note-section-item" (click)="onSelectSection(section)"
+                    [ngClass]="{'selected': selectedSection?.sectionId === section.sectionId}">
+                    <div><strong>{{ i + 1 }}.</strong></div>
+                    <div [innerHTML]="section.name"></div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="note-topic">
+            <div class="note-topic-header">
+                <h3>Topic <span class="link" (click)="addTopic()">+</span></h3>
+            </div>
+            <div class="note-topic-container">
+                @let topics = selectedSection?.topics || [];
+                @for(topic of topics; track topic.topicId; let i = $index) {
+                <div class="note-topic-item" (click)="onSelectTopic(topic)"
+                    [ngClass]="{'selected': selectedTopic?.topicId === topic.topicId}">
+                    <div><strong>{{ i + 1 }}.</strong></div>
+                    <div [innerHTML]="topic.text"></div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="note-description">
+            <app-description [topic]="selectedTopic" (emitEditorText)="onAddDescription($event)"></app-description>
+        </div>
+    </div>
+</div>
+
+@if(show) {
+<app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />
+}

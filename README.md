@@ -57,3 +57,52 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+src/app/
+│
+├── core/                          # Core modules & singletons
+│   ├── guards/                    # Route guards
+│   ├── interceptors/              # HTTP interceptors
+│   ├── services/                  # Core services (auth, api, storage)
+│   ├── models/                    # Interfaces & types (Note, User, etc.)
+│   ├── utils/                     # Helpers, constants
+│   └── core.config.ts             # Core configuration
+│
+├── shared/                        # Reusable components, directives, pipes
+│   ├── components/                # Buttons, modals, inputs, loaders
+│   ├── directives/                # Shared directives
+│   ├── pipes/                     # Shared pipes
+│   └── shared.module.ts (optional if needed)
+│
+├── features/                      # Feature-specific modules
+│   ├── auth/                      # Sign in / Sign up
+│   │   ├── login/                 # Login component
+│   │   ├── register/              # Register component
+│   │   └── auth.routes.ts
+│   │
+│   ├── notes/                     # Notes feature
+│   │   ├── components/            # NoteCard, NoteList, NoteEditor
+│   │   ├── pages/                 # NotesPage, NoteDetailsPage
+│   │   ├── store/                 # NgRx (actions, reducer, effects, selectors)
+│   │   └── notes.routes.ts
+│   │
+│   └── dashboard/                 # Dashboard/Home
+│       ├── components/
+│       ├── pages/
+│       └── dashboard.routes.ts
+│
+├── state/                         # Global NgRx store (if required)
+│   ├── app.actions.ts
+│   ├── app.reducer.ts
+│   ├── app.effects.ts
+│   └── app.selectors.ts
+│
+├── layout/                        # Application-wide layouts
+│   ├── header/                    
+│   ├── sidebar/
+│   └── layout.component.ts
+│
+├── app.routes.ts                  # Root routing
+├── app.component.ts
+└── main.ts
+
