@@ -3,6 +3,8 @@
     <div class="page-info">
         <p-select [options]="notes" [(ngModel)]="selectedNote" optionLabel="name" placeholder="Select a Note"
             (onChange)="onSelectNote()" class="w-full md:w-56" />
+        <a class="link" routerLink="/notes/active-notes">Notes</a>
+        <a class="link" routerLink="/notes/manage-notes">Manage Notes</a>
 
         <!-- <select class="page-dropdown">
             <option>Dashboard</option>

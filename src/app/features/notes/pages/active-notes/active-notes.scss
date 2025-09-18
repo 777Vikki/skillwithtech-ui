@@ -1,0 +1,164 @@
+.note-container {
+
+    .disktop-view {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+
+        .note-section {
+            width: 20%;
+            height: calc(100vh - 85px);
+            border-right: 1px solid black;
+
+            .note-section-header {
+                padding: 8px;
+                border-bottom: 1px solid black;
+            }
+
+            .note-section-container {
+                overflow-y: auto;
+                height: calc(100vh - 125px);
+
+                .note-section-item:hover {
+                    background-color: #8080802e;
+                }
+
+                .note-section-item {
+                    padding: 8px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: baseline;
+                    gap: 4px;
+
+                    &.selected {
+                        background-color: #8080805c;
+                    }
+                }
+            }
+        }
+
+        .note-topic {
+            width: 30%;
+            height: calc(100vh - 85px);
+            border-right: 1px solid black;
+
+            .note-topic-header {
+                padding: 8px;
+                border-bottom: 1px solid black;
+            }
+
+            .note-topic-container {
+                overflow-y: auto;
+                height: calc(100vh - 125px);
+
+                .note-topic-item:hover {
+                    background-color: #8080802e;
+                }
+
+                .note-topic-item {
+                    padding: 8px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: baseline;
+                    gap: 4px;
+
+                    .note-topic-index {
+                        flex: 0 0 auto;
+                    }
+
+                    .note-topic-content {
+                        flex: 1;
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 4px;
+                        align-items: center;
+
+                        .status-icon-pending {
+                            color: blue;
+                            font-size: 16px;
+                        }
+
+                        .status-icon-ans {
+                            color: green;
+                            font-size: 16px;
+                        }
+                    }
+
+                    &.selected {
+                        background-color: #8080805c;
+                    }
+                }
+            }
+        }
+
+        .note-description {
+            width: 50%;
+            height: calc(100vh - 85px);
+        }
+    }
+
+    .mobile-view {
+        border: 1px solid black;
+
+        .note-section {
+            border: 1px solid black;
+            margin: 4px;
+
+            .note-section-item {
+                border-bottom: 1px solid black;
+                padding: 4px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: red;
+
+                .expand-icon {
+                    color: black;
+                    cursor: pointer;
+                }
+
+                .status-icon {
+                    color: blue;
+                }
+            }
+
+            .note-topic {
+                margin: 4px;
+                border: 1px solid black;
+
+                .note-topic-item {
+                    padding: 4px;
+                    border-bottom: 1px dashed black;
+                    background-color: #80808038;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .expand-icon {
+                        color: black;
+                        cursor: pointer;
+                    }
+
+                    .note-topic-content {
+                        display: flex;
+                        gap: 4px;
+                        align-items: center;
+
+                        .status-icon-pending {
+                            color: blue;
+                            font-size: 16px;
+                        }
+
+                        .status-icon-ans {
+                            color: green;
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                .note-description-item {
+                    padding: 4px;
+                }
+            }
+        }
+    }
+}

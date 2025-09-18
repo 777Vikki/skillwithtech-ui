@@ -27,3 +27,9 @@ export interface ISubSection {
     noteType: string;
     topics: ITopic[];
 }
+
+export interface IEditSectionRequest {
+    name: string;
+    sectionId: number;
+    noteType: string;
+}

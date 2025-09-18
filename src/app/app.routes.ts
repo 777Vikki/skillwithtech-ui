@@ -1,7 +1,12 @@
 import { Routes } from '@angular/router';
-import { NotesPage } from './features/notes/pages/notes-page/notes-page';
 
 export const routes: Routes = [
-    { path: "", pathMatch: "full", redirectTo: "notes" },
-    { path: "notes", component: NotesPage },
+    {
+        path: 'notes', loadComponent: () => import('./features/notes/pages/notes-page/notes-page').then(m => m.NotesPage),
+        children: [
+            { path: 'active-notes', loadComponent: () => import('./features/notes/pages/active-notes/active-notes').then(m => m.ActiveNotes) },
+            { path: 'manage-notes', loadComponent: () => import('./features/notes/pages/manage-notes/manage-notes').then(m => m.ManageNotes) },
+        ]
+    },
+    { path: "", pathMatch: "full", redirectTo: "notes/active-notes" },
 ];
