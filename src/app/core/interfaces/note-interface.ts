@@ -1,6 +1,7 @@
 export interface INote { 
     name: string;
     type: string;
+    sections: ISection[];
 }
 
 export interface ISection {
