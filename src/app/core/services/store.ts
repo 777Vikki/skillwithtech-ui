@@ -1,48 +1,25 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { INote } from '../interfaces/note-interface';
 import { Note } from '../enums/note-enum';
+import { BackendService } from './backend';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  private noteList: INote[] = [
-    {
-      name: "Angular",
-      type: Note.ANGULAR
-    },
-    {
-      name: "NgRx",
-      type: Note.NGRX
-    },
-    {
-      name: "RxJS",
-      type: Note.RXJS
-    },
-    {
-      name: "JavaScript",
-      type: Note.JAVASCRIPT
-    },
-    {
-      name: "TypeScript",
-      type: Note.TYPESCRIPT
-    },
-    {
-      name: "HTML",
-      type: Note.HTML
-    },
-    {
-      name: "CSS",
-      type: Note.CSS
-    },
-  ];
+  backendService = inject(BackendService);
+
+  private noteList: INote[] = [];
 
   primaryNote() {
     return [...this.noteList].find(note => note.type === Note.ANGULAR);
   }
 
-  getNotes(): INote[] {
-    return [...this.noteList];
+  getNotes(): Observable<INote[]> {
+    return this.backendService.getHeaders().pipe(tap((d: INote[]) => {
+      this.noteList = d;
+    }));
   }
 
 }

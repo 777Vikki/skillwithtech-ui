@@ -11,7 +11,7 @@ import { IResponse } from '../interfaces/response-interface';
 export class NotesService {
   backendService = inject(BackendService);
 
-  protected selectedNotes: INote | undefined;
+  protected selectedNotes: INote = { name: '', type: '', sections: [] };
   private notesSection = new BehaviorSubject<ISection[]>([]);
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
@@ -36,7 +36,7 @@ export class NotesService {
   }
 
   getSections(): Observable<ISection[]> {
-    if (this.selectedNotes?.type) {
+    if (this.selectedNotes.type) {
       return this.backendService.getSections(this.selectedNotes.type).pipe(tap(section => {
         this.notesSection.next(section);
       }));
@@ -45,7 +45,7 @@ export class NotesService {
   }
 
   getSelectedNotes(): INote {
-    return this.selectedNotes || { name: '', type: '' };
+    return this.selectedNotes;
   }
 
   getPlainText(rawHtml: string): string {

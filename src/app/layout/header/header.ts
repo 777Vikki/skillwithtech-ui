@@ -11,22 +11,24 @@ import { NotesService } from '../../core/services/notes';
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
-export class Header implements OnInit{
+export class Header implements OnInit {
   store = inject(StoreService);
   notesService = inject(NotesService);
   notes: INote[] = [];
   selectedNote: INote | undefined;
 
   ngOnInit(): void {
-    this.selectedNote = this.store.primaryNote();
-    if(this.selectedNote) {
-      this.notesService.setSelectedNotes(this.selectedNote);
-    }
-    this.notes = this.store.getNotes();
+    this.store.getNotes().subscribe((d: INote[]) => {
+      this.notes = d;
+      this.selectedNote = this.store.primaryNote();
+      if (this.selectedNote) {
+        this.notesService.setSelectedNotes(this.selectedNote);
+      }
+    });
   }
 
   onSelectNote() {
-    if(this.selectedNote) {
+    if (this.selectedNote) {
       this.notesService.setSelectedNotes(this.selectedNote);
     }
   }

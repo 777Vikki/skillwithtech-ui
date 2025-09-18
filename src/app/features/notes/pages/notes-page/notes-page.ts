@@ -28,23 +28,31 @@ export class NotesPage implements OnInit {
     this.noteService.getNotesSection()
       .subscribe(res => {
         this.sections = res;
-        if(this.sections.length) {
-          if(!this.selectedSection) {
-            this.selectedSection = this.sections[0];
-          }
-          if(this.selectedSection && !this.selectedTopic) {
-            this.selectedTopic = this.selectedSection.topics[0];
-          }
-        }
-      })
+        this.resetSelectedValue();
+      });
+  }
+
+  resetSelectedValue() {
+    if (this.sections.length) {
+      const availableSection = this.selectedSection ? this.sections.find(s => s.sectionId === this.selectedSection?.sectionId) : this.sections[0];
+      this.selectedSection = availableSection || this.sections[0];
+      if (this.selectedSection.topics.length) {
+        const availableTopic = this.selectedTopic ? this.selectedSection.topics.find(t => t.topicId === this.selectedTopic?.topicId) : this.selectedSection.topics[0];
+        this.selectedTopic = availableTopic || this.selectedSection.topics[0];
+      } else {
+        this.selectedTopic = undefined;
+      }
+    }
   }
 
   onSelectSection(section: ISection) {
     this.selectedSection = section;
+    this.resetSelectedValue();
   }
 
   onSelectTopic(topic: ITopic) {
     this.selectedTopic = topic;
+    this.resetSelectedValue();
   }
 
   addSection() {
@@ -59,10 +67,14 @@ export class NotesPage implements OnInit {
   }
 
   onAddDescription(text: string) {
-    if(this.selectedTopic) {
-      this.noteService.onAddDescription(this.selectedTopic, text).subscribe();
+    if (this.selectedTopic) {
+      this.noteService.onAddDescription(this.selectedTopic, text).subscribe((res: IResponse) => {
+        if(res?.status) {
+          this.noteService.getSections().subscribe();
+        }
+      });
     }
-    
+
   }
 
   addTopic() {
@@ -92,7 +104,7 @@ export class NotesPage implements OnInit {
               this.noteService.getSections().subscribe();
             }
           });
-      } else if(this.actions?.task === "Topic") {
+      } else if (this.actions?.task === "Topic") {
         const topic: ITopic = {
           text: value.text,
           sectionId: this.selectedSection?.sectionId ?? -1,

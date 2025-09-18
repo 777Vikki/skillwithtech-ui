@@ -3,18 +3,19 @@
         <h3>Description</h3>
     </div>
     <div class="note-description-container">
+        @if(topic) {
         <div class="ans-container">
             <div class="ans-box">
                 <div class="ans-box-header">
-                    <div [innerHTML]="topic?.text"></div>
-                    @if(topic?.description) {
+                    <div [innerHTML]="topic.text"></div>
+                    @if(topic.description) {
                     <div><p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" /></div>
                     }
                 </div>
                 <div class="topic-description">
-                    @if(topic?.description) {
-                    <div [innerHTML]="topic?.description"></div>
-                    } @else if(!isShowEditor && !topic?.description) {
+                    @if(!isShowEditor && topic.description) {
+                    <div [innerHTML]="topic.description"></div>
+                    } @else if(!isShowEditor && !topic.description) {
                     <div class="no-ans ">
                         <div class="no-ans-item">
                             <div>No Answer is added.</div>
@@ -26,12 +27,14 @@
                     }
                     @if(isShowEditor) {
                     <div>
-                        <app-text-editor [editorText]="topic?.description" [showCancleBtn]="true" (emitEditorText)="editorText($event)"
+                        <app-text-editor [editorText]="topic.description" [showCancleBtn]="true"
+                            (emitEditorText)="editorText($event)"
                             (onCancleEditor)="isShowEditor=false"></app-text-editor>
                     </div>
                     }
                 </div>
             </div>
         </div>
+        }
     </div>
 </div>
