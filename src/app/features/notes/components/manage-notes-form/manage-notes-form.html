@@ -1,0 +1,62 @@
+<div class="manage-form-container">
+    <div class="manage-action-header center-align-between">
+        <div>{{action?.name}}</div>
+        <div><span class="material-symbols-outlined close-icon" (click)="onClose()">close</span></div>
+    </div>
+    <div class="manage-form-content">
+        @if(notesForm) {
+        <form [formGroup]="notesForm" class="section-form">
+            @if(notesForm.get('sectionId')) {
+            <div class="form-group">
+                <label>Section: </label>
+                <p-select [options]="sections" formControlName="sectionId" placeholder="Select Section"
+                    optionLabel="name" optionValue="sectionId" class="w-full md:w-56" />
+            </div>
+            }
+
+            @if(notesForm.get('subSectionId')) {
+            <div class="form-group">
+                <label>Sub Section: </label>
+                <p-select [options]="subSections" formControlName="subSectionId" placeholder="Select Sub Section"
+                    optionLabel="name" optionValue="subSectionId" class="w-full md:w-56" />
+            </div>
+            }
+
+            @if(notesForm.get('contentId')) {
+            <div class="form-group">
+                <label>Sub Content: </label>
+                <p-select [options]="contentList" formControlName="contentId" placeholder="Select Content"
+                    optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
+            </div>
+            }
+
+            @if(notesForm.get('position')) {
+            <div class="form-group">
+                <label>Position:</label>
+                <div class="radio-group">
+                    <p-radiobutton name="position" value="0" formControlName="position" inputId="position1" />
+                    <label for="position1" class="ml-2">Above</label>
+                </div>
+                <div class="radio-group">
+                    <p-radiobutton name="position" value="1" formControlName="position" inputId="position2" />
+                    <label for="position2" class="ml-2">Below</label>
+                </div>
+            </div>
+            }
+
+            @if(notesForm.get('text')) {
+            <div class="editor-container">
+                <p-editor formControlName="text" [style]="{ height: '150px' }" />
+            </div>
+
+            }
+
+            <!-- Save button -->
+            <div class="form-actions">
+                <p-button (click)="submitForm()" label="Submit" severity="success" [disabled]="notesForm.invalid" />
+            </div>
+        </form>
+        }
+
+    </div>
+</div>

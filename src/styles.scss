@@ -10,8 +10,34 @@ h3 {
 }
 
 pre {
-    background-color: #b2a8a840;
-    white-space: break-spaces;
+    background-color: #ececec;
+    // white-space: break-spaces;
+
+    display: block;
+    font-family: monospace;
+    unicode-bidi: isolate;
+    white-space: pre;
+    margin-block: 1em 1em;
+    margin-inline: 0px;
+    color: currentcolor;
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 1.71429;
+    overflow-x: auto;
+    padding-inline-end: 1.14286em;
+    padding-inline-start: 1.14286em;
+    padding: 4px;
+    // border-radius: 0.375rem;
+    margin: 0px;
+    // padding: 0px;
+}
+
+code {
+    font-size: 0.875em;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.3rem;
+    background-color: #ececec;
 }
 
 strong {
@@ -21,4 +47,11 @@ strong {
 .link {
     cursor: pointer;
     color: blue;
+    text-decoration: none;
+}
+
+.center-align-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

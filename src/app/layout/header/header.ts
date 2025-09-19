@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { INote } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, Select],
+  imports: [RouterModule, FormsModule, Select],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })

@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { INote, ISection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
+import { AbstractControl, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,36 @@ export class NotesService {
     return this.backendService.onAddSection(section, index);
   }
 
-  onAddTopic(topic: ITopic, index: number): Observable<IResponse> {
-    return this.backendService.onAddTopic(topic, index);
+  onEditSection(section: IEditSectionRequest): Observable<IResponse> {
+    return this.backendService.onEditSection(section);
+  }
+
+  onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
+    return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex);
+  }
+
+  onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
+    return this.backendService.onEditSubSection(subSection);
+  }
+
+  onEditContent(content: IEditContentRequest): Observable<IResponse> {
+    return this.backendService.onEditContent(content);
+  }
+
+  onDeleteContent(content: ITopic): Observable<IResponse> {
+    return this.backendService.onDeleteContent(content);
+  }
+
+  onDeleteSection(index: number): Observable<IResponse> {
+    return this.backendService.onDeleteSection(index);
+  }
+
+  onDeleteSubSection(sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
+    return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
+  }
+
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number): Observable<IResponse> {
+    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex);
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
@@ -55,6 +84,42 @@ export class NotesService {
   }
 
   checkMobileScreen(): boolean {
-    return window.innerWidth <= 768;
+    // Mobile (small devices) → window.innerWidth <= 768px
+    // Tablet (medium devices) → 769px – 1024px
+    // Desktop (large devices) → >= 1025px
+    if (window.location.hostname === 'localhost') {
+      return window.innerWidth <= 450;
+    } else {
+      return window.innerWidth <= 768;
+    }
+
+  }
+
+  addRequired(control: AbstractControl | null) {
+    if (!control) return;
+
+    // Angular keeps validators in _rawValidators
+    const validators = (control as any)._rawValidators || [];
+
+    // add required if it's not already there
+    if (!validators.includes(Validators.required)) {
+      validators.push(Validators.required);
+    }
+
+    control.setValidators(validators);
+    control.updateValueAndValidity();
+  }
+
+  removeRequired(control: AbstractControl | null) {
+    if (!control) return;
+
+    // Angular stores validators in `_rawValidators`
+    const validators = (control as any)._rawValidators || [];
+
+    // keep everything except required
+    const newValidators = validators.filter((v: any) => v !== Validators.required);
+
+    control.setValidators(newValidators);
+    control.updateValueAndValidity();
   }
 }

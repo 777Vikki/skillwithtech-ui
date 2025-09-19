@@ -17,7 +17,6 @@ export class Description implements OnInit, OnChanges{
   isShowEditor: boolean = false;
 
   ngOnInit(): void {
-    console.log(window.innerWidth);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

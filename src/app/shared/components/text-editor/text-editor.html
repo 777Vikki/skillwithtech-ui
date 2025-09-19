@@ -3,6 +3,7 @@
         <div>
             <p-editor formControlName="text" [style]="editorStyle" />
         </div>
+        @if(showEditorBtn) {
         <div class="editor-button">
             <p-button type="submit" [disabled]="textEditorForm.invalid" label="Submit" severity="success" />
             <p-button (click)="onClear()" [disabled]="textEditorForm.invalid" label="Clear" severity="secondary" />
@@ -10,5 +11,6 @@
             <p-button (click)="onCancle()" label="Cancle" severity="secondary" />
             }
         </div>
+        }
     </form>
 </div>

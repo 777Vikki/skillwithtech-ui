@@ -1,0 +1,87 @@
+<div class="note-container">
+    @if(!isMobile) {
+    <div class="disktop-view" [ngClass]="{'collapse-section': isSectionCollapse}">
+        <div class="note-section">
+            <div class="note-section-header center-align-between">
+                <h3>Section</h3>
+                <div> <span class="material-symbols-outlined link"
+                        (click)="isSectionCollapse = true">keyboard_double_arrow_left</span> </div>
+            </div>
+            <div class="note-section-container">
+                @for(section of sections; track section.sectionId; let i = $index) {
+                <div class="note-section-item" (click)="onSelectSection(section)"
+                    [ngClass]="{'selected': selectedSection?.sectionId === section.sectionId}">
+                    <div><strong>{{ i + 1 }}.</strong></div>
+                    <div [innerHTML]="section.name"></div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="note-section-collapse">
+            <span class="material-symbols-outlined link section-expand"
+                (click)="isSectionCollapse = false">keyboard_double_arrow_left</span>
+        </div>
+        <div class="note-topic">
+            <div class="note-topic-header">
+                <h3>Content</h3>
+            </div>
+            <div class="note-topic-container">
+                @let topics = selectedSection?.topics || [];
+                @for(topic of topics; track topic.topicId; let i = $index) {
+                <div class="note-topic-item" (click)="onSelectTopic(topic)"
+                    [ngClass]="{'selected': selectedTopic?.topicId === topic.topicId}">
+                    <div class="note-topic-index"><strong>{{ i + 1 }}.</strong></div>
+                    <div class="note-topic-content">
+                        <div [innerHTML]="topic.text"></div>
+                        <span class="material-symbols-outlined"
+                            [ngClass]="{'status-icon-pending': !topic.description, 'status-icon-ans': topic.description}">{{topic.description?
+                            'check_circle' : 'pending'}}</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="note-description">
+            <app-description [topic]="selectedTopic" (emitEditorText)="onAddDescription($event)"></app-description>
+        </div>
+    </div>
+    } @else {
+    <div class="mobile-view">
+        @for(section of sections; track section.sectionId) {
+        <div class="note-section">
+            <div class="note-section-item" (click)="onExpandSection(section.sectionId); $event.stopPropagation()">
+                <div [innerHTML]="section.name"></div>
+                <div>
+                    <span class="material-symbols-outlined"> {{expandSections.includes(section.sectionId)?
+                        'keyboard_arrow_up' : 'keyboard_arrow_down'}} </span>
+                </div>
+            </div>
+            @if(expandSections.includes(section.sectionId)) {
+            @for(topic of section.topics; track topic.topicId) {
+            <div class="note-topic">
+                <div class="note-topic-item" (click)="onExpandTopic(topic.topicId); $event.stopPropagation()">
+                    <div class="note-topic-content">
+                        <span class="material-symbols-outlined"
+                            [ngClass]="{'status-icon-pending': !topic.description, 'status-icon-ans': topic.description}">{{topic.description?
+                            'check_circle' : 'pending'}}</span>
+                        <div [innerHTML]="topic.text"></div>
+                    </div>
+                    <span class="material-symbols-outlined expand-icon"> {{expandTopics.includes(topic.topicId)?
+                        'expand_circle_up' : 'expand_circle_down'}} </span>
+                </div>
+                @if(expandTopics.includes(topic.topicId)) {
+                <div class="note-description-item" [innerHTML]="topic.description"></div>
+                }
+            </div>
+            }
+            }
+        </div>
+
+        }
+    </div>
+    }
+</div>
+
+<!-- @if(show) {
+<app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />
+} -->

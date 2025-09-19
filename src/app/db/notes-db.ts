@@ -1,12 +1,12 @@
 import { Note } from "../core/enums/note-enum"
-import { angularTestingList } from "./testing/angular-testing"
+import { angularList } from "./testing/angular-testing"
 
 export const notesDb = () => {
     return [
         {
           name: "Angular",
           type: Note.ANGULAR,
-          sections: angularTestingList(),
+          sections: angularList(),
         },
         {
           name: "NgRx",
