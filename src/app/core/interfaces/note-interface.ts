@@ -33,3 +33,17 @@ export interface IEditSectionRequest {
     sectionId: number;
     noteType: string;
 }
+
+export interface IEditSubSectionRequest {
+    name: string;
+    sectionId: number;
+    subSectionId: number;
+    noteType: string;
+}
+
+export interface IEditContentRequest {
+    text: string;
+    sectionId: number;
+    subSectionId: number;
+    topicId: number;
+}

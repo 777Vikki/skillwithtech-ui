@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IEditSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -27,8 +27,28 @@ export class NotesService {
     return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex);
   }
 
-  onAddTopic(topic: ITopic, index: number): Observable<IResponse> {
-    return this.backendService.onAddTopic(topic, index);
+  onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
+    return this.backendService.onEditSubSection(subSection);
+  }
+
+  onEditContent(content: IEditContentRequest): Observable<IResponse> {
+    return this.backendService.onEditContent(content);
+  }
+
+  onDeleteContent(content: ITopic): Observable<IResponse> {
+    return this.backendService.onDeleteContent(content);
+  }
+
+  onDeleteSection(index: number): Observable<IResponse> {
+    return this.backendService.onDeleteSection(index);
+  }
+
+  onDeleteSubSection(sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
+    return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
+  }
+
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number): Observable<IResponse> {
+    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex);
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
@@ -64,7 +84,15 @@ export class NotesService {
   }
 
   checkMobileScreen(): boolean {
-    return window.innerWidth <= 768;
+    // Mobile (small devices) → window.innerWidth <= 768px
+    // Tablet (medium devices) → 769px – 1024px
+    // Desktop (large devices) → >= 1025px
+    if (window.location.hostname === 'localhost') {
+      return window.innerWidth <= 450;
+    } else {
+      return window.innerWidth <= 768;
+    }
+
   }
 
   addRequired(control: AbstractControl | null) {

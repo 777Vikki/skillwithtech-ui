@@ -16,9 +16,17 @@
 
             @if(notesForm.get('subSectionId')) {
             <div class="form-group">
-                <label>Section: </label>
+                <label>Sub Section: </label>
                 <p-select [options]="subSections" formControlName="subSectionId" placeholder="Select Sub Section"
                     optionLabel="name" optionValue="subSectionId" class="w-full md:w-56" />
+            </div>
+            }
+
+            @if(notesForm.get('contentId')) {
+            <div class="form-group">
+                <label>Sub Content: </label>
+                <p-select [options]="contentList" formControlName="contentId" placeholder="Select Content"
+                    optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
             </div>
             }
 
@@ -27,11 +35,11 @@
                 <label>Position:</label>
                 <div class="radio-group">
                     <p-radiobutton name="position" value="0" formControlName="position" inputId="position1" />
-                    <label for="position1" class="ml-2">Before</label>
+                    <label for="position1" class="ml-2">Above</label>
                 </div>
                 <div class="radio-group">
                     <p-radiobutton name="position" value="1" formControlName="position" inputId="position2" />
-                    <label for="position2" class="ml-2">After</label>
+                    <label for="position2" class="ml-2">Below</label>
                 </div>
             </div>
             }
