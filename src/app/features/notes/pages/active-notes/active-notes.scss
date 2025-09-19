@@ -5,14 +5,21 @@
         flex-direction: row;
         border: 1px solid black;
 
+        .note-section-collapse {
+            display: none;
+        }
+
         .note-section {
             width: 20%;
-            height: calc(100vh - 85px);
             border-right: 1px solid black;
 
             .note-section-header {
                 padding: 8px;
                 border-bottom: 1px solid black;
+
+                .material-symbols-outlined.link {
+                    font-size: 17px;
+                }
             }
 
             .note-section-container {
@@ -39,7 +46,6 @@
 
         .note-topic {
             width: 30%;
-            height: calc(100vh - 85px);
             border-right: 1px solid black;
 
             .note-topic-header {
@@ -93,7 +99,34 @@
 
         .note-description {
             width: 50%;
-            height: calc(100vh - 85px);
+        }
+
+        &.collapse-section {
+            .note-section-collapse {
+                display: block;
+                width: 18px;
+                border-right: 1px solid black;
+                display: flex;
+                align-items: center;
+                background: aliceblue;
+
+                .section-expand {
+                    transform: rotate(180deg);
+                    font-size: 17px;
+                }
+            }
+
+            .note-section {
+                display: none;
+            }
+
+            .note-topic {
+                width: 30%
+            }
+
+            .note-description {
+                width: calc(70% - 18px);
+            }
         }
     }
 

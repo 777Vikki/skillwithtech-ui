@@ -23,6 +23,7 @@ store = inject(StoreService);
   isMobile = this.noteService.checkMobileScreen();
   expandSections: number[] = [];
   expandTopics: number[] = [];
+  isSectionCollapse: boolean = false;
 
   ngOnInit(): void {
     this.noteService.getNotesSection()
