@@ -28,7 +28,7 @@
                     @if(isShowEditor) {
                     <div>
                         <app-text-editor [editorText]="topic.description" [showCancleBtn]="true"
-                            (emitEditorText)="editorText($event)"
+                            (emitEditorText)="editorText($event)" [editorStyle]="{'height': '258px'}"
                             (onCancleEditor)="isShowEditor=false"></app-text-editor>
                     </div>
                     }
