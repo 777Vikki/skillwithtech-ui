@@ -1,3 +1,43 @@
+::ng-deep .disktop-view {
+    .note-topic-content {
+        pre {
+            overflow-x: auto;
+            width: 196px;
+        }
+    }
+
+    .ans-box-header {
+        pre {
+            overflow-x: auto;
+            width: 275px;
+        }
+    }
+
+    &.collapse-section {
+        .note-topic-content {
+            pre {
+                overflow-x: auto;
+                width: 153px;
+            }
+        }
+
+        .ans-box-header {
+            pre {
+                overflow-x: auto;
+                width: 475px;
+            }
+        }
+
+    }
+}
+
+::ng-deep .mobile-view {
+    pre {
+        overflow-x: auto;
+        width: 153px;
+    }
+}
+
 .note-container {
 
     .disktop-view {
@@ -121,11 +161,11 @@
             }
 
             .note-topic {
-                width: 30%
+                width: 25%
             }
 
             .note-description {
-                width: calc(70% - 18px);
+                width: calc(75% - 18px);
             }
         }
     }

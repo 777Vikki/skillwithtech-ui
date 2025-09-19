@@ -1,407 +1,550 @@
 export const angularList = () => {
     return [
-    {
-        "name": "<p><strong>Basic</strong></p>",
-        "sectionId": 1,
-        "noteType": "Angular",
-        "topics": [
-            {
-                "text": "<p><strong>What is Angular?</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 1,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript-based front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> developed by Google for building </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">single-page applications (SPAs)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. It provides a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">component-based architecture</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, built-in </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">,</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">powerful RxJS-based state management</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> full-fledged front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> that provides a complete solution for building web applications. It includes built-in support for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">routing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">forms</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> HTTP communication</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> through </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">HttpClient</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which automatically synchronizes the model and the view. It uses </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to make services reusable and improve testability. Angular also leverages </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">RxJS </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">for efficient asynchronous data handling and supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which enhances maintainability, scalability, and developer productivity.</span></p>"
-            },
-            {
-                "text": "<p><strong>How is it different from other JavaScript frameworks?</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 2,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> full-fledged front-end framework</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> that provides a complete solution for building web applications. It includes built-in support for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">routing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">forms</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> HTTP communication</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> through </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">HttpClient</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">two-way data binding</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which automatically synchronizes the model and the view. It uses </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">dependency injection</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to make services reusable and improve testability. Angular also leverages </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">RxJS </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">for efficient asynchronous data handling and supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which enhances maintainability, scalability, and developer productivity.</span></p>"
-            },
-            {
-                "text": "<p><strong>What are the key features of Angular?</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 3,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">offers several key features such as Component-Based Architecture, Two-Way Data Binding, Dependency Injection (DI), powerful Directives, RxJS for Reactive Programming, Built-in Routing, robust Forms Handling, State Management using tools like NgRx, and Cross-Platform Support for building web, mobile, and desktop applications.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">These features make Angular a powerful and scalable framework for building enterprise-level applications efficiently.</span></p>"
-            },
-            {
-                "text": "<p><strong>If we can create dynamic pages using JavaScript, why do we need Angular?</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 4,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">JavaScript </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">can create dynamic pages, but </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">provides a structured framework for building large-scale, maintainable applications. It offers features like component-based architecture, two-way data binding, dependency injection, routing, and state management, which help manage complexity, improve code reusability, and speed up development — especially for enterprise-grade apps.</span></p>"
-            },
-            {
-                "text": "<p><strong>Explain the differences between AngularJS and Angular.</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 5,
-                "description": "<ol><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS is based on the </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">MVC (Model-View-Controller)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> architecture, whereas Angular follows a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">component-based architecture</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">JavaScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular supports </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">TypeScript</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. </span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">not optimized for mobile</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">mobile-friendly</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></li><li><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AngularJS has been </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">discontinued</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, whereas Angular is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">actively maintained by Google</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></li></ol>"
-            },
-            {
-                "text": "<p><strong>What is Angular Application load flow?</strong></p>",
-                "sectionId": 1,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 6,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">The browser loads </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">index.html</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which usually contains a root element (like </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">&lt;app-root&gt;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">). Then </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">main.ts</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> executes. This is the entry point (the first TypeScript file that runs), and its job is to bootstrap the Angular application.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Earlier, Angular used </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">platformBrowserDynamic().bootstrapModule(AppModule)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> for NgModules. But after the introduction of standalone components, it now uses </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">bootstrapApplication()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to bootstrap a component directly.</span></p></br></br><pre data-language=\"plain\">\nmain.ts\n\nimport { bootstrapApplication } from &#39;@angular/platform-browser&#39;;\nimport { appConfig } from &#39;./app/app.config&#39;;\nimport { App } from &#39;./app/app&#39;;\nbootstrapApplication(App, appConfig)\n  .catch((err) =&gt; console.error(err));\n</pre></br><p>Next, Angular initializes AppComponent, whose selector (&lt;app-root&gt;) matches the element in index.html.</p><p>For dependency injection setup, bootstrapApplication() also accepts providers such as HttpClient, Router, etc.</p></br></br><pre data-language=\"plain\">\napp.config.ts\n\nimport { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from &#39;@angular/core&#39;;\nimport { provideRouter } from &#39;@angular/router&#39;;\nimport { routes } from &#39;./app.routes&#39;;\nimport { provideHttpClient } from &#39;@angular/common/http&#39;;\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideBrowserGlobalErrorListeners(),\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideHttpClient(),\n    provideRouter(routes)\n  ]\n};\n</pre></br><p>Angular then builds the component tree starting from the root component, runs change detection, and updates the DOM.</p>"
-            }
-        ],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Angular CLI</strong></p>",
-        "sectionId": 2,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Module</strong></p>",
-        "sectionId": 3,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Templates</strong></p>",
-        "sectionId": 4,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>ng-template and ng-container</strong></p>",
-        "sectionId": 5,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Directives</strong></p>",
-        "sectionId": 6,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Service and Injectable</strong></p>",
-        "sectionId": 7,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Angular lifecycle hooks</strong></p>",
-        "sectionId": 8,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Data Binding</strong></p>",
-        "sectionId": 9,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Pipes</strong></p>",
-        "sectionId": 10,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Routing</strong></p>",
-        "sectionId": 11,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Forms</strong></p>",
-        "sectionId": 12,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Zone.js, NgZone and Change Detection</strong></p>",
-        "sectionId": 13,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Guards</strong></p>",
-        "sectionId": 14,
-        "noteType": "Angular",
-        "topics": [
-            {
-                "text": "<p><strong>What are Angular Guards?</strong></p>",
-                "sectionId": 14,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 27,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Route Guards</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> are used to control access to routes based on conditions (e.g., authentication, permissions).</span></p>"
-            },
-            {
-                "text": "<p><strong>Explain the types of route guards.</strong></p>",
-                "sectionId": 14,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 28,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">1. CanActivate:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivate </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to prevent unauthorized access to a route.</span></p></br><p><strong>2.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivateChild:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivateChild </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">guard child routes</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> of a particular route.</span></p></br><p><strong>3.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanDeactivate:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanDeactivate </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> route guard</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> used to prevent navigation away from a component.</span></p></br><p><strong>4.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Resolve</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">: Fetches data before loading a route.</span></p></br><p><strong>5.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanLoad:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanLoad </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">prevent loading a module unless conditions are met (used with lazy loading).</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular deprecated CanLoad in favor of the more powerful and flexible </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanMatch </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">guard starting in </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular v14+</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, especially for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">standalone components</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">lazy-loaded routes</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
-            },
-            {
-                "text": "<p><strong>Can you explain how to implement authentication guards in Angular?</strong></p>",
-                "sectionId": 14,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 29,
-                "description": "<p>Authentication guards are implemented using the <code>CanActivate</code> interface, which controls access to routes based on conditions such as whether the user is logged in.</p></br><p>Authentication guards can be generated using the Angular CLI command <code>ng generate guard AuthGuard</code>. During generation, I select the <code>CanActivate</code> option, which creates a guard using <code>canActivateFn</code>. Inside the guard, I check whether the user is logged in; if yes, I return <code>true</code>, otherwise I redirect them to the login page. Finally, I apply this guard in the routing configuration by setting <code>canActivate: [AuthGuard]</code> on the required path.</p></br><pre data-language=\"plain\">\nauth.guard.ts\n\nimport { inject } from &#39;@angular/core&#39;;\nimport { CanActivateFn, Router } from &#39;@angular/router&#39;;\nimport { AuthService } from &#39;./auth.service&#39;;\n\nexport const authGuard: CanActivateFn = (route, state) =&gt; {\n  const authService = inject(AuthService);\n  const router = inject(Router);\n\n  if (authService.isLoggedIn()) {\n    return true; // allow access\n  }\n\n  // if not logged in → redirect to login\n  return router.createUrlTree([&#39;/login&#39;]);\n};\n</pre></br></br><pre data-language=\"plain\">\napp.routes.ts\n\nimport { Routes } from &#39;@angular/router&#39;;\nimport { DashboardComponent } from &#39;./dashboard/dashboard.component&#39;;\nimport { authGuard } from &#39;./auth.guard&#39;;\n\nexport const routes: Routes = [\n  {\n    path: &#39;dashboard&#39;,\n    component: DashboardComponent,\n    canActivate: [authGuard]\n  },\n  {\n    path: &#39;login&#39;,\n    loadComponent: () =&gt;\n      import(&#39;./login/login.component&#39;).then(m =&gt; m.LoginComponent),\n  },\n];\n</pre>"
-            }
-        ],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Component Communication</strong></p>",
-        "sectionId": 15,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>ViewChild and ContentChild</strong></p>",
-        "sectionId": 16,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Loading</strong></p>",
-        "sectionId": 17,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Performance Optimization</strong></p>",
-        "sectionId": 18,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Interceptor</strong></p>",
-        "sectionId": 19,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Compiler</strong></p>",
-        "sectionId": 20,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>angular.json file</strong></p>",
-        "sectionId": 21,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Tokens</strong></p>",
-        "sectionId": 22,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Challenges Faced in Angular Project</strong></p>",
-        "sectionId": 23,
-        "noteType": "Angular",
-        "topics": [],
-        "subSections": []
-    },
-    {
-        "name": "<p><strong>Unit Testing</strong></p>",
-        "sectionId": 24,
-        "noteType": "Angular",
-        "topics": [
-            {
-                "text": "<p><strong>What is Unit Testing in Angular, and why is it important?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 7,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Unit testing in Angular is the process of testing individual components, services, or functions in isolation to ensure they work correctly and make the application more reliable and maintainable.</span></p>"
-            },
-            {
-                "text": "<p><strong>What testing frameworks are commonly used with Angular (Jasmine, Karma, Jest)?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 8,
-                "description": "<p class=\"ql-align-justify\"><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jasmine</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a testing framework, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Karma</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a test runner (executes tests in browsers), and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jest</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is an alternative framework+runner offering faster, simpler testing.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">In short: </span><em style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jasmine + Karma work together</em><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, while </span><em style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jest alone can replace both</em><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
-            },
-            {
-                "text": "<p><strong>What is the difference between unit testing and end-to-end testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 9,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Unit testing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> checks individual components/services in isolation, while </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">end-to-end testing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> validates the entire application flow from the user’s perspective.</span></p>"
-            },
-            {
-                "text": "<p><strong>What is the default test runner in Angular projects created with Angular CLI?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 10,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">The default test runner in Angular projects created with Angular CLI is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Karma</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
-            },
-            {
-                "text": "<p><strong>How do you create a new Angular component test file using CLI?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 11,
-                "description": "<p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">You can create a new Angular component with its spec (test) file using:</span></p><pre data-language=\"plain\">\nng generate component component-name\n</pre><p class=\"ql-align-justify\"></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">👉 The CLI automatically generates the </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">.spec.ts</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> test file.</span></p></br>"
-            },
-            {
-                "text": "<p><strong>What is ‘describe’ in jasmine in Unit Testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 12,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>What is beforeEach in Jasmine?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 13,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>What is TestBed in Angular Unit Testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 14,
-                "description": "<p><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">TestBed</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">is the </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">primary Angular testing utility</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> that creates a </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">simulated Angular environment</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> for unit testing.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">It allows us to test components, directives, pipes, and services </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">with Angular’s dependency injection, change detection, and templates</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p class=\"ql-align-justify\"><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">1. </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">TestBed </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">Configures a testing module</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> (like a mini </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">NgModule</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">):</span></p><pre data-language=\"plain\">\n\n  TestBed.configureTestingModule({\n  \tdeclarations: [MyComponent],\n  \tproviders: [MyService],\n \timports: [FormsModule, HttpClientTestingModule]\n   });\n</pre><p class=\"ql-align-justify\"></p><p class=\"ql-align-justify\"><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">2.</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> TestBed creates Components for testing:</span></p><pre data-language=\"plain\">\n\n   const fixture = TestBed.createComponent(MyComponent);\n   const component = fixture.componentInstance;\n   fixture.detectChanges(); // runs ngOnInit + bindings\n</pre></br><p>3. TestBed is used to Inject Services:</p><pre data-language=\"plain\">\n      \n    const service = TestBed.inject(MyService);\n\n</pre><p><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">4. Run Change Detection:</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> Updates the DOM after changing component properties.</span></p>"
-            },
-            {
-                "text": "<p><strong>What is ‘it’ in jasmine in Unit Testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 15,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>What is ‘expect’ in Jasmin?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 16,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>Can you describe some matchers?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 17,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">In Angular unit testing, a matcher function compares the actual result with the expected result.</span></p></br><p><strong>1.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">toBeTruthy:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">.toBeTruthy()</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">checks that a value is not </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">false</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">0</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">&#39;&#39;</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">null</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">undefined</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, or </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">NaN</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong>2.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">toHaveBeenCalledWith: </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">toHaveBeenCalledWith</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a Jasmine matcher that checks if a spy (mocked function) was called with the expected arguments. </span> </p>"
-            },
-            {
-                "text": "<p><strong>How does </strong><strong style=\"color: rgb(0, 138, 0);\">async </strong><strong>work in Angular testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 18,
-                "description": "<p><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">async</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">utility (renamed to </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">waitForAsync</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">) tracks all </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">pending async tasks</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> (Promises, timers, XHR) and waits until they are finished. Only then allows the test to continue and run expectations. It waits for </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">real async operations</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to finish automatically.</span></p></br><pre data-language=\"plain\">\n\nmy.component.ts\n\nimport { Component, OnInit } from &#39;@angular/core&#39;;\n@Component({\n  selector: &#39;app-my&#39;,\n  template: `&lt;div *ngIf=&quot;data&quot;&gt;{{ data }}&lt;/div&gt;`\n})\nexport class MyComponent implements OnInit {\n  data: string | null = null;\n  ngOnInit(): void {\n    // Simulate async data (like HTTP call)\n    this.loadData().then(result =&gt; {\n      this.data = result;\n    });\n  }\n  loadData(): Promise&lt;string&gt; {\n    return new Promise(resolve =&gt; {\n      setTimeout(() =&gt; resolve(&#39;Hello Async Data!&#39;), 500);\n    });\n  }\n}\n</pre></br><pre data-language=\"plain\">\n\n// my.component.spec.ts\n\nit(&#39;should load data async and render it&#39;, waitForAsync(() =&gt; {\n fixture.detectChanges(); // triggers ngOnInit\n fixture.whenStable().then(() =&gt; {\n fixture.detectChanges(); // update view after async resolves\n const div = fixture.debugElement.query(By.css(&#39;div&#39;)).nativeElement;\n expect(div.textContent).toContain(&#39;Hello Async Data!&#39;);\n expect(component.data).toBe(&#39;Hello Async Data!&#39;);\n });\n</pre></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">🔑</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> What happens here:</strong></p></br><p><strong>1.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.detectChanges():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> triggers </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, which starts an async task.</span></p></br><p><strong>2.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.whenStable():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> waits until </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">all Promises &amp; async tasks are finished</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><strong>3.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.detectChanges():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> refreshes template after data is set.</span></p></br><p><strong>4.</strong> <span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Test asserts that </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">async data is rendered</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">Explain:</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">I created a </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">loadData</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function that returns a Promise and resolved this Promise inside </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, storing the result in a </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">data</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> property.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">For the unit test: I created a </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">loadData</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function which returns a Promise and resolved this Promise in </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, then stored the result in the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">data</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">property. I wrote a unit test case for this. I used </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">TestBed.createComponent</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to create a fixture for the component, which provides the setup before running the tests, and I accessed the component instance using </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.componentInstance</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Inside the </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">it</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> block for </span><em style=\"color: rgb(0, 0, 0); background-color: transparent;\">&#39;should load data async and render it&#39;</em><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, I wrapped the test with the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">waitForAsync</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function. First, I ran</span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.detectChanges()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to update the view. Then I used </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.whenStable()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to wait until the component became stable. After that, I got the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">div</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">element’s </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">nativeElement</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">using </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.debugElement.query(By.css(&#39;div&#39;)).nativeElement</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">. Finally, I compared </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">div.textContent</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> and </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">component.data</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> with</span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">&#39;Hello Async Data&#39;</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p>"
-            },
-            {
-                "text": "<p><strong>How does </strong><strong style=\"color: rgb(0, 138, 0);\">fakeAsync </strong><strong>work in Angular testing?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 19,
-                "description": "<p><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">utility tests asynchronous code </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">synchronously</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> by simulating the passage of time.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">When you wrap a test function in </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, Angular runs it and replaces real async functions </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">(</strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">Promise.then</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, RxJS timers, etc.) with </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">mocked versions</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><pre data-language=\"plain\">\n\nfake-async.component.ts\n\nimport { Component, OnInit } from &#39;@angular/core&#39;;\n@Component({\n  selector: &#39;app-fake-async&#39;,\n  template: `\n    &lt;div&gt;Static Div&lt;/div&gt;\n    &lt;div *ngIf=&quot;data&quot;&gt;{{ data }}&lt;/div&gt;\n    &lt;div&gt;Another Div&lt;/div&gt;\n  `\n})\nexport class FakeAsyncComponent implements OnInit {\n  data: string | null = null;\n  ngOnInit(): void {\n    setTimeout(() =&gt; {\n      this.data = &#39;Hello FakeAsync!&#39;;\n    }, 1000);\n  }\n}\n</pre></br><pre data-language=\"plain\">\n\nit(&#39;should load async data into the second div&#39;, fakeAsync(() =&gt; {\n    fixture.detectChanges(); // triggers ngOnInit\n    expect(component.data).toBeNull();\n    tick(1000);              // simulate passage of 1 second\n    fixture.detectChanges();\n    const divs = fixture.debugElement.queryAll(By.css(&#39;div&#39;));\n    expect(divs.length).toBe(3);\n    // Second div contains async data\n    expect(divs[1].nativeElement.textContent).toContain(&#39;Hello FakeAsync!&#39;);\n    expect(component.data).toBe(&#39;Hello FakeAsync!&#39;);\n  }));\n</pre></br><p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Note:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> Don’t use fixture.detectChanges(); in beforeEach() otherwise we will get an error.</span></p>"
-            },
-            {
-                "text": "<p><strong>What is the difference between</strong><strong style=\"color: rgb(0, 138, 0);\"> tick()</strong><strong> and </strong><strong style=\"color: rgb(0, 138, 0);\">flush()</strong><strong> in Angular tests?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 20,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Both </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">tick()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> and </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">flush()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> are used </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">inside </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> tests</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to control virtual time and execute async tasks.</span></p></br><p><strong>1.</strong>  <strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">tick()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a helper function that works only inside a </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> zone</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. It </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">simulates the passage of virtual time</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, allowing scheduled async tasks </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">(</strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, RxJS timers, Promises, etc.) to be executed </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">without waiting in real time</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong>2.</strong>  <strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">flush()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a helper function that works only inside a </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">zone. It executes all pending timers at once, without needing any arguments, and moves the virtual clock forward until all queued timers (macroTasks like </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">and </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">) are executed.</span></p>"
-            },
-            {
-                "text": "<p><strong>How can you test an Angular service that makes HTTP calls?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 21,
-                "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">When a service uses HttpClient, we don’t hit the real backend in unit tests. Instead, we use Angular’s HttpClientTestingModule and HttpTestingController to mock HTTP requests.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">I test Angular services with HTTP calls by using HttpClientTestingModule and HttpTestingController. This allows me to mock requests, assert on the method/URL, and return mock responses with flush() instead of calling the real backend.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Call </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">httpMock.verify()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> in </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">afterEach</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">to ensure no unmatched requests.</span></p></br><pre data-language=\"plain\">\n\nTest service file\n\nimport { TestBed } from &#39;@angular/core/testing&#39;;\nimport { User } from &#39;./user&#39;;\nimport { HttpTestingController, provideHttpClientTesting } from &#39;@angular/common/http/testing&#39;;\nimport { provideHttpClient, withFetch } from &#39;@angular/common/http&#39;;\ndescribe(&#39;User&#39;, () =&gt; {\n  let service: User;\n  let httpMock: HttpTestingController;\n  beforeEach(() =&gt; {\n    TestBed.configureTestingModule({\n      providers: [\n        User,\n        provideHttpClient(withFetch()),\n        provideHttpClientTesting()\n      ]\n    });\n    service = TestBed.inject(User);\n    httpMock = TestBed.inject(HttpTestingController);\n  });\n  afterEach(() =&gt; {\n    httpMock.verify();\n  })\n  it(&#39;should be created&#39;, () =&gt; {\n    expect(service).toBeTruthy();\n  });\n  it(&#39;should fetch users from API&#39;, () =&gt; {\n    const mockUsers = [\n      {\n        &quot;userId&quot;: 1,\n        &quot;id&quot;: 1,\n        &quot;title&quot;: &quot;delectus aut autem&quot;,\n        &quot;completed&quot;: false\n      }];\n      \n    service.getUsers().subscribe(users =&gt; {\n      expect(mockUsers).toEqual(users);\n    });\n    const req = httpMock.expectOne(&#39;https://jsonplaceholder.typicode.com/todos/1&#39;);\n    expect(req.request.method).toBe(&#39;GET&#39;);\n    req.flush(mockUsers);\n  });\n});\n\n</pre>"
-            },
-            {
-                "text": "<p><strong>How do you test an Angular component with </strong><strong style=\"color: rgb(0, 138, 0);\">@Input()</strong><strong> and </strong><strong style=\"color: rgb(0, 138, 0);\">@Output()</strong><strong> properties?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 22,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>What is </strong><strong style=\"color: rgb(0, 138, 0);\">ComponentFixture</strong><strong> in Angular testing, and why is it used?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 23,
-                "description": ""
-            },
-            {
-                "text": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">What is the use of </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">spyOn()</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> in Jasmine?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 24,
-                "description": "<p><code>spyOn</code> is a <strong>Jasmine function</strong> used in Angular unit tests.</p></br><p>It <strong>spies on methods</strong> of components, services, or other objects.</p></br><p>It allows you to <strong>track method calls</strong> and <strong>mock return values</strong> without executing the real implementation.</p>"
-            },
-            {
-                "text": "<p><strong>What is the use of createSpyObject() in Jasmine?</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 25,
-                "description": ""
-            },
-            {
-                "text": "<p><strong>Explain Jasmine </strong><strong style=\"color: rgb(0, 138, 0);\">spyOn </strong><strong>and </strong><strong style=\"color: rgb(0, 138, 0);\">createSpyObj </strong><strong>in Angular Unit Testing.</strong></p>",
-                "sectionId": 24,
-                "subSectionId": -1,
-                "noteType": "Angular",
-                "topicId": 26,
-                "description": "<p><code>spyOn</code> is used to watch or mock methods of an existing object. It helps us test without calling the real implementation. For example, <code>spyOn(service, &#39;getData&#39;).and.returnValue(mockData)</code>.</p></br><p><code>createSpyObj</code> is used when we want to mock an entire dependency or service. Instead of creating real objects, we create a fake one with multiple spy methods, like <code>jasmine.createSpyObj(&#39;UserService&#39;, [&#39;getUser&#39;, &#39;saveUser&#39;])</code>.</p></br><p>The key difference is: <code>spyOn</code> works on existing objects, while <code>createSpyObj</code> creates a new fake object.</p>"
-            }
-        ],
-        "subSections": []
-    }
-];
+        {
+            "name": "<p><strong>Basic</strong></p>",
+            "sectionId": 1,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is Angular?</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 1,
+                    "description": "<p>Angular is a <strong>TypeScript-based front-end framework</strong> developed by <strong>Google</strong> for building <strong>single-page applications (SPAs)</strong>. It provides a <strong>component-based architecture</strong>, <strong>built-in dependency injection</strong>, <strong>two-way data binding</strong>, and powerful <strong>RxJS-based state management</strong>.</p></br><p>Angular is a <strong>full-fledged framework</strong> that offers a <strong>complete solution</strong> for building <strong>web applications</strong>. It includes built-in support for <strong>routing</strong>, <strong>forms</strong>, and <strong>HTTP communication</strong> through <strong>HttpClient</strong>. Angular provides <strong>two-way data binding</strong>, which automatically synchronizes the <strong>model</strong> and the <strong>view</strong>. It uses <strong>dependency injection</strong> to make <strong>services reusable</strong> and improve <strong>testability</strong>. Angular also leverages <strong>RxJS</strong> for efficient <strong>asynchronous data handling</strong> and supports <strong>TypeScript</strong>, which enhances <strong>maintainability</strong>, <strong>scalability</strong>, and <strong>developer productivity</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>How is it different from other JavaScript frameworks?</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 2,
+                    "description": "<p>Angular is a full-fledged <strong>front-end framework</strong> that provides a <strong>complete solution</strong> for building <strong>web applications</strong>. It includes built-in support for <strong>routing</strong>, <strong>forms</strong>, and <strong>HTTP communication</strong> through <strong>HttpClient</strong>. Angular offers <strong>two-way data binding</strong>, which automatically synchronizes the <strong>model</strong> and the <strong>view</strong>. It uses <strong>dependency injection</strong> to make <strong>services reusable</strong> and improve <strong>testability</strong>. Angular also leverages <strong>RxJS</strong> for efficient <strong>asynchronous data handling</strong> and supports <strong>TypeScript</strong>, which enhances <strong>maintainability</strong>, <strong>scalability</strong>, and <strong>developer productivity</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>What are the key features of Angular?</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 3,
+                    "description": "<p>Angular offers several key features such as <strong>Component-Based Architecture</strong>, <strong>Two-Way Data Binding</strong>, <strong>Dependency Injection (DI)</strong>, <strong>Directives</strong>, <strong>RxJS</strong> for <strong>Reactive Programming</strong>, <strong>Built-in Routing</strong>, robust <strong>Forms Handling</strong>, <strong>State Management</strong> using tools like <strong>NgRx</strong>, and <strong>Cross-Platform Support</strong> for building web, mobile, and desktop applications.</p></br><p>These features make <strong>Angular</strong> a <strong>powerful</strong> and <strong>scalable</strong> framework for building <strong>enterprise-level applications</strong> efficiently.</p>"
+                },
+                {
+                    "text": "<p><strong>If we can create dynamic pages using JavaScript, why do we need Angular?</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 4,
+                    "description": "<p><strong>JavaScript</strong> can create <strong>dynamic pages</strong>, but <strong>Angular</strong> provides a <strong>structured framework</strong> for building <strong>large-scale</strong> and <strong>maintainable applications</strong>.</p></br><p> It offers features like <strong>Component-Based Architecture</strong>, <strong>Two-Way Data Binding</strong>, <strong>Dependency Injection</strong>, <strong>Routing</strong>, and <strong>State Management</strong>, which help manage <strong>complexity</strong>, improve <strong>code reusability</strong>, and speed up <strong>development</strong> — especially for <strong>enterprise-grade apps</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain the differences between AngularJS and Angular.</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 5,
+                    "description": "<ol><li><strong>AngularJS</strong> is based on the <strong>MVC (Model-View-Controller) architecture</strong>, whereas <strong>Angular</strong> follows a <strong>Component-Based Architecture</strong>.</li><li><strong>AngularJS</strong> supports <strong>JavaScript</strong>, whereas <strong>Angular</strong> supports <strong>TypeScript</strong>.</li><li><strong>AngularJS</strong> is <strong>not optimized for mobile</strong>, whereas <strong>Angular</strong> is <strong>mobile-friendly</strong>.</li><li><strong>AngularJS</strong> has been <strong>discontinued</strong>, whereas <strong>Angular</strong> is <strong>actively maintained by Google</strong>.</li></ol>"
+                },
+                {
+                    "text": "<p><strong>What is Angular Application load flow?</strong></p>",
+                    "sectionId": 1,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 6,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">The browser loads </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">index.html</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, which usually contains a root element (like </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">&lt;app-root&gt;</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">). Then </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">main.ts</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> executes. This is the entry point (the first TypeScript file that runs), and its job is to bootstrap the Angular application.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Earlier, Angular used </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">platformBrowserDynamic().bootstrapModule(AppModule)</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> for NgModules. But after the introduction of standalone components, it now uses </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">bootstrapApplication()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to bootstrap a component directly.</span></p></br></br><pre data-language=\"plain\">\nmain.ts\n\nimport { bootstrapApplication } from &#39;@angular/platform-browser&#39;;\nimport { appConfig } from &#39;./app/app.config&#39;;\nimport { App } from &#39;./app/app&#39;;\nbootstrapApplication(App, appConfig)\n  .catch((err) =&gt; console.error(err));\n</pre></br><p>Next, Angular initializes AppComponent, whose selector (&lt;app-root&gt;) matches the element in index.html.</p><p>For dependency injection setup, bootstrapApplication() also accepts providers such as HttpClient, Router, etc.</p></br></br><pre data-language=\"plain\">\napp.config.ts\n\nimport { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from &#39;@angular/core&#39;;\nimport { provideRouter } from &#39;@angular/router&#39;;\nimport { routes } from &#39;./app.routes&#39;;\nimport { provideHttpClient } from &#39;@angular/common/http&#39;;\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideBrowserGlobalErrorListeners(),\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideHttpClient(),\n    provideRouter(routes)\n  ]\n};\n</pre></br><p>Angular then builds the component tree starting from the root component, runs change detection, and updates the DOM.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Angular CLI</strong></p>",
+            "sectionId": 2,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is the purpose of Angular CLI?</strong></p>",
+                    "sectionId": 2,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 30,
+                    "description": "<p>The <strong>Angular CLI (Command Line Interface)</strong> is a tool that helps in <strong>creating</strong>, <strong>configuring</strong>, and <strong>managing</strong> Angular projects efficiently.</p></br><p> <code>ng new my-app</code> is used for <strong>project setup</strong> and generates a new <strong>Angular project</strong>.</p><p><strong>Components</strong>, <strong>Services</strong>, <strong>Directives</strong>, <strong>Modules</strong>, <strong>Pipes</strong>, and <strong>Guards</strong> can be generated using the <strong>Angular CLI</strong>.</p></br><p>For example:</p><ul><li>To generate a <strong>Component</strong>: <code>ng generate component component-name</code></li><li>To generate a <strong>Service</strong>: <code>ng generate service service-name</code></li></ul></br><p><code>ng serve</code> runs a <strong>local development server</strong> with <strong>live reload</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Module</strong></p>",
+            "sectionId": 3,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is a module in Angular?</strong></p>",
+                    "sectionId": 3,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 31,
+                    "description": "<p>A <strong>Module</strong> contains the <strong>logical structure</strong> of a project. It <strong>groups</strong> related <strong>Components</strong>, <strong>Directives</strong>, <strong>Pipes</strong>, and <strong>Services</strong>.</p></br><p>After the introduction of <strong>Standalone Components (Angular 14+)</strong>, the <strong>need for modules</strong> is <strong>reduced</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Templates</strong></p>",
+            "sectionId": 4,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What are templates in Angular?</strong></p>",
+                    "sectionId": 4,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 32,
+                    "description": "<p>A <strong>Template</strong> in <strong>Angular</strong> is <strong>HTML</strong> with <strong>Angular syntax</strong> (such as <strong>Interpolation</strong>, <strong>Property Binding</strong>, <strong>Event Binding</strong>, <strong>Two-Way Binding</strong>, and <strong>Directives</strong>) that defines a <strong>Component&#39;s View</strong> and makes the <strong>UI dynamic</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>ng-template and ng-container</strong></p>",
+            "sectionId": 5,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is different between ng-templace and ng-container?</strong></p>",
+                    "sectionId": 5,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 33,
+                    "description": "<p><strong>ng-template</strong>:</p></br><p><strong>ng-template </strong>is an <strong>Angular template element</strong> that holds <strong>HTML/Angular code</strong> but is <strong>not rendered in the DOM</strong> by default.</p><p>It’s mainly used with <strong>structural directives</strong> (<code>*ngIf</code>, <code>*ngFor</code>, <code>ngTemplateOutlet</code>) to render <strong>content conditionally</strong> or <strong>dynamically</strong>.</p></br><pre data-language=\"plain\">\n&lt;ng-template #noData&gt;&lt;/ng-template&gt;\n&lt;div *ngIf=&quot;items.length; else noData&quot;&gt;&lt;/div&gt;\n</pre></br><p><strong>Reusable Templates:</strong></p></br><pre data-language=\"plain\">\n&lt;ng-template #welcome&gt;&lt;/ng-template&gt;\n&lt;ng-template #goodbye&gt;&lt;/ng-template&gt;\n\n&lt;ng-container *ngTemplateOutlet=&quot;isLoggedIn ? welcome : goodbye&quot;&gt;&lt;/ng-container&gt;\n</pre></br><p><strong>Dynamic Rendering in TypeScript:</strong></p></br><pre data-language=\"plain\">\nimport { Component, ViewChild, TemplateRef, ViewContainerRef } from &#39;@angular/core&#39;;\n\n@ViewChild(&#39;login&#39;) loginTemplate!: TemplateRef&lt;any&gt;;\n@ViewChild(&#39;signup&#39;) signupTemplate!: TemplateRef&lt;any&gt;;\n@ViewChild(&#39;container&#39;, { read: ViewContainerRef }) container!: ViewContainerRef;\n</pre></br><p><strong>ng-container</strong>:</p></br><p>It’s a <strong>logical container</strong> that does <strong>not create extra DOM elements</strong>.</p><p>It <strong>groups multiple elements</strong> without wrapping them in an unnecessary <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>.</p></br></br></br></br></br>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Directives</strong></p>",
+            "sectionId": 6,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is a directive?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 34,
+                    "description": "<p>A <strong>Directive</strong> in <strong>Angular</strong> is a <strong>class</strong> that <strong>changes the appearance</strong>, <strong>behavior</strong>, or <strong>layout</strong> of elements <strong>dynamically</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain the types of directives in Angular.</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 35,
+                    "description": "<p><strong>Component Directives</strong>: A <strong>Component</strong> is a <strong>special type of directive</strong> that has a <strong>template</strong> and is used to build <strong>UI views</strong>. Components have their own <strong>templates</strong>, <strong>styles</strong>, and <strong>logic</strong>.</p></br><p><strong>Structural Directives</strong>: <strong>Structural Directives</strong> are <strong>Angular directives</strong> that <strong>change the structure of the DOM</strong> by <strong>adding or removing elements</strong> using <code>*ngIf</code>, <code>*ngFor</code>, or <code>*ngSwitch</code>.</p></br><p><strong>Attribute Directives</strong>: <strong>Attribute Directives</strong> are used to <strong>change the appearance</strong> or <strong>behavior</strong> of <strong>DOM elements</strong> in Angular by <strong>modifying their attributes or styles</strong> using <code>ngClass</code>, <code>ngStyle</code>, or <code>ngModel</code>.</p>"
+                },
+                {
+                    "text": "<p><strong>What is the difference between *ngIf and *ngFor?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 36,
+                    "description": "<p><strong>*ngIf</strong>: <code>*ngIf</code> <strong>conditionally adds or removes</strong> an element based on a <strong>boolean expression</strong>.</p></br><p><strong>*ngFor</strong>: <code>*ngFor</code> <strong>iterates over a list</strong> to <strong>render an element</strong> for each <strong>item</strong>.</p>"
+                },
+                {
+                    "text": "<pre data-language=\"plain\">\n@for (item of items; track item.id) { \n    &lt;div&gt;{{ item.name }}&lt;/div&gt; \n} \n</pre><p><strong>Why do we use track in *ngFor?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 37,
+                    "description": "<p><strong>track</strong> in an <code>@for</code> loop is used to <strong>uniquely identify</strong> each <strong>element</strong> in the <strong>list</strong>, which <strong>improves performance</strong> during <strong>DOM updates</strong>.</p></br><p>When using <strong>track</strong>, <strong>Angular</strong> knows which <strong>items</strong> are <strong>unchanged</strong> and which are <strong>added or removed</strong>. It only <strong>updates the necessary DOM elements</strong> without <strong>re-rendering the entire list</strong>.</p></br><p>Using an <strong>object</strong> with <strong>track</strong> is <strong>not ideal</strong> because if the <strong>object</strong> is <strong>replaced</strong> or <strong>mutated</strong>, Angular may <strong>unnecessarily re-render</strong> it.</p></br><pre data-language=\"plain\">\nthis.items = [...this.items];\n</pre></br><p>This creates a <strong>new array</strong> with the same <strong>objects</strong>, but since the <strong>object references</strong> have changed, Angular treats them as <strong>different</strong> and <strong>re-renders the entire list</strong>.</p></br></br>"
+                },
+                {
+                    "text": "<p><strong>With old syntax </strong></p><pre data-language=\"plain\">\n&lt;div *ngFor=&quot;let product of products; trackBy: product.id&quot;&gt; \n   {{ product.name }} \n&lt;/div&gt; \n</pre><p><strong>Why do we get an error?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 38,
+                    "description": "<p>In the old <strong>structural directive</strong> <code>*ngFor</code>, <strong>trackBy</strong> is <strong>optional</strong> and expects a <strong>function reference</strong>, but after the introduction of the <strong>new control flow</strong>, <strong>track</strong> is <strong>mandatory</strong> in <code>@for</code> and expects a <strong>property access</strong>.</p></br><pre data-language=\"plain\">\ntrackByProductId(index: number, product: any): number {\n  return product.id;\n}\n</pre></br><pre data-language=\"plain\">\n&lt;div *ngFor=&quot;let product of products; trackBy: trackByProductId&quot;&gt; \n  {{ product.name }}\n&lt;/div&gt;\n</pre></br></br>"
+                },
+                {
+                    "text": "<p><strong>Why was the new control flow</strong> (<code>@if</code>, <code>@for</code>, and <code>@switch</code>) <strong>introduced when we already had</strong> <code>*ngIf</code>, <code>*ngFor</code>, <strong>and </strong><code>*ngSwitch</code><strong>?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 39,
+                    "description": "<p><code>*ngIf</code>, <code>*ngFor</code>, and <code>*ngSwitch</code> are based on <strong>microsyntax</strong>, which is the special <code>*</code> <strong>syntax</strong>. <strong>Angular</strong> expands this into <code>&lt;ng-template&gt;</code> behind the scenes, creating <strong>hidden layers</strong>.</p></br><pre data-language=\"plain\">\n&lt;ng-template [ngIf]=&quot;show&quot;&gt;\n  &lt;div&gt;\n    Hello\n  &lt;/div&gt;\n&lt;/ng-template&gt;\n</pre></br><p>This can make <strong>templates</strong> harder to <strong>read</strong> and <strong>debug</strong>, especially with <strong>nesting</strong>.</p></br><p>To solve this, <strong>Angular 17+</strong> introduced <strong>block-based syntax</strong> (using <code>{}</code> blocks with <code>@if</code>, <code>@for</code>, <code>@switch</code>). It’s similar to <strong>JavaScript</strong> and makes <strong>templates cleaner</strong>, <strong>more readable</strong>, and <strong>easier to debug</strong>.</p></br>"
+                },
+                {
+                    "text": "<p><strong>What are components in Angular?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 40,
+                    "description": "<p>A <strong>Component</strong> in <strong>Angular</strong> is the <strong>basic building block</strong> of the <strong>UI</strong>, controlling a section of the <strong>view</strong> with <strong>logic</strong> and <strong>data</strong>. It consists of: <strong>TypeScript File (.ts)</strong>, <strong>HTML Template (.html)</strong>, and <strong>CSS/SCSS (.css or .scss)</strong>.</p></br><ol><li><strong>Components</strong> can be used across the app with <code>&lt;selector&gt;</code>.</li><li><strong>Components</strong> are <strong>encapsulated</strong>; each component has its own <strong>template</strong> and <strong>styles</strong>.</li><li><strong>UI (template)</strong> and <strong>logic (class)</strong> are clearly <strong>separated</strong> in components.</li></ol></br><p><strong>Encapsulation</strong> is defined as the <strong>wrapping up of data</strong> under a <strong>single unit</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>How are Components different from directives?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 41,
+                    "description": "<ol><li>All <strong>Components</strong> are <strong>Directives</strong>, but not all <strong>Directives</strong> are <strong>Components</strong>.</li><li>A <strong>Component</strong> is a <strong>special type of directive</strong> that has a <strong>template</strong> and is used to build <strong>UI views</strong>.</li><li>Other <strong>Directives</strong> (<strong>Structural</strong> or <strong>Attribute</strong>) do <strong>not have templates</strong> and are used to <strong>modify behavior</strong> or <strong>layout</strong>.</li></ol>"
+                },
+                {
+                    "text": "<p><strong>What is a host listener?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 42,
+                    "description": "<p><code>@HostListener()</code> allows us to <strong>listen to events</strong> on the <strong>host element</strong> of a <strong>directive</strong> or <strong>component</strong>.</p></br><p><strong>Example</strong>: If you create a <strong>directive</strong> and want to <strong>react</strong> to <strong>mouseover</strong>, <strong>click</strong>, <strong>keydown</strong>, etc., on the <strong>element</strong> it’s applied to, you use <code>@HostListener</code>.</p>"
+                },
+                {
+                    "text": "<p><strong>What is a host binding?</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 43,
+                    "description": "<p><code>@HostBinding()</code> allows you to <strong>bind a property</strong> of the <strong>host element</strong> (like <strong>class</strong>, <strong>style</strong>, <strong>attr</strong>, <strong>disabled</strong>, etc.) to a <strong>field</strong> in your <strong>directive</strong> or <strong>component</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Example of host listener and host binding.</strong></p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 44,
+                    "description": "<p>If you need a <strong>custom directive</strong> for <strong>highlight</strong>, it can be generated using the <strong>Angular CLI</strong> command:</p></br><pre data-language=\"plain\">\nng generate directive highlight\n</pre></br><p>A <strong>custom directive</strong> is created with the <code>@Directive</code> <strong>decorator</strong>, where the <strong>selector</strong> <code>&quot;[appHighlight]&quot;</code> is defined. It can then be used in the <strong>host element</strong> as an <strong>attribute</strong>.</p></br><p>There are two <strong>built-in decorators</strong>:</p><ul><li><code>@HostListener()</code> for <strong>listening to host element events</strong></li><li><code>@HostBinding()</code> for <strong>binding properties</strong> of the <strong>host element</strong></li></ul></br></br><pre data-language=\"plain\">\nHtml File\n\n&lt;p appHighlight&gt;Hover to see **background color change**!&lt;/p&gt;\n</pre></br></br><pre data-language=\"plain\">\nTypeSrcpt File\n\nimport { Directive, HostBinding, HostListener } from &#39;@angular/core&#39;;\n\n@Directive({\n  selector: &#39;[appHighlight]&#39;\n})\nexport class Highlight {\n\n  @HostBinding(&#39;style.backgroundColor&#39;) bgColor: string = &#39;&#39;;\n  @HostBinding(&#39;style.cursor&#39;) cursor: string = &#39;&#39;;\n  @HostBinding(&#39;style.color&#39;) textColor: string = &#39;&#39;;\n\n  constructor() { }\n\n  @HostListener(&#39;mouseenter&#39;) onMouseEnter() {\n    this.bgColor = &#39;yellow&#39;;\n    this.cursor = &#39;pointer&#39;;\n    this.textColor = &#39;red&#39;;\n  } \n\n  @HostListener(&#39;mouseleave&#39;) onMouseLeave() {\n    this.bgColor = &#39;&#39;;\n    this.cursor = &#39;&#39;;\n    this.textColor = &#39;&#39;;\n  }\n}\n</pre></br></br></br></br>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Service and Injectable</strong></p>",
+            "sectionId": 7,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Angular lifecycle hooks</strong></p>",
+            "sectionId": 8,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Data Binding</strong></p>",
+            "sectionId": 9,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Pipes</strong></p>",
+            "sectionId": 10,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Routing</strong></p>",
+            "sectionId": 11,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Forms</strong></p>",
+            "sectionId": 12,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Zone.js, NgZone and Change Detection</strong></p>",
+            "sectionId": 13,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Guards</strong></p>",
+            "sectionId": 14,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What are Angular Guards?</strong></p>",
+                    "sectionId": 14,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 27,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Route Guards</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> are used to control access to routes based on conditions (e.g., authentication, permissions).</span></p>"
+                },
+                {
+                    "text": "<p><strong>Explain the types of route guards.</strong></p>",
+                    "sectionId": 14,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 28,
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">1. CanActivate:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivate </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to prevent unauthorized access to a route.</span></p></br><p><strong>2.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivateChild:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanActivateChild </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">guard child routes</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> of a particular route.</span></p></br><p><strong>3.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanDeactivate:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanDeactivate </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> route guard</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> used to prevent navigation away from a component.</span></p></br><p><strong>4.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Resolve</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">: Fetches data before loading a route.</span></p></br><p><strong>5.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanLoad:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanLoad </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is used to</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">prevent loading a module unless conditions are met (used with lazy loading).</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular deprecated CanLoad in favor of the more powerful and flexible </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">CanMatch </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">guard starting in </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Angular v14+</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, especially for </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">standalone components</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">lazy-loaded routes</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
+                },
+                {
+                    "text": "<p><strong>Can you explain how to implement authentication guards in Angular?</strong></p>",
+                    "sectionId": 14,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 29,
+                    "description": "<p>Authentication guards are implemented using the <code>CanActivate</code> interface, which controls access to routes based on conditions such as whether the user is logged in.</p></br><p>Authentication guards can be generated using the Angular CLI command <code>ng generate guard AuthGuard</code>. During generation, I select the <code>CanActivate</code> option, which creates a guard using <code>canActivateFn</code>. Inside the guard, I check whether the user is logged in; if yes, I return <code>true</code>, otherwise I redirect them to the login page. Finally, I apply this guard in the routing configuration by setting <code>canActivate: [AuthGuard]</code> on the required path.</p></br><pre data-language=\"plain\">\nauth.guard.ts\n\nimport { inject } from &#39;@angular/core&#39;;\nimport { CanActivateFn, Router } from &#39;@angular/router&#39;;\nimport { AuthService } from &#39;./auth.service&#39;;\n\nexport const authGuard: CanActivateFn = (route, state) =&gt; {\n  const authService = inject(AuthService);\n  const router = inject(Router);\n\n  if (authService.isLoggedIn()) {\n    return true; // allow access\n  }\n\n  // if not logged in → redirect to login\n  return router.createUrlTree([&#39;/login&#39;]);\n};\n</pre></br></br><pre data-language=\"plain\">\napp.routes.ts\n\nimport { Routes } from &#39;@angular/router&#39;;\nimport { DashboardComponent } from &#39;./dashboard/dashboard.component&#39;;\nimport { authGuard } from &#39;./auth.guard&#39;;\n\nexport const routes: Routes = [\n  {\n    path: &#39;dashboard&#39;,\n    component: DashboardComponent,\n    canActivate: [authGuard]\n  },\n  {\n    path: &#39;login&#39;,\n    loadComponent: () =&gt;\n      import(&#39;./login/login.component&#39;).then(m =&gt; m.LoginComponent),\n  },\n];\n</pre>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Component Communication</strong></p>",
+            "sectionId": 15,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>How do components communicate with each other in a large-scale Angular application?</strong></p>",
+                    "sectionId": 15,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 45,
+                    "description": "<p>If the <strong>communication</strong> is between <strong>parent</strong> and <strong>child</strong>, I can <strong>pass data</strong> from <strong>parent to child</strong> through <code>@Input()</code> and <strong>emit data</strong> from <strong>child to parent</strong> through <code>@Output()</code>. I can also <strong>directly access</strong> a <strong>child component instance</strong> using <code>ViewChild</code> or <code>ContentChild</code>.</p></br><p>If <strong>components</strong> are <strong>unrelated</strong>, I create a <strong>shared service</strong> and <strong>share data</strong> through it using <code>Subject</code> or <code>BehaviorSubject</code> for <strong>real-time updates</strong>.</p></br><p>For <strong>large-scale apps</strong>, I use <strong>centralized state management</strong> like <strong>NgRx</strong> to <strong>manage</strong> and <strong>share data</strong>.</p></br><p>I can also <strong>pass data</strong> through <strong>route params</strong>, <strong>query params</strong>, or <strong>route state</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>ViewChild and ContentChild</strong></p>",
+            "sectionId": 16,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Loading</strong></p>",
+            "sectionId": 17,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Performance Optimization</strong></p>",
+            "sectionId": 18,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>How can you optimize Angular Application for better performance?</strong></p>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 46,
+                    "description": "<p>In Angular, I optimize <strong>performance</strong> by using <strong>OnPush change detection</strong> with <strong>immutable data</strong>, <strong>trackBy</strong> in <strong>ngFor</strong> to avoid re-rendering, and <strong>pure pipes</strong> for efficiency. I also <strong>lazy load</strong> modules or components to reduce <strong>bundle size</strong>, move <strong>heavy logic</strong> out of <strong>templates</strong>, and <strong>unsubscribe</strong> from <strong>observables</strong> to prevent <strong>memory leaks</strong>. Additionally, I use <strong>standalone components</strong> and <strong>preloading strategies</strong> to improve <strong>load time</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Interceptor</strong></p>",
+            "sectionId": 19,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Compiler</strong></p>",
+            "sectionId": 20,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>angular.json file</strong></p>",
+            "sectionId": 21,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Tokens</strong></p>",
+            "sectionId": 22,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Challenges Faced in Angular Project</strong></p>",
+            "sectionId": 23,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Unit Testing</strong></p>",
+            "sectionId": 24,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>What is Unit Testing in Angular, and why is it important?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 7,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Unit testing in Angular is the process of testing individual components, services, or functions in isolation to ensure they work correctly and make the application more reliable and maintainable.</span></p>"
+                },
+                {
+                    "text": "<p><strong>What testing frameworks are commonly used with Angular (Jasmine, Karma, Jest)?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 8,
+                    "description": "<p class=\"ql-align-justify\"><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jasmine</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a testing framework, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Karma</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a test runner (executes tests in browsers), and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jest</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is an alternative framework+runner offering faster, simpler testing.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">In short: </span><em style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jasmine + Karma work together</em><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, while </span><em style=\"background-color: transparent; color: rgb(0, 0, 0);\">Jest alone can replace both</em><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
+                },
+                {
+                    "text": "<p><strong>What is the difference between unit testing and end-to-end testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 9,
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Unit testing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> checks individual components/services in isolation, while </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">end-to-end testing</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> validates the entire application flow from the user’s perspective.</span></p>"
+                },
+                {
+                    "text": "<p><strong>What is the default test runner in Angular projects created with Angular CLI?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 10,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">The default test runner in Angular projects created with Angular CLI is </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Karma</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
+                },
+                {
+                    "text": "<p><strong>How do you create a new Angular component test file using CLI?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 11,
+                    "description": "<p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">You can create a new Angular component with its spec (test) file using:</span></p><pre data-language=\"plain\">\nng generate component component-name\n</pre><p class=\"ql-align-justify\"></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">👉 The CLI automatically generates the </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">.spec.ts</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> test file.</span></p></br>"
+                },
+                {
+                    "text": "<p><strong>What is ‘describe’ in jasmine in Unit Testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 12,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>What is beforeEach in Jasmine?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 13,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>What is TestBed in Angular Unit Testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 14,
+                    "description": "<p><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">TestBed</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">is the </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">primary Angular testing utility</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> that creates a </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">simulated Angular environment</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> for unit testing.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">It allows us to test components, directives, pipes, and services </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">with Angular’s dependency injection, change detection, and templates</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p class=\"ql-align-justify\"><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">1. </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">TestBed </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">Configures a testing module</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> (like a mini </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">NgModule</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">):</span></p><pre data-language=\"plain\">\n\n  TestBed.configureTestingModule({\n  \tdeclarations: [MyComponent],\n  \tproviders: [MyService],\n \timports: [FormsModule, HttpClientTestingModule]\n   });\n</pre><p class=\"ql-align-justify\"></p><p class=\"ql-align-justify\"><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">2.</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> TestBed creates Components for testing:</span></p><pre data-language=\"plain\">\n\n   const fixture = TestBed.createComponent(MyComponent);\n   const component = fixture.componentInstance;\n   fixture.detectChanges(); // runs ngOnInit + bindings\n</pre></br><p>3. TestBed is used to Inject Services:</p><pre data-language=\"plain\">\n      \n    const service = TestBed.inject(MyService);\n\n</pre><p><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">4. Run Change Detection:</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> Updates the DOM after changing component properties.</span></p>"
+                },
+                {
+                    "text": "<p><strong>What is ‘it’ in jasmine in Unit Testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 15,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>What is ‘expect’ in Jasmin?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 16,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>Can you describe some matchers?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 17,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">In Angular unit testing, a matcher function compares the actual result with the expected result.</span></p></br><p><strong>1.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">toBeTruthy:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">.toBeTruthy()</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">checks that a value is not </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">false</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">0</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">&#39;&#39;</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">null</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">undefined</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, or </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">NaN</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong>2.</strong> <strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">toHaveBeenCalledWith: </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">toHaveBeenCalledWith</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">is a Jasmine matcher that checks if a spy (mocked function) was called with the expected arguments. </span> </p>"
+                },
+                {
+                    "text": "<p><strong>How does </strong><strong style=\"color: rgb(0, 138, 0);\">async </strong><strong>work in Angular testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 18,
+                    "description": "<p><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">async</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">utility (renamed to </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">waitForAsync</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">) tracks all </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">pending async tasks</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> (Promises, timers, XHR) and waits until they are finished. Only then allows the test to continue and run expectations. It waits for </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">real async operations</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to finish automatically.</span></p></br><pre data-language=\"plain\">\n\nmy.component.ts\n\nimport { Component, OnInit } from &#39;@angular/core&#39;;\n@Component({\n  selector: &#39;app-my&#39;,\n  template: `&lt;div *ngIf=&quot;data&quot;&gt;{{ data }}&lt;/div&gt;`\n})\nexport class MyComponent implements OnInit {\n  data: string | null = null;\n  ngOnInit(): void {\n    // Simulate async data (like HTTP call)\n    this.loadData().then(result =&gt; {\n      this.data = result;\n    });\n  }\n  loadData(): Promise&lt;string&gt; {\n    return new Promise(resolve =&gt; {\n      setTimeout(() =&gt; resolve(&#39;Hello Async Data!&#39;), 500);\n    });\n  }\n}\n</pre></br><pre data-language=\"plain\">\n\n// my.component.spec.ts\n\nit(&#39;should load data async and render it&#39;, waitForAsync(() =&gt; {\n fixture.detectChanges(); // triggers ngOnInit\n fixture.whenStable().then(() =&gt; {\n fixture.detectChanges(); // update view after async resolves\n const div = fixture.debugElement.query(By.css(&#39;div&#39;)).nativeElement;\n expect(div.textContent).toContain(&#39;Hello Async Data!&#39;);\n expect(component.data).toBe(&#39;Hello Async Data!&#39;);\n });\n</pre></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">🔑</span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> What happens here:</strong></p></br><p><strong>1.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.detectChanges():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> triggers </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, which starts an async task.</span></p></br><p><strong>2.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.whenStable():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> waits until </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">all Promises &amp; async tasks are finished</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><strong>3.</strong> <strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">fixture.detectChanges():</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> refreshes template after data is set.</span></p></br><p><strong>4.</strong> <span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Test asserts that </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">async data is rendered</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">Explain:</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">I created a </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">loadData</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function that returns a Promise and resolved this Promise inside </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, storing the result in a </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">data</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> property.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">For the unit test: I created a </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">loadData</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function which returns a Promise and resolved this Promise in </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">ngOnInit()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, then stored the result in the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">data</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">property. I wrote a unit test case for this. I used </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">TestBed.createComponent</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to create a fixture for the component, which provides the setup before running the tests, and I accessed the component instance using </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.componentInstance</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Inside the </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">it</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> block for </span><em style=\"color: rgb(0, 0, 0); background-color: transparent;\">&#39;should load data async and render it&#39;</em><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, I wrapped the test with the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">waitForAsync</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">function. First, I ran</span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.detectChanges()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to update the view. Then I used </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.whenStable()</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> to wait until the component became stable. After that, I got the </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">div</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">element’s </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">nativeElement</strong><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">using </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">fixture.debugElement.query(By.css(&#39;div&#39;)).nativeElement</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">. Finally, I compared </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">div.textContent</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> and </span><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">component.data</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> with</span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\"> </strong><strong style=\"color: rgb(24, 128, 56); background-color: transparent;\">&#39;Hello Async Data&#39;</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">.</span></p>"
+                },
+                {
+                    "text": "<p><strong>How does </strong><strong style=\"color: rgb(0, 138, 0);\">fakeAsync </strong><strong>work in Angular testing?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 19,
+                    "description": "<p><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">utility tests asynchronous code </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">synchronously</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> by simulating the passage of time.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">When you wrap a test function in </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, Angular runs it and replaces real async functions </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">(</strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">Promise.then</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, RxJS timers, etc.) with </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">mocked versions</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><pre data-language=\"plain\">\n\nfake-async.component.ts\n\nimport { Component, OnInit } from &#39;@angular/core&#39;;\n@Component({\n  selector: &#39;app-fake-async&#39;,\n  template: `\n    &lt;div&gt;Static Div&lt;/div&gt;\n    &lt;div *ngIf=&quot;data&quot;&gt;{{ data }}&lt;/div&gt;\n    &lt;div&gt;Another Div&lt;/div&gt;\n  `\n})\nexport class FakeAsyncComponent implements OnInit {\n  data: string | null = null;\n  ngOnInit(): void {\n    setTimeout(() =&gt; {\n      this.data = &#39;Hello FakeAsync!&#39;;\n    }, 1000);\n  }\n}\n</pre></br><pre data-language=\"plain\">\n\nit(&#39;should load async data into the second div&#39;, fakeAsync(() =&gt; {\n    fixture.detectChanges(); // triggers ngOnInit\n    expect(component.data).toBeNull();\n    tick(1000);              // simulate passage of 1 second\n    fixture.detectChanges();\n    const divs = fixture.debugElement.queryAll(By.css(&#39;div&#39;));\n    expect(divs.length).toBe(3);\n    // Second div contains async data\n    expect(divs[1].nativeElement.textContent).toContain(&#39;Hello FakeAsync!&#39;);\n    expect(component.data).toBe(&#39;Hello FakeAsync!&#39;);\n  }));\n</pre></br><p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Note:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> Don’t use fixture.detectChanges(); in beforeEach() otherwise we will get an error.</span></p>"
+                },
+                {
+                    "text": "<p><strong>What is the difference between</strong><strong style=\"color: rgb(0, 138, 0);\"> tick()</strong><strong> and </strong><strong style=\"color: rgb(0, 138, 0);\">flush()</strong><strong> in Angular tests?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 20,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Both </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">tick()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> and </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">flush()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> are used </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">inside </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> tests</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> to control virtual time and execute async tasks.</span></p></br><p><strong>1.</strong>  <strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">tick()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a helper function that works only inside a </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> zone</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. It </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">simulates the passage of virtual time</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, allowing scheduled async tasks </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">(</strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">, </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, RxJS timers, Promises, etc.) to be executed </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">without waiting in real time</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p></br><p><strong>2.</strong>  <strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">flush()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a helper function that works only inside a </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">fakeAsync</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">zone. It executes all pending timers at once, without needing any arguments, and moves the virtual clock forward until all queued timers (macroTasks like </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setTimeout</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">and </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">setInterval</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">) are executed.</span></p>"
+                },
+                {
+                    "text": "<p><strong>How can you test an Angular service that makes HTTP calls?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 21,
+                    "description": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">When a service uses HttpClient, we don’t hit the real backend in unit tests. Instead, we use Angular’s HttpClientTestingModule and HttpTestingController to mock HTTP requests.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">I test Angular services with HTTP calls by using HttpClientTestingModule and HttpTestingController. This allows me to mock requests, assert on the method/URL, and return mock responses with flush() instead of calling the real backend.</span></p></br><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Call </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">httpMock.verify()</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> in </span><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">afterEach</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> </strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">to ensure no unmatched requests.</span></p></br><pre data-language=\"plain\">\n\nTest service file\n\nimport { TestBed } from &#39;@angular/core/testing&#39;;\nimport { User } from &#39;./user&#39;;\nimport { HttpTestingController, provideHttpClientTesting } from &#39;@angular/common/http/testing&#39;;\nimport { provideHttpClient, withFetch } from &#39;@angular/common/http&#39;;\ndescribe(&#39;User&#39;, () =&gt; {\n  let service: User;\n  let httpMock: HttpTestingController;\n  beforeEach(() =&gt; {\n    TestBed.configureTestingModule({\n      providers: [\n        User,\n        provideHttpClient(withFetch()),\n        provideHttpClientTesting()\n      ]\n    });\n    service = TestBed.inject(User);\n    httpMock = TestBed.inject(HttpTestingController);\n  });\n  afterEach(() =&gt; {\n    httpMock.verify();\n  })\n  it(&#39;should be created&#39;, () =&gt; {\n    expect(service).toBeTruthy();\n  });\n  it(&#39;should fetch users from API&#39;, () =&gt; {\n    const mockUsers = [\n      {\n        &quot;userId&quot;: 1,\n        &quot;id&quot;: 1,\n        &quot;title&quot;: &quot;delectus aut autem&quot;,\n        &quot;completed&quot;: false\n      }];\n      \n    service.getUsers().subscribe(users =&gt; {\n      expect(mockUsers).toEqual(users);\n    });\n    const req = httpMock.expectOne(&#39;https://jsonplaceholder.typicode.com/todos/1&#39;);\n    expect(req.request.method).toBe(&#39;GET&#39;);\n    req.flush(mockUsers);\n  });\n});\n\n</pre>"
+                },
+                {
+                    "text": "<p><strong>How do you test an Angular component with </strong><strong style=\"color: rgb(0, 138, 0);\">@Input()</strong><strong> and </strong><strong style=\"color: rgb(0, 138, 0);\">@Output()</strong><strong> properties?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 22,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>What is </strong><strong style=\"color: rgb(0, 138, 0);\">ComponentFixture</strong><strong> in Angular testing, and why is it used?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 23,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">What is the use of </strong><strong style=\"background-color: transparent; color: rgb(24, 128, 56);\">spyOn()</strong><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\"> in Jasmine?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 24,
+                    "description": "<p><code>spyOn</code> is a <strong>Jasmine function</strong> used in Angular unit tests.</p></br><p>It <strong>spies on methods</strong> of components, services, or other objects.</p></br><p>It allows you to <strong>track method calls</strong> and <strong>mock return values</strong> without executing the real implementation.</p>"
+                },
+                {
+                    "text": "<p><strong>What is the use of createSpyObject() in Jasmine?</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 25,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong>Explain Jasmine </strong><strong style=\"color: rgb(0, 138, 0);\">spyOn </strong><strong>and </strong><strong style=\"color: rgb(0, 138, 0);\">createSpyObj </strong><strong>in Angular Unit Testing.</strong></p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 26,
+                    "description": "<p><code>spyOn</code> is used to watch or mock methods of an existing object. It helps us test without calling the real implementation. For example, <code>spyOn(service, &#39;getData&#39;).and.returnValue(mockData)</code>.</p></br><p><code>createSpyObj</code> is used when we want to mock an entire dependency or service. Instead of creating real objects, we create a fake one with multiple spy methods, like <code>jasmine.createSpyObj(&#39;UserService&#39;, [&#39;getUser&#39;, &#39;saveUser&#39;])</code>.</p></br><p>The key difference is: <code>spyOn</code> works on existing objects, while <code>createSpyObj</code> creates a new fake object.</p>"
+                }
+            ],
+            "subSections": []
+        }
+    ];
 } 
