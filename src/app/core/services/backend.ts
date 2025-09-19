@@ -15,7 +15,7 @@ export class BackendService {
   private count = {
     section: 24,
     subSection: 0,
-    topic: 29,
+    topic: 46,
   };
 
   private getCount(type: Count) {
