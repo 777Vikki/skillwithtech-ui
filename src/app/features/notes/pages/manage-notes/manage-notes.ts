@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -396,5 +396,11 @@ export class ManageNotes implements OnInit {
         }
       }
     }
+  }
+
+  @HostListener('document:click')
+  closeDropdown() {
+    this.openToggle = -1;
+    this.toggleType = '';
   }
 }
