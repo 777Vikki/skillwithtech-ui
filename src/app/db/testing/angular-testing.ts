@@ -324,7 +324,40 @@ export const angularList = () => {
             "name": "<p><strong>Loading</strong></p>",
             "sectionId": 17,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is the difference between eager loading, lazy loading, and preloading in Angular?</strong></p>",
+                    "sectionId": 17,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 61,
+                    "description": "<p>Angular uses <strong>eager loading</strong>, <strong>lazy loading</strong>, or <strong>preloading</strong> strategies to load components or modules in an application.</p><p>Earlier, Angular loaded a module before accessing its components. However, after introducing <strong>standalone components</strong>, Angular can load components without loading their modules.</p></br><ul><li>In the <strong>eager loading</strong> strategy, all components or modules are loaded immediately when the application starts. This can make the initial load slower if there are many modules or components.</li><li>In the <strong>lazy loading</strong> strategy, modules or components are loaded on demand when the user navigates to those routes. This reduces the initial bundle size and improves startup performance.</li><li>In the <strong>preloading</strong> strategy, modules or components are loaded in the background after the application starts. This combines the benefits of both eager and lazy loading: fast navigation because modules are already loaded, and an optimized initial load.</li></ul></br>"
+                },
+                {
+                    "text": "<p><strong>Can you explain how to implement lazy loading in Angular with module?</strong></p>",
+                    "sectionId": 17,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 62,
+                    "description": "<p>In the lazy loading strategy, earlier Angular used <code>loadChildren</code> to load modules before accessing components. However, after the introduction of standalone components, it uses <code>loadComponent</code> to load components directly.</p></br><p>Suppose we have a feature module (a module that encapsulates a specific feature or functionality) called <code>Admin</code>. First, we set up routing for the <code>Admin</code> module in <code>admin-routing.module.ts</code> and define a <code>routes</code> array that contains all route configurations related to this module. We then pass this <code>routes</code> array into <code>RouterModule.forChild()</code>.</p><p>Next, we configure app routing with lazy loading in <code>app-routing.module.ts</code>. In the app routing configuration, we use <code>loadChildren</code> to dynamically import the <code>AdminModule</code> when the user navigates to the <code>admin</code> routing path.</p></br><pre data-language=\"plain\">\nadmin/admin-routing.module.ts\n\nimport { NgModule } from &#39;@angular/core&#39;;\nimport { RouterModule, Routes } from &#39;@angular/router&#39;;\nimport { DashboardComponent } from &#39;./dashboard/dashboard.component&#39;;\n\nconst routes: Routes = [\n  { path: &#39;&#39;, component: DashboardComponent } // default path for admin module\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class AdminRoutingModule { }\n</pre></br><pre data-language=\"plain\">\napp-routing.module.ts\n\nimport { NgModule } from &#39;@angular/core&#39;;\nimport { RouterModule, Routes } from &#39;@angular/router&#39;;\n\nconst routes: Routes = [\n  { \n    path: &#39;admin&#39;, \n    loadChildren: () =&gt; import(&#39;./admin/admin.module&#39;).then(m =&gt; m.AdminModule) \n  },\n  { path: &#39;&#39;, redirectTo: &#39;/&#39;, pathMatch: &#39;full&#39; }\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n</pre></br>"
+                },
+                {
+                    "text": "<p><strong>Can you explain how to implement lazy loading in Angular with standalone component?</strong></p>",
+                    "sectionId": 17,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 64,
+                    "description": "<p>In the lazy loading strategy, earlier Angular used <code>loadChildren</code> to load modules before accessing components. However, after the introduction of standalone components, it uses <code>loadComponent</code> to load components directly.</p></br><p>Suppose we have a standalone component called <code>Admin</code>. We configure lazy loading in <code>app.routes.ts</code> by defining a <code>routes</code> array that contains all route configurations. In the <code>admin</code> route, we use <code>loadComponent</code> to dynamically import the <code>AdminComponent</code> when the user navigates to the <code>admin</code> route path.</p></br><pre data-language=\"plain\">\napp.routes.ts\n\nimport { Routes } from &#39;@angular/router&#39;;\n\nexport const routes: Routes = [\n{\npath: &#39;admin&#39;,\nloadComponent: () =&gt;\nimport(&#39;./admin/admin.component&#39;).then(m =&gt; m.AdminComponent)\n},\n{ path: &#39;&#39;, redirectTo: &#39;admin&#39;, pathMatch: &#39;full&#39; }\n];\n</pre>"
+                },
+                {
+                    "text": "<p><strong>Can you explain how to implement preloading in Angular?</strong></p>",
+                    "sectionId": 17,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 63,
+                    "description": ""
+                }
+            ],
             "subSections": []
         },
         {

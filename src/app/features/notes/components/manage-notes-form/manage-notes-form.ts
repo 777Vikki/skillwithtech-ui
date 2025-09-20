@@ -23,12 +23,12 @@ export class ManageNotesForm implements OnInit, OnChanges {
   @Input() sections: ISection[] = [];
   @Input() notesForm: FormGroup | undefined;
   @Input() subSections: ISubSection[] = [];
-  @Input() contentList: ITopic[] = [];
+  @Input() contents: ITopic[] = [];
 
   @Output() closeManageNotesForm = new EventEmitter<void>();
   @Output() notesFormSubmit = new EventEmitter<FormGroup>();
 
-  
+
 
   ngOnInit(): void {
 
@@ -38,6 +38,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
     if (changes["sections"]) {
       this.sections = structuredClone(this.sections).map(d => {
         d.name = this.notesService.getPlainText(d.name);
+        d.name = d.name.length > 60? d.name.slice(0, 57) + '...' : d.name;
         return d;
       });
     }
@@ -45,20 +46,15 @@ export class ManageNotesForm implements OnInit, OnChanges {
     if (changes["subSections"]) {
       this.subSections = structuredClone(this.subSections).map(d => {
         d.name = this.notesService.getPlainText(d.name);
+        d.name = d.name.length > 60? d.name.slice(0, 57) + '...' : d.name;
         return d;
       });
     }
 
-    if (changes["sections"]) {
-      this.sections = structuredClone(this.sections).map(d => {
-        d.name = this.notesService.getPlainText(d.name);
-        return d;
-      });
-    }
-
-    if (changes["contentList"]) {
-      this.contentList = structuredClone(this.contentList).map(d => {
+    if (changes["contents"]) {
+      this.contents = structuredClone(this.contents).map(d => {
         d.text = this.notesService.getPlainText(d.text);
+        d.text = d.text.length > 60? d.text.slice(0, 57) + '...' : d.text;
         return d;
       });
     }

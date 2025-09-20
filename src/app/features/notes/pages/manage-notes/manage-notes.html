@@ -61,7 +61,7 @@
     </div>
     <div class="manage-action-container">
         @if(selectedAction) {
-        <app-manage-notes-form [action]="selectedAction" [contentList]="currentActionContents"
+        <app-manage-notes-form [action]="selectedAction" [contents]="currentActionContents"
             [subSections]="currentActionSubsections" [notesForm]="notesForm" [sections]="sections"
             (closeManageNotesForm)="selectedAction = undefined"
             (notesFormSubmit)="submitNotesForm($event)"></app-manage-notes-form>
