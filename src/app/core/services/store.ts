@@ -22,4 +22,23 @@ export class StoreService {
     }));
   }
 
+  checkMobileScreen(): boolean {
+    // Mobile (small devices) → window.innerWidth <= 768px
+    // Tablet (medium devices) → 769px – 1024px
+    // Desktop (large devices) → >= 1025px
+    if (window.location.hostname === 'localhost') {
+      return window.innerWidth <= 450;
+    } else {
+      return window.innerWidth <= 768;
+    }
+  }
+
+  checkMobile(): boolean {
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    return isMobile;
+
+  }
+
 }

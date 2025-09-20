@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
-import { notesDb } from '../../db/notes-db';
+import { notesDb, availableNotes, storeCount } from '../../db/notes-db';
 
 type Count = 'section' | 'subSection' | 'topic';
 
@@ -12,11 +12,7 @@ type Count = 'section' | 'subSection' | 'topic';
 export class BackendService {
   currentNoteSections: ISection[] = [];
   currentNoteKey: string | undefined;
-  private count = {
-    section: 24,
-    subSection: 0,
-    topic: 46,
-  };
+  private count = storeCount();
 
   private getCount(type: Count) {
     const data = localStorage.getItem("count");
@@ -29,13 +25,7 @@ export class BackendService {
   }
 
   getHeaders(): Observable<INote[]> {
-    const header: INote[] = notesDb().map(d => {
-      return {
-        name: d.name,
-        type: d.type,
-        sections: [],
-      }
-    });
+    const header: INote[] = structuredClone(availableNotes());
     return of(structuredClone(header));
   }
 
@@ -46,7 +36,7 @@ export class BackendService {
       this.currentNoteSections = JSON.parse(data);
       return of(JSON.parse(data));
     }
-    this.currentNoteSections = notesDb().find(d => d.type === type)?.sections ?? [];
+    this.currentNoteSections = notesDb(type);
     return of(structuredClone(this.currentNoteSections));
   }
 

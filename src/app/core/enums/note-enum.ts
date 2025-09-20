@@ -5,5 +5,6 @@ export enum Note {
     JAVASCRIPT = "JavaScript",
     TYPESCRIPT = "TypeScript",
     HTML = "HTML",
-    CSS = "CSS"
+    CSS = "CSS",
+    AZURE = "AZURE",
 }
