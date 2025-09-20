@@ -33,18 +33,4 @@ export class StoreService {
     }
   }
 
-  checkMobile(): boolean {
-    // Check user agent for mobile
-    const ua = navigator.userAgent || (window as any).opera;
-    const mobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
-
-    // Check touch capability
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    // Consider mobile if either user agent or touch + small screen
-    const smallScreen = window.innerWidth <= 768;
-
-    return mobileUA || (isTouch && smallScreen);
-  }
-
 }

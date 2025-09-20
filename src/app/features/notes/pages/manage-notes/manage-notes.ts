@@ -29,7 +29,7 @@ export class ManageNotes implements OnInit {
   currentActionContents: ITopic[] = [];
   openToggle: number = -1;
   toggleType: string = '';
-  isMobile = this.storeService.checkMobile();
+  isMobile = this.storeService.checkMobileScreen();
 
   actions: IManageNotesAction[] = [
     {

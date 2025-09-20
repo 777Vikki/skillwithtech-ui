@@ -9,7 +9,7 @@
     .ans-box-header {
         pre {
             overflow-x: auto;
-            width: 275px;
+            width: 335px;
         }
     }
 
@@ -24,7 +24,7 @@
         .ans-box-header {
             pre {
                 overflow-x: auto;
-                width: 475px;
+                width: 570px;
             }
         }
 
@@ -39,9 +39,11 @@
         }
 
         .note-topic {
-            pre {
-                overflow-x: auto;
-                width: 300px;
+            .note-description-item {
+                pre {
+                    overflow-x: auto;
+                    width: 300px;
+                }
             }
         }
     }

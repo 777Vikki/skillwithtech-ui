@@ -17,7 +17,7 @@ export class Description implements OnInit, OnChanges{
   @Output() emitEditorText = new EventEmitter<string>();
 
   isShowEditor: boolean = false;
-  isMobile = this.storeService.checkMobile();
+  isMobile = this.storeService.checkMobileScreen();
 
   ngOnInit(): void {
   }
