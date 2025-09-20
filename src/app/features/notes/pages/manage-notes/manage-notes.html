@@ -1,3 +1,4 @@
+@if(!isMobile) {
 <div class="manage-notes-container" [ngClass]="{'manage-notes-action': selectedAction}">
     <div class="manage-notes" style="flex: 1;">
         <div class="manage-header">
@@ -67,6 +68,11 @@
         }
     </div>
 </div>
+} @else {
+<p-card>
+    <div>Notes are supported only on desktop and big screens.</div>
+</p-card>
+}
 
 <ng-template #myContent let-topics="topics">
     @for(topic of topics; track topic.topicId) {

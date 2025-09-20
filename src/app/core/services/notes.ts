@@ -83,18 +83,6 @@ export class NotesService {
     return plainText;
   }
 
-  checkMobileScreen(): boolean {
-    // Mobile (small devices) → window.innerWidth <= 768px
-    // Tablet (medium devices) → 769px – 1024px
-    // Desktop (large devices) → >= 1025px
-    if (window.location.hostname === 'localhost') {
-      return window.innerWidth <= 450;
-    } else {
-      return window.innerWidth <= 768;
-    }
-
-  }
-
   addRequired(control: AbstractControl | null) {
     if (!control) return;
 

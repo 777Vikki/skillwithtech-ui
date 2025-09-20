@@ -1,5 +1,5 @@
 <div class="note-container">
-    @if(!isMobile) {
+    @if(!isMobileScreen) {
     <div class="disktop-view" [ngClass]="{'collapse-section': isSectionCollapse}">
         <div class="note-section">
             <div class="note-section-header center-align-between">
@@ -17,9 +17,8 @@
                 }
             </div>
         </div>
-        <div class="note-section-collapse">
-            <span class="material-symbols-outlined link section-expand"
-                (click)="isSectionCollapse = false">keyboard_double_arrow_left</span>
+        <div class="note-section-collapse" (click)="isSectionCollapse = false">
+            <span class="material-symbols-outlined link section-expand">keyboard_double_arrow_left</span>
         </div>
         <div class="note-topic">
             <div class="note-topic-header">

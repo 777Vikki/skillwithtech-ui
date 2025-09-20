@@ -8,7 +8,7 @@
             <div class="ans-box">
                 <div class="ans-box-header">
                     <div [innerHTML]="topic.text"></div>
-                    @if(topic.description) {
+                    @if(topic.description && !isMobile) {
                     <div><p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" /></div>
                     }
                 </div>
@@ -19,9 +19,11 @@
                     <div class="no-ans ">
                         <div class="no-ans-item">
                             <div>No Answer is added.</div>
+                            @if(!isMobile) {
                             <span class="link material-symbols-outlined" (click)="isShowEditor=true">
                                 add_circle
                             </span>
+                            }
                         </div>
                     </div>
                     }

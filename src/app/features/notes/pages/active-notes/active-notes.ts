@@ -15,12 +15,12 @@ import { Description } from '../../components/description/description';
   styleUrl: './active-notes.scss'
 })
 export class ActiveNotes implements OnInit {
-store = inject(StoreService);
+  store = inject(StoreService);
   noteService = inject(NotesService);
   sections: ISection[] = [];
   selectedSection: ISection | undefined;
   selectedTopic: ITopic | undefined;
-  isMobile = this.noteService.checkMobileScreen();
+  isMobileScreen = this.store.checkMobileScreen();
   expandSections: number[] = [];
   expandTopics: number[] = [];
   isSectionCollapse: boolean = false;

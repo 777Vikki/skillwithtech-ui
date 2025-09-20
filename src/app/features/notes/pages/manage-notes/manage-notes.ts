@@ -8,15 +8,18 @@ import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISect
 import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
 import { ManageNotesForm } from '../../components/manage-notes-form/manage-notes-form';
 import { IResponse } from '../../../../core/interfaces/response-interface';
+import { CardModule } from 'primeng/card';
+import { StoreService } from '../../../../core/services/store';
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, NgTemplateOutlet, ButtonModule, SelectModule, FormsModule, ManageNotesForm],
+  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm],
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss'
 })
 export class ManageNotes implements OnInit {
-  notesService = inject(NotesService);
+  private storeService = inject(StoreService)
+  private notesService = inject(NotesService);
   fomBuilder = inject(FormBuilder);
 
   notesForm: FormGroup = this.fomBuilder.group({});
@@ -26,6 +29,7 @@ export class ManageNotes implements OnInit {
   currentActionContents: ITopic[] = [];
   openToggle: number = -1;
   toggleType: string = '';
+  isMobile = this.storeService.checkMobile();
 
   actions: IManageNotesAction[] = [
     {

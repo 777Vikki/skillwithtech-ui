@@ -32,9 +32,18 @@
 }
 
 ::ng-deep .mobile-view {
-    pre {
-        overflow-x: auto;
-        width: 250px;
+    .note-section {
+        pre {
+            overflow-x: auto;
+            width: 200px;
+        }
+
+        .note-topic {
+            pre {
+                overflow-x: auto;
+                width: 300px;
+            }
+        }
     }
 }
 
@@ -143,6 +152,7 @@
 
         &.collapse-section {
             .note-section-collapse {
+                cursor: pointer;
                 display: block;
                 width: 18px;
                 border-right: 1px solid black;
