@@ -10,15 +10,15 @@ import { Observable, tap } from 'rxjs';
 export class StoreService {
   backendService = inject(BackendService);
 
-  private noteList: INote[] = [];
+  private headerList: INote[] = [];
 
-  primaryNote() {
-    return [...this.noteList].find(note => note.type === Note.ANGULAR);
+  primaryHeader() {
+    return [...this.headerList].find(note => note.type === Note.ANGULAR);
   }
 
-  getNotes(): Observable<INote[]> {
+  getHeaders(): Observable<INote[]> {
     return this.backendService.getHeaders().pipe(tap((d: INote[]) => {
-      this.noteList = d;
+      this.headerList = d;
     }));
   }
 

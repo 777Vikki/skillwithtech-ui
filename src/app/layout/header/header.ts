@@ -15,22 +15,22 @@ import { RouterModule } from '@angular/router';
 export class Header implements OnInit {
   store = inject(StoreService);
   notesService = inject(NotesService);
-  notes: INote[] = [];
-  selectedNote: INote | undefined;
+  headers: INote[] = [];
+  selectedHeader: INote | undefined;
 
   ngOnInit(): void {
-    this.store.getNotes().subscribe((d: INote[]) => {
-      this.notes = d;
-      this.selectedNote = this.store.primaryNote();
-      if (this.selectedNote) {
-        this.notesService.setSelectedNotes(this.selectedNote);
+    this.store.getHeaders().subscribe((d: INote[]) => {
+      this.headers = d;
+      this.selectedHeader = this.store.primaryHeader();
+      if (this.selectedHeader) {
+        this.notesService.setSelectedNotes(this.selectedHeader);
       }
     });
   }
 
   onSelectNote() {
-    if (this.selectedNote) {
-      this.notesService.setSelectedNotes(this.selectedNote);
+    if (this.selectedHeader) {
+      this.notesService.setSelectedNotes(this.selectedHeader);
     }
   }
 
