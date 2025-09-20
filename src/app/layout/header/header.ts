@@ -4,33 +4,64 @@ import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { INote } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule, FormsModule, Select],
+  imports: [FormsModule, Select],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
 export class Header implements OnInit {
   store = inject(StoreService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
   notesService = inject(NotesService);
   headers: INote[] = [];
   selectedHeader: INote | undefined;
 
   ngOnInit(): void {
-    this.store.getHeaders().subscribe((d: INote[]) => {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      switchMap(() => this.store.getHeaders())
+    ).subscribe(d => {
+      const NotesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
       this.headers = d;
-      this.selectedHeader = this.store.primaryHeader();
+      if (NotesId > 0) {
+        this.selectedHeader = this.headers.find(d => d.id === NotesId) ?? this.store.primaryHeader();
+      } else {
+        this.selectedHeader = this.store.primaryHeader();
+      }
       if (this.selectedHeader) {
         this.notesService.setSelectedNotes(this.selectedHeader);
       }
     });
   }
 
+  onNavigation(path: string) {
+    
+    const queryParamRequest: any = {
+      queryParams: {notesId: this.selectedHeader?.id}
+    }
+    if(!path) {
+      queryParamRequest['relativeTo'] = this.route;
+    }
+    
+    const routerPath = path? [path] : [];
+    this.router.navigate(routerPath, queryParamRequest);
+
+    // this.router.navigate([], {
+    //     relativeTo: this.route,      // stay on current route
+    //     queryParams: { NotesId: this.selectedHeader.id },      // update ID
+    //     // queryParamsHandling: 'merge' // keep other query params
+    //   });
+  }
+
   onSelectNote() {
     if (this.selectedHeader) {
       this.notesService.setSelectedNotes(this.selectedHeader);
+      this.onNavigation('');
     }
   }
 

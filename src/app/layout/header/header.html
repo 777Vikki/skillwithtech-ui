@@ -3,8 +3,8 @@
     <div class="page-info">
         <p-select [options]="headers" [(ngModel)]="selectedHeader" optionLabel="name" placeholder="Select a Note"
             (onChange)="onSelectNote()" class="w-full md:w-56" />
-        <a class="link" routerLink="/notes/active-notes">Notes</a>
-        <a class="link" routerLink="/notes/manage-notes">Manage Notes</a>
+        <a class="link" (click)="onNavigation('/notes/active-notes')">Notes</a>
+        <a class="link" (click)="onNavigation('/notes/manage-notes')">Manage Notes</a>
     </div>
 
     <!-- Right: Logo + Profile -->
