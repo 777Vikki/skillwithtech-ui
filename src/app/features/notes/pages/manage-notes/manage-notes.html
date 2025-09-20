@@ -14,54 +14,60 @@
         </div>
         <div class="manage-notes-content">
             @for(section of sections; track section.sectionId; let sectionIndex = $index) {
-            <div class="section-text center-align-between">
-                <div [innerHTML]="section.name"></div>
-                <div class="menu-container">
-                    <span class="material-symbols-outlined link"
-                        (click)="toggleMenu(section.sectionId, 'section'); $event.stopPropagation()"> more_vert </span>
-                    @if(openToggle === section.sectionId && toggleType === 'section') {
-                    <ul class="menu-list">
-                        <li (click)="addSection(section, '0')">Add Section Above</li>
-                        <li (click)="addSection(section, '1')">Add Section Below</li>
-                        <li (click)="addSubSectOnSection(section)">Add Sub Section</li>
-                        <li (click)="editSection(section)">Edit Section</li>
-                        <li (click)="deleteSection(sectionIndex)">Delete Section</li>
-                    </ul>
+            <div class="section-container">
+                <div class="section-text center-align-between">
+                    <div [innerHTML]="section.name"></div>
+                    <div class="menu-container">
+                        <span class="material-symbols-outlined link"
+                            (click)="toggleMenu(section.sectionId, 'section'); $event.stopPropagation()"> more_vert
+                        </span>
+                        @if(openToggle === section.sectionId && toggleType === 'section') {
+                        <ul class="menu-list">
+                            <li (click)="addSection(section, '0')">Add Section Above</li>
+                            <li (click)="addSection(section, '1')">Add Section Below</li>
+                            <li (click)="addSubSectOnSection(section)">Add Sub Section</li>
+                            <li (click)="editSection(section)">Edit Section</li>
+                            <li (click)="deleteSection(sectionIndex)">Delete Section</li>
+                        </ul>
+                        }
+                    </div>
+                </div>
+                @if(section?.topics?.length) {
+                <ng-container *ngTemplateOutlet="myContent; context: { topics: section.topics }"></ng-container>
+                }
+                @if(section?.subSections?.length) {
+                @for(subSection of section.subSections; track subSection.subSectionId; let subSectionIndex = $index) {
+                <div class="subsection-container">
+                    <div class="subSection-text center-align-between">
+                        <div [innerHTML]="subSection.name"></div>
+                        <div class="menu-container">
+                            <span class="material-symbols-outlined link"
+                                (click)="toggleMenu(subSection.subSectionId, 'subSection'); $event.stopPropagation()">
+                                more_vert
+                            </span>
+                            @if(openToggle === subSection.subSectionId && toggleType === 'subSection') {
+                            <ul class="menu-list">
+                                <li (click)="addSubSection(subSection, '0')">Add Sub Section Above</li>
+                                <li (click)="addSubSection(subSection, '1')">Add Sub Section Below</li>
+                                <li (click)="editSubSection(subSection)">Edit Sub Section</li>
+                                <li (click)="deleteSubSection(sectionIndex, subSectionIndex)">Delete Sub Section</li>
+                            </ul>
+                            }
+                        </div>
+                    </div>
+                    @if(subSection?.topics?.length) {
+                    <ng-container *ngTemplateOutlet="myContent; context: { topics: subSection.topics }"></ng-container>
                     }
                 </div>
+                }
+                }
             </div>
-            @if(section?.topics?.length) {
-            <ng-container *ngTemplateOutlet="myContent; context: { topics: section.topics }"></ng-container>
-            }
-            @if(section?.subSections?.length) {
-            @for(subSection of section.subSections; track subSection.subSectionId; let subSectionIndex = $index) {
-            <div class="subSection-text center-align-between">
-                <div [innerHTML]="subSection.name"></div>
-                <div class="menu-container">
-                    <span class="material-symbols-outlined link"
-                        (click)="toggleMenu(subSection.subSectionId, 'subSection'); $event.stopPropagation()"> more_vert
-                    </span>
-                    @if(openToggle === subSection.subSectionId && toggleType === 'subSection') {
-                    <ul class="menu-list">
-                        <li (click)="addSubSection(subSection, '0')">Add Sub Section Above</li>
-                        <li (click)="addSubSection(subSection, '1')">Add Sub Section Below</li>
-                        <li (click)="editSubSection(subSection)">Edit Sub Section</li>
-                        <li (click)="deleteSubSection(sectionIndex, subSectionIndex)">Delete Sub Section</li>
-                    </ul>
-                    }
-                </div>
-            </div>
-            @if(subSection?.topics?.length) {
-            <ng-container *ngTemplateOutlet="myContent; context: { topics: subSection.topics }"></ng-container>
-            }
-            }
-            }
             }
         </div>
     </div>
     <div class="manage-action-container">
         @if(selectedAction) {
-        <app-manage-notes-form [action]="selectedAction" [contentList]="currentActionContents"
+        <app-manage-notes-form [action]="selectedAction" [contents]="currentActionContents"
             [subSections]="currentActionSubsections" [notesForm]="notesForm" [sections]="sections"
             (closeManageNotesForm)="selectedAction = undefined"
             (notesFormSubmit)="submitNotesForm($event)"></app-manage-notes-form>
@@ -76,6 +82,7 @@
 
 <ng-template #myContent let-topics="topics">
     @for(topic of topics; track topic.topicId) {
+    @if(topic.text) {
     <div class="content-text center-align-between">
         <div [innerHTML]="topic.text"></div>
         <div class="menu-container">
@@ -90,5 +97,6 @@
             }
         </div>
     </div>
+    }
     }
 </ng-template>

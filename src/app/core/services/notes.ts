@@ -12,7 +12,7 @@ import { AbstractControl, Validators } from '@angular/forms';
 export class NotesService {
   backendService = inject(BackendService);
 
-  protected selectedNotes: INote = { name: '', type: '', sections: [] };
+  protected selectedNotes: INote = { name: '', type: '', id: -1,  sections: [] };
   private notesSection = new BehaviorSubject<ISection[]>([]);
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {

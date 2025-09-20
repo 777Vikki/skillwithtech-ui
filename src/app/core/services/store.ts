@@ -10,15 +10,15 @@ import { Observable, tap } from 'rxjs';
 export class StoreService {
   backendService = inject(BackendService);
 
-  private noteList: INote[] = [];
+  private headerList: INote[] = [];
 
-  primaryNote() {
-    return [...this.noteList].find(note => note.type === Note.ANGULAR);
+  primaryHeader() {
+    return [...this.headerList].find(note => note.type === Note.ANGULAR);
   }
 
-  getNotes(): Observable<INote[]> {
+  getHeaders(): Observable<INote[]> {
     return this.backendService.getHeaders().pipe(tap((d: INote[]) => {
-      this.noteList = d;
+      this.headerList = d;
     }));
   }
 
@@ -31,20 +31,6 @@ export class StoreService {
     } else {
       return window.innerWidth <= 768;
     }
-  }
-
-  checkMobile(): boolean {
-    // Check user agent for mobile
-    const ua = navigator.userAgent || (window as any).opera;
-    const mobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
-
-    // Check touch capability
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    // Consider mobile if either user agent or touch + small screen
-    const smallScreen = window.innerWidth <= 768;
-
-    return mobileUA || (isTouch && smallScreen);
   }
 
 }
