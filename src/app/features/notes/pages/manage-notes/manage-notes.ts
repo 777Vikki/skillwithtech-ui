@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -11,6 +11,7 @@ import { IResponse } from '../../../../core/interfaces/response-interface';
 import { CardModule } from 'primeng/card';
 import { StoreService } from '../../../../core/services/store';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-notes',
@@ -18,9 +19,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss'
 })
-export class ManageNotes implements OnInit, OnDestroy {
+export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
+  private route = inject(ActivatedRoute);
+
+  @ViewChild('manageViewListScrollContainer') manageViewListScrollContainer!: ElementRef;
+
   fomBuilder = inject(FormBuilder);
 
   notesForm: FormGroup = this.fomBuilder.group({});
@@ -69,6 +74,29 @@ export class ManageNotes implements OnInit, OnDestroy {
         })
     );
 
+  }
+
+  ngAfterViewInit(): void {
+    const routeQueryParams = this.route.snapshot.queryParams;
+    const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
+    const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
+    const subsectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : -1;
+    this.scrollManageViewList(sectionId, subsectionId, contentId);
+  }
+
+  scrollManageViewList(sectionId: number, subsectionId: number, contentId: number) {
+    let elementId = '';
+    if (contentId > -1) {
+      elementId = "manage-content-" + contentId;
+    } else if (subsectionId > -1) {
+      elementId = "manage-subsection-" + subsectionId;
+    } else if (sectionId > -1) {
+      elementId = 'manage-section-' + sectionId;
+    }
+    if (elementId) {
+      const element = document.getElementById(elementId);
+      element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   setSubSectionControl() {
