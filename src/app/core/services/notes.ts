@@ -5,14 +5,16 @@ import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
+import { StoreService } from './store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  backendService = inject(BackendService);
+  private storeService = inject(StoreService);
+  private backendService = inject(BackendService);
 
-  protected selectedNotes: INote = { name: '', type: '', id: -1,  sections: [] };
+  protected selectedNotes: INote = this.storeService.getDummyNotes();
   private notesSection = new BehaviorSubject<ISection[]>([]);
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
