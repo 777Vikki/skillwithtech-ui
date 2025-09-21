@@ -184,9 +184,11 @@
 
     .mobile-view {
         border: 1px solid black;
+        border-radius: 4px;
 
         .note-section {
             border: 1px solid black;
+            border-radius: 4px;
             margin: 4px;
 
             .note-section-item {
@@ -210,6 +212,7 @@
             .note-topic {
                 margin: 4px;
                 border: 1px solid black;
+                border-radius: 4px;
 
                 .note-topic-item {
                     padding: 4px;
@@ -238,6 +241,10 @@
                             font-size: 16px;
                         }
                     }
+                }
+
+                .note-topic-item:first-child {
+                    border-bottom: 0px;   
                 }
 
                 .note-description-item {
