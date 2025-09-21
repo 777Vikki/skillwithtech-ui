@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -23,8 +23,6 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   private route = inject(ActivatedRoute);
-
-  @ViewChild('manageViewListScrollContainer') manageViewListScrollContainer!: ElementRef;
 
   fomBuilder = inject(FormBuilder);
 
@@ -85,23 +83,27 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
     const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
     const subsectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : -1;
-    if(contentId > -1) {
+    this.setActiveRow(sectionId, subsectionId, contentId);
+    this.scrollManageViewList(sectionId, subsectionId, contentId);
+  }
+
+  setActiveRow(sectionId: number, subsectionId: number, contentId: number) {
+    if (contentId > -1) {
       this.activeRow = {
         id: contentId,
         type: "content"
       }
-    } else if(subsectionId > -1) {
+    } else if (subsectionId > -1) {
       this.activeRow = {
         id: subsectionId,
         type: "subsection"
       }
-    } else if(sectionId > -1) {
+    } else if (sectionId > -1) {
       this.activeRow = {
         id: sectionId,
         type: "section"
       }
     }
-    this.scrollManageViewList(sectionId, subsectionId, contentId);
   }
 
   scrollManageViewList(sectionId: number, subsectionId: number, contentId: number) {
@@ -109,16 +111,8 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     if (contentId > -1) {
       elementId = "manage-content-" + contentId;
     } else if (subsectionId > -1) {
-      this.activeRow = {
-        id: subsectionId,
-        type: "subsection"
-      }
       elementId = "manage-subsection-" + subsectionId;
     } else if (sectionId > -1) {
-      this.activeRow = {
-        id: sectionId,
-        type: "section"
-      }
       elementId = 'manage-section-' + sectionId;
     }
     if (elementId) {
@@ -356,8 +350,8 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.currentActionSubsections = [];
     this.currentActionContents = [];
     this.selectedAction = this.actions.find(d => d.type === "Content");
-    if(content.sectionId > -1) {
-      if(content.subSectionId > -1) {
+    if (content.sectionId > -1) {
+      if (content.subSectionId > -1) {
         this.currentActionSubsections = this.sections.find(d => d.sectionId === content.sectionId)?.subSections ?? [];
         this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? [];
       } else {
@@ -368,7 +362,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.notesForm.addControl('sectionId', new FormControl(content.sectionId, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl(content.subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-    if(content.topicId > -1) {
+    if (content.topicId > -1) {
       this.notesForm.addControl('contentId', new FormControl(content.topicId, [Validators.required]));
       this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
     } else {

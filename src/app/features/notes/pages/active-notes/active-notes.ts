@@ -22,8 +22,6 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  @ViewChild('sectionScrollContainer') sectionScrollContainer!: ElementRef;
-  @ViewChild('contentScrollContainer') contentScrollContainer!: ElementRef;
   sections: ISection[] = [];
   selectedSection: ISection | undefined;
   selectedTopic: ITopic | undefined;
@@ -56,7 +54,11 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
     const routeQueryParams = this.route.snapshot.queryParams;
     const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
     const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
-    
+
+    this.scrollActiveNotes(NaN, -1, contentId);
+  }
+
+  scrollActiveNotes(sectionId: number, subsectionId: number, contentId: number) {
     if (sectionId > -1) {
       const element = document.getElementById('section_' + sectionId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -66,7 +68,6 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
       const element = document.getElementById('content_' + contentId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-
   }
 
   onExpandSection(sectionId: number) {
@@ -108,6 +109,9 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
+    setTimeout(() => {
+      this.scrollActiveNotes(-1, -1, this.selectedTopic?.topicId ?? -1);
+    });
   }
 
   onSelectSection(section: ISection) {
