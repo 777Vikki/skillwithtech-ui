@@ -12,9 +12,9 @@
             <p-button class="ml-4" (click)="onRearrange()" label="Rearrange" severity="secondary" />
 
         </div>
-        <div class="manage-notes-content">
+        <div class="manage-notes-content" #manageViewListScrollContainer>
             @for(section of sections; track section.sectionId; let sectionIndex = $index) {
-            <div class="section-container">
+            <div class="section-container" [id]="'manage-section-' + section.sectionId">
                 <div class="section-text center-align-between">
                     <div [innerHTML]="section.name"></div>
                     <div class="menu-container">
@@ -37,7 +37,7 @@
                 }
                 @if(section?.subSections?.length) {
                 @for(subSection of section.subSections; track subSection.subSectionId; let subSectionIndex = $index) {
-                <div class="subsection-container">
+                <div class="subsection-container" [id]="'manage-subsection-' + subSection.subSectionId">
                     <div class="subSection-text center-align-between">
                         <div [innerHTML]="subSection.name"></div>
                         <div class="menu-container">
@@ -83,7 +83,7 @@
 <ng-template #myContent let-topics="topics">
     @for(topic of topics; track topic.topicId) {
     @if(topic.text) {
-    <div class="content-text center-align-between">
+    <div class="content-text center-align-between" [id]="'manage-content-' + topic.topicId">
         <div [innerHTML]="topic.text"></div>
         <div class="menu-container">
             <span class="material-symbols-outlined link"

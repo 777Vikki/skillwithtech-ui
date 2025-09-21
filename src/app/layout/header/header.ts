@@ -5,7 +5,7 @@ import { Select } from 'primeng/select';
 import { INote } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, switchMap } from 'rxjs';
+import { filter, first, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -24,8 +24,10 @@ export class Header implements OnInit {
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      switchMap(() => this.store.getHeaders())
-    ).subscribe(d => {
+      switchMap(() => this.store.getHeaders()),
+    )
+    .pipe(first())
+    .subscribe(d => {
       const NotesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
       this.headers = d;
       if (NotesId > 0) {
@@ -40,12 +42,14 @@ export class Header implements OnInit {
   }
 
   onNavigation(path: string) {
-    
+
     const queryParamRequest: any = {
       queryParams: {notesId: this.selectedHeader?.id}
     }
     if(!path) {
       queryParamRequest['relativeTo'] = this.route;
+    } else {
+      queryParamRequest["queryParamsHandling"] = "merge";
     }
     
     const routerPath = path? [path] : [];
