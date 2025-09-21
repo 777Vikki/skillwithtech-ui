@@ -255,14 +255,104 @@ export const angularList = () => {
             "name": "<p><strong>Forms</strong></p>",
             "sectionId": 12,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is the difference between reactive forms and template-driven forms?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 65,
+                    "description": "<ul><li><strong>Template-Driven Forms</strong> are built mainly in the <strong>HTML template</strong> using Angular directives (<strong>ngModel</strong>, <strong>ngForm</strong>), whereas <strong>Reactive Forms</strong> are built in <strong>TypeScript</strong> using <strong>FormControl</strong>, <strong>FormGroup</strong>, and <strong>FormBuilder</strong>.</li></ul></br><ul><li> For <strong>data binding</strong>, Template-Driven Forms use <strong>ngModel</strong>, while Reactive Forms use <strong>FormControl</strong>.</li></ul></br><ul><li>For <strong>validation</strong>, Template-Driven Forms use <strong>directives</strong> (such as <strong>required</strong>, <strong>minLength</strong>), whereas Reactive Forms use <strong>Validators</strong>.</li></ul></br><p> Therefore, Template-Driven Forms are <strong>not suitable</strong> for <strong>large and complex forms</strong>, but Reactive Forms are <strong>well-suited</strong> for them.</p>"
+                },
+                {
+                    "text": "<p><strong>What is a FormGroup,  FormControl FormArray in Angular Reactive Forms?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 66,
+                    "description": "<ul><li><strong>FormControl</strong>: Represents a <strong>single form field</strong> (<strong>input</strong>, <strong>select</strong>, etc.).</li></ul></br><ul><li><strong>FormGroup</strong>: A <strong>collection</strong> of <strong>FormControl</strong> elements, treating them as a <strong>unit</strong>.</li></ul></br><ul><li><strong>FormArray</strong>: A <strong>collection</strong> of <strong>single form fields</strong> or <strong>FormGroup</strong>, like an <strong>array</strong>.</li></ul>"
+                },
+                {
+                    "text": "<p><strong>How is form validation handled Template Driven Form in Angular?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 67,
+                    "description": "<p>In Template-Driven Forms, we can use built-in directives for validations such as <code>required</code>, <code>minlength</code>, <code>maxlength</code>, and <code>pattern</code>. We can also implement custom validations using directives that return validation errors.</p></br><pre data-language=\"plain\">\nCustom &quot;noSpace&quot; validator\n\nimport { Directive } from &#39;@angular/core&#39;;\nimport { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from &#39;@angular/forms&#39;;\n\n@Directive({\n  selector: &#39;[appNoSpace]&#39;,\n  providers: [{ provide: NG_VALIDATORS, useExisting: NoSpaceDirective, multi: true }]\n})\nexport class NoSpaceDirective implements Validator {\n  validate(control: AbstractControl): ValidationErrors | null {\n    const value = control.value;\n    if (value &amp;&amp; value.includes(&#39; &#39;)) {\n      return { noSpace: true };\n    }\n    return null;\n  }\n}\n</pre></br><pre data-language=\"plain\">\nUse in Template\n\n&lt;form #myForm=&quot;ngForm&quot;&gt;\n  &lt;input name=&quot;username&quot; ngModel appNoSpace required /&gt;\n  &lt;div *ngIf=&quot;myForm.controls[&#39;username&#39;]?.errors?.noSpace&quot;&gt;\n    Spaces are not allowed.\n  &lt;/div&gt;\n&lt;/form&gt;\n</pre></br></br></br></br>"
+                },
+                {
+                    "text": "<p><strong>How is form validation handled Reactive Form in Angular?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 68,
+                    "description": "<p>In Reactive Forms, we can use built-in validators such as <code>Validators.required</code>, <code>Validators.minLength()</code>, and <code>Validators.pattern()</code>. We can also implement custom validations.</p></br><p><strong>Custom Validator for FormControl:</strong></p><pre data-language=\"plain\">\nExample: No Spaces Validator\n\nimport { AbstractControl, ValidationErrors, ValidatorFn } from &#39;@angular/forms&#39;;\n\nexport function noSpaceValidator(): ValidatorFn {\n  return (control: AbstractControl): ValidationErrors | null =&gt; {\n    if (control.value &amp;&amp; control.value.includes(&#39; &#39;)) {\n      return { noSpace: true }; // invalid\n    }\n    return null; // valid\n  };\n}\n</pre></br><pre data-language=\"plain\">\nUse Custom Validator in FormControl\n\nimport { FormGroup, FormControl, Validators } from &#39;@angular/forms&#39;;\n\nthis.userForm = new FormGroup({\n  username: new FormControl(&#39;&#39;, [Validators.required, noSpaceValidator()])\n});\n</pre></br><p><strong>Custom Validator for FormGroup:</strong></p><pre data-language=\"plain\">\nexport function passwordMatchValidator(group: AbstractControl): ValidationErrors | null {\n  const password = group.get(&#39;password&#39;)?.value;\n  const confirmPassword = group.get(&#39;confirmPassword&#39;)?.value;\n\n  return password === confirmPassword ? null : { passwordsMismatch: true };\n}\n\n// Usage\nthis.registerForm = new FormGroup({\n  password: new FormControl(&#39;&#39;, Validators.required),\n  confirmPassword: new FormControl(&#39;&#39;, Validators.required)\n}, { validators: passwordMatchValidator });\n</pre></br></br></br>"
+                },
+                {
+                    "text": "<p><strong>How to show error in Reactive Form?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 69,
+                    "description": "<pre data-language=\"plain\">\n&lt;form [formGroup]=&quot;myForm&quot; (ngSubmit)=&quot;onSubmit()&quot;&gt;\n  &lt;div&gt;\n    &lt;label&gt;Email: &lt;/label&gt;\n    &lt;input type=&quot;email&quot; formControlName=&quot;email&quot; /&gt;\n\n    @let emailControl = myForm.get(&#39;email&#39;);\n\n    @if(emailControl?.touched &amp;&amp; emailControl?.invalid) {\n      @let emailControlErrors = emailControl?.errors;\n\n      @if(emailControlErrors?.[&#39;required&#39;]) {\n        &lt;small&gt;Email is required&lt;/small&gt;\n      }\n\n      @if(emailControlErrors?.[&#39;email&#39;]) {\n        &lt;small&gt;Invalid email format&lt;/small&gt;\n      }\n\n      @if(emailControlErrors?.[&#39;minlength&#39;]) {\n        &lt;small&gt;Minimum length of email should be 6&lt;/small&gt;\n      }\n    }\n  &lt;/div&gt;\n\n  &lt;button type=&quot;submit&quot; [disabled]=&quot;myForm.invalid&quot;&gt;Submit&lt;/button&gt;\n&lt;/form&gt;\n</pre></br><pre data-language=\"plain\">\nconstructor(private fb: FormBuilder) {\n  this.myForm = this.fb.group({\n    email: [&#39;&#39;, [Validators.required, Validators.email, Validators.minLength(6)]],\n  });\n}\n\nonSubmit() {\n  if (this.myForm.invalid) {\n    this.myForm.markAllAsTouched(); // This will trigger all error messages\n    return;\n  }\n  console.log(this.myForm.value);\n}\n</pre></br></br></br>"
+                },
+                {
+                    "text": "<p><strong>How to show error in Template Driven Form?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 70,
+                    "description": "<pre data-language=\"plain\">\n&lt;form #form=&quot;ngForm&quot; (ngSubmit)=&quot;submitForm(form)&quot;&gt;\n  &lt;div&gt;\n    &lt;label for=&quot;email&quot;&gt;Email: &lt;/label&gt;\n    &lt;input\n      type=&quot;email&quot;\n      name=&quot;email&quot;\n      [(ngModel)]=&quot;user.email&quot;\n      email\n      required\n      minlength=&quot;6&quot;\n      #emailRef=&quot;ngModel&quot;\n    /&gt;\n\n    @if(emailRef.touched &amp;&amp; emailRef.invalid) {\n      @if(emailRef.errors?.[&#39;required&#39;]) {\n        &lt;small&gt;Email is required.&lt;/small&gt;\n      }\n      @if(emailRef.errors?.[&#39;email&#39;]) {\n        &lt;small&gt;Invalid email format&lt;/small&gt;\n      }\n      @if(emailRef.errors?.[&#39;minlength&#39;]) {\n        &lt;small&gt;Minimum 6 characters required.&lt;/small&gt;\n      }\n    }\n  &lt;/div&gt;\n\n  &lt;button type=&quot;submit&quot; [disabled]=&quot;form.invalid&quot;&gt;Submit&lt;/button&gt;\n&lt;/form&gt;\n</pre></br><pre data-language=\"plain\">\nuser = {\n  email: &#39;&#39;,\n  password: &#39;&#39;,\n}\n\nsubmitForm(form: NgForm) {\n  if (form.invalid) {\n    // Mark all controls as touched to show validation errors\n    Object.values(form.controls).forEach(control =&gt; control.markAsTouched());\n    return;\n  }\n\n  console.log(this.user);\n}\n</pre>"
+                },
+                {
+                    "text": "<pre data-language=\"plain\">\nthis.myForm.get(&#39;email&#39;)?.valueChanges\n  .subscribe(value =&gt; \n      { console.log(&#39;Email changed:&#39;, value); \n  }); \n</pre><p><strong>How to optimize this when valueChange fires on every keystroke?</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 71,
+                    "description": "<p>We can use <strong>RxJS operators</strong> like <code><strong>debounceTime()</strong></code> and <code><strong>distinctUntilChanged()</strong></code> to optimize <code><strong>valueChanges</strong></code> at every keystroke.</p></br><ul><li><code>debounceTime()</code> delays the emission of values from an observable by a specified time <strong>after the last event</strong>.</li><li><code>distinctUntilChanged()</code> prevents an observable from emitting a value if it is the <strong>same as the previous value</strong>.</li></ul>"
+                },
+                {
+                    "text": "<p><strong>How to create a new form with name, email, and phoneNumber controls every time a button is clicked.</strong></p>",
+                    "sectionId": 12,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 72,
+                    "description": "<pre data-language=\"plain\">\n&lt;form [formGroup]=&quot;userForm&quot; (ngSubmit)=&quot;onSubmit()&quot;&gt;\n  &lt;div formArrayName=&quot;users&quot;&gt;\n    @for(userGroup of users.controls; track userGroup; let i=$index) {\n      &lt;div [formGroupName]=&quot;i&quot; class=&quot;user-form&quot;&gt;\n        &lt;div&gt;\n          &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;\n          &lt;input type=&quot;text&quot; name=&quot;name&quot; formControlName=&quot;name&quot; /&gt;\n          @if(userGroup.get(&#39;name&#39;)?.touched &amp;&amp; userGroup.get(&#39;name&#39;)?.invalid) {\n            &lt;small&gt;Name is required&lt;/small&gt;\n          }\n        &lt;/div&gt;\n\n        &lt;div&gt;\n          &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;\n          &lt;input type=&quot;text&quot; name=&quot;email&quot; formControlName=&quot;email&quot; /&gt;\n          @if(userGroup.get(&#39;email&#39;)?.touched &amp;&amp; userGroup.get(&#39;email&#39;)?.invalid) {\n            @let emailControlError = userGroup.get(&#39;email&#39;)?.errors;\n\n            @if(emailControlError?.[&#39;required&#39;]) {\n              &lt;small&gt;Email is required.&lt;/small&gt;\n            }\n            @if(emailControlError?.[&#39;email&#39;]) {\n              &lt;small&gt;Invalid email.&lt;/small&gt;\n            }\n          }\n        &lt;/div&gt;\n\n        &lt;div&gt;\n          &lt;label for=&quot;phoneNumber&quot;&gt;Phone Number&lt;/label&gt;\n          &lt;input type=&quot;text&quot; name=&quot;phoneNumber&quot; formControlName=&quot;phoneNumber&quot; /&gt;\n          @if(userGroup.get(&#39;phoneNumber&#39;)?.touched &amp;&amp; userGroup.get(&#39;phoneNumber&#39;)?.invalid) {\n            &lt;small&gt;Phone Number is required&lt;/small&gt;\n          }\n        &lt;/div&gt;\n      &lt;/div&gt;\n    }\n  &lt;/div&gt;\n\n  &lt;button type=&quot;button&quot; (click)=&quot;addUser()&quot;&gt;Add Another User&lt;/button&gt;\n  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;\n&lt;/form&gt;\n</pre></br><pre data-language=\"plain\">\nimport { Component } from &#39;@angular/core&#39;;\nimport { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from &#39;@angular/forms&#39;;\n\n@Component({\n  selector: &#39;app-root&#39;,\n  imports: [ReactiveFormsModule],\n  templateUrl: &#39;./app.html&#39;,\n  styleUrls: [&#39;./app.scss&#39;]\n})\nexport class App {\n  userForm!: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.userForm = this.fb.group({\n      users: this.fb.array([])\n    });\n\n    this.addUser();\n  }\n\n  get users(): FormArray {\n    return this.userForm.get(&#39;users&#39;) as FormArray;\n  }\n\n  createUserForm(): FormGroup {\n    return this.fb.group({\n      name: [&#39;&#39;, [Validators.required]],\n      email: [&#39;&#39;, [Validators.required, Validators.email]],\n      phoneNumber: [&#39;&#39;, [Validators.required]],\n    });\n  }\n\n  addUser() {\n    this.users.push(this.createUserForm());\n  }\n\n  onSubmit() {\n    if (this.userForm.valid) {\n      console.log(this.userForm.value);\n    } else {\n      this.users.controls.forEach(control =&gt; control.markAllAsTouched());\n    }\n  }\n}\n</pre>"
+                }
+            ],
             "subSections": []
         },
         {
             "name": "<p><strong>Zone.js, NgZone and Change Detection</strong></p>",
             "sectionId": 13,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is Zone.js, NgZone and Change Detection?</strong></p>",
+                    "sectionId": 13,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 73,
+                    "description": "<p><strong>Zone.js</strong> is a JavaScript library that tracks <strong>asynchronous tasks</strong> start and finish. When a task completes, <strong>Zone.js</strong> informs <strong>NgZone</strong> (a wrapper around Zone.js), “Hey, something changed, maybe run <strong>change detection</strong>.”</p></br><p><code>NgZone</code> is an Angular service that acts as a <strong>bridge between asynchronous operations</strong> (like <code>setTimeout</code>, <code>Promise</code>, HTTP requests) and Angular’s <strong>change detection</strong> system. It is built on top of <strong>Zone.js</strong>.</p></br><p><strong>Change Detection:</strong></p><p>Change Detection in Angular is the process that updates the DOM when a component’s state changes. Change Detection runs through the component tree from top to bottom, compares the current and previous values, and updates the DOM if any value has changed.</p></br></br><p><strong>NgZone: Impact on Performance</strong></p><ul><li><strong>Pros:</strong><ul><li>Simplifies change detection by automatically tracking async operations.</li><li>Keeps the UI updated without manual intervention.</li></ul></li><li><strong>Cons / Considerations:</strong><ul><li>Every async operation triggers change detection for the <strong>entire component tree</strong> by default.</li><li>Frequent async operations (like rapid <code>setTimeout</code>, <code>setInterval</code>, or HTTP polling) can <strong>slow down performance</strong>.</li><li>To optimize, you can run tasks <strong>outside Angular’s zone</strong> using <code>ngZone.runOutsideAngular()</code> and only trigger change detection when necessary.</li></ul></li></ul>"
+                },
+                {
+                    "text": "<p><strong>How does Angular’s change detection mechanism work?</strong></p>",
+                    "sectionId": 13,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 75,
+                    "description": "<p>Zone.js detects clicks, input events, and other DOM events, as well as when an asynchronous task has completed, and informs NgZone: &#39;Hey, something changed, maybe run change detection.&#39; NgZone then tells Angular to run change detection. Change detection runs through the component tree from top to bottom, compares the current and previous values, and updates the DOM if any value has changed. Angular checks all child components, regardless of whether they are affected by the change.</p>"
+                },
+                {
+                    "text": "<p><strong>If I pass the value from parent component to child component, how does child component get this value?</strong></p>",
+                    "sectionId": 13,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 76,
+                    "description": "<p>Zone.js detects <strong>clicks</strong>, <strong>input events</strong>, and other <strong>DOM events</strong>, as well as when an <strong>asynchronous task</strong> has completed, and informs <strong>NgZone</strong>: &#39;Hey, something changed, maybe run <strong>change detection</strong>.&#39; <strong>NgZone</strong> then tells <strong>Angular</strong> to run <strong>change detection</strong>.</p></br><p>If we enable the <strong>OnPush Change Detection Strategy</strong>, <strong>Angular</strong> only checks a <strong>component</strong> when one of the following happens: the <strong>component</strong> triggers an <strong>event</strong> (click, input), an <strong>@Input</strong> property changes (<strong>reference changes</strong>), or an <strong>asynchronous task</strong> has completed.</p></br><p>Otherwise, <strong>Angular</strong> skips checking the <strong>component</strong>, improving <strong>performance</strong>.</p></br><pre data-language=\"plain\">\nEnable OnPush Strategy\n\nimport { ChangeDetectionStrategy, Component } from &#39;@angular/core&#39;;\n\n@Component({\n  selector: &#39;app-child&#39;,\n  templateUrl: &#39;./child.component.html&#39;,\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class ChildComponent { }\n</pre></br>"
+                }
+            ],
             "subSections": []
         },
         {
@@ -371,7 +461,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 46,
-                    "description": "<p>In Angular, I optimize <strong>performance</strong> by using <strong>OnPush change detection</strong> with <strong>immutable data</strong>, <strong>trackBy</strong> in <strong>ngFor</strong> to avoid re-rendering, and <strong>pure pipes</strong> for efficiency. I also <strong>lazy load</strong> modules or components to reduce <strong>bundle size</strong>, move <strong>heavy logic</strong> out of <strong>templates</strong>, and <strong>unsubscribe</strong> from <strong>observables</strong> to prevent <strong>memory leaks</strong>. Additionally, I use <strong>standalone components</strong> and <strong>preloading strategies</strong> to improve <strong>load time</strong>.</p>"
+                    "description": "<p>In Angular, I optimize <strong>performance</strong> by using <strong>OnPush change detection</strong> with <strong>immutable data</strong>, <strong>trackBy</strong> in <strong>ngFor</strong> to avoid re-rendering, and <strong>pure pipes</strong> for efficiency. I also <strong>lazy load</strong> modules or components to reduce <strong>bundle size</strong>, move <strong>heavy logic</strong> out of <strong>templates</strong>, and <strong>unsubscribe</strong> from <strong>observables</strong> to prevent <strong>memory leaks</strong>. Additionally, I use <strong>standalone components</strong> and <strong>preloading strategies</strong> to improve <strong>load time</strong>.</p></br><p><strong>Immutable Data: </strong></p><p>If we use <strong>mutable objects/arrays</strong>, Angular cannot detect small changes (like this.user.name = &quot;Alice&quot;) unless we replace the entire reference.</p></br><p>Immutable data ensures that whenever we modify something, we <strong>create a new reference</strong>, which works perfectly with <strong>OnPush</strong>.</p></br><pre data-language=\"plain\">\n// ❌ Mutable (Angular won&#39;t detect inside change with OnPush)\nthis.user.name = &quot;Alice&quot;;  \n\n// ✅ Immutable (Angular detects new reference)\nthis.user = { ...this.user, name: &quot;Alice&quot; };\n</pre></br></br><p><strong>move heavy logic out of templates:</strong></p><p>If we call functions from the template for <code>*ngFor</code> or <code>*ngIf</code>, these functions are executed on every change detection cycle, whether the data has changed or not, which makes the performance slow.</p></br><pre data-language=\"plain\">\n❌ Bad Practice (heavy logic in template):\n\n&lt;div *ngFor=&quot;let user of getActiveUsers()&quot;&gt;\n  {{ calculateAge(user.dob) }}\n&lt;/div&gt;\n</pre>"
                 }
             ],
             "subSections": []

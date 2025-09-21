@@ -55,7 +55,7 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
     const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
     const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
 
-    this.scrollActiveNotes(NaN, -1, contentId);
+    this.scrollActiveNotes(sectionId, -1, contentId);
   }
 
   scrollActiveNotes(sectionId: number, subsectionId: number, contentId: number) {
