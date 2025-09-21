@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -10,6 +10,7 @@ import { ManageNotesForm } from '../../components/manage-notes-form/manage-notes
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { CardModule } from 'primeng/card';
 import { StoreService } from '../../../../core/services/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-notes',
@@ -17,7 +18,7 @@ import { StoreService } from '../../../../core/services/store';
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss'
 })
-export class ManageNotes implements OnInit {
+export class ManageNotes implements OnInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   fomBuilder = inject(FormBuilder);
@@ -30,6 +31,7 @@ export class ManageNotes implements OnInit {
   openToggle: number = -1;
   toggleType: string = '';
   isMobile = this.storeService.checkMobileScreen();
+  subscriptions: Subscription[] = [];
 
   actions: IManageNotesAction[] = [
     {
@@ -52,18 +54,21 @@ export class ManageNotes implements OnInit {
   selectedAction: IManageNotesAction | undefined;
 
   ngOnInit(): void {
-    this.notesService.getNotesSection()
-      .subscribe((res: ISection[]) => {
-        this.sections = res;
-        if (this.notesForm?.get('sectionId')) {
-          const sectionId = this.notesForm?.get('sectionId')?.value || -1;
-          const index = this.sections.findIndex(d => d.sectionId === sectionId);
-          if (index < 0) {
-            this.selectedAction = undefined;
+    this.subscriptions.push(
+      this.notesService.getNotesSection()
+        .subscribe((res: ISection[]) => {
+          this.sections = res;
+          if (this.notesForm?.get('sectionId')) {
+            const sectionId = this.notesForm?.get('sectionId')?.value || -1;
+            const index = this.sections.findIndex(d => d.sectionId === sectionId);
+            if (index < 0) {
+              this.selectedAction = undefined;
+            }
           }
-        }
-        this.notesForm.reset();
-      });
+          this.notesForm.reset();
+        })
+    );
+
   }
 
   setSubSectionControl() {
@@ -271,7 +276,7 @@ export class ManageNotes implements OnInit {
 
   deleteContent(content: ITopic) {
     this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
-      if(res.status) {
+      if (res.status) {
         this.notesService.getSections().subscribe();
       }
     });
@@ -385,7 +390,7 @@ export class ManageNotes implements OnInit {
               this.notesService.getSections().subscribe();
             }
           });
-        } else if(this.selectedAction.id === "Edit_Content") { 
+        } else if (this.selectedAction.id === "Edit_Content") {
           const content: IEditContentRequest = {
             text: editorText,
             sectionId: formValue.sectionId,
@@ -406,5 +411,12 @@ export class ManageNotes implements OnInit {
   closeDropdown() {
     this.openToggle = -1;
     this.toggleType = '';
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+    this.subscriptions = [];
   }
 }
