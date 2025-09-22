@@ -27,6 +27,7 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   selectedTopic: ITopic | undefined;
   isMobileScreen = this.store.checkMobileScreen();
   expandSections: number[] = [];
+  expandSubSections: number[] = [];
   expandTopics: number[] = [];
   isSectionCollapse: boolean = false;
   subscriptions: Subscription[] = [];
@@ -80,6 +81,15 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
       this.expandSections.splice(index, 1);
     } else {
       this.expandSections.push(sectionId);
+    }
+  }
+
+  onExpandSubSection(subSectionId: number) {
+    const index = this.expandSubSections.indexOf(subSectionId);
+    if (index >= 0) {
+      this.expandSubSections.splice(index, 1);
+    } else {
+      this.expandSubSections.push(subSectionId);
     }
   }
 

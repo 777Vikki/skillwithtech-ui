@@ -145,7 +145,8 @@
                     font-weight: 600;
                 }
 
-                .note-topic-content, .note-subsection-text {
+                .note-topic-content,
+                .note-subsection-text {
                     flex: 1;
                 }
 
@@ -206,70 +207,72 @@
         border: 1px solid black;
         border-radius: 4px;
 
-        .note-section {
+        .note-section,
+        .note-topic,
+        .note-sub-section {
             border: 1px solid black;
             border-radius: 4px;
             margin: 4px;
+        }
 
-            .note-section-item {
-                border-bottom: 1px solid black;
+        .note-subsection-item,
+        .note-section-item {
+            border-bottom: 1px solid black;
+            padding: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: red;
+        }
+
+        .note-section-item {
+            .expand-icon {
+                color: black;
+                cursor: pointer;
+            }
+
+            .status-icon {
+                color: blue;
+            }
+        }
+
+        .note-topic {
+            .note-topic-item {
                 padding: 4px;
+                border-bottom: 1px dashed black;
+                background-color: #80808038;
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
-                color: red;
 
                 .expand-icon {
                     color: black;
                     cursor: pointer;
                 }
 
-                .status-icon {
-                    color: blue;
+                .note-topic-content {
+                    display: flex;
+                    gap: 4px;
+                    align-items: center;
+                    cursor: default;
+
+                    .status-icon-pending {
+                        color: blue;
+                        font-size: 16px;
+                    }
+
+                    .status-icon-ans {
+                        color: green;
+                        font-size: 16px;
+                    }
                 }
             }
 
-            .note-topic {
-                margin: 4px;
-                border: 1px solid black;
-                border-radius: 4px;
+            .note-topic-item:first-child {
+                border-bottom: 0px;
+            }
 
-                .note-topic-item {
-                    padding: 4px;
-                    border-bottom: 1px dashed black;
-                    background-color: #80808038;
-                    display: flex;
-                    justify-content: space-between;
-
-                    .expand-icon {
-                        color: black;
-                        cursor: pointer;
-                    }
-
-                    .note-topic-content {
-                        display: flex;
-                        gap: 4px;
-                        align-items: center;
-
-                        .status-icon-pending {
-                            color: blue;
-                            font-size: 16px;
-                        }
-
-                        .status-icon-ans {
-                            color: green;
-                            font-size: 16px;
-                        }
-                    }
-                }
-
-                .note-topic-item:first-child {
-                    border-bottom: 0px;
-                }
-
-                .note-description-item {
-                    padding: 4px;
-                }
+            .note-description-item {
+                padding: 4px;
             }
         }
     }
