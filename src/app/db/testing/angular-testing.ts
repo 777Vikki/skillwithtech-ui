@@ -220,7 +220,64 @@ export const angularList = () => {
             "name": "<p><strong>Service and Injectable</strong></p>",
             "sectionId": 7,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is a service in Angular?</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 85,
+                    "description": "<p>A <strong>service</strong> in <strong>Angular</strong> is a <strong>reusable class</strong> used to <strong>share data</strong>, <strong>logic</strong>, or <strong>functions</strong> across <strong>components</strong> using <strong>dependency injection</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>How do you create a service?</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 86,
+                    "description": "<p>A service can be created using the Angular CLI command:</p></br><p><code>ng generate service service-name (e.g., User)</code>.</p></br><p>It generates a service class with the <strong>@Injectable()</strong> decorator. The <strong>@Injectable()</strong> decorator makes the service eligible for <strong>dependency injection</strong>.</p></br><p>import { Injectable } from &#39;@angular/core&#39;;</p></br><pre data-language=\"plain\">\n@Injectable({\n  providedIn: &#39;root&#39;\n})\nexport class User {}\n</pre></br><p>If <code><strong>providedIn: &#39;root&#39;</strong></code> is used in a service, it can be reused across the <strong>entire application</strong>. Otherwise, it needs to be <strong>registered in the </strong><code><strong>providers</strong></code><strong> array</strong> of a <strong>module</strong> or <strong>component</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain Dependency Injection in Angular.</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 87,
+                    "description": "<p><strong>Dependency Injection (DI)</strong> is a <strong>design pattern</strong> in <strong>Angular</strong> that allows a <strong>class</strong> to receive its <strong>dependencies</strong> from an <strong>external source</strong> instead of creating them itself. </p></br><p>The <strong>inject()</strong> function was introduced in <strong>Angular v14+</strong>. This means we can directly perform <strong>dependency injection</strong> using the <strong>inject()</strong> function without needing to register dependencies in the <strong>constructor</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain the concept of the Angular Injector.</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 88,
+                    "description": "<p><strong>Angular Injector</strong> is a <strong>mechanism</strong> that provides <strong>dependencies</strong> (like <strong>services</strong>) to <strong>components</strong>, <strong>directives</strong>, <strong>pipes</strong>, and other <strong>classes</strong> using <strong>Dependency Injection</strong>.</p><p>It <strong>creates</strong> and <strong>delivers instances</strong> when needed.</p></br><pre data-language=\"plain\">\nconstructor(private userService: UserService) {}\n</pre></br><p>Here, <strong>Angular</strong> uses the <strong>injector</strong> to provide an <strong>instance</strong> of <strong>UserService</strong> to the <strong>component</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>What is injectable?</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 89,
+                    "description": "<p><strong>@Injectable()</strong> is a <strong>decorator</strong> that marks a <strong>class</strong> as available to be <strong>injected</strong> as a <strong>dependency</strong> into other <strong>classes</strong> (like <strong>components</strong>, <strong>directives</strong>, or <strong>services</strong>).</p>"
+                },
+                {
+                    "text": "<p><strong>What is the level of injectable?</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 90,
+                    "description": "<p>We can use @Injectable at <strong>root level</strong>, <strong>module level</strong>, and <strong>component level</strong>. </p></br><p>If <code>providedIn</code> is root (<code>@Injectable({ providedIn: &#39;root&#39; })</code>), it can be <strong>used across the application</strong>. For the <strong>module level</strong>, we can add it in <strong>NgModule</strong> using the <strong>providers array</strong>. For the <strong>component level</strong>, we can add it in the <strong>providers array</strong> for any specific component.</p>"
+                },
+                {
+                    "text": "<p><strong>How does Angular handle dependency injection under the hood?</strong></p>",
+                    "sectionId": 7,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 91,
+                    "description": "<p><strong>Angular’s Dependency Injection (DI)</strong> is powered by an <strong>injector system</strong>, which is essentially a <strong>hierarchical registry</strong> of <strong>providers</strong> that knows how to <strong>create</strong> and <strong>supply instances</strong> of <strong>services</strong> when needed.</p></br><p>Each <strong>injector</strong> holds a <strong>provider</strong> and each <strong>provider</strong> maps a <strong>token</strong> (usually the <strong>service class</strong>) to a <strong>factory function</strong> that tells <strong>Angular</strong> how to <strong>create the instance</strong>.</p></br><p>When a <strong>component</strong> requests a <strong>dependency</strong>, <strong>Angular</strong> checks its <strong>constructor</strong>, looks up the <strong>token</strong> in the <strong>nearest injector</strong>, <strong>creates the instance</strong> if not cached, and <strong>reuses it</strong> for future requests.</p><p>This allows <strong>services</strong> to be <strong>singleton</strong> at the <strong>root</strong> or <strong>scoped</strong> to <strong>modules/components</strong>, depending on where they’re <strong>provided</strong>.</p></br><p><strong>Note:</strong> A <strong>factory function</strong> is just a <strong>function</strong> that <strong>creates</strong> and <strong>returns</strong> an <strong>object</strong> (or <strong>value</strong>) instead of using <code>new</code>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
@@ -234,14 +291,72 @@ export const angularList = () => {
             "name": "<p><strong>Data Binding</strong></p>",
             "sectionId": 9,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>How does data binding work in Angular?</strong></p>",
+                    "sectionId": 9,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 83,
+                    "description": "<p><strong>Data binding in Angular</strong> is the <strong>mechanism</strong> that <strong>connects the component class</strong> (TypeScript) with the <strong>template</strong> (HTML). It allows data to flow <strong>between the model and the view</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain one-way and two-way binding.</strong></p>",
+                    "sectionId": 9,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 84,
+                    "description": "<h3><strong>Types of Data Binding</strong></h3></br><ul><li><strong>One-Way Binding:</strong> In <strong>one-way binding</strong>, data flows in <strong>one direction</strong>.</li></ul></br><p><strong>Interpolation (</strong><code><strong>{{ }}</strong></code><strong>):</strong> Interpolation <strong>binds data from the component to the view</strong>. It uses <strong>double curly braces </strong><code><strong>{{}}</strong></code> to bind and display data in the template.</p></br><pre data-language=\"plain\">\n&lt;h1&gt;{{ title }}&lt;/h1&gt;\n</pre></br><p><strong>Property Binding (</strong><code><strong>[property]</strong></code><strong>):</strong> Property binding <strong>updates the UI from the component</strong>, such as <code>[src]</code>, <code>[ngClass]</code>, <code>[ngStyle]</code>. It uses <strong>square brackets</strong> to bind data from the component to the view.</p></br><p><strong>Event Binding (</strong><code><strong>(event)</strong></code><strong>):</strong> Event binding <strong>emits user actions to the component</strong>, such as <code>(click)</code>, <code>(change)</code>.</p></br><ul><li><strong>Two-Way Binding:</strong> In two-way binding, data flows in both directions — from the component to the view and from the view back to the component. Example: <code>[(ngModel)]</code>.</li></ul></br><pre data-language=\"plain\">\n&lt;input [(ngModel)]=&quot;username&quot;&gt;\n</pre>"
+                }
+            ],
             "subSections": []
         },
         {
             "name": "<p><strong>Pipes</strong></p>",
             "sectionId": 10,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is an Angular Pipe?</strong></p>",
+                    "sectionId": 10,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 78,
+                    "description": "<p><strong>An Angular Pipe</strong> is a <strong>feature</strong> that <strong>transforms data</strong> in <strong>templates</strong> before <strong>displaying</strong> it. It is used with the <strong>| (pipe) operator</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>How do you create a custom pipe?</strong></p>",
+                    "sectionId": 10,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 79,
+                    "description": "<p>If I need a <strong>custom pipe</strong> for <strong>uppercase</strong>, it can be generated using the <strong>Angular CLI command</strong></p><p><code>ng generate pipe uppercase</code>.</p></br><p>A <strong>custom pipe</strong> is created with the <strong>@Pipe decorator</strong>, where the <strong>name: &#39;uppercase&#39;</strong> is defined. It can then be used in a <strong>template element</strong> with the <strong>pipe (|) operator</strong>. Every <strong>custom pipe</strong> implements the built-in <strong>transform() method</strong>, which has the signature:</p><p><code>transform(value: unknown, ...args: unknown[]): unknown</code>.</p></br><p>If the <strong>value</strong> is <strong>null</strong>, <strong>undefined</strong>, or an <strong>empty string</strong>, the pipe returns an <strong>empty string</strong>; otherwise, it returns <strong>value.toUpperCase()</strong>.</p></br><pre data-language=\"plain\">\nimport { Pipe, PipeTransform } from &#39;@angular/core&#39;;\n\n@Pipe({\n  name: &#39;uppercase&#39;,\n})\nexport class UppercasePipe implements PipeTransform {\n  transform(value: string, ...args: unknown[]): unknown {\n    return value ? value.toUpperCase() : &#39;&#39;;\n  }\n}\n</pre>"
+                },
+                {
+                    "text": "<p><strong>What is the purpose of the async pipe in Angular?</strong></p>",
+                    "sectionId": 10,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 80,
+                    "description": "<p>The <strong>async pipe</strong> is used in <strong>templates</strong> to <strong>subscribe</strong> to an <strong>Observable</strong> or <strong>Promise</strong> automatically and <strong>display</strong> the latest <strong>emitted value</strong>.</p><p>It also handles <strong>unsubscribe</strong> when the <strong>component</strong> is <strong>destroyed</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>What is the drawback of an async pipe?</strong></p>",
+                    "sectionId": 10,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 81,
+                    "description": "<p>If you have <strong>user$ Observable</strong>:</p><ul><li>If you use <strong>user$ | async</strong> multiple times in the same <strong>template</strong>, Angular will create a <strong>new subscription</strong> each time.</li><li><strong>async pipe</strong> only works inside the <strong>template</strong>.</li><li><strong>async pipe</strong> does not provide a way to handle <strong>errors</strong> emitted by an <strong>Observable</strong> and <strong>cannot use</strong> an <strong>RxJS operator</strong>.</li><li>Every time the <strong>Observable emits</strong>, <strong>async pipe</strong> triggers <strong>change detection</strong>.</li><li>We have to optimize with <strong>ChangeDetectionStrategy.OnPush</strong>.</li></ul>"
+                },
+                {
+                    "text": "<p><strong>What is the difference between Pure and Impure Pipe?</strong></p>",
+                    "sectionId": 10,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 82,
+                    "description": "<p><strong>Pure pipes</strong> run only when the <strong>input changes</strong> and are <strong>performance-friendly, </strong>while <strong>impure pipes</strong> (declared with <strong>pure: false</strong>) run on <strong>every change detection cycle </strong>and should be used only when working with <strong>mutable data</strong>.</p></br><p>An <strong>impure pipe</strong> can be defined by setting the flag <strong>pure: false</strong> inside the <strong>@Pipe decorator</strong>; otherwise, by default, a pipe is <strong>pure</strong>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
