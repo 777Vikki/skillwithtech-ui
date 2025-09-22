@@ -9,10 +9,11 @@ import { CardModule } from 'primeng/card';
 import { Description } from '../../components/description/description';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-active-notes',
-  imports: [NgClass, NgTemplateOutlet, Description, CardModule],
+  imports: [NgClass, NgTemplateOutlet, Description, CardModule, TooltipModule],
   templateUrl: './active-notes.html',
   styleUrl: './active-notes.scss'
 })

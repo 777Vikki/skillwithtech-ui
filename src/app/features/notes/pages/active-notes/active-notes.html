@@ -91,7 +91,7 @@
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
             <div [innerHTML]="content.text"></div>
-            <span class="material-symbols-outlined"
+            <span class="material-symbols-outlined" [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
                 [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
                 'check_circle' : 'pending'}}</span>
         </div>
@@ -102,7 +102,7 @@
     <div class="note-topic">
         <div class="note-topic-item" (click)="onExpandTopic(content.topicId); $event.stopPropagation()">
             <div class="note-topic-content">
-                <span class="material-symbols-outlined"
+                <span class="material-symbols-outlined" [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
                     [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
                     'check_circle' : 'pending'}}</span>
                 <div [innerHTML]="content.text"></div>
