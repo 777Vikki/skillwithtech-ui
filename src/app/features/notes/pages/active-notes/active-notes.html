@@ -25,18 +25,22 @@
                 <h3>Content</h3>
             </div>
             <div class="note-topic-container" #contentScrollContainer>
-                @let topics = selectedSection?.topics || [];
-                @for(topic of topics; track topic.topicId; let i = $index) {
-                <div class="note-topic-item" [id]="'content_' + topic.topicId" (click)="onSelectTopic(topic)"
-                    [ngClass]="{'selected': selectedTopic?.topicId === topic.topicId}">
-                    <div class="note-topic-index"><strong>{{ i + 1 }}.</strong></div>
-                    <div class="note-topic-content">
-                        <div [innerHTML]="topic.text"></div>
-                        <span class="material-symbols-outlined"
-                            [ngClass]="{'status-icon-pending': !topic.description, 'status-icon-ans': topic.description}">{{topic.description?
-                            'check_circle' : 'pending'}}</span>
-                    </div>
+                @let contents = selectedSection?.topics || [];
+                @for(content of contents; track content.topicId; let i = $index) {
+                <ng-container
+                    *ngTemplateOutlet="activeNotesContent; context: { content: content, index: i }"></ng-container>
+                }
+                @let subSections = selectedSection?.subSections || [];
+                @for(subSection of subSections; track subSection.subSectionId) {
+                <div class="note-subsection-item">
+                    <div class="note-subsection-title">Sub Section: </div>
+                    <div class="note-subsection-text" [innerHTML]="subSection.name"></div>
                 </div>
+                @let contents = subSection?.topics || [];
+                @for(content of contents; track content.topicId; let i = $index) {
+                <ng-container
+                    *ngTemplateOutlet="activeNotesContent; context: { content: content, index: i }"></ng-container>
+                }
                 }
             </div>
         </div>
@@ -80,6 +84,19 @@
     </div>
     }
 </div>
+
+<ng-template #activeNotesContent let-content="content" let-index="index">
+    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectTopic(content)"
+        [ngClass]="{'selected': selectedTopic?.topicId === content.topicId}">
+        <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
+        <div class="note-topic-content">
+            <div [innerHTML]="content.text"></div>
+            <span class="material-symbols-outlined"
+                [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
+                'check_circle' : 'pending'}}</span>
+        </div>
+    </div>
+</ng-template>
 
 <!-- @if(show) {
 <app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />

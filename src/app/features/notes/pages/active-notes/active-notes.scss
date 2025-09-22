@@ -113,37 +113,56 @@
                     background-color: #8080802e;
                 }
 
-                .note-topic-item {
+                .note-topic-item,
+                .note-subsection-item {
                     padding: 8px;
-                    cursor: pointer;
                     display: flex;
                     align-items: baseline;
                     gap: 4px;
+                }
 
-                    .note-topic-index {
-                        flex: 0 0 auto;
-                    }
-
-                    .note-topic-content {
-                        flex: 1;
-                        display: flex;
-                        justify-content: space-between;
-                        gap: 4px;
-                        align-items: center;
-
-                        .status-icon-pending {
-                            color: blue;
-                            font-size: 16px;
-                        }
-
-                        .status-icon-ans {
-                            color: green;
-                            font-size: 16px;
-                        }
-                    }
+                .note-topic-item {
+                    cursor: pointer;
 
                     &.selected {
                         background-color: #8080805c;
+                    }
+                }
+
+                .note-subsection-item {
+                    background-color: burlywood;
+                    border-bottom: 1px solid black;
+                    border-top: 1px solid black;
+                    cursor: default;
+                }
+
+                .note-topic-index,
+                .note-subsection-title {
+                    flex: 0 0 auto;
+                }
+
+                .note-subsection-title {
+                    font-weight: 600;
+                }
+
+                .note-topic-content, .note-subsection-text {
+                    flex: 1;
+                }
+
+                .note-topic-content {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 4px;
+                    align-items: center;
+
+                    .status-icon-pending {
+                        color: blue;
+                        font-size: 16px;
+                    }
+
+                    .status-icon-ans {
+                        color: green;
+                        font-size: 16px;
                     }
                 }
             }
@@ -245,7 +264,7 @@
                 }
 
                 .note-topic-item:first-child {
-                    border-bottom: 0px;   
+                    border-bottom: 0px;
                 }
 
                 .note-description-item {
