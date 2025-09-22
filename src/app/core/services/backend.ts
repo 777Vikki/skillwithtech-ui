@@ -45,7 +45,7 @@ export class BackendService {
     section.sectionId = this.getCount("section");
     this.currentNoteSections.splice(index, 0, section);
     this.storeSection(this.currentNoteSections)
-    return of({ status: true });
+    return of({ status: true, data: [section] });
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -55,7 +55,7 @@ export class BackendService {
       sec.name = section.name;
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [] });
   }
 
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
@@ -68,7 +68,7 @@ export class BackendService {
       }
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [] });
   }
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
@@ -85,7 +85,7 @@ export class BackendService {
       selectedContent.text = content.text;
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [] });
   }
 
   onDeleteContent(content: ITopic): Observable<IResponse> {
@@ -102,21 +102,21 @@ export class BackendService {
       selectedContents.splice(index, 1);
     }
     this.storeSection(this.currentNoteSections);
-    return of({status: true});
+    return of({status: true, data: []});
   }
 
   onDeleteSection(index: number) {
     console.log(index);
     this.currentNoteSections.splice(index, 1);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [] });
   }
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number) {
     console.log('sectionIndex: ', sectionIndex, ' subSectionIndex: ', subSectionIndex);
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [] });
   }
 
   onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number): Observable<IResponse> {
@@ -130,7 +130,7 @@ export class BackendService {
     }
 
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [content] });
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
@@ -139,7 +139,7 @@ export class BackendService {
     subSection.subSectionId = this.getCount("subSection");
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 0, subSection);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [subSection] });
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
@@ -153,7 +153,7 @@ export class BackendService {
       }
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true });
+    return of({ status: true, data: [topic] });
   }
 
   storeSection(sections: ISection[]) {

@@ -31,12 +31,13 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   sections: ISection[] = [];
   currentActionSubsections: ISubSection[] = [];
   currentActionContents: ITopic[] = [];
-  openToggle: number = -1;
+  openToggle: number = 0;
   toggleType: string = '';
   isMobile = this.storeService.checkMobileScreen();
   subscriptions: Subscription[] = [];
+  responseRowDetail: ISection | ISubSection | ITopic | undefined;
   activeRow = {
-    id: -1,
+    id: 0,
     type: ''
   };
 
@@ -65,17 +66,18 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
       this.notesService.getNotesSection()
         .subscribe((res: ISection[]) => {
           this.sections = res;
-          if (this.notesForm?.get('sectionId')) {
-            const sectionId = this.notesForm?.get('sectionId')?.value || 0;
-            const index = sectionId ? this.sections.findIndex(d => d.sectionId === sectionId) : -1;
-            if (index < 0) {
-              this.selectedAction = undefined;
+          if(this.selectedAction != null) {
+            const position = this.notesForm.get('position')?.value? this.notesForm.get('position')?.value : '1';  
+            if(this.selectedAction.id === "Add_Section") {
+              this.addSection(this.responseRowDetail as ISection, position);
+            } else if(this.selectedAction.id === "Add_Sub_Section") {
+              this.addSubSection(this.responseRowDetail as ISubSection, position);
+            } else if(this.selectedAction.id === "Add_Content") {
+              this.addContent(this.responseRowDetail as ITopic, position);
             }
           }
-          this.notesForm.reset();
         })
     );
-
   }
 
   ngAfterViewInit(): void {
@@ -88,17 +90,17 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setActiveRow(sectionId: number, subsectionId: number, contentId: number) {
-    if (contentId) {
+    if (contentId != null && contentId > 0) {
       this.activeRow = {
         id: contentId,
         type: "content"
       }
-    } else if (subsectionId) {
+    } else if (subsectionId != null && subsectionId > 0) {
       this.activeRow = {
         id: subsectionId,
         type: "subsection"
       }
-    } else if (sectionId) {
+    } else if (sectionId != null && sectionId > 0) {
       this.activeRow = {
         id: sectionId,
         type: "section"
@@ -108,11 +110,11 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
 
   scrollManageViewList(sectionId: number, subsectionId: number, contentId: number) {
     let elementId = '';
-    if (contentId) {
+    if (contentId != null && contentId > 0) {
       elementId = "manage-content-" + contentId;
-    } else if (subsectionId) {
+    } else if (subsectionId != null && subsectionId > 0) {
       elementId = "manage-subsection-" + subsectionId;
-    } else if (sectionId) {
+    } else if (sectionId != null && sectionId > 0) {
       elementId = 'manage-section-' + sectionId;
     }
     if (elementId) {
@@ -123,14 +125,14 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
 
   setSubSectionControl() {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
-      this.currentActionSubsections = this.sections.find(d => d.sectionId === value)?.subSections ?? [];
+      this.currentActionSubsections = (value != null && value > 0)? (this.sections.find(d => d.sectionId === value)?.subSections ?? []) : [];
       this.notesForm.patchValue({
         subSectionId: null,
       });
     });
 
     this.notesForm.get('subSectionId')?.valueChanges.subscribe(value => {
-      if (value) {
+      if (value != null && value > 0) {
         if (!this.notesForm.get('position')) {
           this.notesForm.addControl('position', new FormControl('', [Validators.required]));
         }
@@ -144,7 +146,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
 
   setContentControl() {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
-      if (value) {
+      if (value != null && value > 0) {
         this.currentActionSubsections = this.sections.find(d => d.sectionId === value)?.subSections ?? [];
         this.currentActionContents = this.sections.find(d => d.sectionId === value)?.topics ?? [];
       } else {
@@ -158,18 +160,14 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.notesForm.get('subSectionId')?.valueChanges.subscribe(value => {
+      this.currentActionContents = (value != null && value > 0)? (this.currentActionSubsections.find(d => d.subSectionId === value)?.topics ?? []) : [];
       this.notesForm.patchValue({
         contentId: null,
       });
-      if (value) {
-        this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === value)?.topics ?? [];
-      } else {
-        this.currentActionContents = [];
-      }
     });
 
     this.notesForm.get('contentId')?.valueChanges.subscribe(value => {
-      if (value) {
+      if (value != null && value > 0) {
         if (!this.notesForm.get('position')) {
           this.notesForm.addControl('position', new FormControl('', [Validators.required]));
         }
@@ -232,11 +230,9 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.currentActionSubsections = [];
     this.currentActionContents = [];
     this.removeFormControls();
-    const sectionId = selectedSubSection.sectionId || null;
-    const subSectionId = selectedSubSection.subSectionId || null;
-    if (selectedSubSection.sectionId > 0) {
-      this.currentActionSubsections = this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? [];
-    }
+    const sectionId = (selectedSubSection.sectionId != null && selectedSubSection.sectionId > 0)? selectedSubSection.sectionId : null;
+    const subSectionId = (selectedSubSection.subSectionId != null && selectedSubSection.subSectionId > 0)? selectedSubSection.subSectionId : null;
+    this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
@@ -253,9 +249,11 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
       type: "Sub_Section"
     };
     this.removeFormControls();
-    this.currentActionSubsections = this.sections.find(d => d.sectionId === subSection.sectionId)?.subSections ?? [];
-    this.notesForm.addControl('sectionId', new FormControl({ value: subSection.sectionId, disabled: true }, [Validators.required]));
-    this.notesForm.addControl('subSectionId', new FormControl({ value: subSection.subSectionId, disabled: true }, [Validators.required]));
+    const sectionId = (subSection.sectionId != null && subSection.sectionId > 0)? subSection.sectionId : null;
+    const subSectionId = (subSection.subSectionId != null && subSection.subSectionId > 0)? subSection.subSectionId : null;
+    this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+    this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }, [Validators.required]));
+    this.notesForm.addControl('subSectionId', new FormControl({ value: subSectionId, disabled: true }, [Validators.required]));
     this.notesForm.addControl('text', new FormControl(subSection.name, [Validators.required]));
   }
 
@@ -281,16 +279,19 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.removeFormControls();
     this.currentActionContents = [];
     this.currentActionSubsections = [];
-    if (content.subSectionId > 0) {
-      this.currentActionSubsections = this.sections.find(d => d.sectionId === content.sectionId)?.subSections ?? [];
-      this.notesForm.addControl('subSectionId', new FormControl({ value: content.subSectionId, disabled: true }));
-      this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? [];
+    const sectionId = (content.sectionId != null && content.sectionId > 0)? content.sectionId : null;
+    const subSectionId = (content.subSectionId != null && content.subSectionId > 0)? content.subSectionId : null;
+    const contentId = (content.topicId != null && content.topicId > 0)? content.topicId : null;
+    if (subSectionId) {
+      this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+      this.notesForm.addControl('subSectionId', new FormControl({ value: subSectionId, disabled: true }));
+      this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === subSectionId)?.topics ?? [];
     } else {
-      this.currentActionContents = this.sections.find(d => d.sectionId === content.sectionId)?.topics || [];
+      this.currentActionContents = sectionId? (this.sections.find(d => d.sectionId === content.sectionId)?.topics || []) : [];
     }
-    this.notesForm.addControl('sectionId', new FormControl({ value: content.sectionId, disabled: true }));
+    this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }));
     this.notesForm.addControl('text', new FormControl(content.text, [Validators.required]));
-    this.notesForm.addControl('contentId', new FormControl({ value: content.topicId, disabled: true }));
+    this.notesForm.addControl('contentId', new FormControl({ value: contentId, disabled: true }));
     this.selectedAction = {
       name: "Edit Content",
       id: "Edit_Content",
@@ -332,7 +333,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.removeFormControls();
     this.currentActionSubsections = [];
     this.currentActionContents = [];
-    const sectionId = section.sectionId || null;
+    const sectionId = (section.sectionId != null || section.sectionId > 0)? section.sectionId : null;
     this.selectedAction = this.actions.find(d => d.type === "Section");
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
@@ -344,22 +345,25 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.currentActionSubsections = [];
     this.currentActionContents = [];
     this.selectedAction = this.actions.find(d => d.type === "Content");
-    if (content.sectionId) {
-      if (content.subSectionId) {
-        this.currentActionSubsections = this.sections.find(d => d.sectionId === content.sectionId)?.subSections ?? [];
-        this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? [];
+    const sectionId = (content.sectionId != null && content.sectionId > 0)? content.sectionId : null;
+    const subSectionId = (content.subSectionId != null && content.subSectionId > 0)? content.subSectionId : null;
+    const contentId = (content.topicId != null && content.topicId > 0)? content.topicId : null;
+    if (sectionId) {
+      if (subSectionId) {
+        this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+        this.currentActionContents = subSectionId? (this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []) : [];
       } else {
-        this.currentActionContents = this.sections.find(d => d.sectionId === content.sectionId)?.topics ?? [];
+        this.currentActionContents = sectionId? (this.sections.find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
       }
     }
-    this.notesForm.addControl('sectionId', new FormControl(content.sectionId || null, [Validators.required]));
-    this.notesForm.addControl('subSectionId', new FormControl(content.subSectionId || null));
+    this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
+    this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-    if (content.topicId) {
-      this.notesForm.addControl('contentId', new FormControl(content.topicId, [Validators.required]));
+    if (contentId) {
+      this.notesForm.addControl('contentId', new FormControl(contentId, [Validators.required]));
       this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
     } else {
-      this.notesForm.addControl('contentId', new FormControl(null));
+      this.notesForm.addControl('contentId', new FormControl(contentId));
     }
     this.setContentControl();
   }
@@ -382,6 +386,9 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           const index = this.sections.length > 0 ? this.sections.findIndex(d => d.sectionId === formValue.sectionId) + Number(formValue.position) : 0;
           this.notesService.onAddSection(section, index).subscribe((res: IResponse) => {
             if (res?.status) {
+              if (res.data != null && res.data.length > 0) {
+                this.responseRowDetail = res.data[0];
+              }
               this.notesService.getSections().subscribe();
             }
           })
@@ -416,6 +423,9 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           }
           this.notesService.onAddSubSection(subSection, sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
             if (res?.status) {
+              if (res.data != null && res.data.length > 0) {
+                this.responseRowDetail = res.data[0];
+              }
               this.notesService.getSections().subscribe();
             }
           })
@@ -460,6 +470,9 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           }
           this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex).subscribe((res: IResponse) => {
             if (res?.status) {
+              if (res.data && res.data.length > 0) {
+                this.responseRowDetail = res.data[0];
+              }
               this.notesService.getSections().subscribe();
             }
           });
