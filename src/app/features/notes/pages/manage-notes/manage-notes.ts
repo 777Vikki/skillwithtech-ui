@@ -13,20 +13,23 @@ import { StoreService } from '../../../../core/services/store';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Toast } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm, Toast],
+  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm, Toast, ConfirmDialogModule],
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss',
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
+  private confirmationService = inject(ConfirmationService);
 
   fomBuilder = inject(FormBuilder);
 
@@ -83,7 +86,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               this.addSubSection(this.responseRowDetail as ISubSection, position);
             } else if (this.selectedAction.id === "Add_Content") {
               this.addContent(this.responseRowDetail as ITopic, position, "Add_Content");
-            } else if(this.selectedAction.id === "Add_Bulk_Content") {
+            } else if (this.selectedAction.id === "Add_Bulk_Content") {
               this.notesForm.reset();
             }
           }
@@ -272,22 +275,58 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteSection(index: number) {
-    this.selectedAction = undefined;
-    this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
-      if (res?.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this Section? All associated contents will be lost.',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
+          if (res?.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
   deleteSubSection(sectionIndex: number, subSectionIndex: number) {
-    this.selectedAction = undefined;
-    this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
-      if (res?.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this Sub Section? All associated contents will be lost.',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
+          if (res?.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
@@ -316,11 +355,30 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteContent(content: ITopic) {
-    this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
-      if (res.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Do you really want to delete this record?',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
+          if (res.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
