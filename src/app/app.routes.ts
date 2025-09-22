@@ -9,5 +9,6 @@ export const routes: Routes = [
             { path: 'manage-notes', loadComponent: () => import('./features/notes/pages/manage-notes/manage-notes').then(m => m.ManageNotes) },
         ]
     },
+    { path: "profile", loadComponent: () => import('./features/profile/pages/profile/profile').then(m => m.Profile) },
     { path: "", pathMatch: "full", redirectTo: "notes" },
 ];

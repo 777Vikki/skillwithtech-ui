@@ -1,0 +1,130 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    background: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3b82f6;
+}
+
+.profile-basic-info h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.profile-basic-info p {
+    margin: 0.2rem 0;
+    color: #555;
+}
+
+.profile-section {
+    margin-bottom: 2rem;
+}
+
+.profile-section h3 {
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    color: #1e40af;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.experience {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.experience-header {
+    background: #f3f4f6;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.experience-body {
+    padding: 1rem;
+    background: #ffffff;
+}
+
+.social-links {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.social-links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #0077b5;
+    /* LinkedIn blue */
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.social-links a:last-child {
+    color: #333;
+    /* GitHub dark */
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+ul {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+ul li {
+    margin-bottom: 0.3rem;
+}
