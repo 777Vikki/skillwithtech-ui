@@ -71,10 +71,6 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  check(dd: any) {
-    console.log(dd);
-  }
-
   onExpandSection(sectionId: number) {
     const index = this.expandSections.indexOf(sectionId);
     if (index >= 0) {

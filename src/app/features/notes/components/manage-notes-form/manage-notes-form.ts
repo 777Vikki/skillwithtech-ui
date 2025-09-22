@@ -24,11 +24,10 @@ export class ManageNotesForm implements OnInit, OnChanges {
   @Input() notesForm: FormGroup | undefined;
   @Input() subSections: ISubSection[] = [];
   @Input() contents: ITopic[] = [];
+  previewList: string[] = [];
 
   @Output() closeManageNotesForm = new EventEmitter<void>();
   @Output() notesFormSubmit = new EventEmitter<FormGroup>();
-
-
 
   ngOnInit(): void {
 
@@ -38,7 +37,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
     if (changes["sections"]) {
       this.sections = structuredClone(this.sections).map(d => {
         d.name = this.notesService.getPlainText(d.name);
-        d.name = d.name.length > 60? d.name.slice(0, 57) + '...' : d.name;
+        d.name = d.name.length > 60 ? d.name.slice(0, 57) + '...' : d.name;
         return d;
       });
     }
@@ -46,7 +45,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
     if (changes["subSections"]) {
       this.subSections = structuredClone(this.subSections).map(d => {
         d.name = this.notesService.getPlainText(d.name);
-        d.name = d.name.length > 60? d.name.slice(0, 57) + '...' : d.name;
+        d.name = d.name.length > 60 ? d.name.slice(0, 57) + '...' : d.name;
         return d;
       });
     }
@@ -54,9 +53,19 @@ export class ManageNotesForm implements OnInit, OnChanges {
     if (changes["contents"]) {
       this.contents = structuredClone(this.contents).map(d => {
         d.text = this.notesService.getPlainText(d.text);
-        d.text = d.text.length > 60? d.text.slice(0, 57) + '...' : d.text;
+        d.text = d.text.length > 60 ? d.text.slice(0, 57) + '...' : d.text;
         return d;
       });
+    }
+
+    if (changes["action"]) {
+      this.previewList = [];
+      if(this.action?.id === "Add_Bulk_Content") {
+        this.notesForm?.get("text")?.valueChanges.subscribe(d => {
+          const polishText = d.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
+          this.previewList = polishText.match(/<p>.*?<\/p>/g) ?? [];
+        });
+      }
     }
   }
 

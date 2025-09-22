@@ -95,8 +95,8 @@
             </span>
             @if(openToggle === topic.topicId && toggleType === 'content') {
             <ul class="menu-list">
-                <li (click)="addContent(topic, '0')">Add Content Above</li>
-                <li (click)="addContent(topic, '1')">Add Content Below</li>
+                <li (click)="addContent(topic, '0', 'Add_Content')">Add Content Above</li>
+                <li (click)="addContent(topic, '1', 'Add_Content')">Add Content Below</li>
                 <li (click)="editContent(topic)">Edit Content</li>
                 <li (click)="deleteContent(topic)">Delete Content</li>
             </ul>
