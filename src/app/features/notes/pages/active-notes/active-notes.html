@@ -86,7 +86,7 @@
 </div>
 
 <ng-template #activeNotesTableContent let-content="content" let-index="index">
-    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectTopic(content)"
+    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectContent(content)"
         [ngClass]="{'selected': selectedTopic?.topicId === content.topicId}">
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
@@ -119,6 +119,7 @@
         }
     </div>
 </ng-template>
+<p-toast />
 
 <!-- @if(show) {
 <app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />

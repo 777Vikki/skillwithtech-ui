@@ -158,14 +158,26 @@ export class BackendService {
     console.log(topic);
     console.log('Description: ', description);
     const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === topic.sectionId);
+    let selectedContent: ITopic | undefined = undefined;
     if (section) {
-      const selectedTopic = section.topics.find(d => d.topicId === topic.topicId);
-      if (selectedTopic) {
-        selectedTopic.description = description;
+      if (topic.subSectionId != null && topic.subSectionId > 0) {
+        const subSection = section.subSections.find(d => d.subSectionId === topic.subSectionId) ?? undefined;
+        if (subSection && subSection.topics.length) {
+          selectedContent = subSection.topics.find(d => d.topicId === topic.topicId);
+        }
+      }
+      if (!selectedContent && section.topics.length) {
+        selectedContent = section.topics.find(d => d.topicId === topic.topicId) ?? undefined;
+      }
+      if (selectedContent) {
+        selectedContent.description = description;
+        this.storeSection(this.currentNoteSections);
+        return of({ status: true, message: 'Success', data: [topic] });
+      } else {
+        return of({ status: false, message: 'data is not added', data: [topic] });
       }
     }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [topic] });
+    return of({ status: false, message: 'data is not added', data: [topic] });
   }
 
   storeSection(sections: ISection[]) {
