@@ -83,6 +83,8 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               this.addSubSection(this.responseRowDetail as ISubSection, position);
             } else if (this.selectedAction.id === "Add_Content") {
               this.addContent(this.responseRowDetail as ITopic, position, "Add_Content");
+            } else if(this.selectedAction.id === "Add_Bulk_Content") {
+              this.notesForm.reset();
             }
           }
         })

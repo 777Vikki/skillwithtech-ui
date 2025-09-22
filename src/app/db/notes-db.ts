@@ -7,7 +7,7 @@ export const storeCount = () => {
   return {
     section: 30,
     subSection: 0,
-    topic: 91,
+    topic: 115,
   }
 }
 
@@ -93,7 +93,7 @@ export const availableNotes = (): INote[] => {
       sections: [],
     },
     {
-      name: "Azure",
+      name: "CI/CD pipelines with Azure",
       type: Note.AZURE,
       id: 8,
       sections: []
