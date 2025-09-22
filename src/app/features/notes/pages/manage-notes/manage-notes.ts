@@ -12,17 +12,21 @@ import { CardModule } from 'primeng/card';
 import { StoreService } from '../../../../core/services/store';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Toast } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm],
+  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm, Toast],
   templateUrl: './manage-notes.html',
-  styleUrl: './manage-notes.scss'
+  styleUrl: './manage-notes.scss',
+  providers: [MessageService]
 })
 export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   private route = inject(ActivatedRoute);
+  private messageService = inject(MessageService);
 
   fomBuilder = inject(FormBuilder);
 
@@ -261,6 +265,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.selectedAction = undefined;
     this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
       if (res?.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
         this.notesService.getSections().subscribe();
       }
     });
@@ -270,6 +275,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.selectedAction = undefined;
     this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
       if (res?.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
         this.notesService.getSections().subscribe();
       }
     });
@@ -302,6 +308,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   deleteContent(content: ITopic) {
     this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
       if (res.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
         this.notesService.getSections().subscribe();
       }
     });
@@ -389,6 +396,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               if (res.data != null && res.data.length > 0) {
                 this.responseRowDetail = res.data[0];
               }
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully added.' });
               this.notesService.getSections().subscribe();
             }
           })
@@ -400,6 +408,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           }
           this.notesService.onEditSection(section).subscribe((res: IResponse) => {
             if (res?.status) {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
               this.notesService.getSections().subscribe();
             }
           })
@@ -426,6 +435,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               if (res.data != null && res.data.length > 0) {
                 this.responseRowDetail = res.data[0];
               }
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section is successfully added.' });
               this.notesService.getSections().subscribe();
             }
           })
@@ -438,6 +448,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           }
           this.notesService.onEditSubSection(subSection).subscribe((res: IResponse) => {
             if (res?.status) {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
               this.notesService.getSections().subscribe();
             }
           });
@@ -473,6 +484,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               if (res.data && res.data.length > 0) {
                 this.responseRowDetail = res.data[0];
               }
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully added.' });
               this.notesService.getSections().subscribe();
             }
           });
@@ -485,6 +497,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           }
           this.notesService.onEditContent(content).subscribe((res: IResponse) => {
             if (res?.status) {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully updated.' });
               this.notesService.getSections().subscribe();
             }
           });
