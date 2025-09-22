@@ -49,8 +49,8 @@ export class NotesService {
     return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
   }
 
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number): Observable<IResponse> {
-    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex);
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent);
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {

@@ -17,16 +17,17 @@
             @if(notesForm.get('subSectionId')) {
             <div class="form-group">
                 <label>Sub Section: </label>
-                <p-select [options]="subSections" [showClear]="true" formControlName="subSectionId" placeholder="Select Sub Section"
-                    optionLabel="name" optionValue="subSectionId" class="w-full md:w-56" />
+                <p-select [options]="subSections" [showClear]="true" formControlName="subSectionId"
+                    placeholder="Select Sub Section" optionLabel="name" optionValue="subSectionId"
+                    class="w-full md:w-56" />
             </div>
             }
 
             @if(notesForm.get('contentId')) {
             <div class="form-group">
                 <label>Sub Content: </label>
-                <p-select [options]="contents" [showClear]="true" formControlName="contentId" placeholder="Select Content"
-                    optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
+                <p-select [options]="contents" [showClear]="true" formControlName="contentId"
+                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
             </div>
             }
 
@@ -55,8 +56,27 @@
             <div class="form-actions">
                 <p-button (click)="submitForm()" label="Submit" severity="success" [disabled]="notesForm.invalid" />
             </div>
+            @if(notesForm.get('text')?.touched && notesForm.get('text')?.valid && action?.id === 'Add_Bulk_Content') {
+            @if(previewList && previewList.length) {
+            <div class="preview-contaner">
+                <div class="preview-text">Preview: </div>
+                <div class="preview-list">
+                    @for(preview of previewList; track preview; let i = $index) {
+                    <div class="preview-content">
+                        <div class="preview-index">{{i + 1}}.</div>
+                        <div [innerHTML]="preview"></div>
+                    </div>
+                    }
+                </div>
+            </div>
+            } @else {
+                <div class="preview-contaner">
+                    <div class="preview-text">Preview: </div>
+                    <div class="no-preview">No preview available. Please check text format</div>
+                </div>
+            }
+            }
         </form>
         }
-
     </div>
 </div>

@@ -54,6 +54,38 @@
 
 }
 
+.preview-contaner {
+    border: 1px solid black;
+    border-radius: 4px;
+
+    .preview-text,
+    .preview-index {
+        font-weight: 600;
+    }
+
+    .preview-text {
+        padding: 8px;
+        border-bottom: 1px solid black;
+        background: rgba(128, 128, 128, 0.5098039216);
+    }
+
+    .preview-list {
+        overflow-y: auto;
+        max-height: 150px;
+    }
+
+    .preview-content {
+        display: flex;
+        align-items: baseline;
+        padding: 8px;
+        gap: 4px;
+    }
+
+    .no-preview {
+        padding: 8px;
+    }
+}
+
 .close-icon {
     font-size: 14px;
     cursor: pointer;

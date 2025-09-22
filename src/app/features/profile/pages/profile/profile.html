@@ -1,0 +1,69 @@
+<div class="profile-container">
+    <div class="profile-card">
+        <!-- Header -->
+        <div class="profile-header">
+            <img src="profile.jpeg" alt="Profile Picture" class="profile-image">
+            <div class="profile-basic-info">
+                <h2>{{ user.name }}</h2>
+                <p>{{ user.jobTitle }}</p>
+                <p>{{ user.email }}</p>
+
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a [href]="user.linkedin" target="_blank" title="LinkedIn">
+                        <i class="pi pi-linkedin"></i> LinkedIn
+                    </a>
+                    <a [href]="user.github" target="_blank" title="GitHub">
+                        <i class="pi pi-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="profile-section">
+            <h3>Personal Information</h3>
+            <div class="info-row"><span>Phone:</span> <span>{{ user.phone }}</span></div>
+            <div class="info-row"><span>Location:</span> <span>{{ user.location }}</span></div>
+            <div class="info-row" *ngIf="user.dob"><span>Date of Birth:</span> <span>{{ user.dob | date }}</span></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="profile-section">
+            <h3>Skills</h3>
+            <div class="skills">
+                <span class="skill" *ngFor="let skill of user.skills">{{ skill }}</span>
+            </div>
+        </div>
+
+        <!-- Job Details -->
+        <div class="profile-section">
+            <h3>Job Details</h3>
+            <!-- <div class="info-row"><span>Department:</span> <span>{{ user.department }}</span></div> -->
+            <div class="info-row"><span>Experience:</span> <span>{{ user.experience }} years</span></div>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="profile-section">
+            <h3>Professional Experience</h3>
+            <div class="experience" *ngFor="let exp of user.experienceDetails; let i = index">
+                <div class="experience-header" (click)="exp.open = !exp.open">
+                    <h4>{{ exp.company }} – {{ exp.location }}</h4>
+                    <span class="duration">{{ exp.duration }}</span>
+                    <span class="toggle-icon">{{ exp.open ? '-' : '+' }}</span>
+                </div>
+                <div class="experience-body" *ngIf="exp.open">
+                    @for(project of exp.projects; track project) {
+                    <div>
+                        <h5>{{ project.projectName }} ({{ project.role }})</h5>
+                        <p>{{ project.description }}</p>
+                        <ul>
+                            <li *ngFor="let res of project.responsibilities">{{ res }}</li>
+                        </ul>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

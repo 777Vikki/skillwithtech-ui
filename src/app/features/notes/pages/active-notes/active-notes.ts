@@ -9,18 +9,23 @@ import { CardModule } from 'primeng/card';
 import { Description } from '../../components/description/description';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TooltipModule } from 'primeng/tooltip';
+import { Toast } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-active-notes',
-  imports: [NgClass, NgTemplateOutlet, Description, CardModule],
+  imports: [NgClass, NgTemplateOutlet, Toast, Description, CardModule, TooltipModule],
   templateUrl: './active-notes.html',
-  styleUrl: './active-notes.scss'
+  styleUrl: './active-notes.scss',
+  providers: [MessageService]
 })
 export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   store = inject(StoreService);
   noteService = inject(NotesService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  private messageService = inject(MessageService);
 
   sections: ISection[] = [];
   selectedSection: ISection | undefined;
@@ -37,18 +42,9 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
       this.noteService.getNotesSection()
         .subscribe(res => {
           this.sections = res;
-          const routeQueryParams = this.route.snapshot.queryParams;
-          const selectedSectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
-          if (selectedSectionId > 0) {
-            this.selectedSection = this.sections.find(d => d.sectionId === selectedSectionId) ?? undefined;
-          }
-          const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
-          if (contentId > 0) {
-            this.selectedTopic = this.selectedSection?.topics.find(d => d.topicId === contentId) ?? undefined;
-          }
           this.resetSelectedValue();
         })
-    )
+    );
   }
 
   ngAfterViewInit(): void {
@@ -69,10 +65,6 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
       const element = document.getElementById('content_' + contentId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }
-
-  check(dd: any) {
-    console.log(dd);
   }
 
   onExpandSection(sectionId: number) {
@@ -103,24 +95,73 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   }
 
   resetSelectedValue() {
-    if (this.sections.length) {
-      const availableSection = this.selectedSection ? this.sections.find(s => s.sectionId === this.selectedSection?.sectionId) : this.sections[0];
-      this.selectedSection = availableSection || this.sections[0];
-      if (this.selectedSection.topics.length) {
-        const availableTopic = this.selectedTopic ? this.selectedSection.topics.find(t => t.topicId === this.selectedTopic?.topicId) : this.selectedSection.topics[0];
-        this.selectedTopic = availableTopic || this.selectedSection.topics[0];
-      } else {
-        this.selectedTopic = undefined;
+    this.selectedSection = undefined;
+    this.selectedTopic = undefined;
+    const routeQueryParams = this.route.snapshot.queryParams;
+    const selectedSectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : 0;
+    if (selectedSectionId != null && selectedSectionId > 0) {
+      this.selectedSection = this.sections.find(d => d.sectionId === selectedSectionId) ?? undefined;
+      if (this.selectedSection) {
+        const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : 0;
+        const subSectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : 0;
+        if (contentId != null && contentId > 0) {
+          if (subSectionId != null && subSectionId > 0 && this.selectedSection?.subSections) {
+            const availableSubSection = this.selectedSection?.subSections.find(d => d.subSectionId === subSectionId);
+            if (availableSubSection && availableSubSection.topics.length) {
+              this.selectedTopic = availableSubSection.topics.find(d => d.topicId === contentId);
+            }
+          }
+          if (!this.selectedTopic) {
+            this.selectedTopic = this.selectedSection.topics.find(d => d.topicId === contentId);
+          }
+        }
       }
     } else {
-      this.selectedSection = undefined;
-      this.selectedTopic = undefined;
+      this.selectedSection = this.sections.length ? this.sections[0] : undefined;
+      if (this.selectedSection?.topics.length) {
+        this.selectedTopic = this.selectedSection.topics[0]
+      } else if (this.selectedSection?.subSections.length && this.selectedSection.subSections[0].topics.length) {
+        this.selectedTopic = this.selectedSection.subSections[0].topics[0];
+      }
+    }
+    this.setQueryParam();
+
+
+
+
+
+    //   if (this.sections.length) {
+    //     const availableSection = this.selectedSection ? this.sections.find(s => s.sectionId === this.selectedSection?.sectionId) : this.sections[0];
+    //     this.selectedSection = availableSection || this.sections[0];
+    //     if (this.selectedSection.topics.length) {
+    //       const availableTopic = this.selectedTopic ? this.selectedSection.topics.find(t => t.topicId === this.selectedTopic?.topicId) : this.selectedSection.topics[0];
+    //       this.selectedTopic = availableTopic || this.selectedSection.topics[0];
+    //     } else {
+    //       this.selectedTopic = undefined;
+    //     }
+    //   } else {
+    //     this.selectedSection = undefined;
+    //     this.selectedTopic = undefined;
+    //   }
+
+  }
+
+  setQueryParam() {
+    let sectionId = 0;
+    let subSectionId = 0;
+    let contentId = 0;
+    if (this.selectedTopic) {
+      sectionId = this.selectedTopic.sectionId;
+      subSectionId = this.selectedTopic.subSectionId;
+      contentId = this.selectedTopic.topicId;
+    } else if (this.selectedSection) {
+      sectionId = this.selectedSection.sectionId;
     }
     const queryParamRequest = {
-      sectionId: this.selectedSection?.sectionId ?? -1,
-      subSectionId: -1,
-      contentId: this.selectedTopic?.topicId ?? -1
-    }
+      sectionId: sectionId,
+      subSectionId: subSectionId,
+      contentId: contentId
+    };
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
     setTimeout(() => {
@@ -130,19 +171,29 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
 
   onSelectSection(section: ISection) {
     this.selectedSection = section;
-    this.resetSelectedValue();
+    let availableContent = this.selectedSection.topics?.length ? this.selectedSection.topics[0] : undefined;
+    if (!availableContent) {
+      if (this.selectedSection.subSections?.length) {
+        availableContent = this.selectedSection.subSections[0].topics?.length ? this.selectedSection.subSections[0].topics[0] : undefined;
+      }
+    }
+    this.selectedTopic = availableContent;
+    this.setQueryParam();
   }
 
-  onSelectTopic(topic: ITopic) {
+  onSelectContent(topic: ITopic) {
     this.selectedTopic = topic;
-    this.resetSelectedValue();
+    this.setQueryParam();
   }
 
   onAddDescription(text: string) {
     if (this.selectedTopic) {
       this.noteService.onAddDescription(this.selectedTopic, text).subscribe((res: IResponse) => {
         if (res?.status) {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Description is successfully updated.' });
           this.noteService.getSections().subscribe();
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
         }
       });
     }

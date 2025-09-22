@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { NotesService } from '../../../../core/services/notes';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
-import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
+import { IManageNotesAction, ManageNotesIdType } from '../../../../core/interfaces/manage-notes-action-interface';
 import { ManageNotesForm } from '../../components/manage-notes-form/manage-notes-form';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { CardModule } from 'primeng/card';
@@ -13,20 +13,23 @@ import { StoreService } from '../../../../core/services/store';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Toast } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm, Toast],
+  imports: [NgClass, NgTemplateOutlet, ButtonModule, CardModule, SelectModule, FormsModule, ManageNotesForm, Toast, ConfirmDialogModule],
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss',
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
+  private confirmationService = inject(ConfirmationService);
 
   fomBuilder = inject(FormBuilder);
 
@@ -61,6 +64,11 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
       id: "Add_Content",
       type: "Content"
     },
+    {
+      name: "Add Bulk Content",
+      id: "Add_Bulk_Content",
+      type: "Content"
+    }
   ];
 
   selectedAction: IManageNotesAction | undefined;
@@ -70,14 +78,16 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
       this.notesService.getNotesSection()
         .subscribe((res: ISection[]) => {
           this.sections = res;
-          if(this.selectedAction != null) {
-            const position = this.notesForm.get('position')?.value? this.notesForm.get('position')?.value : '1';  
-            if(this.selectedAction.id === "Add_Section") {
+          if (this.selectedAction != null) {
+            const position = this.notesForm.get('position')?.value ? this.notesForm.get('position')?.value : '1';
+            if (this.selectedAction.id === "Add_Section") {
               this.addSection(this.responseRowDetail as ISection, position);
-            } else if(this.selectedAction.id === "Add_Sub_Section") {
+            } else if (this.selectedAction.id === "Add_Sub_Section") {
               this.addSubSection(this.responseRowDetail as ISubSection, position);
-            } else if(this.selectedAction.id === "Add_Content") {
-              this.addContent(this.responseRowDetail as ITopic, position);
+            } else if (this.selectedAction.id === "Add_Content") {
+              this.addContent(this.responseRowDetail as ITopic, position, "Add_Content");
+            } else if (this.selectedAction.id === "Add_Bulk_Content") {
+              this.notesForm.reset();
             }
           }
         })
@@ -129,7 +139,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
 
   setSubSectionControl() {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
-      this.currentActionSubsections = (value != null && value > 0)? (this.sections.find(d => d.sectionId === value)?.subSections ?? []) : [];
+      this.currentActionSubsections = (value != null && value > 0) ? (this.sections.find(d => d.sectionId === value)?.subSections ?? []) : [];
       this.notesForm.patchValue({
         subSectionId: null,
       });
@@ -164,7 +174,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.notesForm.get('subSectionId')?.valueChanges.subscribe(value => {
-      this.currentActionContents = (value != null && value > 0)? (this.currentActionSubsections.find(d => d.subSectionId === value)?.topics ?? []) : [];
+      this.currentActionContents = (value != null && value > 0) ? (this.currentActionSubsections.find(d => d.subSectionId === value)?.topics ?? []) : this.currentActionContents;
       this.notesForm.patchValue({
         contentId: null,
       });
@@ -194,7 +204,10 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
         this.addSubSection(subSection, '');
       } else if (this.selectedAction?.id === "Add_Content") {
         const content: ITopic = this.storeService.getDummyContent();
-        this.addContent(content, '');
+        this.addContent(content, '', "Add_Content");
+      } else if (this.selectedAction?.id === "Add_Bulk_Content") {
+        const content: ITopic = this.storeService.getDummyContent();
+        this.addContent(content, '', "Add_Bulk_Content");
       }
     } else {
       this.removeFormControls();
@@ -234,9 +247,9 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.currentActionSubsections = [];
     this.currentActionContents = [];
     this.removeFormControls();
-    const sectionId = (selectedSubSection.sectionId != null && selectedSubSection.sectionId > 0)? selectedSubSection.sectionId : null;
-    const subSectionId = (selectedSubSection.subSectionId != null && selectedSubSection.subSectionId > 0)? selectedSubSection.subSectionId : null;
-    this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
+    const sectionId = (selectedSubSection.sectionId != null && selectedSubSection.sectionId > 0) ? selectedSubSection.sectionId : null;
+    const subSectionId = (selectedSubSection.subSectionId != null && selectedSubSection.subSectionId > 0) ? selectedSubSection.subSectionId : null;
+    this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
@@ -253,31 +266,67 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
       type: "Sub_Section"
     };
     this.removeFormControls();
-    const sectionId = (subSection.sectionId != null && subSection.sectionId > 0)? subSection.sectionId : null;
-    const subSectionId = (subSection.subSectionId != null && subSection.subSectionId > 0)? subSection.subSectionId : null;
-    this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+    const sectionId = (subSection.sectionId != null && subSection.sectionId > 0) ? subSection.sectionId : null;
+    const subSectionId = (subSection.subSectionId != null && subSection.subSectionId > 0) ? subSection.subSectionId : null;
+    this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
     this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl({ value: subSectionId, disabled: true }, [Validators.required]));
     this.notesForm.addControl('text', new FormControl(subSection.name, [Validators.required]));
   }
 
   deleteSection(index: number) {
-    this.selectedAction = undefined;
-    this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
-      if (res?.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this Section? All associated contents will be lost.',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
+          if (res?.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
   deleteSubSection(sectionIndex: number, subSectionIndex: number) {
-    this.selectedAction = undefined;
-    this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
-      if (res?.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this Sub Section? All associated contents will be lost.',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
+          if (res?.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
@@ -285,15 +334,15 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
     this.removeFormControls();
     this.currentActionContents = [];
     this.currentActionSubsections = [];
-    const sectionId = (content.sectionId != null && content.sectionId > 0)? content.sectionId : null;
-    const subSectionId = (content.subSectionId != null && content.subSectionId > 0)? content.subSectionId : null;
-    const contentId = (content.topicId != null && content.topicId > 0)? content.topicId : null;
+    const sectionId = (content.sectionId != null && content.sectionId > 0) ? content.sectionId : null;
+    const subSectionId = (content.subSectionId != null && content.subSectionId > 0) ? content.subSectionId : null;
+    const contentId = (content.topicId != null && content.topicId > 0) ? content.topicId : null;
     if (subSectionId) {
-      this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+      this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
       this.notesForm.addControl('subSectionId', new FormControl({ value: subSectionId, disabled: true }));
       this.currentActionContents = this.currentActionSubsections.find(d => d.subSectionId === subSectionId)?.topics ?? [];
     } else {
-      this.currentActionContents = sectionId? (this.sections.find(d => d.sectionId === content.sectionId)?.topics || []) : [];
+      this.currentActionContents = sectionId ? (this.sections.find(d => d.sectionId === content.sectionId)?.topics || []) : [];
     }
     this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }));
     this.notesForm.addControl('text', new FormControl(content.text, [Validators.required]));
@@ -306,11 +355,30 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteContent(content: ITopic) {
-    this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
-      if (res.status) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
-        this.notesService.getSections().subscribe();
-      }
+    this.confirmationService.confirm({
+      message: 'Do you really want to delete this record?',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+        this.selectedAction = undefined;
+        this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
+          if (res.status) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
+            this.notesService.getSections().subscribe();
+          }
+        });
+      },
+      reject: () => {
+      },
     });
   }
 
@@ -326,41 +394,41 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
   addContentOnSection(section: ISection) {
     const content = this.storeService.getDummyContent();
     content["sectionId"] = section.sectionId;
-    this.addContent(content, '');
+    this.addContent(content, '', "Add_Content");
   }
 
   addContentOnSubSection(subSection: ISubSection) {
     const content: ITopic = this.storeService.getDummyContent();
     content["sectionId"] = subSection.sectionId;
     content["subSectionId"] = subSection.subSectionId;
-    this.addContent(content, '');
+    this.addContent(content, '', "Add_Content");
   }
 
   addSection(section: ISection, position: string) {
     this.removeFormControls();
     this.currentActionSubsections = [];
     this.currentActionContents = [];
-    const sectionId = (section.sectionId != null || section.sectionId > 0)? section.sectionId : null;
+    const sectionId = (section.sectionId != null || section.sectionId > 0) ? section.sectionId : null;
     this.selectedAction = this.actions.find(d => d.type === "Section");
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
     this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
   }
 
-  addContent(content: ITopic, position: string) {
+  addContent(content: ITopic, position: string, manageNotesActionId: ManageNotesIdType) {
     this.removeFormControls();
     this.currentActionSubsections = [];
     this.currentActionContents = [];
-    this.selectedAction = this.actions.find(d => d.type === "Content");
-    const sectionId = (content.sectionId != null && content.sectionId > 0)? content.sectionId : null;
-    const subSectionId = (content.subSectionId != null && content.subSectionId > 0)? content.subSectionId : null;
-    const contentId = (content.topicId != null && content.topicId > 0)? content.topicId : null;
+    this.selectedAction = this.actions.find(d => d.id === manageNotesActionId);
+    const sectionId = (content.sectionId != null && content.sectionId > 0) ? content.sectionId : null;
+    const subSectionId = (content.subSectionId != null && content.subSectionId > 0) ? content.subSectionId : null;
+    const contentId = (content.topicId != null && content.topicId > 0) ? content.topicId : null;
     if (sectionId) {
       if (subSectionId) {
-        this.currentActionSubsections = sectionId? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
-        this.currentActionContents = subSectionId? (this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []) : [];
+        this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+        this.currentActionContents = subSectionId ? (this.currentActionSubsections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []) : [];
       } else {
-        this.currentActionContents = sectionId? (this.sections.find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
+        this.currentActionContents = sectionId ? (this.sections.find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
       }
     }
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
@@ -396,7 +464,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               if (res.data != null && res.data.length > 0) {
                 this.responseRowDetail = res.data[0];
               }
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully added.' });
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is created successfully.' });
               this.notesService.getSections().subscribe();
             }
           })
@@ -435,7 +503,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               if (res.data != null && res.data.length > 0) {
                 this.responseRowDetail = res.data[0];
               }
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section is successfully added.' });
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section is created successfully.' });
               this.notesService.getSections().subscribe();
             }
           })
@@ -454,7 +522,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
           });
         }
       } else if (this.selectedAction?.type === "Content") {
-        if (this.selectedAction.id === "Add_Content") {
+        if (this.selectedAction.id === "Add_Content" || this.selectedAction.id === "Add_Bulk_Content") {
           const content: ITopic = {
             text: editorText,
             sectionId: formValue.sectionId,
@@ -479,13 +547,21 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
               contentIndex = this.sections[sectionIndex].topics.length;
             }
           }
-          this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex).subscribe((res: IResponse) => {
+          const isBulkContent = this.selectedAction.id === "Add_Bulk_Content";
+          this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).subscribe((res: IResponse) => {
             if (res?.status) {
               if (res.data && res.data.length > 0) {
-                this.responseRowDetail = res.data[0];
+                if (isBulkContent) {
+                  this.responseRowDetail = undefined;
+                  this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
+                } else {
+                  this.responseRowDetail = res.data[0];
+                  this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is created successfully.' });
+                }
               }
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully added.' });
               this.notesService.getSections().subscribe();
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
             }
           });
         } else if (this.selectedAction.id === "Edit_Content") {
@@ -508,7 +584,7 @@ export class ManageNotes implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('document:click')
   closeDropdown() {
-    this.openToggle = -1;
+    this.openToggle = 0;
     this.toggleType = '';
   }
 

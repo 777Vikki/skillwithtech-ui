@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { INote } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, first, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, Select],
+  imports: [FormsModule, Select, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })

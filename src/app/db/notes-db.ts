@@ -2,27 +2,29 @@ import { Note } from "../core/enums/note-enum"
 import { INote, ISection } from "../core/interfaces/note-interface"
 import { angularList } from "./testing/angular-testing"
 import { azureList } from "./testing/azure-list"
+import { ngrxList } from "./testing/ngrx-list"
+import { rxjsList } from "./testing/rxjs-list"
 
 export const storeCount = () => {
   return {
-    section: 30,
-    subSection: 0,
-    topic: 91,
+    section: 35,
+    subSection: 5,
+    topic: 140,
   }
 }
 
 export const notesDb = (type: string): ISection[]  => {
   switch(type) {
     case Note.ANGULAR: {
-      return angularList()
+      return angularList();
     }
 
     case Note.NGRX: {
-      return []
+      return ngrxList();
     }
 
     case Note.RXJS: {
-      return []
+      return rxjsList();
     }
 
     case Note.JAVASCRIPT: {
@@ -42,7 +44,7 @@ export const notesDb = (type: string): ISection[]  => {
     }
 
     case Note.AZURE: {
-      return azureList()
+      return azureList();
     }
   }
   return [];
@@ -93,7 +95,7 @@ export const availableNotes = (): INote[] => {
       sections: [],
     },
     {
-      name: "Azure",
+      name: "CI/CD pipelines with Azure",
       type: Note.AZURE,
       id: 8,
       sections: []

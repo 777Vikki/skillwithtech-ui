@@ -45,7 +45,7 @@ export class BackendService {
     section.sectionId = this.getCount("section");
     this.currentNoteSections.splice(index, 0, section);
     this.storeSection(this.currentNoteSections)
-    return of({ status: true, data: [section] });
+    return of({ status: true, message: 'Success', data: [section] });
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -55,7 +55,7 @@ export class BackendService {
       sec.name = section.name;
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [] });
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
@@ -68,7 +68,7 @@ export class BackendService {
       }
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [] });
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
@@ -85,7 +85,7 @@ export class BackendService {
       selectedContent.text = content.text;
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [] });
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteContent(content: ITopic): Observable<IResponse> {
@@ -98,39 +98,51 @@ export class BackendService {
       selectedContents = section?.topics ?? [];
     }
     const index = selectedContents.findIndex(d => d.topicId === content.topicId);
-    if(index > -1) {
+    if (index > -1) {
       selectedContents.splice(index, 1);
     }
     this.storeSection(this.currentNoteSections);
-    return of({status: true, data: []});
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteSection(index: number) {
     console.log(index);
     this.currentNoteSections.splice(index, 1);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [] });
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number) {
     console.log('sectionIndex: ', sectionIndex, ' subSectionIndex: ', subSectionIndex);
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [] });
+    return of({ status: true, message: 'Success', data: [] });
   }
 
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number): Observable<IResponse> {
-    console.log((content));
-    console.log('SectionIndex: ', sectionIndex, ' SubSectionIndex', subSectionIndex, ' contentIndex', contentIndex)
-    content.topicId = this.getCount("topic");
-    if (subSectionIndex > -1) {
-      this.currentNoteSections[sectionIndex].subSections[subSectionIndex].topics.splice(contentIndex, 0, content);
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+    console.log('SectionIndex: ', sectionIndex, ' SubSectionIndex', subSectionIndex, ' contentIndex', contentIndex);
+    let contents: ITopic[] = [];
+    if (isBulkContent) {
+      const requestContents = content.text?.match(/<p>.*?<\/p>/g) ?? [];
+      if (requestContents.length > 0) {
+        contents = requestContents.map(d => {
+          return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
+        });
+      } else {
+        return of({ status: false, message: 'Text format is not correct. Please see Preview', data: [content] });
+      }
     } else {
-      this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, content);
+      content.topicId = this.getCount("topic");
+      contents = [content]
     }
-
+    if (subSectionIndex > -1) {
+      this.currentNoteSections[sectionIndex].subSections[subSectionIndex].topics.splice(contentIndex, 0, ...contents);
+    } else {
+      this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
+    }
+    console.log(contents);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [content] });
+    return of({ status: true, message: 'Success', data: [...contents] });
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
@@ -139,21 +151,33 @@ export class BackendService {
     subSection.subSectionId = this.getCount("subSection");
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 0, subSection);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [subSection] });
+    return of({ status: true, message: 'Success', data: [subSection] });
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
     console.log(topic);
     console.log('Description: ', description);
     const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === topic.sectionId);
+    let selectedContent: ITopic | undefined = undefined;
     if (section) {
-      const selectedTopic = section.topics.find(d => d.topicId === topic.topicId);
-      if (selectedTopic) {
-        selectedTopic.description = description;
+      if (topic.subSectionId != null && topic.subSectionId > 0) {
+        const subSection = section.subSections.find(d => d.subSectionId === topic.subSectionId) ?? undefined;
+        if (subSection && subSection.topics.length) {
+          selectedContent = subSection.topics.find(d => d.topicId === topic.topicId);
+        }
+      }
+      if (!selectedContent && section.topics.length) {
+        selectedContent = section.topics.find(d => d.topicId === topic.topicId) ?? undefined;
+      }
+      if (selectedContent) {
+        selectedContent.description = description;
+        this.storeSection(this.currentNoteSections);
+        return of({ status: true, message: 'Success', data: [topic] });
+      } else {
+        return of({ status: false, message: 'data is not added', data: [topic] });
       }
     }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, data: [topic] });
+    return of({ status: false, message: 'data is not added', data: [topic] });
   }
 
   storeSection(sections: ISection[]) {
