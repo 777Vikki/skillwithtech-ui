@@ -4,7 +4,7 @@ import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
 // import { TextEditorModal } from '../../../../shared/modals/text-editor-modal/text-editor-modal';
 import { IResponse } from '../../../../core/interfaces/response-interface';
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { Description } from '../../components/description/description';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-active-notes',
-  imports: [NgClass, Description, CardModule],
+  imports: [NgClass, NgTemplateOutlet, Description, CardModule],
   templateUrl: './active-notes.html',
   styleUrl: './active-notes.scss'
 })
@@ -27,6 +27,7 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   selectedTopic: ITopic | undefined;
   isMobileScreen = this.store.checkMobileScreen();
   expandSections: number[] = [];
+  expandSubSections: number[] = [];
   expandTopics: number[] = [];
   isSectionCollapse: boolean = false;
   subscriptions: Subscription[] = [];
@@ -70,12 +71,25 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  check(dd: any) {
+    console.log(dd);
+  }
+
   onExpandSection(sectionId: number) {
     const index = this.expandSections.indexOf(sectionId);
     if (index >= 0) {
       this.expandSections.splice(index, 1);
     } else {
       this.expandSections.push(sectionId);
+    }
+  }
+
+  onExpandSubSection(subSectionId: number) {
+    const index = this.expandSubSections.indexOf(subSectionId);
+    if (index >= 0) {
+      this.expandSubSections.splice(index, 1);
+    } else {
+      this.expandSubSections.push(subSectionId);
     }
   }
 

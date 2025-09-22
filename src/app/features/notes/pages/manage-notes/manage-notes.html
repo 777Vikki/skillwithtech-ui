@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 @if(section?.topics?.length) {
-                <ng-container *ngTemplateOutlet="myContent; context: { topics: section.topics }"></ng-container>
+                <ng-container *ngTemplateOutlet="manageNotesContent; context: { topics: section.topics }"></ng-container>
                 }
                 @if(section?.subSections?.length) {
                 @for(subSection of section.subSections; track subSection.subSectionId; let subSectionIndex = $index) {
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     @if(subSection?.topics?.length) {
-                    <ng-container *ngTemplateOutlet="myContent; context: { topics: subSection.topics }"></ng-container>
+                    <ng-container *ngTemplateOutlet="manageNotesContent; context: { topics: subSection.topics }"></ng-container>
                     }
                 </div>
                 }
@@ -82,7 +82,7 @@
 </p-card>
 }
 
-<ng-template #myContent let-topics="topics">
+<ng-template #manageNotesContent let-topics="topics">
     @for(topic of topics; track topic.topicId) {
     @if(topic.text) {
     <div class="content-text center-align-between"
@@ -106,3 +106,4 @@
     }
     }
 </ng-template>
+<p-toast />

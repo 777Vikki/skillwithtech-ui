@@ -15,20 +15,20 @@ export class StoreService {
   private dummyNotes: INote = {
     name: '',
     type: '',
-    id: -1,
+    id: 0,
     sections: []
   }
   private dummyContent: ITopic = {
     text: '',
-    sectionId: -1,
-    subSectionId: -1,
+    sectionId: 0,
+    subSectionId: 0,
     noteType: '',
-    topicId: -1,
+    topicId: 0,
     description: ''
   };
   private dummySection: ISection = {
     name: '',
-    sectionId: -1,
+    sectionId: 0,
     noteType: '',
     topics: [],
     subSections: []
@@ -36,8 +36,8 @@ export class StoreService {
 
   private dummySubSection: ISubSection = {
     name: '',
-    sectionId: -1,
-    subSectionId: -1,
+    sectionId: 0,
+    subSectionId: 0,
     noteType: '',
     topics: [],
   }

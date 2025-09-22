@@ -25,18 +25,22 @@
                 <h3>Content</h3>
             </div>
             <div class="note-topic-container" #contentScrollContainer>
-                @let topics = selectedSection?.topics || [];
-                @for(topic of topics; track topic.topicId; let i = $index) {
-                <div class="note-topic-item" [id]="'content_' + topic.topicId" (click)="onSelectTopic(topic)"
-                    [ngClass]="{'selected': selectedTopic?.topicId === topic.topicId}">
-                    <div class="note-topic-index"><strong>{{ i + 1 }}.</strong></div>
-                    <div class="note-topic-content">
-                        <div [innerHTML]="topic.text"></div>
-                        <span class="material-symbols-outlined"
-                            [ngClass]="{'status-icon-pending': !topic.description, 'status-icon-ans': topic.description}">{{topic.description?
-                            'check_circle' : 'pending'}}</span>
-                    </div>
+                @let contents = selectedSection?.topics || [];
+                @for(content of contents; track content.topicId; let i = $index) {
+                <ng-container
+                    *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
+                }
+                @let subSections = selectedSection?.subSections || [];
+                @for(subSection of subSections; track subSection.subSectionId) {
+                <div class="note-subsection-item">
+                    <div class="note-subsection-title">Sub Section: </div>
+                    <div class="note-subsection-text" [innerHTML]="subSection.name"></div>
                 </div>
+                @let contents = subSection?.topics || [];
+                @for(content of contents; track content.topicId; let i = $index) {
+                <ng-container
+                    *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
+                }
                 }
             </div>
         </div>
@@ -56,20 +60,20 @@
                 </div>
             </div>
             @if(expandSections.includes(section.sectionId)) {
-            @for(topic of section.topics; track topic.topicId) {
-            <div class="note-topic">
-                <div class="note-topic-item" (click)="onExpandTopic(topic.topicId); $event.stopPropagation()">
-                    <div class="note-topic-content">
-                        <span class="material-symbols-outlined"
-                            [ngClass]="{'status-icon-pending': !topic.description, 'status-icon-ans': topic.description}">{{topic.description?
-                            'check_circle' : 'pending'}}</span>
-                        <div [innerHTML]="topic.text"></div>
-                    </div>
-                    <span class="material-symbols-outlined expand-icon"> {{expandTopics.includes(topic.topicId)?
-                        'expand_circle_up' : 'expand_circle_down'}} </span>
+            @for(content of section.topics; track content.topicId) {
+            <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
+            }
+            @for(subSection of section.subSections; track subSection.subSectionId) {
+            <div class="note-sub-section">
+                <div class="note-subsection-item" (click)="onExpandSubSection(subSection.subSectionId)">
+                    <div [innerHTML]="subSection.name"></div>
+                    <div><span class="material-symbols-outlined">{{expandSubSections.includes(subSection.subSectionId)?
+                            'keyboard_arrow_up' : 'keyboard_arrow_down'}}</span></div>
                 </div>
-                @if(expandTopics.includes(topic.topicId)) {
-                <div class="note-description-item" [innerHTML]="topic.description"></div>
+                @for(content of subSection.topics; track content.topicId) {
+                @if(expandSubSections.includes(subSection.subSectionId)) {
+                <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
+                }
                 }
             </div>
             }
@@ -80,6 +84,41 @@
     </div>
     }
 </div>
+
+<ng-template #activeNotesTableContent let-content="content" let-index="index">
+    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectTopic(content)"
+        [ngClass]="{'selected': selectedTopic?.topicId === content.topicId}">
+        <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
+        <div class="note-topic-content">
+            <div [innerHTML]="content.text"></div>
+            <span class="material-symbols-outlined"
+                [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
+                'check_circle' : 'pending'}}</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #activeNotesRowContent let-content="content">
+    <div class="note-topic">
+        <div class="note-topic-item" (click)="onExpandTopic(content.topicId); $event.stopPropagation()">
+            <div class="note-topic-content">
+                <span class="material-symbols-outlined"
+                    [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
+                    'check_circle' : 'pending'}}</span>
+                <div [innerHTML]="content.text"></div>
+            </div>
+            <span class="material-symbols-outlined expand-icon"> {{expandTopics.includes(content.topicId)?
+                'expand_circle_up' : 'expand_circle_down'}} </span>
+        </div>
+        @if(expandTopics.includes(content.topicId)) {
+        @if(content.description) {
+        <div class="note-description-item" [innerHTML]="content.description"></div>
+        } @else {
+        <div class="note-description-item">No Answer.</div>
+        }
+        }
+    </div>
+</ng-template>
 
 <!-- @if(show) {
 <app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />

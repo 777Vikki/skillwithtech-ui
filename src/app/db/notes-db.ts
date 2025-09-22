@@ -5,9 +5,9 @@ import { azureList } from "./testing/azure-list"
 
 export const storeCount = () => {
   return {
-    section: 25,
+    section: 30,
     subSection: 0,
-    topic: 77,
+    topic: 91,
   }
 }
 
