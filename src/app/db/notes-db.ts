@@ -2,14 +2,16 @@ import { Note } from "../core/enums/note-enum"
 import { INote, ISection } from "../core/interfaces/note-interface"
 import { angularList } from "./testing/angular-testing"
 import { azureList } from "./testing/azure-list"
+import { htmlList } from "./testing/htmlList"
 import { ngrxList } from "./testing/ngrx-list"
 import { rxjsList } from "./testing/rxjs-list"
+import { typescriptList } from "./testing/typescript-list"
 
 export const storeCount = () => {
   return {
-    section: 39,
+    section: 43,
     subSection: 12,
-    topic: 174,
+    topic: 193,
   }
 }
 
@@ -32,11 +34,11 @@ export const notesDb = (type: string): ISection[]  => {
     }
 
     case Note.TYPESCRIPT: {
-      return []
+      return typescriptList()
     }
 
     case Note.HTML: {
-      return []
+      return htmlList()
     }
 
     case Note.CSS: {
@@ -70,12 +72,12 @@ export const availableNotes = (): INote[] => {
       id: 3,
       sections: [],
     },
-    {
-      name: "JavaScript",
-      type: Note.JAVASCRIPT,
-      id: 4,
-      sections: [],
-    },
+    // {
+    //   name: "JavaScript",
+    //   type: Note.JAVASCRIPT,
+    //   id: 4,
+    //   sections: [],
+    // },
     {
       name: "TypeScript",
       type: Note.TYPESCRIPT,
