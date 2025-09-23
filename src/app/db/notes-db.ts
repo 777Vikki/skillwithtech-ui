@@ -7,9 +7,9 @@ import { rxjsList } from "./testing/rxjs-list"
 
 export const storeCount = () => {
   return {
-    section: 35,
-    subSection: 5,
-    topic: 140,
+    section: 38,
+    subSection: 9,
+    topic: 167,
   }
 }
 

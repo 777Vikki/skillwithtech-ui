@@ -284,7 +284,48 @@ export const angularList = () => {
             "name": "<p><strong>Angular lifecycle hooks</strong></p>",
             "sectionId": 8,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What are lifecycle hooks in Angular?</strong></p>",
+                    "sectionId": 8,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 141,
+                    "description": "<p><strong>Lifecycle hooks</strong> are <strong>special methods</strong> in <strong>Angular</strong> that get called <strong>automatically</strong> at different stages of a <strong>component</strong> or <strong>directive’s life cycle</strong> — from <strong>creation</strong> to <strong>destruction</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Explain some commonly used lifecycle hooks.</strong></p>",
+                    "sectionId": 8,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 142,
+                    "description": "<p><code><strong>ngOnChanges(changes: SimpleChanges)</strong></code></p><ul><li>Called whenever an <code>@Input()</code> property value changes.</li><li>Useful for reacting to input updates from a parent component.</li></ul></br><p><code><strong>ngOnInit()</strong></code></p><ul><li>Called once, after the first <code>ngOnChanges</code>.</li><li>Best place for component initialization logic (e.g., fetching data from APIs).</li></ul></br><p><code><strong>ngDoCheck()</strong></code></p><ul><li>Called during every change detection cycle.</li><li>Lets you implement your own change detection logic (advanced usage).</li></ul></br><p><code><strong>ngAfterContentInit()</strong></code></p><ul><li>Called once after projecting external content (<code>&lt;ng-content&gt;</code>) into the component.</li></ul></br><p><code><strong>ngAfterContentChecked()</strong></code></p><ul><li>Called after every check of projected content.</li></ul></br><p><code><strong>ngAfterViewInit()</strong></code></p><ul><li>Called once after component’s view (and its child views) are initialized.</li><li>Good for DOM/child component access via <code>@ViewChild</code>.</li></ul></br><p><code><strong>ngAfterViewChecked()</strong></code></p><ul><li>Called after every check of the component’s view (and child views).</li></ul></br><p><code><strong>ngOnDestroy()</strong></code></p><ul><li>Called just before Angular destroys the component.</li><li>Use it to clean up (unsubscribe from Observables, detach event listeners, etc.).</li></ul></br>"
+                },
+                {
+                    "text": "<p><strong>When a component loads, which lifecycle hook is called first?</strong></p>",
+                    "sectionId": 8,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 143,
+                    "description": "<p>When an Angular <strong>component loads</strong>, the <strong>first lifecycle hook</strong> that is called is <code><strong>ngOnChanges()</strong></code>, <strong>if the component has any </strong><code><strong>@Input()</strong></code><strong> properties</strong>.</p></br><p>If there are <strong>no </strong><code><strong>@Input()</strong></code><strong> bindings</strong>, then Angular skips <code>ngOnChanges()</code> and directly calls <code><strong>ngOnInit()</strong></code>.</p>"
+                },
+                {
+                    "text": "<p><strong>Why is constructor() called first in Angular?</strong></p>",
+                    "sectionId": 8,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 144,
+                    "description": "<p>The <code><strong>constructor()</strong></code> is a <strong>TypeScript/JavaScript class feature</strong>, not an Angular lifecycle hook.</p></br><p>The <strong>constructor is called first</strong> because it’s part of the <strong>class instantiation process in TypeScript/JavaScript</strong>, not Angular’s lifecycle.</p></br><p>The <strong>constructor’s job</strong> is only to:</p><ul><li>Initialize <strong>class fields</strong></li><li>Inject <strong>dependencies</strong> via Angular’s <strong>Dependency Injection (DI)</strong> system</li></ul></br>"
+                },
+                {
+                    "text": "<p><strong>Why do we need ngOnInit() if the constructor runs once?</strong></p>",
+                    "sectionId": 8,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 145,
+                    "description": "<p>The <code><strong>constructor()</strong></code> is a <strong>TypeScript/JavaScript class feature</strong>, not an Angular lifecycle hook.</p></br><p>The <strong>constructor runs too early</strong>, before Angular sets <code>@Input()</code> properties.</p></br><p><code>ngOnInit()</code> runs <strong>after Angular has finished initializing inputs and setting up the component</strong>.</p></br><p><code><strong>ngOnInit()</strong></code> is guaranteed to run <strong>once</strong>, after inputs are ready, making it the best place for <strong>component initialization logic</strong>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
@@ -346,7 +387,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 81,
-                    "description": "<p>If you have <strong>user$ Observable</strong>:</p><ul><li>If you use <strong>user$ | async</strong> multiple times in the same <strong>template</strong>, Angular will create a <strong>new subscription</strong> each time.</li><li><strong>async pipe</strong> only works inside the <strong>template</strong>.</li><li><strong>async pipe</strong> does not provide a way to handle <strong>errors</strong> emitted by an <strong>Observable</strong> and <strong>cannot use</strong> an <strong>RxJS operator</strong>.</li><li>Every time the <strong>Observable emits</strong>, <strong>async pipe</strong> triggers <strong>change detection</strong>.</li><li>We have to optimize with <strong>ChangeDetectionStrategy.OnPush</strong>.</li></ul>"
+                    "description": "<p>If you have <strong>user$ Observable</strong>:</p><ul><li>If we use <strong>user$ | async</strong> multiple times in the same <strong>template</strong>, Angular will create a <strong>new subscription</strong> each time.</li><li><strong>async pipe</strong> only works inside the <strong>template</strong>.</li><li><strong>async pipe</strong> does not provide a way to handle <strong>errors</strong> emitted by an <strong>Observable</strong> and <strong>cannot use</strong> an <strong>RxJS operator</strong>.</li><li>Every time the <strong>Observable emits</strong>, <strong>async pipe</strong> triggers <strong>change detection</strong>.</li><li>We have to optimize with <strong>ChangeDetectionStrategy.OnPush</strong>.</li></ul>"
                 },
                 {
                     "text": "<p><strong>What is the difference between Pure and Impure Pipe?</strong></p>",
@@ -363,8 +404,66 @@ export const angularList = () => {
             "name": "<p><strong>Routing</strong></p>",
             "sectionId": 11,
             "noteType": "Angular",
-            "topics": [],
-            "subSections": []
+            "topics": [
+                {
+                    "text": "<p><strong>How to access route parameters, query parameters, and static route data?</strong></p>",
+                    "sectionId": 11,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 149,
+                    "description": "<p>There are two approch to access route. </p><ol><li>snapshot</li><li>subscribe</li></ol></br><p><strong>Pass data in navigation</strong></p></br><pre data-language=\"plain\">\nconst routes: Routes = [\n  {\n    path: &#39;product/:id&#39;,\n    component: ProductComponent,\n    data: { title: &#39;Product Details&#39; } // Static Route Data\n  }\n];\n</pre></br><pre data-language=\"plain\">\n// Query Parameters (?key=value)\nthis.router.navigate([&#39;/search&#39;], { queryParams: { term: &#39;angular&#39; } });\n</pre></br><pre data-language=\"plain\">\n// Route Parameters (:id)\nthis.router.navigate([&#39;/user&#39;, 5]); // 5 is the id\n</pre></br><p><strong>Access data from Route</strong></p></br><pre data-language=\"plain\">\n// Snapshot approach\nthis.userId = this.route.snapshot.paramMap.get(&#39;id&#39;)!;\nthis.term = this.route.snapshot.queryParamMap.get(&#39;term&#39;);\n\n// subscribe to param or queryParam changes\nthis.route.paramMap.subscribe(params =&gt; {\n      this.userId = params.get(&#39;id&#39;)!;\n });\nthis.route.queryParamMap.subscribe(params =&gt; {\n      this.term = params.get(&#39;term&#39;)!;\n });\n\n// Static Route Data\nthis.route.data.subscribe(data =&gt; {\n  console.log(data[&#39;title&#39;]); // static title\n});\n</pre>"
+                },
+                {
+                    "text": "<p><strong>Explain RouterModule and RouterOutlet.</strong></p>",
+                    "sectionId": 11,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 150,
+                    "description": "<p><code><strong>RouterModule</strong></code> is an <strong>Angular module</strong> that provides all the necessary <strong>services</strong>, <strong>directives</strong>, and <strong>configurations</strong> for <strong>routing</strong> and <strong>navigation</strong> in an Angular application.</p></br><p> <code><strong>&lt;router-outlet&gt;</strong></code> is a <strong>directive</strong> used to <strong>load routed components</strong>, and it is typically placed in the <strong>root component</strong> (<code>AppComponent</code>) or any component where you want to display routed views.</p>"
+                }
+            ],
+            "subSections": [
+                {
+                    "name": "<p><strong>Routing with Module</strong></p>",
+                    "sectionId": 11,
+                    "subSectionId": 6,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><strong>How do you handle routing in Angular?</strong></p>",
+                            "sectionId": 11,
+                            "subSectionId": 6,
+                            "noteType": "Angular",
+                            "topicId": 146,
+                            "description": "<p>In Angular, <code>RouterModule.forRoot()</code> is used in the <strong>root module</strong> to configure <strong>global routes</strong>. It sets up the <strong>Router service</strong> and makes routing directives like <code>&lt;router-outlet&gt;</code> and <code>routerLink</code> available throughout the app. We use <code>.forRoot()</code> only once to ensure the Router is a <strong>singleton</strong>, and in <strong>feature modules</strong>, we use <code>RouterModule.forChild()</code> to add additional routes without creating multiple Router instances.</p></br><pre data-language=\"plain\">\n// app.module.ts (root routes)\n\nimport { NgModule } from &#39;@angular/core&#39;;\nimport { RouterModule, Routes } from &#39;@angular/router&#39;;\nimport { HomeComponent } from &#39;./home/home.component&#39;;\nimport { AboutComponent } from &#39;./about/about.component&#39;;\n\nconst routes: Routes = [\n  { path: &#39;home&#39;, component: HomeComponent },\n  { path: &#39;about&#39;, component: AboutComponent },\n  { path: &#39;&#39;, redirectTo: &#39;home&#39;, pathMatch: &#39;full&#39; }, // default route\n  { path: &#39;**&#39;, redirectTo: &#39;home&#39; } // wildcard route\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],   // configure routes\n  exports: [RouterModule]                   // export for use in AppModule\n})\nexport class AppRoutingModule {}\n</pre></br></br><pre data-language=\"plain\">\n// app-routing.module.ts (root routes)\n\nimport { NgModule } from &#39;@angular/core&#39;;\nimport { BrowserModule } from &#39;@angular/platform-browser&#39;;\nimport { AppComponent } from &#39;./app.component&#39;;\nimport { AppRoutingModule } from &#39;./app-routing.module&#39;;\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule   // ✅ routing included here\n  ],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}\n</pre>"
+                        },
+                        {
+                            "text": "<p><strong>Can you explain RouterModule.forRoot() and RouterModule.forChild()</strong></p>",
+                            "sectionId": 11,
+                            "subSectionId": 6,
+                            "noteType": "Angular",
+                            "topicId": 148,
+                            "description": "<p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">In Angular, </span><code style=\"color: rgb(0, 0, 0); background-color: rgb(236, 236, 236);\">RouterModule.forRoot()</code><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\"> is used in the </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">root module</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\"> to configure </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">global routes</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">.</span></p></br><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">We use </span><code style=\"background-color: rgb(236, 236, 236); color: rgb(0, 0, 0);\">RouterModule.forChild()</code><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> to add additional routes without creating multiple Router instances.</span></p>"
+                        }
+                    ]
+                },
+                {
+                    "name": "<p><strong>Routing with Standalone Component</strong></p>",
+                    "sectionId": 11,
+                    "subSectionId": 7,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><strong>How do you handle routing in Angular?</strong></p>",
+                            "sectionId": 11,
+                            "subSectionId": 7,
+                            "noteType": "Angular",
+                            "topicId": 147,
+                            "description": "<p>With standalone components, routing is configured <strong>directly in </strong><code><strong>main.ts</strong></code> using <code>provideRouter()</code>. Each component has <code>standalone: true</code> and can import <code>RouterModule</code> for directives like <code>&lt;router-outlet&gt;</code> and <code>routerLink</code>. This removes the need for NgModules, making routing simpler and more modular.</p>"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "<p><strong>Forms</strong></p>",
@@ -519,10 +618,43 @@ export const angularList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>ViewChild and ContentChild</strong></p>",
+            "name": "<p><strong>ViewChild / ViewChildren and ContentChild / ContentChildren</strong></p>",
             "sectionId": 16,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is ViewChild?</strong></p>",
+                    "sectionId": 16,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 151,
+                    "description": "<p><code>ViewChild</code> is used to get a reference to <strong>a single element, directive, or child component</strong> <strong>from the component’s own template (view)</strong>.</p></br><p>It becomes available after the <strong>view is initialized</strong> (<code>ngAfterViewInit</code>).</p></br><p><strong>Accessing a DOM element</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;app-demo&#39;,\n  template: `&lt;p #para&gt;Hello World&lt;/p&gt;`\n})\nexport class DemoComponent implements AfterViewInit {\n  @ViewChild(&#39;para&#39;) para!: ElementRef;\n\n  ngAfterViewInit() {\n    console.log(this.para.nativeElement.textContent); // Outputs: &quot;Hello World&quot;\n  }\n}\n</pre></br><p><strong>Accessing a Child Component</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;child-comp&#39;,\n  template: `&lt;p&gt;Child works!&lt;/p&gt;`\n})\nexport class ChildComponent {}\n\n@Component({\n  selector: &#39;app-demo&#39;,\n  template: `&lt;child-comp #child&gt;&lt;/child-comp&gt;`\n})\nexport class DemoComponent implements AfterViewInit {\n  @ViewChild(&#39;child&#39;) childComp!: ChildComponent;\n\n  ngAfterViewInit() {\n    console.log(this.childComp); // Access the ChildComponent instance\n  }\n}\n\n</pre>"
+                },
+                {
+                    "text": "<p><strong>What is ViewChildren?</strong></p>",
+                    "sectionId": 16,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 152,
+                    "description": "<p><code>ViewChildren</code> is used to get references to <strong>multiple elements or child components</strong> in a component’s own template. It returns a <strong>QueryList</strong> and becomes available after <strong>ngAfterViewInit</strong>.</p></br><p><strong>Accessing multiple DOM elements</strong></p><pre data-language=\"plain\">\n@Component({\n  template: `\n    &lt;p #item *ngFor=&quot;let i of [1,2,3]&quot;&gt;Item {{i}}&lt;/p&gt;\n  `\n})\nexport class DemoComponent implements AfterViewInit {\n  @ViewChildren(&#39;item&#39;) items!: QueryList&lt;ElementRef&gt;;\n\n  ngAfterViewInit() {\n    this.items.forEach(el =&gt; console.log(el.nativeElement.textContent));\n  }\n}\n</pre></br><pre data-language=\"plain\">\n// Output\nItem 1\nItem 2\nItem 3\n</pre></br><p><strong>Accessing multiple Child Components</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;child-comp&#39;,\n  template: `&lt;p&gt;Child&lt;/p&gt;`\n})\nexport class ChildComponent {}\n\n@Component({\n  template: `\n    &lt;child-comp *ngFor=&quot;let i of [1,2]&quot;&gt;&lt;/child-comp&gt;\n  `\n})\nexport class ParentComponent implements AfterViewInit {\n  @ViewChildren(ChildComponent) children!: QueryList&lt;ChildComponent&gt;;\n\n  ngAfterViewInit() {\n    console.log(this.children.length); // 2\n  }\n</pre><p>}</p>"
+                },
+                {
+                    "text": "<p><strong>What is ContentChild?</strong></p>",
+                    "sectionId": 16,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 153,
+                    "description": "<p><code>ContentChild</code> is used to get a reference to a <strong>single element, directive, or component projected into a component</strong> via <code>&lt;ng-content&gt;</code>. It is available after <strong>ngAfterContentInit</strong></p></br><p><strong>Accessing projected content</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;child-comp&#39;,\n  template: `&lt;ng-content&gt;&lt;/ng-content&gt;`\n})\nexport class ChildComponent implements AfterContentInit {\n  @ContentChild(&#39;projected&#39;) projected!: ElementRef;\n\n  ngAfterContentInit() {\n    console.log(this.projected.nativeElement.textContent);\n  }\n}\n</pre></br><pre data-language=\"plain\">\n&lt;!-- Parent Component Template --&gt;\n&lt;child-comp&gt;\n  &lt;p #projected&gt;Hello from Parent&lt;/p&gt;\n&lt;/child-comp&gt;\n</pre>"
+                },
+                {
+                    "text": "<p><strong>What is ContentChildren?</strong></p>",
+                    "sectionId": 16,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 154,
+                    "description": "<p><code>ContentChildren</code> is used to get references to <strong>multiple elements or components projected into a component</strong> via <code>&lt;ng-content&gt;</code>. It returns a <strong>QueryList</strong> and becomes available after <strong>ngAfterContentInit</strong>.</p></br><p><strong>Accessing multiple projected elements</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;child-comp&#39;,\n  template: `&lt;ng-content&gt;&lt;/ng-content&gt;`\n})\nexport class ChildComponent implements AfterContentInit {\n  @ContentChildren(&#39;projected&#39;) projectedItems!: QueryList&lt;ElementRef&gt;;\n\n  ngAfterContentInit() {\n    this.projectedItems.forEach(item =&gt; \n      console.log(item.nativeElement.textContent)\n    );\n  }\n}\n</pre></br><pre data-language=\"plain\">\n&lt;!-- Parent Component Template --&gt;\n&lt;child-comp&gt;\n  &lt;p #projected&gt;Item 1&lt;/p&gt;\n  &lt;p #projected&gt;Item 2&lt;/p&gt;\n&lt;/child-comp&gt;\n</pre>"
+                }
+            ],
             "subSections": []
         },
         {
@@ -585,35 +717,72 @@ export const angularList = () => {
             "name": "<p><strong>Interceptor</strong></p>",
             "sectionId": 19,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is the Interceptor?</strong></p>",
+                    "sectionId": 19,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 155,
+                    "description": "<p><strong>Interceptor</strong> is a <strong>middleware</strong> for <strong>HTTP requests</strong> and <strong>responses</strong> in <strong>Angular</strong>. It allows us to <strong>modify requests</strong> (like adding <strong>authentication tokens</strong>), <strong>handle errors globally</strong>, or manage <strong>loaders</strong> without repeating code in every service. It improves <strong>code reusability</strong>, <strong>maintainability</strong>, and ensures <strong>consistent handling</strong> of <strong>API calls</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>If I have multiple APIs, I need to show success and failure for each APIs. How can I handle it at one place?</strong></p>",
+                    "sectionId": 19,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 156,
+                    "description": "<p>Instead of handling <strong>success</strong> and <strong>error</strong> separately in every <strong>service</strong> or <strong>component</strong>, I used an <strong>HTTP Interceptor</strong>. This allows me to capture every <strong>request</strong> and <strong>response</strong> globally. I <strong>log successes</strong>, and if there’s any <strong>error</strong> (like <strong>401</strong>, <strong>404</strong>, or <strong>500</strong>), I can show a <strong>toast</strong> or <strong>redirect to login</strong> automatically. This makes the <strong>code cleaner</strong>, <strong>reusable</strong>, and avoids <strong>duplication</strong>.</p>"
+                },
+                {
+                    "text": "<p><strong>Suppose I want to add an Authorization token for all API requests through an interceptor, but in the case of login and signup APIs I don’t need to pass the token. How can we handle that scenario efficiently in Angular?</strong></p>",
+                    "sectionId": 19,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 157,
+                    "description": "<p>In the <strong>interceptor</strong>, I check if the <strong>request URL</strong> is for <strong>login</strong> or <strong>signup</strong>. If yes, I <strong>skip adding the Authorization header</strong>. Otherwise, I <strong>clone the request</strong> and <strong>attach the token</strong>. This way, I handle it <strong>globally</strong> and avoid <strong>repeating logic</strong> in <strong>services</strong>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
             "name": "<p><strong>Compiler</strong></p>",
             "sectionId": 20,
             "noteType": "Angular",
-            "topics": [],
-            "subSections": []
-        },
-        {
-            "name": "<p><strong>angular.json file</strong></p>",
-            "sectionId": 21,
-            "noteType": "Angular",
-            "topics": [],
-            "subSections": []
-        },
-        {
-            "name": "<p><strong>Tokens</strong></p>",
-            "sectionId": 22,
-            "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>What is the role of a compiler in angular?</strong></p>",
+                    "sectionId": 20,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 159,
+                    "description": "<p>The <strong>Angular Compiler</strong> is a core part of the Angular framework that converts your application’s <strong>HTML templates</strong> and decorated <strong>TypeScript code</strong> (like components, directives, and pipes) into efficient <strong>JavaScript code</strong> that the browser can understand and execute.</p></br><p>Angular has two main compilation modes:</p></br><ul><li><strong>JIT (Just-in-Time):</strong> Used in the <strong>browser at runtime</strong> and is useful during <strong>development</strong>.</li><li><strong>AOT (Ahead-of-Time):</strong> Used in the <strong>build process</strong> before the app runs in the browser and is <strong>preferred for production</strong>.</li></ul>"
+                },
+                {
+                    "text": "<p><strong>What is Ahead-of-Time (AOT) compilation in Angular?</strong></p>",
+                    "sectionId": 20,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 160,
+                    "description": "<p><strong>Ahead-of-Time (AOT) compilation</strong> is the process where Angular compiles <strong>TypeScript code</strong> and <strong>HTML templates</strong> into efficient <strong>JavaScript code</strong> during <strong>build time</strong>, <strong>before the browser downloads and runs the application</strong>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
             "name": "<p><strong>Challenges Faced in Angular Project</strong></p>",
             "sectionId": 23,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>Tell me about some challenges you faced in your Angular projects.</strong></p>",
+                    "sectionId": 23,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 158,
+                    "description": "<p>One of the challenges I faced was <strong>implementing a search box</strong>. Initially, every keystroke was hitting the backend API, which <strong>created unnecessary load and poor performance</strong>. I solved this by using <strong>RxJS operators</strong> — <code>debounceTime</code> to wait for the user to stop typing, <code>distinctUntilChanged</code> to avoid duplicate searches, and <code>switchMap</code> to cancel previous API calls when a new value was entered. This <strong>optimized API usage</strong> and <strong>improved the user experience</strong>.</p></br><p>Another challenge was <strong>implementing nested drag-and-drop functionality</strong>. The Angular CDK works well for flat lists, but in my project, we needed <strong>hierarchical data movement across multiple levels</strong>. I extended the CDK drag-drop with <strong>custom logic for nested structures</strong> and handled <strong>index recalculations</strong>. This provided <strong>smooth drag-and-drop</strong> for complex data.</p></br><p>I also faced <strong>memory leak issues</strong> due to multiple subscriptions. Some observables were not unsubscribed properly, <strong>leading to performance degradation</strong>. To fix this, I applied the <strong>async pipe</strong> wherever possible, used the <strong>takeUntil pattern with a Subject</strong>, and even created a <strong>BaseComponent</strong> to centralize cleanup logic in <code>ngOnDestroy</code>. This <strong>ensured stability</strong> and <strong>prevented memory leaks</strong>.</p>"
+                }
+            ],
             "subSections": []
         },
         {
@@ -783,6 +952,70 @@ export const angularList = () => {
                 }
             ],
             "subSections": []
+        },
+        {
+            "name": "<p><strong>angular.json file</strong></p>",
+            "sectionId": 38,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><strong>When we create a component ‘</strong><strong style=\"background-color: rgb(187, 187, 187);\">ng generate component info</strong><strong>’, an app is getting added. From where the app is getting added?</strong></p>",
+                    "sectionId": 38,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 167,
+                    "description": "<p>The <strong>app</strong> is added as a <strong>prefix</strong> because it&#39;s defined as the <strong>default prefix</strong> in the <strong>angular.json configuration</strong> under the <strong>project&#39;s settings</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Angular related other questions</strong></p>",
+            "sectionId": 37,
+            "noteType": "Angular",
+            "topics": [],
+            "subSections": [
+                {
+                    "name": "<p><strong>Tokens</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 8,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><strong>What are authorization tokens in angular?</strong></p>",
+                            "sectionId": 37,
+                            "subSectionId": 8,
+                            "noteType": "Angular",
+                            "topicId": 164,
+                            "description": "<p><strong>Authorization Tokens: </strong></p><p>Authorization tokens are <strong>pieces of data (usually a string)</strong> issued by the server that prove a user is <strong>authenticated</strong> and has permission to access certain resources.</p></br><p><strong>Common Types:</strong></p><ol><li><strong>JWT (JSON Web Token)</strong> – Encodes user info and expiry time.</li><li><strong>OAuth Tokens</strong> – Access tokens issued by OAuth providers.</li><li><strong>Custom tokens</strong> – Sometimes generated by your backend.</li></ol></br></br>"
+                        },
+                        {
+                            "text": "<p><strong>Do you have any idea about bearer token and JWT token?</strong></p>",
+                            "sectionId": 37,
+                            "subSectionId": 8,
+                            "noteType": "Angular",
+                            "topicId": 165,
+                            "description": "<p>A <strong>Bearer Token</strong> is used for <strong>authorization</strong>, while a <strong>JWT token</strong> can be used for both <strong>authorization</strong> and carrying <strong>user data/claims</strong>.</p>"
+                        }
+                    ]
+                },
+                {
+                    "name": "<p><strong>Restful API</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 9,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><strong>What is a Restful API?</strong></p>",
+                            "sectionId": 37,
+                            "subSectionId": 9,
+                            "noteType": "Angular",
+                            "topicId": 166,
+                            "description": "<p>A <strong>REST API</strong> (Representational State Transfer Application Programming Interface) is a way for two systems (such as a <strong>frontend app</strong> and a <strong>backend server</strong>) to communicate over the Internet using standard <strong>HTTP methods</strong>.</p></br><p><strong>Common HTTP methods:</strong></p><ul><li><strong>GET</strong> → Retrieve data</li><li><strong>POST</strong> → Create new data</li><li><strong>PUT / PATCH</strong> → Update existing data</li><li><strong>DELETE</strong> → Remove data</li></ul>"
+                        }
+                    ]
+                }
+            ]
         }
     ];
 } 
