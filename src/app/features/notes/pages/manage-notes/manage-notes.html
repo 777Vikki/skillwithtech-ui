@@ -1,6 +1,6 @@
 @if(!isMobile) {
 <div class="manage-notes-container" [ngClass]="{'manage-notes-action': selectedAction}">
-    <div class="manage-notes" style="flex: 1;">
+    <div class="manage-notes">
         <div class="manage-header">
             @if(sections.length > 0) {
             <p-select [options]="actions" [(ngModel)]="selectedAction"
