@@ -8,8 +8,8 @@ import { rxjsList } from "./testing/rxjs-list"
 export const storeCount = () => {
   return {
     section: 35,
-    subSection: 5,
-    topic: 140,
+    subSection: 7,
+    topic: 160,
   }
 }
 
