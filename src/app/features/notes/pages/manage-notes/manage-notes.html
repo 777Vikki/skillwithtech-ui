@@ -1,10 +1,9 @@
-@if(!isMobile) {
 <div class="manage-notes-container" [ngClass]="{'manage-notes-action': selectedAction}">
     <div class="manage-notes">
         <div class="manage-header">
             @if(sections.length > 0) {
-            <p-select [options]="actions" [(ngModel)]="selectedAction"
-                [showClear]="true" optionLabel="name" placeholder="Select" class="w-full md:w-56" />
+            <p-select [options]="actions" [(ngModel)]="selectedAction" [showClear]="true" optionLabel="name"
+                placeholder="Select" class="w-full md:w-56" />
             } @else {
             <p-button class="ml-4" (click)="onSelectAction()" label="Add Section" severity="secondary" />
             }
@@ -13,7 +12,8 @@
 
         </div>
         <div class="manage-notes-content" #manageViewListScrollContainer>
-            <app-manage-notes-crud [actions]="actions" [selectedAction]="selectedAction" [sections]="sections"></app-manage-notes-crud>
+            <app-manage-notes-crud [actions]="actions" [selectedAction]="selectedAction"
+                [sections]="sections"></app-manage-notes-crud>
         </div>
     </div>
     <div class="manage-action-container">
@@ -25,10 +25,10 @@
         }
     </div>
 </div>
-} @else {
-<p-card>
-    <div>Manage Notes are supported only on desktop and big screens.</div>
-</p-card>
-}
+<div class="mobile-only">
+    <p-card>
+        <div>Manage Notes are supported only on desktop and big screens.</div>
+    </p-card>
+</div>
 <p-toast />
 <p-confirmdialog />
