@@ -14,7 +14,6 @@
 }
 
 .manage-notes-action {
-
   .manage-notes,
   .manage-action-container {
     flex: 1;
@@ -50,5 +49,8 @@
   .manage-notes-container {
     display: block;
     /* show on desktop */
+  }
+  .manage-notes-action {
+    display: flex;
   }
 }

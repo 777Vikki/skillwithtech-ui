@@ -10,7 +10,14 @@
             <div class="form-group">
                 <label>Section: </label>
                 <p-select [options]="sections" formControlName="sectionId" placeholder="Select Section"
-                    optionLabel="name" optionValue="sectionId" class="w-full md:w-56" />
+                    optionLabel="name" optionValue="sectionId" class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
@@ -19,7 +26,14 @@
                 <label>Sub Section: </label>
                 <p-select [options]="subSections" [showClear]="true" formControlName="subSectionId"
                     placeholder="Select Sub Section" optionLabel="name" optionValue="subSectionId"
-                    class="w-full md:w-56" />
+                    class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
@@ -27,7 +41,14 @@
             <div class="form-group">
                 <label>Sub Content: </label>
                 <p-select [options]="contents" [showClear]="true" formControlName="contentId"
-                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
+                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.text | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.text | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
@@ -70,10 +91,10 @@
                 </div>
             </div>
             } @else {
-                <div class="preview-contaner">
-                    <div class="preview-text">Preview: </div>
-                    <div class="no-preview">No preview available. Please check text format</div>
-                </div>
+            <div class="preview-contaner">
+                <div class="preview-text">Preview: </div>
+                <div class="no-preview">No preview available. Please check text format</div>
+            </div>
             }
             }
         </form>

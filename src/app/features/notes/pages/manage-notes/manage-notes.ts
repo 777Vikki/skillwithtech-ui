@@ -20,7 +20,7 @@ import { ManageNotesCrud } from '../../components/manage-notes-crud/manage-notes
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, ButtonModule, CardModule, SelectModule, FormsModule, Toast, ConfirmDialogModule, ManageNotesCrud],
+  imports: [NgClass, ButtonModule, CardModule, SelectModule, FormsModule, Toast, ConfirmDialogModule, ManageNotesCrud, ManageNotesForm],
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss',
   providers: [MessageService, ConfirmationService]
