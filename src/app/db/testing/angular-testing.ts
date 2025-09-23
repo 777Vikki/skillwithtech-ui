@@ -406,6 +406,14 @@ export const angularList = () => {
             "noteType": "Angular",
             "topics": [
                 {
+                    "text": "<p><strong>What is Routing in Angular?</strong></p>",
+                    "sectionId": 11,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 168,
+                    "description": "<p>In <strong>Angular</strong>, <strong>Routing</strong> is the mechanism that allows us to <strong>navigate between different views (components/pages)</strong> in a Single Page Application (SPA) without reloading the entire page.</p></br><p>A <strong>Single Page Application (SPA)</strong> is a <strong>web application that loads a single HTML page (index.html)</strong> and dynamically updates the <strong>content</strong>, <strong>without refreshing the entire page</strong>.</p></br>"
+                },
+                {
                     "text": "<p><strong>How to access route parameters, query parameters, and static route data?</strong></p>",
                     "sectionId": 11,
                     "subSectionId": -1,
