@@ -10,6 +10,7 @@ import { EditorModule } from 'primeng/editor';
 import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
 import { StoreService } from '../../../../core/services/store';
 import { PlainTextPipe } from '../../../../core/pipes/plain-text-pipe';
+import { SharedNotesService } from '../../services/shared-notes';
 @Component({
   selector: 'app-manage-notes-form',
   imports: [ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe],
@@ -19,12 +20,12 @@ import { PlainTextPipe } from '../../../../core/pipes/plain-text-pipe';
 export class ManageNotesForm implements OnInit, OnChanges {
   private formBuilder = inject(FormBuilder);
   private storeService = inject(StoreService);
+  private sharedNotesService = inject(SharedNotesService);
 
 
   @Input() action: IManageNotesAction | undefined;
   @Input() sections: ISection[] = [];
   @Input() selectedAction: IManageNotesAction | undefined;
-  @Output() closeManageNotesForm = new EventEmitter<void>();
 
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
@@ -176,7 +177,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
   }
 
   onClose() {
-    this.closeManageNotesForm.next();
+    this.sharedNotesService.setManageNotesAction(undefined);
   }
 
   submitForm() { }

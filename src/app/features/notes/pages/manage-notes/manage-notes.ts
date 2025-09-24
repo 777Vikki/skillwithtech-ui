@@ -16,46 +16,26 @@ import { Toast } from 'primeng/toast';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ManageNotesCrud } from '../../components/manage-notes-crud/manage-notes-crud';
+import { ManageNotesAction } from '../../components/manage-notes-action/manage-notes-action';
+import { SharedNotesService } from '../../services/shared-notes';
 
 
 @Component({
   selector: 'app-manage-notes',
-  imports: [NgClass, ButtonModule, CardModule, SelectModule, FormsModule, Toast, ConfirmDialogModule, ManageNotesCrud, ManageNotesForm],
+  imports: [NgClass, CardModule, Toast, ConfirmDialogModule, ManageNotesAction, ManageNotesCrud, ManageNotesForm],
   templateUrl: './manage-notes.html',
   styleUrl: './manage-notes.scss',
   providers: [MessageService, ConfirmationService]
 })
 export class ManageNotes implements OnInit, OnDestroy {
   private notesService = inject(NotesService);
-  private storeService = inject(StoreService)
+  private sharedNotesService = inject(SharedNotesService)
 
   subscriptions: Subscription[] = [];
   sections: ISection[] = [];
-  selectedAction: IManageNotesAction | undefined;
-  isMobile = this.storeService.checkMobileScreen();
+  selectedAction = this.sharedNotesService.manageNotesAction;
 
-  actions: IManageNotesAction[] = [
-    {
-      name: "Add Section",
-      id: "Add_Section",
-      type: "Section"
-    },
-    {
-      name: "Add Sub Section",
-      id: "Add_Sub_Section",
-      type: "Sub_Section"
-    },
-    {
-      name: "Add Content",
-      id: "Add_Content",
-      type: "Content"
-    },
-    {
-      name: "Add Bulk Content",
-      id: "Add_Bulk_Content",
-      type: "Content"
-    }
-  ];
+  actions: IManageNotesAction[] = [];
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -64,14 +44,6 @@ export class ManageNotes implements OnInit, OnDestroy {
           this.sections = res;
           })
     );
-  }
-
-  onSelectAction() {
-    this.selectedAction = this.actions.find(d => d.id === "Add_Section");
-  }
-
-  onRearrange() {
-    this.selectedAction = undefined;
   }
 
   ngOnDestroy() {

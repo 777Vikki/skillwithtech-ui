@@ -3,6 +3,7 @@ import { INote, ISection, ISubSection, ITopic } from '../interfaces/note-interfa
 import { Note } from '../enums/note-enum';
 import { BackendService } from './backend';
 import { Observable, tap } from 'rxjs';
+import { IManageNotesAction } from '../interfaces/manage-notes-action-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,29 @@ export class StoreService {
   backendService = inject(BackendService);
 
   private headerList: INote[] = [];
+
+  private manageNotesActions: IManageNotesAction[] = [
+    {
+      name: "Add Section",
+      id: "Add_Section",
+      type: "Section"
+    },
+    {
+      name: "Add Sub Section",
+      id: "Add_Sub_Section",
+      type: "Sub_Section"
+    },
+    {
+      name: "Add Content",
+      id: "Add_Content",
+      type: "Content"
+    },
+    {
+      name: "Add Bulk Content",
+      id: "Add_Bulk_Content",
+      type: "Content"
+    }
+  ];
 
   private dummyNotes: INote = {
     name: '',
@@ -66,6 +90,10 @@ export class StoreService {
 
   getDummyContent() {
     return { ...this.dummyContent };
+  }
+
+  getManageNotesActions(): IManageNotesAction[] {
+    return [...this.manageNotesActions];
   }
 
   checkMobileScreen(): boolean {

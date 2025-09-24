@@ -8,6 +8,7 @@ import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISect
 import { IManageNotesAction, ManageNotesIdType } from '../../../../core/interfaces/manage-notes-action-interface';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-notes-crud',
@@ -23,21 +24,31 @@ export class ManageNotesCrud implements OnChanges {
   private confirmationService = inject(ConfirmationService);
   private fomBuilder = inject(FormBuilder);
 
-  @Input() sections: ISection[] = [];
   @Input() selectedAction: IManageNotesAction | undefined;
-  @Input() actions: IManageNotesAction[] = [];
 
   notesForm: FormGroup = this.fomBuilder.group({});
+  actions: IManageNotesAction[] = this.storeService.getManageNotesActions();
+  sections: ISection[] = [];
 
   currentActionSubsections: ISubSection[] = [];
   currentActionContents: ITopic[] = [];
   openToggle: number = 0;
   toggleType: string = '';
   responseRowDetail: ISection | ISubSection | ITopic | undefined;
+  subscriptions: Subscription[] = [];
   activeRow = {
     id: 0,
     type: ''
   };
+
+  ngOnInit() {
+    this.subscriptions.push(
+      this.notesService.getNotesSection()
+        .subscribe((res: ISection[]) => {
+          this.sections = res;
+          })
+    );
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sections']) {
