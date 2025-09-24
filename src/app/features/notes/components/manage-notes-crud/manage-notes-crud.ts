@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,8 @@ import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISect
 import { IManageNotesAction, ManageNotesIdType } from '../../../../core/interfaces/manage-notes-action-interface';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-manage-notes-crud',
@@ -16,13 +17,15 @@ import { Subscription } from 'rxjs';
   templateUrl: './manage-notes-crud.html',
   styleUrl: './manage-notes-crud.scss'
 })
-export class ManageNotesCrud implements OnChanges {
+export class ManageNotesCrud implements OnInit, OnChanges {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
   private fomBuilder = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
+
 
   @Input() selectedAction: IManageNotesAction | undefined;
 
@@ -35,19 +38,16 @@ export class ManageNotesCrud implements OnChanges {
   openToggle: number = 0;
   toggleType: string = '';
   responseRowDetail: ISection | ISubSection | ITopic | undefined;
-  subscriptions: Subscription[] = [];
   activeRow = {
     id: 0,
     type: ''
   };
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.notesService.getNotesSection()
-        .subscribe((res: ISection[]) => {
-          this.sections = res;
-          })
-    );
+    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res: ISection[]) => {
+        this.sections = res;
+      })
   }
 
   ngOnChanges(changes: SimpleChanges): void {

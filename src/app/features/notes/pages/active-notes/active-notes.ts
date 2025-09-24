@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ISection, ITopic } from '../../../../core/interfaces/note-interface';
 import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-active-notes',
@@ -20,12 +21,13 @@ import { MessageService } from 'primeng/api';
   styleUrl: './active-notes.scss',
   providers: [MessageService]
 })
-export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
-  store = inject(StoreService);
-  noteService = inject(NotesService);
-  route = inject(ActivatedRoute);
-  router = inject(Router);
+export class ActiveNotes implements OnInit, AfterViewInit {
+  private store = inject(StoreService);
+  private noteService = inject(NotesService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private messageService = inject(MessageService);
+  private destroyRef = inject(DestroyRef);
 
   sections: ISection[] = [];
   selectedSection: ISection | undefined;
@@ -35,16 +37,13 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
   expandSubSections: number[] = [];
   expandTopics: number[] = [];
   isSectionCollapse: boolean = false;
-  subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.noteService.getNotesSection()
-        .subscribe(res => {
-          this.sections = res;
-          this.resetSelectedValue();
-        })
-    );
+    this.noteService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.sections = res;
+        this.resetSelectedValue();
+      })
   }
 
   ngAfterViewInit(): void {
@@ -198,12 +197,5 @@ export class ActiveNotes implements OnInit, OnDestroy, AfterViewInit {
       });
     }
 
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
-    this.subscriptions = [];
   }
 }

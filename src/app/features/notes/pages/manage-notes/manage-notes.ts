@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, Component, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ManageNotesCrud } from '../../components/manage-notes-crud/manage-notes-crud';
 import { ManageNotesAction } from '../../components/manage-notes-action/manage-notes-action';
 import { SharedNotesService } from '../../services/shared-notes';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -27,29 +28,20 @@ import { SharedNotesService } from '../../services/shared-notes';
   styleUrl: './manage-notes.scss',
   providers: [MessageService, ConfirmationService]
 })
-export class ManageNotes implements OnInit, OnDestroy {
+export class ManageNotes implements OnInit {
   private notesService = inject(NotesService);
-  private sharedNotesService = inject(SharedNotesService)
+  private sharedNotesService = inject(SharedNotesService);
+  private destroyRef = inject(DestroyRef);
 
-  subscriptions: Subscription[] = [];
   sections: ISection[] = [];
   selectedAction = this.sharedNotesService.manageNotesAction;
 
   actions: IManageNotesAction[] = [];
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.notesService.getNotesSection()
-        .subscribe((res: ISection[]) => {
-          this.sections = res;
-          })
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
-    this.subscriptions = [];
+    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res: ISection[]) => {
+        this.sections = res;
+      })
   }
 }

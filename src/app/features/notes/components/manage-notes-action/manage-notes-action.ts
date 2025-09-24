@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { ISection } from '../../../../core/interfaces/note-interface';
 import { FormsModule } from '@angular/forms';
 import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { StoreService } from '../../../../core/services/store';
 import { SharedNotesService } from '../../services/shared-notes';
+import { BaseComponent } from 'primeng/basecomponent';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface DropdownChangeEvent {
   originalEvent: Event; // could also use MouseEvent
@@ -20,31 +22,26 @@ interface DropdownChangeEvent {
   templateUrl: './manage-notes-action.html',
   styleUrl: './manage-notes-action.scss'
 })
-export class ManageNotesAction implements OnInit, OnDestroy {
+export class ManageNotesAction implements OnInit {
   private notesService = inject(NotesService);
   private storeService = inject(StoreService);
   private sharedNotesService = inject(SharedNotesService);
+  private destroyRef = inject(DestroyRef);
 
   sections: ISection[] = [];
   selectedAction = this.sharedNotesService.manageNotesAction;
-  subscriptions: Subscription[] = [];
 
   actions: IManageNotesAction[] = this.storeService.getManageNotesActions();
 
-  constructor() {
-  }
-
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.notesService.getNotesSection()
-        .subscribe((sec: ISection[]) => {
-          this.sections = sec;
-        })
-    )
+    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((sec: ISection[]) => {
+        this.sections = sec;
+      })
   }
 
   onSelectAction(e: DropdownChangeEvent | Event) {
-    if('value' in e) {
+    if ('value' in e) {
       const selectedAction = e.value as (IManageNotesAction | undefined);
       this.sharedNotesService.setManageNotesAction(selectedAction);
     } else {
@@ -55,14 +52,5 @@ export class ManageNotesAction implements OnInit, OnDestroy {
 
   onRearrange() {
 
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscriptions.length > 0) {
-      this.subscriptions.forEach((subscription: Subscription) => {
-        subscription.unsubscribe();
-      });
-    }
-    this.subscriptions = [];
   }
 }
