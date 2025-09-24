@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
@@ -25,13 +25,13 @@ export class ManageNotesForm implements OnInit, OnChanges {
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
 
-  @Input() sections: ISection[] = [];
   @Input() selectedAction: IManageNotesAction | undefined;
 
+  sections = signal<ISection[]>([]);
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
   previewList: string[] = [];
-  currentAction: IManageNotesAction | undefined;
+  currentAction = signal<IManageNotesAction | undefined>(undefined);
   notesForm: FormGroup = this.formBuilder.group({});
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
     this.notesService.getNotesSection()
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe((sec: ISection[]) => {
-      this.sections = sec;
+      this.sections.set(sec);
     });
   }
 
@@ -51,9 +51,9 @@ export class ManageNotesForm implements OnInit, OnChanges {
     this.sharedNotesService.getCurrentActionObservable()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((action: IManageNotesAction | undefined) => {
-        this.currentAction = action;
+        this.currentAction.set(action);
         if (this.currentAction != null) {
-          if (this.currentAction?.id === "Add_Section") {
+          if (this.currentAction()?.id === "Add_Section") {
             this.addSection();
           }
         }
@@ -103,7 +103,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
     this.removeFormControls();
     const sectionId = (selectedSubSection.sectionId != null && selectedSubSection.sectionId > 0) ? selectedSubSection.sectionId : null;
     const subSectionId = (selectedSubSection.subSectionId != null && selectedSubSection.subSectionId > 0) ? selectedSubSection.subSectionId : null;
-    this.subSections = sectionId ? (this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
+    this.subSections = sectionId ? (this.sections().find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
@@ -122,10 +122,10 @@ export class ManageNotesForm implements OnInit, OnChanges {
     const contentId = (content.topicId != null && content.topicId > 0) ? content.topicId : null;
     if (sectionId) {
       if (subSectionId) {
-        this.subSections = sectionId ? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
+        this.subSections = sectionId ? (this.sections().find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
         this.contents = subSectionId ? (this.subSections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []) : [];
       } else {
-        this.contents = sectionId ? (this.sections.find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
+        this.contents = sectionId ? (this.sections().find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
       }
     }
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
@@ -143,8 +143,8 @@ export class ManageNotesForm implements OnInit, OnChanges {
   setContentControl() {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
       if (value != null && value > 0) {
-        this.subSections = this.sections.find(d => d.sectionId === value)?.subSections ?? [];
-        this.contents = this.sections.find(d => d.sectionId === value)?.topics ?? [];
+        this.subSections = this.sections().find(d => d.sectionId === value)?.subSections ?? [];
+        this.contents = this.sections().find(d => d.sectionId === value)?.topics ?? [];
       } else {
         this.subSections = [];
         this.contents = [];
@@ -177,7 +177,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
 
   setSubSectionControl() {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
-      this.subSections = (value != null && value > 0) ? (this.sections.find(d => d.sectionId === value)?.subSections ?? []) : [];
+      this.subSections = (value != null && value > 0) ? (this.sections().find(d => d.sectionId === value)?.subSections ?? []) : [];
       this.notesForm.patchValue({
         subSectionId: null,
       });
