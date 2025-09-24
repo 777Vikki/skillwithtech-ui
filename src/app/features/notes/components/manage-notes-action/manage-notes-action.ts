@@ -29,9 +29,8 @@ export class ManageNotesAction implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   sections: ISection[] = [];
-  selectedAction = this.sharedNotesService.manageNotesAction;
-
   actions: IManageNotesAction[] = this.storeService.getManageNotesActions();
+  seletedAction: IManageNotesAction | undefined;
 
   ngOnInit(): void {
     this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
@@ -43,11 +42,13 @@ export class ManageNotesAction implements OnInit {
   onSelectAction(e: DropdownChangeEvent | Event) {
     if ('value' in e) {
       const selectedAction = e.value as (IManageNotesAction | undefined);
-      this.sharedNotesService.setManageNotesAction(selectedAction);
+      this.sharedNotesService.setCurrentActionObservable(selectedAction);
     } else {
       const selectedAction = this.actions.find(d => d.type === "Section" && d.id === "Add_Section");
-      this.sharedNotesService.setManageNotesAction(selectedAction);
+      this.sharedNotesService.setCurrentActionObservable(selectedAction);
     }
+    this.sharedNotesService.setCurrectActionRow(undefined);
+    this.sharedNotesService.setApplyActionPosition('');  
   }
 
   onRearrange() {

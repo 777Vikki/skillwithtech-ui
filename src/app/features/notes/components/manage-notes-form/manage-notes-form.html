@@ -1,6 +1,6 @@
 <div class="manage-form-container">
     <div class="manage-action-header center-align-between">
-        <div>{{action?.name}}</div>
+        <div>{{currentAction?.name}}</div>
         <div><span class="material-symbols-outlined close-icon" (click)="onClose()">close</span></div>
     </div>
     <div class="manage-form-content">
@@ -77,7 +77,7 @@
             <div class="form-actions">
                 <p-button (click)="submitForm()" label="Submit" severity="success" [disabled]="notesForm.invalid" />
             </div>
-            @if(notesForm.get('text')?.touched && notesForm.get('text')?.valid && action?.id === 'Add_Bulk_Content') {
+            @if(notesForm.get('text')?.touched && notesForm.get('text')?.valid && currentAction?.id === 'Add_Bulk_Content') {
             @if(previewList && previewList.length) {
             <div class="preview-contaner">
                 <div class="preview-text">Preview: </div>

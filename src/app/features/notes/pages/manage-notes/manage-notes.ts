@@ -33,15 +33,12 @@ export class ManageNotes implements OnInit {
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
 
-  sections: ISection[] = [];
-  selectedAction = this.sharedNotesService.manageNotesAction;
-
-  actions: IManageNotesAction[] = [];
-
+  currentAction: IManageNotesAction | undefined;
   ngOnInit(): void {
-    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((res: ISection[]) => {
-        this.sections = res;
-      })
+    this.sharedNotesService.getCurrentActionObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((action: IManageNotesAction | undefined) => {
+        this.currentAction = action;
+      });
   }
 }

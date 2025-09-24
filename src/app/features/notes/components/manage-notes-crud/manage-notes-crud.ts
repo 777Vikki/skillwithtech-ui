@@ -10,6 +10,7 @@ import { IResponse } from '../../../../core/interfaces/response-interface';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Subscription, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SharedNotesService } from '../../services/shared-notes';
 
 @Component({
   selector: 'app-manage-notes-crud',
@@ -17,9 +18,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './manage-notes-crud.html',
   styleUrl: './manage-notes-crud.scss'
 })
-export class ManageNotesCrud implements OnInit, OnChanges {
+export class ManageNotesCrud implements OnInit {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
+  private sharedService = inject(SharedNotesService);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
@@ -44,31 +46,11 @@ export class ManageNotesCrud implements OnInit, OnChanges {
   };
 
   ngOnInit() {
-    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+    this.notesService.getNotesSection()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res: ISection[]) => {
         this.sections = res;
       })
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['sections']) {
-      if (this.selectedAction != null) {
-        const position = this.notesForm.get('position')?.value ? this.notesForm.get('position')?.value : '1';
-        if (this.selectedAction.id === "Add_Section") {
-          this.addSection(this.responseRowDetail as ISection, position);
-        } else if (this.selectedAction.id === "Add_Sub_Section") {
-          this.addSubSection(this.responseRowDetail as ISubSection, position);
-        } else if (this.selectedAction.id === "Add_Content") {
-          this.addContent(this.responseRowDetail as ITopic, position, "Add_Content");
-        } else if (this.selectedAction.id === "Add_Bulk_Content") {
-          this.notesForm.reset();
-        }
-      }
-    }
-
-    if (changes["selectedAction"]) {
-      this.onSelectAction();
-    }
   }
 
   ngAfterViewInit(): void {
@@ -170,35 +152,35 @@ export class ManageNotesCrud implements OnInit, OnChanges {
     });
   }
 
-  onSelectAction() {
-    if (this.sections.length > 0) {
-      if (this.selectedAction?.id === "Add_Section") {
-        const section: ISection = this.storeService.getDummySection();
-        this.addSection(section, '');
-      } else if (this.selectedAction?.id === "Add_Sub_Section") {
-        const subSection: ISubSection = this.storeService.getDummySubSection();
-        this.addSubSection(subSection, '');
-      } else if (this.selectedAction?.id === "Add_Content") {
-        const content: ITopic = this.storeService.getDummyContent();
-        this.addContent(content, '', "Add_Content");
-      } else if (this.selectedAction?.id === "Add_Bulk_Content") {
-        const content: ITopic = this.storeService.getDummyContent();
-        this.addContent(content, '', "Add_Bulk_Content");
-      }
-    } else {
-      this.removeFormControls();
-      this.currentActionSubsections = [];
-      this.currentActionContents = [];
-      this.selectedAction = this.actions.find(d => d.id === "Add_Section");
-      this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-    }
-  }
+  // onSelectAction() {
+  //   if (this.sections.length > 0) {
+  //     if (this.selectedAction?.id === "Add_Section") {
+  //       const section: ISection = this.storeService.getDummySection();
+  //       this.addSection(section, '');
+  //     } else if (this.selectedAction?.id === "Add_Sub_Section") {
+  //       const subSection: ISubSection = this.storeService.getDummySubSection();
+  //       this.addSubSection(subSection, '');
+  //     } else if (this.selectedAction?.id === "Add_Content") {
+  //       const content: ITopic = this.storeService.getDummyContent();
+  //       this.addContent(content, '', "Add_Content");
+  //     } else if (this.selectedAction?.id === "Add_Bulk_Content") {
+  //       const content: ITopic = this.storeService.getDummyContent();
+  //       this.addContent(content, '', "Add_Bulk_Content");
+  //     }
+  //   } else {
+  //     this.removeFormControls();
+  //     this.currentActionSubsections = [];
+  //     this.currentActionContents = [];
+  //     this.selectedAction = this.actions.find(d => d.id === "Add_Section");
+  //     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
+  //   }
+  // }
 
-  removeFormControls() {
-    Object.keys(this.notesForm.controls).forEach(key => {
-      this.notesForm.removeControl(key);
-    });
-  }
+  // removeFormControls() {
+  //   Object.keys(this.notesForm.controls).forEach(key => {
+  //     this.notesForm.removeControl(key);
+  //   });
+  // }
 
   editSection(selectedSection: ISection) {
     this.selectedAction = {
@@ -206,7 +188,7 @@ export class ManageNotesCrud implements OnInit, OnChanges {
       id: "Edit_Section",
       type: "Section"
     };
-    this.removeFormControls();
+    // this.removeFormControls();
     this.currentActionSubsections = [];
     this.notesForm.addControl('sectionId', new FormControl({ value: selectedSection.sectionId, disabled: true }, [Validators.required]));
     this.notesForm.addControl('text', new FormControl(selectedSection.name, [Validators.required]));
@@ -222,7 +204,7 @@ export class ManageNotesCrud implements OnInit, OnChanges {
     this.selectedAction = this.actions.find(d => d.id === "Add_Sub_Section");
     this.currentActionSubsections = [];
     this.currentActionContents = [];
-    this.removeFormControls();
+    // this.removeFormControls();
     const sectionId = (selectedSubSection.sectionId != null && selectedSubSection.sectionId > 0) ? selectedSubSection.sectionId : null;
     const subSectionId = (selectedSubSection.subSectionId != null && selectedSubSection.subSectionId > 0) ? selectedSubSection.subSectionId : null;
     this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === selectedSubSection.sectionId)?.subSections ?? []) : [];
@@ -241,7 +223,7 @@ export class ManageNotesCrud implements OnInit, OnChanges {
       id: "Edit_Sub_Section",
       type: "Sub_Section"
     };
-    this.removeFormControls();
+    // this.removeFormControls();
     const sectionId = (subSection.sectionId != null && subSection.sectionId > 0) ? subSection.sectionId : null;
     const subSectionId = (subSection.subSectionId != null && subSection.subSectionId > 0) ? subSection.subSectionId : null;
     this.currentActionSubsections = sectionId ? (this.sections.find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
@@ -307,7 +289,7 @@ export class ManageNotesCrud implements OnInit, OnChanges {
   }
 
   editContent(content: ITopic) {
-    this.removeFormControls();
+    // this.removeFormControls();
     this.currentActionContents = [];
     this.currentActionSubsections = [];
     const sectionId = (content.sectionId != null && content.sectionId > 0) ? content.sectionId : null;
@@ -377,18 +359,14 @@ export class ManageNotesCrud implements OnInit, OnChanges {
   }
 
   addSection(section: ISection, position: string) {
-    this.removeFormControls();
-    this.currentActionSubsections = [];
-    this.currentActionContents = [];
-    const sectionId = (section.sectionId != null || section.sectionId > 0) ? section.sectionId : null;
-    this.selectedAction = this.actions.find(d => d.type === "Section");
-    this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
-    this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-    this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
+    this.sharedService.setCurrectActionRow(section);
+    this.sharedService.setApplyActionPosition(position);
+    const action: IManageNotesAction | undefined = this.actions.find(d => d.type === "Section");
+    this.sharedService.setCurrentActionObservable(action);
   }
 
   addContent(content: ITopic, position: string, manageNotesActionId: ManageNotesIdType) {
-    this.removeFormControls();
+    // this.removeFormControls();
     this.currentActionSubsections = [];
     this.currentActionContents = [];
     this.selectedAction = this.actions.find(d => d.id === manageNotesActionId);

@@ -1,15 +1,15 @@
-<div class="manage-notes-container" [ngClass]="{'manage-notes-action': selectedAction()}">
+<div class="manage-notes-container" [ngClass]="{'manage-notes-action': currentAction}">
     <div class="manage-notes">
         <div class="manage-header">
             <app-manage-notes-action></app-manage-notes-action>
         </div>
         <div class="manage-notes-content" #manageViewListScrollContainer>
-            <app-manage-notes-crud [selectedAction]="selectedAction()"></app-manage-notes-crud>
+            <app-manage-notes-crud></app-manage-notes-crud>
         </div>
     </div>
     <div class="manage-action-container">
-        @if((selectedAction())) {
-        <app-manage-notes-form [action]="selectedAction()" [sections]="sections"></app-manage-notes-form>
+        @if((currentAction)) {
+        <app-manage-notes-form></app-manage-notes-form>
         }
     </div>
 </div>

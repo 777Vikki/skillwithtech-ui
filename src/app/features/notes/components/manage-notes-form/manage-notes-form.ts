@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
@@ -11,6 +11,7 @@ import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-act
 import { StoreService } from '../../../../core/services/store';
 import { PlainTextPipe } from '../../../../core/pipes/plain-text-pipe';
 import { SharedNotesService } from '../../services/shared-notes';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-manage-notes-form',
   imports: [ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe],
@@ -18,54 +19,79 @@ import { SharedNotesService } from '../../services/shared-notes';
   styleUrl: './manage-notes-form.scss'
 })
 export class ManageNotesForm implements OnInit, OnChanges {
+  private notesService = inject(NotesService);
   private formBuilder = inject(FormBuilder);
   private storeService = inject(StoreService);
   private sharedNotesService = inject(SharedNotesService);
+  private destroyRef = inject(DestroyRef);
 
-
-  @Input() action: IManageNotesAction | undefined;
   @Input() sections: ISection[] = [];
   @Input() selectedAction: IManageNotesAction | undefined;
 
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
   previewList: string[] = [];
-
+  currentAction: IManageNotesAction | undefined;
   notesForm: FormGroup = this.formBuilder.group({});
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    this.getSections();
+    this.getCurrentAction();
+  }
+
+  getSections() {
+    this.notesService.getNotesSection()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((sec: ISection[]) => {
+      this.sections = sec;
+    });
+  }
+
+  getCurrentAction() {
+    this.sharedNotesService.getCurrentActionObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((action: IManageNotesAction | undefined) => {
+        this.currentAction = action;
+        if (this.currentAction != null) {
+          if (this.currentAction?.id === "Add_Section") {
+            this.addSection();
+          }
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['action']) {
-      if (this.sections.length) {
-        if (this.action?.id === "Add_Section") {
-          const section: ISection = this.storeService.getDummySection();
-          this.addSection(section, '');
-        } else if (this.action?.id === "Add_Sub_Section") {
-          const subSection: ISubSection = this.storeService.getDummySubSection();
-          this.addSubSection(subSection, '');
-        } else if (this.action?.id === "Add_Content") {
-          const content = this.storeService.getDummyContent();
-          this.addContent(content, '');
-        }
-      } else {
-        if (this.action?.id === "Add_Section") {
-          this.removeFormControls();
-          this.subSections = [];
-          this.contents = [];
-          this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-        }
-      }
+    // if (changes['action']) {
+    //   if (this.sections.length) {
+    //     if (this.action?.id === "Add_Section") {
+    //       const section: ISection = this.storeService.getDummySection();
+    //       // this.addSection(section, '');
+    //     } else if (this.action?.id === "Add_Sub_Section") {
+    //       const subSection: ISubSection = this.storeService.getDummySubSection();
+    //       this.addSubSection(subSection, '');
+    //     } else if (this.action?.id === "Add_Content") {
+    //       const content = this.storeService.getDummyContent();
+    //       this.addContent(content, '');
+    //     }
+    //   } else {
+    //     if (this.action?.id === "Add_Section") {
+    //       this.removeFormControls();
+    //       this.subSections = [];
+    //       this.contents = [];
+    //       this.notesForm.addControl('text', new FormControl('', [Validators.required]));
+    //     }
+    //   }
 
-    }
+    // }
   }
 
-  addSection(section: ISection, position: string) {
+  addSection() {
     this.removeFormControls();
     this.subSections = [];
     this.contents = [];
-    const sectionId = (section.sectionId != null || section.sectionId > 0) ? section.sectionId : null;
+    const section: ISection | undefined = this.sharedNotesService.currentActionRow() as ISection;
+    const position = this.sharedNotesService.applyActionPosition();
+    const sectionId = (section?.sectionId != null || section?.sectionId > 0) ? section.sectionId : null;
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
     this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
@@ -177,7 +203,7 @@ export class ManageNotesForm implements OnInit, OnChanges {
   }
 
   onClose() {
-    this.sharedNotesService.setManageNotesAction(undefined);
+    this.sharedNotesService.setCurrentActionObservable(undefined);
   }
 
   submitForm() { }
