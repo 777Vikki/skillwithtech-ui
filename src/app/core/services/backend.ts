@@ -124,29 +124,38 @@ export class BackendService {
   }
 
   onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    console.log('SectionIndex: ', sectionIndex, ' SubSectionIndex', subSectionIndex, ' contentIndex', contentIndex);
     let contents: ITopic[] = [];
+    let message = '';
+    const flatQuestionList = this.getFlatPlainTextContent(this.currentNoteSections);
     if (isBulkContent) {
-      const requestContents = content.text?.match(/<p>.*?<\/p>/g) ?? [];
+      let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
       if (requestContents.length > 0) {
+        const filterRequestContents = requestContents.filter(d => flatQuestionList.includes(this.getPlainTextWithTrim(d)));
+        if (filterRequestContents.length !== requestContents.length) {
+          message = 'Some Contents are dublicates.';
+          requestContents = filterRequestContents;
+        }
         contents = requestContents.map(d => {
           return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
         });
       } else {
-        return of({ status: false, message: 'Text format is not correct. Please see Preview', data: [content] });
+        return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
       }
     } else {
-      content.topicId = this.getCount("topic");
-      contents = [content]
+      if (flatQuestionList.includes(this.getPlainTextWithTrim(content.text))) {
+        return of({ status: false, message: 'Contant is dublicated.', data: [] });
+      } else {
+        content.topicId = this.getCount("topic");
+        contents = [content]
+      }
     }
     if (subSectionIndex > -1) {
       this.currentNoteSections[sectionIndex].subSections[subSectionIndex].topics.splice(contentIndex, 0, ...contents);
     } else {
       this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
     }
-    console.log(contents);
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [...contents] });
+    return of({ status: true, message: message ? message : 'Success', data: [...contents] });
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
@@ -163,8 +172,6 @@ export class BackendService {
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
-    console.log(topic);
-    console.log('Description: ', description);
     const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === topic.sectionId);
     let selectedContent: ITopic | undefined = undefined;
     if (section) {
@@ -182,10 +189,10 @@ export class BackendService {
         this.storeSection(this.currentNoteSections);
         return of({ status: true, message: 'Success', data: [topic] });
       } else {
-        return of({ status: false, message: 'data is not added', data: [topic] });
+        return of({ status: false, message: 'data is not added.', data: [topic] });
       }
     }
-    return of({ status: false, message: 'data is not added', data: [topic] });
+    return of({ status: false, message: 'data is not added.', data: [topic] });
   }
 
   storeSection(sections: ISection[]) {

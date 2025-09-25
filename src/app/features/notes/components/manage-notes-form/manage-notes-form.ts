@@ -30,8 +30,6 @@ export class ManageNotesForm implements OnInit {
   private destroyRef = inject(DestroyRef);
   private messageService = inject(MessageService);
 
-  @Input() selectedAction: IManageNotesAction | undefined;
-
   sections = signal<ISection[]>([]);
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
@@ -306,7 +304,58 @@ export class ManageNotesForm implements OnInit {
   }
 
   submitAddContentForm() {
-    
+    const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const content: ITopic = {
+      text: editorText,
+      sectionId: formValue.sectionId,
+      subSectionId: -1,
+      noteType: this.notesService.getSelectedNotes().type,
+      topicId: -1,
+      description: ''
+    };
+    const sectionIndex = this.sections().findIndex(d => d.sectionId === formValue.sectionId);
+    let subSectionIndex = -1;
+    let contentIndex = 0;
+
+    if (formValue.subSectionId > 0) {
+      content.subSectionId = formValue.subSectionId ?? -1;
+      subSectionIndex = this.subSections.findIndex(d => d.subSectionId === content.subSectionId);
+    }
+
+    if (formValue.contentId > 0) {
+      contentIndex = this.contents.length > 0 ? this.contents.findIndex(d => d.topicId === formValue.contentId) + Number(formValue.position) : 0;
+    } else {
+      if (subSectionIndex > -1) {
+        contentIndex = this.subSections[subSectionIndex].topics.length;
+      } else {
+        contentIndex = this.sections()[sectionIndex].topics.length;
+      }
+    }
+    const isBulkContent = this.currentAction()?.id === "Add_Bulk_Content";
+    this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).subscribe((res: IResponse) => {
+      if (res?.status) {
+        if (res.data && res.data.length > 0) {
+          if (isBulkContent) {
+            this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
+            this.sharedNotesService.setCurrentActionObservable(this.currentAction());
+            if (res.message === "Some Contents are dublicates.") {
+              this.messageService.add({ severity: 'warning', summary: 'Warning', detail: res.message });
+            } else {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
+            }
+          } else {
+            const responseSection = res.data[0];
+            const position = formValue?.position ? formValue.position : '1';
+            this.sharedNotesService.setCurrectActionRowDetail(responseSection, position);
+            this.sharedNotesService.setCurrentActionObservable(this.currentAction());
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is created successfully.' });
+          }
+        }
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    });
   }
 
   submitEditSectionForm() {

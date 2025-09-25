@@ -47,6 +47,19 @@ export class NotesService {
       }));
   }
 
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).pipe(
+      concatMap(postResult => {
+        if (postResult?.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          );
+        } else {
+          return of(postResult);
+        }
+      }));
+  }
+
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
     return this.backendService.onEditSubSection(subSection);
   }
@@ -65,10 +78,6 @@ export class NotesService {
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
     return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
-  }
-
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent);
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
