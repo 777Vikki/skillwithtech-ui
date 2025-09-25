@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { concatMap, tap, map, delay } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
 import { StoreService } from './store';
@@ -18,7 +18,16 @@ export class NotesService {
   private notesSection = new BehaviorSubject<ISection[]>([]);
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
-    return this.backendService.onAddSection(section, index);
+    return this.backendService.onAddSection(section, index).pipe(
+      concatMap(postResult => {
+        if (postResult.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          )
+        } else {
+          return of(postResult);
+        }
+      }));
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -26,7 +35,16 @@ export class NotesService {
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex);
+    return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex).pipe(
+      concatMap(postResult => {
+        if (postResult?.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          )
+        } else {
+          return of(postResult);
+        }
+      }));
   }
 
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
@@ -69,6 +87,7 @@ export class NotesService {
   getSections(): Observable<ISection[]> {
     if (this.selectedNotes.type) {
       return this.backendService.getSections(this.selectedNotes.type).pipe(tap(section => {
+        console.log(section);
         this.notesSection.next(section);
       }));
     }

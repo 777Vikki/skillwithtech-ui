@@ -267,7 +267,6 @@ export class ManageNotesForm implements OnInit {
           this.sharedNotesService.setCurrentActionObservable(this.currentAction());
         }
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is created successfully.' });
-        this.notesService.getSections().subscribe();
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
       }
@@ -300,7 +299,6 @@ export class ManageNotesForm implements OnInit {
           this.sharedNotesService.setCurrentActionObservable(this.currentAction());
         }
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is created successfully.' });
-        this.notesService.getSections().subscribe();
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
       }
