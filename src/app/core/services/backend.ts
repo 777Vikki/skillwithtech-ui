@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
@@ -10,8 +10,8 @@ type Count = 'section' | 'subSection' | 'topic';
   providedIn: 'root'
 })
 export class BackendService {
-  currentNoteSections: ISection[] = [];
-  currentNoteKey: string | undefined;
+  private currentNoteSections: ISection[] = [];
+  private currentNoteKey: string | undefined;
   private count = storeCount();
 
   private getCount(type: Count) {
@@ -41,11 +41,15 @@ export class BackendService {
   }
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
-    console.log(section);
-    section.sectionId = this.getCount("section");
-    this.currentNoteSections.splice(index, 0, section);
-    this.storeSection(this.currentNoteSections)
-    return of({ status: true, message: 'Success', data: [section] });
+    const avaibaleSection = this.currentNoteSections.find(d => this.getPlainTextWithTrim(d.name) === this.getPlainTextWithTrim(section.name));
+    if (avaibaleSection) {
+      return of({ status: false, message: 'Section is already added.', data: [] });
+    } else {
+      section.sectionId = this.getCount("section");
+      this.currentNoteSections.splice(index, 0, section);
+      this.storeSection(this.currentNoteSections);
+      return of({ status: true, message: 'Success', data: [section] });
+    }
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -146,12 +150,16 @@ export class BackendService {
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    console.log(subSection);
-    console.log('sectionIndex: ', sectionIndex, ' subSectionIndex: ', subSectionIndex);
-    subSection.subSectionId = this.getCount("subSection");
-    this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 0, subSection);
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [subSection] });
+    const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
+    const availableSubSection = currentSubSections.find((subSec: ISubSection) => this.getPlainTextWithTrim(subSec.name) === this.getPlainTextWithTrim(subSection.name));
+    if (availableSubSection) {
+      return of({ status: false, message: 'Sub Section is already added in Current Section.', data: [] });
+    } else {
+      subSection.subSectionId = this.getCount("subSection");
+      currentSubSections.splice(subSectionIndex, 0, subSection);
+      this.storeSection(this.currentNoteSections);
+      return of({ status: true, message: 'Success', data: [subSection] });
+    }
   }
 
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
@@ -185,5 +193,37 @@ export class BackendService {
     if (this.currentNoteKey) {
       localStorage.setItem(this.currentNoteKey, data);
     }
+  }
+
+  getFlatPlainTextContent(sec: (ISection | ISubSection | ITopic)[]): string[] {
+    let resultContents: string[] = [];
+    if (Array.isArray(sec) && sec.length > 0) {
+      const rowDetail = sec[0];
+      if (('sectionId' in rowDetail) && !('subSectionId' in rowDetail) && !('topicId' in rowDetail)) {
+        const sections = sec as ISection[];
+        for (let i = 0; i < sections.length; i++) {
+          if (sections[i].topics?.length) {
+            resultContents = [...resultContents, ...this.getFlatPlainTextContent(sections[i].topics)];
+          }
+        }
+      } else if (('sectionId' in rowDetail) && ('subSectionId' in rowDetail) && !('topicId' in rowDetail)) {
+        const subSections = sec as ISubSection[];
+        for (let i = 0; i < subSections.length; i++) {
+          if (subSections[i].topics.length) {
+            resultContents = [...resultContents, ...this.getFlatPlainTextContent(subSections[i].topics)];
+          }
+        }
+      } else if (('sectionId' in rowDetail) && ('subSectionId' in rowDetail) && ('topicId' in rowDetail)) {
+        const contents = sec as ITopic[];
+        resultContents = [...resultContents, ...contents.map(d => this.getPlainTextWithTrim(d.text))];
+      }
+    }
+    return resultContents;
+  }
+
+  getPlainTextWithTrim(rawHtml: string): string {
+    let doc = new DOMParser().parseFromString(rawHtml, 'text/html');
+    let plainText = doc.body.textContent || "";
+    return plainText.trim();
   }
 }

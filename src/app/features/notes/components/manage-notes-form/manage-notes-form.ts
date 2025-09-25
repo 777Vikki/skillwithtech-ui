@@ -11,11 +11,16 @@ import { StoreService } from '../../../../core/services/store';
 import { PlainTextPipe } from '../../../../core/pipes/plain-text-pipe';
 import { SharedNotesService } from '../../services/shared-notes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IResponse } from '../../../../core/interfaces/response-interface';
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
+
 @Component({
   selector: 'app-manage-notes-form',
-  imports: [ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe],
+  imports: [ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe, Toast],
   templateUrl: './manage-notes-form.html',
-  styleUrl: './manage-notes-form.scss'
+  styleUrl: './manage-notes-form.scss',
+  providers: [MessageService]
 })
 export class ManageNotesForm implements OnInit {
   private notesService = inject(NotesService);
@@ -23,6 +28,7 @@ export class ManageNotesForm implements OnInit {
   private storeService = inject(StoreService);
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
+  private messageService = inject(MessageService);
 
   @Input() selectedAction: IManageNotesAction | undefined;
 
@@ -40,10 +46,10 @@ export class ManageNotesForm implements OnInit {
 
   getSections() {
     this.notesService.getNotesSection()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((sec: ISection[]) => {
-      this.sections.set(sec);
-    });
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((sec: ISection[]) => {
+        this.sections.set(sec);
+      });
   }
 
   getCurrentAction() {
@@ -55,14 +61,18 @@ export class ManageNotesForm implements OnInit {
         if (this.currentAction != null) {
           if (currentActionId === "Add_Section") {
             this.addSection();
-          } else if(currentActionId === "Add_Sub_Section") {
+          } else if (currentActionId === "Add_Sub_Section") {
             this.addSubSection();
-          } else if(currentActionId === "Add_Content") {
+          } else if (currentActionId === "Add_Content") {
             this.addContent();
-          } else if(currentActionId === "Edit_Content") {
-            this.editContent();
-          } else if(currentActionId === "Edit_Sub_Section") {
+          } else if (currentActionId === "Edit_Section") {
+            this.editSection();
+          } else if (currentActionId === "Edit_Sub_Section") {
             this.editSubSection();
+          } else if (currentActionId === "Edit_Content") {
+            this.editContent();
+          } else if (currentActionId === "Add_Bulk_Content") {
+            this.addSection();
           }
         }
       });
@@ -119,7 +129,7 @@ export class ManageNotesForm implements OnInit {
     this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
     if (contentId) {
-      this.notesForm.addControl('contentId', new FormControl(contentId, [Validators.required]));
+      this.notesForm.addControl('contentId', new FormControl(contentId));
       this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
     } else {
       this.notesForm.addControl('contentId', new FormControl(contentId));
@@ -132,8 +142,8 @@ export class ManageNotesForm implements OnInit {
     this.contents = [];
     this.subSections = [];
     const section = this.sharedNotesService.currentActionRow() as ISection;
-    const sectionId = section?.sectionId? section.sectionId : null;
-    const name = section?.name? section.name : '';
+    const sectionId = section?.sectionId ? section.sectionId : null;
+    const name = section?.name ? section.name : '';
     this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }, [Validators.required]));
     this.notesForm.addControl('text', new FormControl(name, [Validators.required]));
   }
@@ -238,30 +248,101 @@ export class ManageNotesForm implements OnInit {
   }
 
   submitAddSectionForm() {
-
+    const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const section: ISection = {
+      name: editorText,
+      sectionId: 0,
+      noteType: this.notesService.getSelectedNotes().type,
+      topics: [],
+      subSections: [],
+    };
+    const index = this.sections().length > 0 ? this.sections().findIndex(d => d.sectionId === formValue.sectionId) + Number(formValue.position) : 0;
+    this.notesService.onAddSection(section, index).subscribe((res: IResponse) => {
+      if (res?.status) {
+        if (res.data != null && res.data.length > 0) {
+          const responseSection = res.data[0];
+          const position = formValue?.position ? formValue.position : '1';
+          this.sharedNotesService.setCurrectActionRowDetail(responseSection, position);
+          this.sharedNotesService.setCurrentActionObservable(this.currentAction());
+        }
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is created successfully.' });
+        this.notesService.getSections().subscribe();
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    })
   }
 
   submitAddSubSectionForm() {
-
+    const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const subSection: ISubSection = {
+      name: editorText,
+      sectionId: formValue.sectionId,
+      subSectionId: 0,
+      noteType: this.notesService.getSelectedNotes().type,
+      topics: [],
+    };
+    const sectionIndex = this.sections().findIndex(d => d.sectionId === formValue.sectionId);
+    let subSectionIndex = 0;
+    if (formValue.subSectionId) {
+      subSectionIndex = this.subSections.findIndex(d => d.subSectionId === formValue.subSectionId) + Number(formValue.position);
+    } else {
+      subSectionIndex = this.sections()[sectionIndex].subSections.length;
+    }
+    this.notesService.onAddSubSection(subSection, sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
+      if (res?.status) {
+        if (res.data != null && res.data.length > 0) {
+          const subSection = res.data[0];
+          const position = formValue?.position ? formValue.position : '1';
+          this.sharedNotesService.setCurrectActionRowDetail(subSection, position);
+          this.sharedNotesService.setCurrentActionObservable(this.currentAction());
+        }
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is created successfully.' });
+        this.notesService.getSections().subscribe();
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    })
   }
 
   submitAddContentForm() {
-
+    
   }
 
   submitEditSectionForm() {
-
+    const formValue = this.notesForm.getRawValue();
   }
 
   submitEditSubSectionForm() {
-
+    const formValue = this.notesForm.getRawValue();
   }
 
   submitEditContentForm() {
-
+    const formValue = this.notesForm.getRawValue();
   }
 
   submitForm() {
-    console.log(this.notesForm.getRawValue());
+    if (this.notesForm.valid) {
+      const currentActionId = this.currentAction()?.id;
+      if (this.currentAction != null) {
+        if (currentActionId === "Add_Section") {
+          this.submitAddSectionForm();
+        } else if (currentActionId === "Add_Sub_Section") {
+          this.submitAddSubSectionForm();
+        } else if (currentActionId === "Add_Content") {
+          this.submitAddContentForm();
+        } else if (currentActionId === "Edit_Section") {
+          this.submitEditSectionForm();
+        } else if (currentActionId === "Edit_Sub_Section") {
+          this.submitEditSubSectionForm();
+        } else if (currentActionId === "Edit_Content") {
+          this.submitEditContentForm();
+        } else if (currentActionId === "Add_Bulk_Content") {
+          this.submitAddContentForm();
+        }
+      }
+    }
   }
 }

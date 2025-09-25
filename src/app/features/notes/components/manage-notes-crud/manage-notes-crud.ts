@@ -10,10 +10,11 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SharedNotesService } from '../../services/shared-notes';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-manage-notes-crud',
-  imports: [NgTemplateOutlet, NgClass, ConfirmDialogModule],
+  imports: [NgTemplateOutlet, NgClass, ConfirmDialogModule, Toast],
   templateUrl: './manage-notes-crud.html',
   styleUrl: './manage-notes-crud.scss',
   providers: [ConfirmationService]

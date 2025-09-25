@@ -79,6 +79,12 @@ export class NotesService {
     return this.selectedNotes;
   }
 
+  removeUnusedTag(text: string) {
+    let editorText = text.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
+    editorText = editorText === '</br>' ? '' : editorText;
+    return editorText;
+  }
+
   getPlainText(rawHtml: string): string {
     let doc = new DOMParser().parseFromString(rawHtml, 'text/html');
     let plainText = doc.body.textContent || "";
