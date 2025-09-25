@@ -1,7 +1,7 @@
 import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
 import { SelectModule } from 'primeng/select';
 import { NotesService } from '../../../../core/services/notes';
 import { ButtonModule } from 'primeng/button';
@@ -360,14 +360,55 @@ export class ManageNotesForm implements OnInit {
 
   submitEditSectionForm() {
     const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const section: IEditSectionRequest = {
+      name: editorText,
+      sectionId: formValue.sectionId,
+      noteType: this.notesService.getSelectedNotes().type
+    };
+    this.notesService.onEditSection(section).subscribe((res: IResponse) => {
+      if (res?.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    })
   }
 
   submitEditSubSectionForm() {
     const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const subSection: IEditSubSectionRequest = {
+      name: editorText,
+      sectionId: formValue.sectionId,
+      subSectionId: formValue.subSectionId,
+      noteType: this.notesService.getSelectedNotes().type,
+    }
+    this.notesService.onEditSubSection(subSection).subscribe((res: IResponse) => {
+      if (res?.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    });
   }
 
   submitEditContentForm() {
     const formValue = this.notesForm.getRawValue();
+    const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
+    const content: IEditContentRequest = {
+      text: editorText,
+      sectionId: formValue.sectionId,
+      subSectionId: formValue.subSectionId,
+      topicId: formValue.contentId
+    }
+    this.notesService.onEditContent(content).subscribe((res: IResponse) => {
+      if (res?.status) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully updated.' });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+    });
   }
 
   submitForm() {

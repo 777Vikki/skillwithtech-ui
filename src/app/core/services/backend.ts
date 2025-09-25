@@ -53,30 +53,30 @@ export class BackendService {
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
-    console.log(section);
     const sec = this.currentNoteSections.find(d => d.sectionId === section.sectionId);
     if (sec) {
       sec.name = section.name;
+      this.storeSection(this.currentNoteSections);
+      return of({ status: true, message: 'Success', data: [] });
     }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [] });
+    return of({ status: false, message: 'Detail is not found.', data: [] });
+
   }
 
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
-    console.log(subSection);
     const subSections = this.currentNoteSections.find(d => d.sectionId === subSection.sectionId)?.subSections;
     if (subSections) {
       const subSec = subSections.find(d => d.subSectionId === subSection.subSectionId);
       if (subSec) {
         subSec.name = subSection.name;
+        this.storeSection(this.currentNoteSections);
+        return of({ status: true, message: 'Success', data: [] });
       }
     }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [] });
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
-    console.log(content);
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
     let selectedContent: ITopic | undefined;
     if (content.subSectionId > 0) {
@@ -87,13 +87,13 @@ export class BackendService {
     }
     if (selectedContent) {
       selectedContent.text = content.text;
+      this.storeSection(this.currentNoteSections);
+      return of({ status: true, message: 'Success', data: [] });
     }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [] });
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onDeleteContent(content: ITopic): Observable<IResponse> {
-    console.log(content);
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
     let selectedContents: ITopic[] = [];
     if (content.subSectionId > 0) {
@@ -110,14 +110,12 @@ export class BackendService {
   }
 
   onDeleteSection(index: number) {
-    console.log(index);
     this.currentNoteSections.splice(index, 1);
     this.storeSection(this.currentNoteSections);
     return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number) {
-    console.log('sectionIndex: ', sectionIndex, ' subSectionIndex: ', subSectionIndex);
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
     this.storeSection(this.currentNoteSections);
     return of({ status: true, message: 'Success', data: [] });

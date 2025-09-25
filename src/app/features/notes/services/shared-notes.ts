@@ -7,7 +7,8 @@ import { ISection, ISubSection, ITopic } from '../../../core/interfaces/note-int
   providedIn: 'root'
 })
 export class SharedNotesService {
-  private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(undefined);
+  private _manageNoteCurrentAction = signal<IManageNotesAction | undefined>(undefined);
+  private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(this._manageNoteCurrentAction());
   private _currentActionRow = signal<ISection | ISubSection | ITopic | undefined>(undefined);
   private _applyActionPosition = signal<string>('');
 
@@ -17,9 +18,10 @@ export class SharedNotesService {
 
   getCurrentActionObservable(): Observable<IManageNotesAction | undefined> {
     return this._manageNoteActionBehaviourSub.asObservable();
-  } 
+  }
 
   setCurrentActionObservable(action: IManageNotesAction | undefined) {
+    this._manageNoteCurrentAction.set(action);
     this._manageNoteActionBehaviourSub.next(action);
   }
 
@@ -27,4 +29,5 @@ export class SharedNotesService {
     this._currentActionRow.set(row);
     this._applyActionPosition.set(position);
   }
+
 }
