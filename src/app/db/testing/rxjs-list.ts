@@ -91,7 +91,7 @@ export const rxjsList = () => {
                     "subSectionId": -1,
                     "noteType": "RxJs",
                     "topicId": 126,
-                    "description": ""
+                    "description": "<p><strong>Creation Operators</strong> are used to create new Observables from scratch or from various sources, such as:</p><ul><li><strong>of()</strong> → creates an observable from a value.</li><li><strong>from()</strong> → creates an observable from an array or a promise.</li><li><strong>fromEvent()</strong> → creates an observable from a DOM event.</li></ul><p><strong>Transformation Operators</strong> are used to transform data emitted by an observable, such as:</p><ul><li><strong>switchMap()</strong> → cancels the previous observable if a new value is emitted.</li><li><strong>mergeMap()</strong> → runs multiple observables in parallel and subscribes to all of them concurrently.</li><li><strong>concatMap()</strong> → waits for each observable to complete before moving to the next.</li><li><strong>exhaustMap()</strong> → ignores new emissions from the source until the current inner observable completes.</li></ul><p><strong>Filtering Operators</strong> are used to filter emitted values based on conditions, such as:</p><ul><li><strong>take(n)</strong> → emits only the first <em>n</em> values and then completes.</li><li><strong>takeUntil()</strong> → unsubscribes from the source observable when a notifier observable emits.</li><li><strong>skip(n)</strong> → ignores the first <em>n</em> emitted values and emits the rest.</li></ul><p><strong>Combination Operators</strong> are used to combine multiple observables into one, such as:</p><ul><li><strong>combineLatest()</strong> → emits the latest values from multiple observables whenever any of them emits.</li><li><strong>forkJoin()</strong> → emits the last value from each observable once all have completed.</li></ul>"
                 }
             ],
             "subSections": []
@@ -116,7 +116,16 @@ export const rxjsList = () => {
             "name": "<p><strong>Types of observable</strong></p>",
             "sectionId": 33,
             "noteType": "RxJs",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><strong>Can you explain types of  operators in sort?</strong></p>",
+                    "sectionId": 33,
+                    "subSectionId": -1,
+                    "noteType": "RxJs",
+                    "topicId": 194,
+                    "description": "<p><strong>Creation Operators</strong> are used to create new Observables from scratch or from various sources, such as:</p><ul><li><strong>of()</strong> → creates an observable from a value.</li><li><strong>from()</strong> → creates an observable from an array or a promise.</li><li><strong>fromEvent()</strong> → creates an observable from a DOM event.</li></ul><p><strong>Transformation Operators</strong> are used to transform data emitted by an observable, such as:</p><ul><li><strong>switchMap()</strong> → cancels the previous observable if a new value is emitted.</li><li><strong>mergeMap()</strong> → runs multiple observables in parallel and subscribes to all of them concurrently.</li><li><strong>concatMap()</strong> → waits for each observable to complete before moving to the next.</li><li><strong>exhaustMap()</strong> → ignores new emissions from the source until the current inner observable completes.</li></ul><p><strong>Filtering Operators</strong> are used to filter emitted values based on conditions, such as:</p><ul><li><strong>take(n)</strong> → emits only the first <em>n</em> values and then completes.</li><li><strong>takeUntil()</strong> → unsubscribes from the source observable when a notifier observable emits.</li><li><strong>skip(n)</strong> → ignores the first <em>n</em> emitted values and emits the rest.</li></ul><p><strong>Combination Operators</strong> are used to combine multiple observables into one, such as:</p><ul><li><strong>combineLatest()</strong> → emits the latest values from multiple observables whenever any of them emits.</li><li><strong>forkJoin()</strong> → emits the last value from each observable once all have completed.</li></ul></br>"
+                }
+            ],
             "subSections": [
                 {
                     "name": "<p><strong>Creation Operators</strong></p>",
