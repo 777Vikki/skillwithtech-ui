@@ -1,14 +1,12 @@
-import { Component, DestroyRef, effect, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ISection } from '../../../../core/interfaces/note-interface';
 import { FormsModule } from '@angular/forms';
 import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
-import { Subscription } from 'rxjs';
 import { NotesService } from '../../../../core/services/notes';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { StoreService } from '../../../../core/services/store';
 import { SharedNotesService } from '../../services/shared-notes';
-import { BaseComponent } from 'primeng/basecomponent';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface DropdownChangeEvent {
@@ -28,27 +26,40 @@ export class ManageNotesAction implements OnInit {
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
 
-  sections: ISection[] = [];
-  actions: IManageNotesAction[] = this.storeService.getManageNotesActions();
-  seletedAction: IManageNotesAction | undefined;
+  sections = signal<ISection[]>([]);
+  selectedAction = signal<IManageNotesAction | undefined>(undefined);
+  actions = signal<IManageNotesAction[]>(this.storeService.getManageNotesActions());
 
   ngOnInit(): void {
+    this.getCurrentAction();
+    this.getSections();
+  }
+
+  getCurrentAction() {
+    this.sharedNotesService.getCurrentActionObservable()
+      .subscribe((action: IManageNotesAction | undefined) => {
+        this.selectedAction.set(action);
+        
+      });
+  }
+
+  getSections() {
     this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((sec: ISection[]) => {
-        this.sections = sec;
-      })
+        this.sections.set(sec);
+      });
   }
 
   onSelectAction(e: DropdownChangeEvent | Event) {
+    this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
     if ('value' in e) {
-      const selectedAction = e.value as (IManageNotesAction | undefined);
-      this.sharedNotesService.setCurrentActionObservable(selectedAction);
+      const action = e.value as (IManageNotesAction | undefined);
+      this.selectedAction.set(action)
+      this.sharedNotesService.setCurrentActionObservable(action);
     } else {
-      const selectedAction = this.actions.find(d => d.type === "Section" && d.id === "Add_Section");
-      this.sharedNotesService.setCurrentActionObservable(selectedAction);
+      const action = this.actions().find(d => d.type === "Section" && d.id === "Add_Section");
+      this.sharedNotesService.setCurrentActionObservable(action);
     }
-    this.sharedNotesService.setCurrectActionRow(undefined);
-    this.sharedNotesService.setApplyActionPosition('');  
   }
 
   onRearrange() {

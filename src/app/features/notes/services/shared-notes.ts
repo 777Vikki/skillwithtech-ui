@@ -23,11 +23,8 @@ export class SharedNotesService {
     this._manageNoteActionBehaviourSub.next(action);
   }
 
-  setCurrectActionRow(row: ISection | ISubSection | ITopic | undefined) {
+  setCurrectActionRowDetail(row: ISection | ISubSection | ITopic | undefined, position: string) {
     this._currentActionRow.set(row);
-  }
-
-  setApplyActionPosition(position: string) {
     this._applyActionPosition.set(position);
   }
 }

@@ -1,5 +1,5 @@
 <div>
-    @for(section of sections; track section.sectionId; let sectionIndex = $index) {
+    @for(section of sections(); track section.sectionId; let sectionIndex = $index) {
     <div class="section-container" [id]="'manage-section-' + section.sectionId">
         <div class="section-text center-align-between">
             <div [innerHTML]="section.name"></div>
@@ -7,7 +7,7 @@
                 <span class="material-symbols-outlined link"
                     (click)="toggleMenu(section.sectionId, 'section'); $event.stopPropagation()"> more_vert
                 </span>
-                @if(openToggle === section.sectionId && toggleType === 'section') {
+                @if(openToggle().id === section.sectionId && openToggle().type === 'section') {
                 <ul class="menu-list">
                     <li (click)="addSection(section, '0')">Add Section Above</li>
                     <li (click)="addSection(section, '1')">Add Section Below</li>
@@ -32,7 +32,7 @@
                         (click)="toggleMenu(subSection.subSectionId, 'subSection'); $event.stopPropagation()">
                         more_vert
                     </span>
-                    @if(openToggle === subSection.subSectionId && toggleType === 'subSection') {
+                    @if(openToggle().id === subSection.subSectionId && openToggle().type === 'subSection') {
                     <ul class="menu-list">
                         <li (click)="addSubSection(subSection, '0')">Add Sub Section Above</li>
                         <li (click)="addSubSection(subSection, '1')">Add Sub Section Below</li>
@@ -57,14 +57,14 @@
     @for(topic of topics; track topic.topicId) {
     @if(topic.text) {
     <div class="content-text center-align-between"
-        [ngClass]="{'active-row': activeRow.type === 'content' && topic.topicId === activeRow.id}"
+        [ngClass]="{'active-row': activeRow().type === 'content' && topic.topicId === activeRow().id}"
         [id]="'manage-content-' + topic.topicId">
         <div [innerHTML]="topic.text"></div>
         <div class="menu-container">
             <span class="material-symbols-outlined link"
                 (click)="toggleMenu(topic.topicId, 'content'); $event.stopPropagation()"> more_vert
             </span>
-            @if(openToggle === topic.topicId && toggleType === 'content') {
+            @if(openToggle().id === topic.topicId && openToggle().type === 'content') {
             <ul class="menu-list">
                 <li (click)="addContent(topic, '0', 'Add_Content')">Add Content Above</li>
                 <li (click)="addContent(topic, '1', 'Add_Content')">Add Content Below</li>
@@ -77,3 +77,5 @@
     }
     }
 </ng-template>
+
+<p-confirmdialog />
