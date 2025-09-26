@@ -54,7 +54,7 @@ export class Header implements OnInit {
     const queryParamRequest: any = {
       queryParams: {notesId: this.selectedHeader()?.id}
     }
-    if(path != null || path === '../') {
+    if(path === '../') {
       queryParamRequest['relativeTo'] = this.route;
     } else {
       queryParamRequest["queryParamsHandling"] = "merge";

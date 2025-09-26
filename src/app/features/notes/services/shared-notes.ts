@@ -20,6 +20,7 @@ export class SharedNotesService {
   applyActionPosition = this._applyActionPosition.asReadonly();
   currentNote = this._currentNote.asReadonly();
   currentNoteSections = this._currentNoteSections.asReadonly();
+  manageNoteCurrentAction = this._manageNoteCurrentAction.asReadonly();
 
 
   getCurrentActionObservable(): Observable<IManageNotesAction | undefined> {
