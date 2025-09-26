@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { StoreService } from '../../core/services/store';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
@@ -26,7 +26,9 @@ export class Header implements OnInit {
   route = inject(ActivatedRoute);
   notesService = inject(NotesService);
   headers = signal<INote[]>([]);
-  selectedHeader = this.sharedNotesService.currentNote;;
+  selectedHeader = this.sharedNotesService.currentNote;
+  showProfile = signal<boolean>(false);
+  showSettings = signal<boolean>(false);
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -74,5 +76,14 @@ export class Header implements OnInit {
     this.onNavigation('../');
     this.sharedNotesService.setCurrentNote(header.value);
     this.notesService.getSections().subscribe();
+  }
+
+  clearLocalStorage() {
+    localStorage.clear();
+  }
+
+  @HostListener('document:click')
+  closeDropdown() {
+    this.showProfile.set(false);
   }
 }

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class Profile {
   user = {
-    name: 'Mayank Maurya',
+    name: 'Vivek Kumar Maurya',
     jobTitle: 'Angular Developer',
     location: 'Noida, India',
     phone: '+91-8574998039',

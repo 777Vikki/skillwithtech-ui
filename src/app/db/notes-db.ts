@@ -1,5 +1,6 @@
 import { Note } from "../core/enums/note-enum"
 import { INote, ISection } from "../core/interfaces/note-interface"
+import { angularMicrofrontendList } from "./testing/angular-microfrontent"
 import { angularList } from "./testing/angular-testing"
 import { azureList } from "./testing/azure-list"
 import { htmlList } from "./testing/htmlList"
@@ -47,6 +48,10 @@ export const notesDb = (type: string): ISection[]  => {
 
     case Note.AZURE: {
       return azureList();
+    }
+
+    case Note.ANGULAR_MICROFRONTEND: {
+      return angularMicrofrontendList()
     }
   }
   return [];
@@ -96,10 +101,16 @@ export const availableNotes = (): INote[] => {
       id: 7,
       sections: [],
     },
+    // {
+    //   name: "CI/CD pipelines with Azure",
+    //   type: Note.AZURE,
+    //   id: 8,
+    //   sections: []
+    // }
     {
-      name: "CI/CD pipelines with Azure",
-      type: Note.AZURE,
-      id: 8,
+      name: "Micro Frontend in Angular",
+      type: Note.ANGULAR_MICROFRONTEND,
+      id: 9,
       sections: []
     }
   ]
