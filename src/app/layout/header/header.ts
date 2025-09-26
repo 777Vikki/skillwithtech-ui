@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { StoreService } from '../../core/services/store';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
@@ -6,6 +6,12 @@ import { INote } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, first, switchMap } from 'rxjs';
+import { SharedNotesService } from '../../features/notes/services/shared-notes';
+
+interface DropdownChangeEvent {
+  originalEvent: Event; // could also use MouseEvent
+  value: INote;           // adjust type as per your data model
+}
 
 @Component({
   selector: 'app-header',
@@ -14,12 +20,13 @@ import { filter, first, switchMap } from 'rxjs';
   styleUrl: './header.scss'
 })
 export class Header implements OnInit {
+  sharedNotesService = inject(SharedNotesService);
   store = inject(StoreService);
   router = inject(Router);
   route = inject(ActivatedRoute);
   notesService = inject(NotesService);
-  headers: INote[] = [];
-  selectedHeader: INote | undefined;
+  headers = signal<INote[]>([]);
+  selectedHeader = this.sharedNotesService.currentNote;;
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -28,15 +35,16 @@ export class Header implements OnInit {
     )
     .pipe(first())
     .subscribe(d => {
-      const NotesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
-      this.headers = d;
-      if (NotesId > 0) {
-        this.selectedHeader = this.headers.find(d => d.id === NotesId) ?? this.store.primaryHeader();
+      const notesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
+      this.headers.set(d);
+      if (notesId != null && notesId > 0) {
+        const currentHeader = this.headers().find(d => d.id === notesId) ?? this.store.primaryHeader();
+        this.sharedNotesService.setCurrentNote(currentHeader);
       } else {
-        this.selectedHeader = this.store.primaryHeader();
+        this.sharedNotesService.setCurrentNote(this.store.primaryHeader());
       }
-      if (this.selectedHeader) {
-        this.notesService.setSelectedNotes(this.selectedHeader);
+      if (this.selectedHeader()) {
+        this.notesService.getSections().subscribe();
       }
     });
   }
@@ -44,9 +52,9 @@ export class Header implements OnInit {
   onNavigation(path: string) {
 
     const queryParamRequest: any = {
-      queryParams: {notesId: this.selectedHeader?.id}
+      queryParams: {notesId: this.selectedHeader()?.id}
     }
-    if(!path) {
+    if(path != null || path === '../') {
       queryParamRequest['relativeTo'] = this.route;
     } else {
       queryParamRequest["queryParamsHandling"] = "merge";
@@ -62,11 +70,9 @@ export class Header implements OnInit {
     //   });
   }
 
-  onSelectNote() {
-    if (this.selectedHeader) {
-      this.notesService.setSelectedNotes(this.selectedHeader);
-      this.onNavigation('');
-    }
+  onSelectNote(header: DropdownChangeEvent) {
+    this.onNavigation('../');
+    this.sharedNotesService.setCurrentNote(header.value);
+    this.notesService.getSections().subscribe();
   }
-
 }

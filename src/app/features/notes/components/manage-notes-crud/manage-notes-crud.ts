@@ -22,22 +22,17 @@ import { Toast } from 'primeng/toast';
 export class ManageNotesCrud implements OnInit {
   private storeService = inject(StoreService)
   private notesService = inject(NotesService);
-  private sharedService = inject(SharedNotesService);
+  private sharedNotesService = inject(SharedNotesService);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
   private destroyRef = inject(DestroyRef);
 
-  sections = signal<ISection[]>([]);
+  sections = this.sharedNotesService.currentNoteSections;
   openToggle = signal<{ id: number, type: string }>({ id: 0, type: '' });
   activeRow = signal<{ id: number, type: string }>({ id: 0, type: '' });
 
   ngOnInit() {
-    this.notesService.getNotesSection()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((res: ISection[]) => {
-        this.sections.set(res);
-      })
   }
 
   ngAfterViewInit(): void {
@@ -75,10 +70,10 @@ export class ManageNotesCrud implements OnInit {
   }
 
   addSection(section: ISection, position: string) {
-    this.sharedService.setCurrectActionRowDetail(section, position);
+    this.sharedNotesService.setCurrectActionRowDetail(section, position);
     const actions = this.storeService.getManageNotesActions()
     const action: IManageNotesAction | undefined = actions.find(d => d.type === "Section");
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   addSubSectOnSection(section: ISection) {
@@ -90,8 +85,8 @@ export class ManageNotesCrud implements OnInit {
   addSubSection(subSection: ISubSection, position: string) {
     const actions = this.storeService.getManageNotesActions();
     const action = actions.find(d => d.id === "Add_Sub_Section") ?? undefined;
-    this.sharedService.setCurrectActionRowDetail(subSection, position);
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrectActionRowDetail(subSection, position);
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   addContentOnSection(section: ISection) {
@@ -110,8 +105,8 @@ export class ManageNotesCrud implements OnInit {
   addContent(content: ITopic, position: string, manageNotesActionId: ManageNotesIdType) {
     const actions = this.storeService.getManageNotesActions();
     const action = actions.find(d => d.id === manageNotesActionId) ?? undefined;
-    this.sharedService.setCurrectActionRowDetail(content, position);
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrectActionRowDetail(content, position);
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   editSection(section: ISection) {
@@ -120,8 +115,8 @@ export class ManageNotesCrud implements OnInit {
       id: "Edit_Section",
       type: "Section"
     };
-    this.sharedService.setCurrectActionRowDetail(section, '');
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrectActionRowDetail(section, '');
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   editSubSection(subSection: ISubSection) {
@@ -130,8 +125,8 @@ export class ManageNotesCrud implements OnInit {
       id: "Edit_Sub_Section",
       type: "Sub_Section"
     };
-    this.sharedService.setCurrectActionRowDetail(subSection, '');
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrectActionRowDetail(subSection, '');
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   editContent(content: ITopic) {
@@ -140,8 +135,8 @@ export class ManageNotesCrud implements OnInit {
       id: "Edit_Content",
       type: "Content"
     }
-    this.sharedService.setCurrectActionRowDetail(content, '');
-    this.sharedService.setCurrentActionObservable(action);
+    this.sharedNotesService.setCurrectActionRowDetail(content, '');
+    this.sharedNotesService.setCurrentActionObservable(action);
   }
 
   deleteSection(index: number) {
@@ -159,7 +154,7 @@ export class ManageNotesCrud implements OnInit {
         label: 'Save',
       },
       accept: () => {
-        this.sharedService.setCurrectActionRowDetail(undefined, '');
+        this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
           if (res?.status) {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
@@ -187,7 +182,7 @@ export class ManageNotesCrud implements OnInit {
         label: 'Save',
       },
       accept: () => {
-        this.sharedService.setCurrectActionRowDetail(undefined, '');
+        this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
           if (res?.status) {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
@@ -215,7 +210,7 @@ export class ManageNotesCrud implements OnInit {
         label: 'Save',
       },
       accept: () => {
-        this.sharedService.setCurrectActionRowDetail(undefined, '');
+        this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
           if (res.status) {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });

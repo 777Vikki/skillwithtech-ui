@@ -30,7 +30,7 @@ export class ManageNotesForm implements OnInit {
   private destroyRef = inject(DestroyRef);
   private messageService = inject(MessageService);
 
-  sections = signal<ISection[]>([]);
+  sections = this.sharedNotesService.currentNoteSections;
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
   previewList: string[] = [];
@@ -43,11 +43,6 @@ export class ManageNotesForm implements OnInit {
   }
 
   getSections() {
-    this.notesService.getNotesSection()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((sec: ISection[]) => {
-        this.sections.set(sec);
-      });
   }
 
   getCurrentAction() {
@@ -251,7 +246,7 @@ export class ManageNotesForm implements OnInit {
     const section: ISection = {
       name: editorText,
       sectionId: 0,
-      noteType: this.notesService.getSelectedNotes().type,
+      noteType: this.sharedNotesService.currentNote()?.type ?? '',
       topics: [],
       subSections: [],
     };
@@ -278,7 +273,7 @@ export class ManageNotesForm implements OnInit {
       name: editorText,
       sectionId: formValue.sectionId,
       subSectionId: 0,
-      noteType: this.notesService.getSelectedNotes().type,
+      noteType: this.sharedNotesService.currentNote()?.type ?? '',
       topics: [],
     };
     const sectionIndex = this.sections().findIndex(d => d.sectionId === formValue.sectionId);
@@ -310,7 +305,7 @@ export class ManageNotesForm implements OnInit {
       text: editorText,
       sectionId: formValue.sectionId,
       subSectionId: -1,
-      noteType: this.notesService.getSelectedNotes().type,
+      noteType: this.sharedNotesService.currentNote()?.type ?? '',
       topicId: -1,
       description: ''
     };
@@ -364,7 +359,7 @@ export class ManageNotesForm implements OnInit {
     const section: IEditSectionRequest = {
       name: editorText,
       sectionId: formValue.sectionId,
-      noteType: this.notesService.getSelectedNotes().type
+      noteType: this.sharedNotesService.currentNote()?.type ?? ''
     };
     this.notesService.onEditSection(section).subscribe((res: IResponse) => {
       if (res?.status) {
@@ -382,7 +377,7 @@ export class ManageNotesForm implements OnInit {
       name: editorText,
       sectionId: formValue.sectionId,
       subSectionId: formValue.subSectionId,
-      noteType: this.notesService.getSelectedNotes().type,
+      noteType: this.sharedNotesService.currentNote()?.type ?? '',
     }
     this.notesService.onEditSubSection(subSection).subscribe((res: IResponse) => {
       if (res?.status) {

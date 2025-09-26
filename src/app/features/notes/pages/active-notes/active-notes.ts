@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { ISection, ITopic } from '../../../../core/interfaces/note-interface';
 import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
@@ -13,6 +13,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SharedNotesService } from '../../services/shared-notes';
 
 @Component({
   selector: 'app-active-notes',
@@ -22,6 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   providers: [MessageService]
 })
 export class ActiveNotes implements OnInit, AfterViewInit {
+  private sharedNotesService = inject(SharedNotesService);
   private store = inject(StoreService);
   private noteService = inject(NotesService);
   private route = inject(ActivatedRoute);
@@ -29,7 +31,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
 
-  sections: ISection[] = [];
+  sections = this.sharedNotesService.currentNoteSections;
   selectedSection: ISection | undefined;
   selectedTopic: ITopic | undefined;
   isMobileScreen = this.store.checkMobileScreen();
@@ -39,9 +41,8 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   isSectionCollapse: boolean = false;
 
   ngOnInit(): void {
-    this.noteService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
+    this.sharedNotesService.getCurrentNoteSectionsObservable().pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        this.sections = res;
         this.resetSelectedValue();
       })
   }
@@ -99,7 +100,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     const routeQueryParams = this.route.snapshot.queryParams;
     const selectedSectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : 0;
     if (selectedSectionId != null && selectedSectionId > 0) {
-      this.selectedSection = this.sections.find(d => d.sectionId === selectedSectionId) ?? undefined;
+      this.selectedSection = this.sections().find(d => d.sectionId === selectedSectionId) ?? undefined;
       if (this.selectedSection) {
         const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : 0;
         const subSectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : 0;
@@ -115,8 +116,9 @@ export class ActiveNotes implements OnInit, AfterViewInit {
           }
         }
       }
-    } else {
-      this.selectedSection = this.sections.length ? this.sections[0] : undefined;
+    }
+    if (!this.selectedSection) {
+      this.selectedSection = this.sections().length ? this.sections()[0] : undefined;
       if (this.selectedSection?.topics.length) {
         this.selectedTopic = this.selectedSection.topics[0]
       } else if (this.selectedSection?.subSections.length && this.selectedSection.subSections[0].topics.length) {

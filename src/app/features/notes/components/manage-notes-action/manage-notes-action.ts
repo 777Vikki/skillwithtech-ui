@@ -11,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface DropdownChangeEvent {
   originalEvent: Event; // could also use MouseEvent
-  value: any;           // adjust type as per your data model
+  value: IManageNotesAction;           // adjust type as per your data model
 }
 
 @Component({
@@ -26,13 +26,12 @@ export class ManageNotesAction implements OnInit {
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
 
-  sections = signal<ISection[]>([]);
+  sections = this.sharedNotesService.currentNoteSections;
   selectedAction = signal<IManageNotesAction | undefined>(undefined);
   actions = signal<IManageNotesAction[]>(this.storeService.getManageNotesActions());
 
   ngOnInit(): void {
     this.getCurrentAction();
-    this.getSections();
   }
 
   getCurrentAction() {
@@ -40,13 +39,6 @@ export class ManageNotesAction implements OnInit {
       .subscribe((action: IManageNotesAction | undefined) => {
         this.selectedAction.set(action);
         
-      });
-  }
-
-  getSections() {
-    this.notesService.getNotesSection().pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((sec: ISection[]) => {
-        this.sections.set(sec);
       });
   }
 

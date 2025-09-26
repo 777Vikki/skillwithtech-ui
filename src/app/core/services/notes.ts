@@ -5,17 +5,14 @@ import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { concatMap, tap, map, delay } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
-import { StoreService } from './store';
+import { SharedNotesService } from '../../features/notes/services/shared-notes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  private storeService = inject(StoreService);
+  private sharedNotesService = inject(SharedNotesService);
   private backendService = inject(BackendService);
-
-  protected selectedNotes: INote = this.storeService.getDummyNotes();
-  private notesSection = new BehaviorSubject<ISection[]>([]);
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
     return this.backendService.onAddSection(section, index).pipe(
@@ -84,27 +81,14 @@ export class NotesService {
     return this.backendService.onAddDescription(topic, description);
   }
 
-  setSelectedNotes(notes: INote) {
-    this.selectedNotes = notes;
-    this.getSections().subscribe();
-  }
-
-  getNotesSection(): Observable<ISection[]> {
-    return this.notesSection.asObservable();
-  }
-
   getSections(): Observable<ISection[]> {
-    if (this.selectedNotes.type) {
-      return this.backendService.getSections(this.selectedNotes.type).pipe(tap(section => {
-        console.log(section);
-        this.notesSection.next(section);
+    const selectedNote = this.sharedNotesService.currentNote();
+    if (selectedNote?.type) {
+      return this.backendService.getSections(selectedNote.type).pipe(tap(sections => {
+        this.sharedNotesService.setCurrentNoteSections(sections);
       }));
     }
     return EMPTY;
-  }
-
-  getSelectedNotes(): INote {
-    return this.selectedNotes;
   }
 
   removeUnusedTag(text: string) {

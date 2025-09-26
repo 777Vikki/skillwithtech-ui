@@ -8,7 +8,7 @@
                         (click)="isSectionCollapse = true">keyboard_double_arrow_left</span> </div>
             </div>
             <div class="note-section-container" #sectionScrollContainer>
-                @for(section of sections; track section.sectionId; let i = $index) {
+                @for(section of sections(); track section.sectionId; let i = $index) {
                 <div class="note-section-item" [id]="'section_' + section.sectionId" (click)="onSelectSection(section)"
                     [ngClass]="{'selected': selectedSection?.sectionId === section.sectionId}">
                     <div><strong>{{ i + 1 }}.</strong></div>
@@ -50,7 +50,7 @@
     </div>
     } @else {
     <div class="mobile-view">
-        @for(section of sections; track section.sectionId) {
+        @for(section of sections(); track section.sectionId) {
         <div class="note-section">
             <div class="note-section-item" (click)="onExpandSection(section.sectionId); $event.stopPropagation()">
                 <div [innerHTML]="section.name"></div>
