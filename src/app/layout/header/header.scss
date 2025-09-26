@@ -51,3 +51,58 @@
     }
   }
 }
+
+.menu-container {
+  position: relative;
+
+  .dots-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .menu-list {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    li {
+      padding: 0.5rem 1rem;
+      width: 160px;
+      font-size: 12px;
+    }
+  }
+}
+
+.outlined-blue-btn {
+  padding: 4px;
+  border: 1.5px solid blue;
+  text-align: center;
+  border-radius: 12px;
+  color: blue;
+  cursor: pointer;
+}
+
+.outlined-blue-btn:hover {
+  background-color: rgb(0 0 255 / 8%);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.settins {
+  padding: 8px;
+  margin-top: 6px;
+  background-color: #8080801c;
+  border-radius: 4px;
+}

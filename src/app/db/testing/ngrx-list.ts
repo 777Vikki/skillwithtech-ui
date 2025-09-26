@@ -6,7 +6,7 @@ export const ngrxList = () => {
             "noteType": "NgRx",
             "topics": [
                 {
-                    "text": "<p><strong>What is NgRx in Angular?</strong></p>",
+                    "text": "<p>What is NgRx in Angular?</p>",
                     "sectionId": 34,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -14,7 +14,7 @@ export const ngrxList = () => {
                     "description": "<p><strong>NgRx</strong> in <strong>Angular</strong> is a <strong>state management library</strong> built on top of <strong>RxJS</strong> (<em>Reactive Extensions for JavaScript</em>).</p></br><p> It helps manage and maintain the <strong>application state</strong> in a <strong>predictable</strong> (easy to understand and debug) and <strong>scalable</strong> (grow with your application without becoming messy) way, especially useful in <strong>large Angular applications</strong> where multiple components interact with <strong>shared data</strong>.</p></br><p>It follows the <strong>Redux pattern</strong> (<strong>single store</strong>, <strong>unidirectional data flow</strong>, <strong>immutability</strong>), but implemented with <strong>Angular</strong> and <strong>RxJS</strong>.</p></br><p>It uses <strong>Actions</strong>, <strong>Reducers</strong>, <strong>Selectors</strong>, and <strong>Effects</strong> to manage and handle <strong>application state</strong> and <strong>side effects</strong> like <strong>API calls</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>How does NgRx handle immutability?</strong></p>",
+                    "text": "<p>How does NgRx handle immutability?</p>",
                     "sectionId": 34,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -30,7 +30,7 @@ export const ngrxList = () => {
                     "noteType": "NgRx",
                     "topics": [
                         {
-                            "text": "<p><strong>Can you explain NgRx Flow (Redux Pattern in Angular)?</strong></p>",
+                            "text": "<p>Can you explain NgRx Flow (Redux Pattern in Angular)?</p>",
                             "sectionId": 34,
                             "subSectionId": 5,
                             "noteType": "NgRx",
@@ -47,7 +47,7 @@ export const ngrxList = () => {
             "noteType": "NgRx",
             "topics": [
                 {
-                    "text": "<p><strong>What is ‘store’ in NgRx?</strong></p>",
+                    "text": "<p>What is ‘store’ in NgRx?</p>",
                     "sectionId": 35,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -55,7 +55,7 @@ export const ngrxList = () => {
                     "description": "<p>The <strong>Store</strong> in <strong>NgRx</strong> is a <strong>centralized state management container</strong> for Angular applications. It holds the entire <strong>application state</strong> in a <strong>single tree structure</strong>, following the <strong>Redux pattern</strong> and <strong>RxJS observables</strong>.</p></br><ul><li>The <strong>Store</strong> is <strong>read-only</strong> → components cannot directly modify it.</li><li>To <strong>update the state</strong>, we <strong>dispatch actions</strong>, which are processed by <strong>reducers</strong> to create a <strong>new immutable state</strong>.</li><li>Components can then subscribe to <strong>selectors</strong> to <strong>read slices of state</strong> in a <strong>reactive way</strong>.</li></ul>"
                 },
                 {
-                    "text": "<p><strong>What is ‘Actions’ in NgRx?</strong></p>",
+                    "text": "<p>What is ‘Actions’ in NgRx?</p>",
                     "sectionId": 35,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -63,7 +63,7 @@ export const ngrxList = () => {
                     "description": "<p><strong>Actions</strong> are <strong>plain TypeScript objects</strong>, and they are the <strong>only way</strong> to express that <strong>something happened</strong> (e.g., a <strong>user clicked a button</strong>, <strong>data loaded</strong> from an <strong>API</strong>, or a <strong>login failed</strong>).</p>"
                 },
                 {
-                    "text": "<p><strong>What is ‘Reducer’ in NgRx?</strong></p>",
+                    "text": "<p>What is ‘Reducer’ in NgRx?</p>",
                     "sectionId": 35,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -71,7 +71,7 @@ export const ngrxList = () => {
                     "description": "<p>In <strong>NgRx</strong>, a <strong>Reducer</strong> is a <strong>pure function</strong> that takes the <strong>current state</strong> and an <strong>action</strong>, then returns a <strong>new state</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>What is ‘Selectors’ in NgRx?</strong></p>",
+                    "text": "<p>What is ‘Selectors’ in NgRx?</p>",
                     "sectionId": 35,
                     "subSectionId": -1,
                     "noteType": "NgRx",
@@ -79,7 +79,7 @@ export const ngrxList = () => {
                     "description": "<p>In <strong>NgRx</strong>, <strong>Selectors</strong> are <strong>functions</strong> used to query <strong>slices of state</strong> from the <strong>Store</strong>.</p><p> They make it <strong>easier</strong>, <strong>reusable</strong>, and <strong>efficient</strong> to get <strong>data</strong> from the <strong>state</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>What are ‘effects’ in NgRx?</strong></p>",
+                    "text": "<p>What are ‘effects’ in NgRx?</p>",
                     "sectionId": 35,
                     "subSectionId": -1,
                     "noteType": "NgRx",

@@ -8,7 +8,25 @@
     </div>
 
     <!-- Right: Logo + Profile -->
-    <div class="right-section">
-        <div class="profile-avatar" routerLink="/profile"> VM </div>
+    <div class="right-section menu-container" (click)="$event.stopPropagation()">
+        <div class="profile-avatar" (click)="showProfile.set(!showProfile()); showSettings.set(false)"> VM </div>
+        @if(showProfile()) {
+        <ul class="menu-list">
+            <li><strong>Vivek Kumar Maurya</strong></li>
+            <li>
+                <div routerLink="/profile" class="outlined-blue-btn">View Profile</div>
+            </li>
+            <li>
+                <div>
+                    <span class="cursor-pointer" (click)="showSettings.set(!showSettings())">Settings</span>
+                </div>
+                @if(showSettings()) {
+                <div class="settins">
+                    <div class="cursor-pointer" (click)="clearLocalStorage()">Clear Storage</div>
+                </div>
+                }
+            </li>
+        </ul>
+        }
     </div>
 </header>
