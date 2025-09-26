@@ -14,10 +14,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
+import { NgClass } from '@angular/common';
+
+interface IPreview {
+  text: string;
+  isDuplicate: boolean;
+}
 
 @Component({
   selector: 'app-manage-notes-form',
-  imports: [ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe, Toast],
+  imports: [NgClass, ReactiveFormsModule, RadioButtonModule, SelectModule, EditorModule, ButtonModule, PlainTextPipe, Toast],
   templateUrl: './manage-notes-form.html',
   styleUrl: './manage-notes-form.scss',
   providers: [MessageService]
@@ -25,7 +31,6 @@ import { Toast } from 'primeng/toast';
 export class ManageNotesForm implements OnInit {
   private notesService = inject(NotesService);
   private formBuilder = inject(FormBuilder);
-  private storeService = inject(StoreService);
   private sharedNotesService = inject(SharedNotesService);
   private destroyRef = inject(DestroyRef);
   private messageService = inject(MessageService);
@@ -33,22 +38,21 @@ export class ManageNotesForm implements OnInit {
   sections = this.sharedNotesService.currentNoteSections;
   subSections: ISubSection[] = [];
   contents: ITopic[] = [];
-  previewList: string[] = [];
+  previewList = signal<IPreview[]>([]);
+  duplicatePreviewCount = signal<number>(0)
   currentAction = signal<IManageNotesAction | undefined>(undefined);
   notesForm: FormGroup = this.formBuilder.group({});
 
   ngOnInit(): void {
-    this.getSections();
     this.getCurrentAction();
-  }
-
-  getSections() {
   }
 
   getCurrentAction() {
     this.sharedNotesService.getCurrentActionObservable()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((action: IManageNotesAction | undefined) => {
+        this.previewList.set([]);
+        this.duplicatePreviewCount.set(0);
         this.currentAction.set(action);
         const currentActionId = this.currentAction()?.id;
         if (this.currentAction != null) {
@@ -65,7 +69,7 @@ export class ManageNotesForm implements OnInit {
           } else if (currentActionId === "Edit_Content") {
             this.editContent();
           } else if (currentActionId === "Add_Bulk_Content") {
-            this.addSection();
+            this.addContent();
           }
         }
       });
@@ -207,6 +211,24 @@ export class ManageNotesForm implements OnInit {
         }
       }
     });
+
+    if (this.currentAction()?.id === "Add_Bulk_Content") {
+      this.previewList.set([]);
+      this.duplicatePreviewCount.set(0);
+      this.notesForm?.get("text")?.valueChanges.subscribe(d => {
+        const polishText = d.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
+        const polishTextMatch: string[] = polishText.match(/<p>.*?<\/p>/g) ?? [];
+        const duplicatedPreviewList = polishTextMatch.filter((d: string, index: number) => polishTextMatch.indexOf(d) !== index);
+        this.previewList.set(
+          polishTextMatch.map((d: string) => {
+            return {
+              text: d,
+              isDuplicate: duplicatedPreviewList.includes(d),
+            }
+          }));
+        this.duplicatePreviewCount.set(duplicatedPreviewList.length)
+      });
+    }
   }
 
   setSubSectionControl() {
@@ -328,17 +350,19 @@ export class ManageNotesForm implements OnInit {
       }
     }
     const isBulkContent = this.currentAction()?.id === "Add_Bulk_Content";
+    if(isBulkContent) {
+      if(this.duplicatePreviewCount() > 0) {
+        this.messageService.add({ severity: 'warn', summary: 'Warn', detail: "Please remove doplicate contents." });
+        return;
+      }
+    }
     this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).subscribe((res: IResponse) => {
       if (res?.status) {
         if (res.data && res.data.length > 0) {
           if (isBulkContent) {
             this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
             this.sharedNotesService.setCurrentActionObservable(this.currentAction());
-            if (res.message === "Some Contents are dublicates.") {
-              this.messageService.add({ severity: 'warning', summary: 'Warning', detail: res.message });
-            } else {
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
-            }
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
           } else {
             const responseSection = res.data[0];
             const position = formValue?.position ? formValue.position : '1';
@@ -346,6 +370,8 @@ export class ManageNotesForm implements OnInit {
             this.sharedNotesService.setCurrentActionObservable(this.currentAction());
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is created successfully.' });
           }
+        } else {
+          this.messageService.add({ severity: 'warn', summary: 'Warn', detail: res.message });
         }
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });

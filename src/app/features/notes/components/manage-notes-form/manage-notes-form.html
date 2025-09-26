@@ -77,19 +77,24 @@
             <div class="form-actions">
                 <p-button (click)="submitForm()" label="Submit" severity="success" [disabled]="notesForm.invalid" />
             </div>
-            @if(notesForm.get('text')?.touched && notesForm.get('text')?.valid && currentAction()?.id === 'Add_Bulk_Content') {
-            @if(previewList && previewList.length) {
+            @if(currentAction()?.id === 'Add_Bulk_Content') {
+            @if(previewList() && previewList().length) {
             <div class="preview-contaner">
                 <div class="preview-text">Preview: </div>
                 <div class="preview-list">
-                    @for(preview of previewList; track preview; let i = $index) {
-                    <div class="preview-content">
+                    @for(preview of previewList(); track preview; let i = $index) {
+                    <div class="preview-content" [ngClass]="{'text-warn': preview.isDuplicate}">
                         <div class="preview-index">{{i + 1}}.</div>
-                        <div [innerHTML]="preview"></div>
+                        <div [innerHTML]="preview.text"></div>
                     </div>
                     }
                 </div>
             </div>
+            @if(duplicatePreviewCount() > 0) {
+            <div>
+                Duplicated Text Count: {{duplicatePreviewCount()}}
+            </div>
+            }
             } @else {
             <div class="preview-contaner">
                 <div class="preview-text">Preview: </div>

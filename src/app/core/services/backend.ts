@@ -128,14 +128,18 @@ export class BackendService {
     if (isBulkContent) {
       let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
       if (requestContents.length > 0) {
-        const filterRequestContents = requestContents.filter(d => flatQuestionList.includes(this.getPlainTextWithTrim(d)));
-        if (filterRequestContents.length !== requestContents.length) {
-          message = 'Some Contents are dublicates.';
-          requestContents = filterRequestContents;
+        const filterRequestContents = requestContents.filter(d => !flatQuestionList.includes(this.getPlainTextWithTrim(d)));
+        if (filterRequestContents.length > 0) {
+          if (filterRequestContents.length !== requestContents.length) {
+            message = (requestContents.length - filterRequestContents.length) + ' Content(s) are dublicates.';
+            requestContents = filterRequestContents;
+          }
+          contents = requestContents.map(d => {
+            return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
+          });
+        } else {
+          return of({ status: true, message: 'All Contents are dublicates.', data: [] });
         }
-        contents = requestContents.map(d => {
-          return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
-        });
       } else {
         return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
       }
@@ -153,7 +157,7 @@ export class BackendService {
       this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: message ? message : 'Success', data: [...contents] });
+    return of({ status: true, message: message ? message : 'Success', data: isBulkContent? [] : [...contents] });
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
