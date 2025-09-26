@@ -7,4 +7,5 @@ export enum Note {
     HTML = "HTML",
     CSS = "CSS",
     AZURE = "AZURE",
+    ANGULAR_MICROFRONTEND = "AngularMicroFrontend"
 }

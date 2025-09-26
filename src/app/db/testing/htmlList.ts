@@ -6,7 +6,7 @@ export const htmlList = () => {
             "noteType": "HTML",
             "topics": [
                 {
-                    "text": "<p><strong>What is HTML?</strong></p>",
+                    "text": "<p>What is HTML?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
@@ -14,31 +14,31 @@ export const htmlList = () => {
                     "description": ""
                 },
                 {
-                    "text": "<p><strong>What is the difference between inline, block, and inline-block elements?</strong></p>",
+                    "text": "<p>What is the difference between inline, block, and inline-block elements?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 181,
-                    "description": ""
+                    "description": "<p><strong>Inline</strong>: Does <strong>not start on a new line</strong> (<code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>).</p></br><p><strong>Block</strong>: <strong>Occupies full width</strong>, <strong>starts on new line</strong> (<code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>).</p></br><p><strong>Inline-block</strong>: <strong>Behaves like inline</strong> but <strong>supports block properties</strong> (<strong>height/width</strong>).</p>"
                 },
                 {
-                    "text": "<p><strong>What are semantic HTML tags? Can you give examples?</strong></p>",
+                    "text": "<p>What are semantic HTML tags? Can you give examples?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 182,
-                    "description": ""
+                    "description": "<p><strong>Semantic HTML tags</strong> describe the <strong>meaning of content</strong> (<strong>improve SEO &amp; accessibility</strong>).</p></br><p><strong>Examples:</strong> <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>.</p>"
                 },
                 {
-                    "text": "<p><strong>What is SEO</strong></p>",
+                    "text": "<p>What is SEO?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 183,
-                    "description": ""
+                    "description": "<p><strong>SEO (Search Engine Optimization)</strong> is the practice of <strong>improving a website’s visibility</strong> in <strong>search engines</strong> through <strong>content</strong>, <strong>structure</strong>, and <strong>performance optimization</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>What is a Web Component?</strong></p>",
+                    "text": "<p>What is a Web Component?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
@@ -46,28 +46,28 @@ export const htmlList = () => {
                     "description": ""
                 },
                 {
-                    "text": "<p><strong>Difference between id and class attributes in HTML?</strong></p>",
+                    "text": "<p>Difference between id and class attributes in HTML?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 185,
-                    "description": ""
+                    "description": "<p><strong>id:</strong> <strong>Unique per page</strong>, used for <strong>specific elements</strong>.</p></br><p><strong>class:</strong> Can be <strong>shared by multiple elements</strong>, used for <strong>styling</strong> and <strong>grouping</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>What are data- attributes* in HTML? How are they useful in Angular?</strong></p>",
+                    "text": "<p>What are data- attributes* in HTML? How are they useful in Angular?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 186,
-                    "description": ""
+                    "description": "<p><strong>Custom attributes</strong> (e.g., <code>data-user-id=&quot;123&quot;</code>) used to <strong>store extra data</strong> without <strong>cluttering code</strong>.</p></br><p> 👉 <strong>Useful in Angular</strong> for <strong>passing small dataset</strong> to <strong>components</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>Difference between &lt;div&gt; and &lt;span&gt; tags?</strong></p>",
+                    "text": "<p>Difference between &lt;div&gt; and &lt;span&gt; tags?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 187,
-                    "description": ""
+                    "description": "<p><code>&lt;div&gt;</code>: <strong>Block-level container</strong>.</p></br><p> <code>&lt;span&gt;</code>: <strong>Inline container</strong> for <strong>styling specific text/part</strong>.</p>"
                 }
             ],
             "subSections": []
@@ -78,28 +78,28 @@ export const htmlList = () => {
             "noteType": "HTML",
             "topics": [
                 {
-                    "text": "<p><strong>What is the difference between &lt;input type=&quot;text&quot;&gt; and &lt;textarea&gt;?</strong></p>",
+                    "text": "<p>What is the difference between &lt;input type=&quot;text&quot;&gt; and &lt;textarea&gt;?</p>",
                     "sectionId": 42,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 188,
-                    "description": ""
+                    "description": "<p><code>&lt;input type=&quot;text&quot;&gt;</code>: <strong>Single line input</strong>.</p></br><p> <code>&lt;textarea&gt;</code>: <strong>Multi-line input</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>Difference between &lt;button&gt; and &lt;input type=&quot;button&quot;&gt;?</strong></p>",
+                    "text": "<p>Difference between &lt;button&gt; and &lt;input type=&quot;button&quot;&gt;?</p>",
                     "sectionId": 42,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 189,
-                    "description": ""
+                    "description": "<p><code>&lt;button&gt;</code>: <strong>More flexible</strong> (can contain <strong>HTML inside</strong>, default type is <strong>&quot;submit&quot;</strong>).</p></br><p> <code>&lt;input type=&quot;button&quot;&gt;</code>: <strong>Fixed</strong>, only <strong>text value</strong>.</p>"
                 },
                 {
-                    "text": "<p><strong>What is the difference between GET and POST form methods?</strong></p>",
+                    "text": "<p>What is the difference between GET and POST form methods?</p>",
                     "sectionId": 42,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 190,
-                    "description": ""
+                    "description": "<p><strong>GET:</strong> <strong>Data visible in URL</strong> (<strong>not secure</strong>, <strong>limited length</strong>).</p></br><p> <strong>POST:</strong> <strong>Data hidden in body</strong> (<strong>secure</strong>, used for <strong>sensitive data</strong>).</p>"
                 }
             ],
             "subSections": []
@@ -110,28 +110,28 @@ export const htmlList = () => {
             "noteType": "HTML",
             "topics": [
                 {
-                    "text": "<p><strong>What is srcset?</strong></p>",
+                    "text": "<p>What is srcset?</p>",
                     "sectionId": 43,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 191,
-                    "description": ""
+                    "description": "<p><code><strong>srcset</strong></code><strong> attribute</strong> allows you to provide <strong>multiple versions of the same image</strong> for <strong>different screen sizes</strong> and <strong>resolutions</strong>.</p><p>The <strong>browser automatically chooses</strong> the <strong>best image</strong> to load depending on the <strong>device DPI (pixel density)</strong> and <strong>viewport width</strong>.</p></br><pre data-language=\"plain\">\n&lt;img \n  src=&quot;image-small.jpg&quot; \n  srcset=&quot;image-small.jpg 480w, image-medium.jpg 800w, image-large.jpg 1200w&quot; \n</pre><p>  alt=&quot;Sample Image&quot;&gt;</p></br><p>👉 <strong>Explanation:</strong></p><ul><li><strong>image-small.jpg 480w</strong> → use when <strong>viewport ≤480px</strong>.</li><li><strong>image-medium.jpg 800w</strong> → use when <strong>viewport ≤800px</strong>.</li><li><strong>image-large.jpg 1200w</strong> → use when <strong>viewport ≤1200px</strong>.</li></ul><p><strong>Browser picks the most suitable image automatically.</strong></p></br>"
                 },
                 {
-                    "text": "<p><strong>What is the difference between src and href in HTML?</strong></p>",
+                    "text": "<p>What is the difference between src and href in HTML?</p>",
                     "sectionId": 43,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 192,
-                    "description": ""
+                    "description": "<p><code><strong>src</strong></code>: Tells the <strong>browser</strong> to <strong>embed the resource</strong> at that location (<strong>replace the element’s content</strong>). Example: <code>&lt;img src=&quot;image.png&quot;&gt;</code>.</p></br><p><code><strong>href</strong></code>: Tells the <strong>browser</strong> to <strong>navigate</strong> or <strong>link</strong> to that <strong>resource</strong>. Example: <code>&lt;a href=&quot;page.html&quot;&gt;</code>.</p>"
                 },
                 {
-                    "text": "<p><strong>What tags commonly use the src attribute?</strong></p>",
+                    "text": "<p>What tags commonly use the src attribute?</p>",
                     "sectionId": 43,
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 193,
-                    "description": ""
+                    "description": "<p><code>&lt;img src=&quot;...&quot;&gt;</code> → <strong>for images</strong>.</p><p><code>&lt;script src=&quot;...&quot;&gt;</code> → <strong>for JavaScript files</strong>.</p><p><code>&lt;iframe src=&quot;...&quot;&gt;</code> → <strong>for embedding pages</strong>.</p><p><code>&lt;audio src=&quot;...&quot;&gt;</code> / <code>&lt;video src=&quot;...&quot;&gt;</code> → <strong>for media</strong>.</p><p><code>&lt;source src=&quot;...&quot;&gt;</code> → <strong>inside &lt;audio&gt; or &lt;video&gt;</strong>.</p>"
                 }
             ],
             "subSections": []

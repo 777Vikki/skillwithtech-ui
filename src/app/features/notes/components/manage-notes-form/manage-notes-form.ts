@@ -79,12 +79,16 @@ export class ManageNotesForm implements OnInit {
     this.removeFormControls();
     this.subSections = [];
     this.contents = [];
-    const section: ISection | undefined = this.sharedNotesService.currentActionRow() as ISection;
-    const position = this.sharedNotesService.applyActionPosition();
-    const sectionId = (section?.sectionId != null || section?.sectionId > 0) ? section.sectionId : null;
-    this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
-    this.notesForm.addControl('text', new FormControl('', [Validators.required]));
-    this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
+    if (this.sections().length > 0) {
+      const section: ISection | undefined = this.sharedNotesService.currentActionRow() as ISection;
+      const position = this.sharedNotesService.applyActionPosition();
+      const sectionId = (section?.sectionId != null || section?.sectionId > 0) ? section.sectionId : null;
+      this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
+      this.notesForm.addControl('text', new FormControl('', [Validators.required]));
+      this.notesForm.addControl('position', new FormControl(position, [Validators.required]));
+    } else {
+      this.notesForm.addControl('text', new FormControl('', [Validators.required]));
+    }
   }
 
   addSubSection() {
