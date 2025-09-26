@@ -157,8 +157,8 @@ export class ManageNotesCrud implements OnInit {
         this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteSection(index).subscribe((res: IResponse) => {
           if (res?.status) {
+            this.sharedNotesService.deleteSection(index);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section has been deleted.' });
-            this.notesService.getSections().subscribe();
           }
         });
       },
@@ -185,8 +185,8 @@ export class ManageNotesCrud implements OnInit {
         this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteSubSection(sectionIndex, subSectionIndex).subscribe((res: IResponse) => {
           if (res?.status) {
+            this.sharedNotesService.deleteSubSection(sectionIndex, subSectionIndex);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Section has been deleted.' });
-            this.notesService.getSections().subscribe();
           }
         });
       },
@@ -213,8 +213,8 @@ export class ManageNotesCrud implements OnInit {
         this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
         this.notesService.onDeleteContent(content).subscribe((res: IResponse) => {
           if (res.status) {
+            this.sharedNotesService.deleteConten(content);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content has been deleted.' });
-            this.notesService.getSections().subscribe();
           }
         });
       },

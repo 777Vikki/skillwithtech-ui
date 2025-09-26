@@ -216,8 +216,11 @@ export class ManageNotesForm implements OnInit {
       this.previewList.set([]);
       this.duplicatePreviewCount.set(0);
       this.notesForm?.get("text")?.valueChanges.subscribe(d => {
-        const polishText = d.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
-        const polishTextMatch: string[] = polishText.match(/<p>.*?<\/p>/g) ?? [];
+        const polishText = d
+          .replace(/&nbsp;/g, ' ')
+          .replace(/(<p>\s*<\/p>)/g, '</br>');
+
+        const polishTextMatch: string[] = polishText.match(/<p>.*?<\/p>/g)?.map((p: string) => p.trim()) ?? [];
         const duplicatedPreviewList = polishTextMatch.filter((d: string, index: number) => polishTextMatch.indexOf(d) !== index);
         this.previewList.set(
           polishTextMatch.map((d: string) => {
@@ -350,8 +353,8 @@ export class ManageNotesForm implements OnInit {
       }
     }
     const isBulkContent = this.currentAction()?.id === "Add_Bulk_Content";
-    if(isBulkContent) {
-      if(this.duplicatePreviewCount() > 0) {
+    if (isBulkContent) {
+      if (this.duplicatePreviewCount() > 0) {
         this.messageService.add({ severity: 'warn', summary: 'Warn', detail: "Please remove doplicate contents." });
         return;
       }
@@ -359,11 +362,7 @@ export class ManageNotesForm implements OnInit {
     this.notesService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).subscribe((res: IResponse) => {
       if (res?.status) {
         if (res.data && res.data.length > 0) {
-          if (isBulkContent) {
-            this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
-            this.sharedNotesService.setCurrentActionObservable(this.currentAction());
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
-          } else {
+          if (!isBulkContent) {
             const responseSection = res.data[0];
             const position = formValue?.position ? formValue.position : '1';
             this.sharedNotesService.setCurrectActionRowDetail(responseSection, position);
@@ -371,7 +370,16 @@ export class ManageNotesForm implements OnInit {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is created successfully.' });
           }
         } else {
-          this.messageService.add({ severity: 'warn', summary: 'Warn', detail: res.message });
+          if (isBulkContent) {
+            this.sharedNotesService.setCurrectActionRowDetail(undefined, '');
+            this.sharedNotesService.setCurrentActionObservable(this.currentAction());
+            if (res.message !== "Success") {
+              this.messageService.add({ severity: 'warn', summary: 'Warn', detail: res.message });
+            } else {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contents are created successfully.' });
+            }
+            this.notesForm.reset();
+          }
         }
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
@@ -389,6 +397,7 @@ export class ManageNotesForm implements OnInit {
     };
     this.notesService.onEditSection(section).subscribe((res: IResponse) => {
       if (res?.status) {
+        this.sharedNotesService.updateSectionText(section.name, section.sectionId)
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
@@ -407,6 +416,7 @@ export class ManageNotesForm implements OnInit {
     }
     this.notesService.onEditSubSection(subSection).subscribe((res: IResponse) => {
       if (res?.status) {
+        this.sharedNotesService.updateSubSectionText(editorText, subSection.sectionId, subSection.subSectionId);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
@@ -425,6 +435,7 @@ export class ManageNotesForm implements OnInit {
     }
     this.notesService.onEditContent(content).subscribe((res: IResponse) => {
       if (res?.status) {
+        this.sharedNotesService.updateContentText(editorText, content.sectionId, content.subSectionId, content.topicId)
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully updated.' });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });

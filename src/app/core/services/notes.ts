@@ -85,6 +85,7 @@ export class NotesService {
     const selectedNote = this.sharedNotesService.currentNote();
     if (selectedNote?.type) {
       return this.backendService.getSections(selectedNote.type).pipe(tap(sections => {
+        console.log(sections);
         this.sharedNotesService.setCurrentNoteSections(sections);
       }));
     }
