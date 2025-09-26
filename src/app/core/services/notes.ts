@@ -2,23 +2,29 @@ import { inject, Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { concatMap, tap, map, delay } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
-import { StoreService } from './store';
+import { SharedNotesService } from '../../features/notes/services/shared-notes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  private storeService = inject(StoreService);
+  private sharedNotesService = inject(SharedNotesService);
   private backendService = inject(BackendService);
 
-  protected selectedNotes: INote = this.storeService.getDummyNotes();
-  private notesSection = new BehaviorSubject<ISection[]>([]);
-
   onAddSection(section: ISection, index: number): Observable<IResponse> {
-    return this.backendService.onAddSection(section, index);
+    return this.backendService.onAddSection(section, index).pipe(
+      concatMap(postResult => {
+        if (postResult.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          )
+        } else {
+          return of(postResult);
+        }
+      }));
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -26,7 +32,29 @@ export class NotesService {
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex);
+    return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex).pipe(
+      concatMap(postResult => {
+        if (postResult?.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          )
+        } else {
+          return of(postResult);
+        }
+      }));
+  }
+
+  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).pipe(
+      concatMap(postResult => {
+        if (postResult?.status) {
+          return this.getSections().pipe(
+            map(() => postResult)
+          );
+        } else {
+          return of(postResult);
+        }
+      }));
   }
 
   onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
@@ -49,34 +77,25 @@ export class NotesService {
     return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
   }
 
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent);
-  }
-
   onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
     return this.backendService.onAddDescription(topic, description);
   }
 
-  setSelectedNotes(notes: INote) {
-    this.selectedNotes = notes;
-    this.getSections().subscribe();
-  }
-
-  getNotesSection(): Observable<ISection[]> {
-    return this.notesSection.asObservable();
-  }
-
   getSections(): Observable<ISection[]> {
-    if (this.selectedNotes.type) {
-      return this.backendService.getSections(this.selectedNotes.type).pipe(tap(section => {
-        this.notesSection.next(section);
+    const selectedNote = this.sharedNotesService.currentNote();
+    if (selectedNote?.type) {
+      return this.backendService.getSections(selectedNote.type).pipe(tap(sections => {
+        console.log(sections);
+        this.sharedNotesService.setCurrentNoteSections(sections);
       }));
     }
     return EMPTY;
   }
 
-  getSelectedNotes(): INote {
-    return this.selectedNotes;
+  removeUnusedTag(text: string) {
+    let editorText = text.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
+    editorText = editorText === '</br>' ? '' : editorText;
+    return editorText;
   }
 
   getPlainText(rawHtml: string): string {

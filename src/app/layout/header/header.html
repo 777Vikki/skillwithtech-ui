@@ -1,8 +1,8 @@
 <header class="header">
     <!-- Left: Page name and dropdown -->
     <div class="page-info">
-        <p-select [options]="headers" [(ngModel)]="selectedHeader" optionLabel="name" placeholder="Select a Note"
-            (onChange)="onSelectNote()" class="w-full md:w-56" />
+        <p-select [options]="headers()" [ngModel]="selectedHeader()" optionLabel="name" placeholder="Select a Note"
+            (onChange)="onSelectNote($event)" class="w-full md:w-56" />
         <a class="link" (click)="onNavigation('/notes/active-notes')">Notes</a>
         <a class="link" (click)="onNavigation('/notes/manage-notes')">Manage Notes</a>
     </div>

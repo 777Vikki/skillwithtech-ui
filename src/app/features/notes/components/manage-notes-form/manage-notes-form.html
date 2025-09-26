@@ -1,6 +1,6 @@
 <div class="manage-form-container">
     <div class="manage-action-header center-align-between">
-        <div>{{action?.name}}</div>
+        <div>{{currentAction()?.name}}</div>
         <div><span class="material-symbols-outlined close-icon" (click)="onClose()">close</span></div>
     </div>
     <div class="manage-form-content">
@@ -9,8 +9,15 @@
             @if(notesForm.get('sectionId')) {
             <div class="form-group">
                 <label>Section: </label>
-                <p-select [options]="sections" formControlName="sectionId" placeholder="Select Section"
-                    optionLabel="name" optionValue="sectionId" class="w-full md:w-56" />
+                <p-select [options]="sections()" formControlName="sectionId" placeholder="Select Section"
+                    optionLabel="name" optionValue="sectionId" class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
@@ -19,15 +26,29 @@
                 <label>Sub Section: </label>
                 <p-select [options]="subSections" [showClear]="true" formControlName="subSectionId"
                     placeholder="Select Sub Section" optionLabel="name" optionValue="subSectionId"
-                    class="w-full md:w-56" />
+                    class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.name | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
             @if(notesForm.get('contentId')) {
             <div class="form-group">
-                <label>Sub Content: </label>
+                <label>Content: </label>
                 <p-select [options]="contents" [showClear]="true" formControlName="contentId"
-                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56" />
+                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56">
+                    <ng-template let-item #selectedItem>
+                        <span>{{item.text | plainText:60}}</span>
+                    </ng-template>
+                    <ng-template let-item #item>
+                        <span>{{item.text | plainText:60}}</span>
+                    </ng-template>
+                </p-select>
             </div>
             }
 
@@ -56,27 +77,34 @@
             <div class="form-actions">
                 <p-button (click)="submitForm()" label="Submit" severity="success" [disabled]="notesForm.invalid" />
             </div>
-            @if(notesForm.get('text')?.touched && notesForm.get('text')?.valid && action?.id === 'Add_Bulk_Content') {
-            @if(previewList && previewList.length) {
+            @if(currentAction()?.id === 'Add_Bulk_Content') {
+            @if(previewList() && previewList().length) {
             <div class="preview-contaner">
                 <div class="preview-text">Preview: </div>
                 <div class="preview-list">
-                    @for(preview of previewList; track preview; let i = $index) {
-                    <div class="preview-content">
+                    @for(preview of previewList(); track preview; let i = $index) {
+                    <div class="preview-content" [ngClass]="{'text-warn': preview.isDuplicate}">
                         <div class="preview-index">{{i + 1}}.</div>
-                        <div [innerHTML]="preview"></div>
+                        <div [innerHTML]="preview.text"></div>
                     </div>
                     }
                 </div>
             </div>
+            @if(duplicatePreviewCount() > 0) {
+            <div>
+                Duplicated Text Count: {{duplicatePreviewCount()}}
+            </div>
+            }
             } @else {
-                <div class="preview-contaner">
-                    <div class="preview-text">Preview: </div>
-                    <div class="no-preview">No preview available. Please check text format</div>
-                </div>
+            <div class="preview-contaner">
+                <div class="preview-text">Preview: </div>
+                <div class="no-preview">No preview available. Please check text format</div>
+            </div>
             }
             }
         </form>
         }
     </div>
 </div>
+
+<p-toast />

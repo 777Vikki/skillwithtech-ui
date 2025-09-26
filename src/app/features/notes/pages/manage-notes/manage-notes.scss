@@ -1,121 +1,56 @@
 .manage-notes-container {
-    border: 1px solid black;
-    border-radius: 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: none;
 
-    .manage-notes {
-        flex: none;
+  .manage-notes {
+    flex: none;
+  }
 
-        .manage-header {
-            padding: 8px;
-            border-bottom: 1px solid black;
-        }
-
-        .manage-notes-content {
-            overflow-y: auto;
-            height: calc(100vh - 140px);
-
-            .section-text {
-                background-color: #80808082;
-                padding: 8px;
-                border-bottom: 1px solid black;
-            }
-
-            .subSection-text {
-                background-color: #80808033;
-                padding: 8px;
-                border-bottom: 1px solid black;
-            }
-
-            .content-text {
-                padding: 8px;
-                border-bottom: 1px dashed black;
-            }
-
-            .content-text:last-child {
-                border-bottom: 0px;
-            }
-        }
-
-        .section-container {
-            margin: 8px;
-            border: 1px solid black;
-            border-radius: 4px;
-        }
-
-        .subsection-container {
-            margin: 8px;
-            border: 1px solid black;
-            border-radius: 4px;
-        }
-    }
-
-    .manage-action-container {
-        display: none;
-        border-left: 1px solid black;
-    }
-
-    &.manage-notes-action {
-        display: flex;
-
-        .manage-notes {
-            flex: 1;
-        }
-
-        .manage-action-container {
-            display: block;
-            flex: 1;
-        }
-    }
+  .manage-action-container {
+    display: none;
+    border-left: 1px solid black;
+  }
 }
 
-.menu-container {
-    position: relative;
+.manage-notes-action {
+  .manage-notes,
+  .manage-action-container {
+    flex: 1;
+  }
 
-    .dots-btn {
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .menu-list {
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        list-style: none;
-        padding: 0.5rem 0;
-        margin: 0;
-        z-index: 1;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-        li {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            width: 160px;
-
-            &:hover {
-                background: #f3f4f6;
-            }
-        }
-    }
+  .manage-action-container {
+    display: block;
+  }
 }
 
-.subSection-text {
-    .menu-container {
-        li {
-            width: 195px;
-        }
-    }
-
+.manage-header {
+  padding: 8px;
+  border-bottom: 1px solid black;
 }
 
-.active-row {
-    background-color: khaki;
+.manage-notes-content {
+  overflow-y: auto;
+  height: calc(100vh - 140px);
 }
 
-.ml-4 {
-    margin-left: 4px;
+.mobile-only {
+  display: block;
+  /* show on mobile */
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+    /* hide on desktop */
+  }
+
+  .manage-notes-container {
+    display: block;
+    /* show on desktop */
+  }
+  .manage-notes-action {
+    display: flex;
+  }
 }
