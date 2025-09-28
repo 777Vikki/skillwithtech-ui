@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './layout/header/header';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,5 +11,18 @@ import { Header } from './layout/header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  
+  http = inject(HttpClient);
+
+  ngOnInit() {
+    this.http.get('https://raw.githubusercontent.com/777Vikki/skillwithtech-db/master/skillWithTech.json?ts=' + new Date().getTime())
+      .subscribe(d => {
+        console.log(d);
+      });
+
+    this.http.get<any>("https://github.com/777Vikki/skillwithtech-db/blob/master/skillWithTech.json")
+      .subscribe(data => {
+        console.log("Fetched JSON:", data);
+      });
+
+  }
 }
