@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ITopic } from '../../../../core/interfaces/note-interface';
+import { IContent } from '../../../../core/interfaces/note-interface';
 import { TextEditor } from '../../../../shared/components/text-editor/text-editor';
 import { ButtonModule } from 'primeng/button';
 import { StoreService } from '../../../../core/services/store';
@@ -12,7 +12,7 @@ import { StoreService } from '../../../../core/services/store';
 })
 export class Description implements OnInit, OnChanges{
   private storeService = inject(StoreService);
-  @Input() topic: ITopic | undefined;
+  @Input() topic: IContent | undefined;
 
   @Output() emitEditorText = new EventEmitter<string>();
 

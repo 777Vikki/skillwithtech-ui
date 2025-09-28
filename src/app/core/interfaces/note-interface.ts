@@ -1,4 +1,4 @@
-export interface INote { 
+export interface ISubject { 
     name: string;
     type: string;
     id: number;
@@ -9,11 +9,11 @@ export interface ISection {
     name: string;
     sectionId: number;
     noteType: string;
-    topics: ITopic[];
+    topics: IContent[];
     subSections: ISubSection[];
 }
 
-export interface ITopic {
+export interface IContent {
     text: string;
     sectionId: number;
     subSectionId: number;
@@ -26,7 +26,7 @@ export interface ISubSection {
     sectionId: number;
     subSectionId: number;
     noteType: string;
-    topics: ITopic[];
+    topics: IContent[];
 }
 
 export interface IEditSectionRequest {

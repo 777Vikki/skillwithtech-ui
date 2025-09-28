@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { IManageNotesAction } from '../../../core/interfaces/manage-notes-action-interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { INote, ISection, ISubSection, ITopic } from '../../../core/interfaces/note-interface';
+import { ISubject, ISection, ISubSection, IContent } from '../../../core/interfaces/note-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ import { INote, ISection, ISubSection, ITopic } from '../../../core/interfaces/n
 export class SharedNotesService {
   private _manageNoteCurrentAction = signal<IManageNotesAction | undefined>(undefined);
   private _currentNoteSections = signal<ISection[]>([]);
-  private _currentActionRow = signal<ISection | ISubSection | ITopic | undefined>(undefined);
+  private _currentActionRow = signal<ISection | ISubSection | IContent | undefined>(undefined);
   private _applyActionPosition = signal<string>('');
-  private _currentNote = signal<INote | undefined>(undefined);
+  private _currentNote = signal<ISubject | undefined>(undefined);
 
   private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(this._manageNoteCurrentAction());
   private currentNoteSectionsBehaviourSub = new BehaviorSubject<ISection[]>(this._currentNoteSections());
@@ -36,12 +36,12 @@ export class SharedNotesService {
     this._manageNoteActionBehaviourSub.next(action);
   }
 
-  setCurrectActionRowDetail(row: ISection | ISubSection | ITopic | undefined, position: string) {
+  setCurrectActionRowDetail(row: ISection | ISubSection | IContent | undefined, position: string) {
     this._currentActionRow.set(row);
     this._applyActionPosition.set(position);
   }
 
-  setCurrentNote(note: INote | undefined) {
+  setCurrentNote(note: ISubject | undefined) {
     this._currentNote.set(note);
   }
 
@@ -69,7 +69,7 @@ export class SharedNotesService {
     )
   }
 
-  deleteConten(content: ITopic) {
+  deleteConten(content: IContent) {
     this._currentNoteSections.update((sections: ISection[]) =>
       sections.map((section: ISection) =>
         content.subSectionId > -1
@@ -79,14 +79,14 @@ export class SharedNotesService {
               subSection.subSectionId === content.subSectionId
                 ? {
                   ...subSection,
-                  topics: subSection.topics.filter((topic: ITopic) => topic.topicId !== content.topicId)
+                  topics: subSection.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
                 }
                 : subSection
             )
           }
           : {
             ...section,
-            topics: section.topics.filter((topic: ITopic) => topic.topicId !== content.topicId)
+            topics: section.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
           }
       )
     )
@@ -202,7 +202,7 @@ export class SharedNotesService {
   //               subSection.subSectionId === subSectionId
   //                 ? {
   //                   ...subSection,
-  //                   topics: subSection.topics.map((content: ITopic) =>
+  //                   topics: subSection.topics.map((content: IContent) =>
   //                     content.topicId === contentId
   //                       ? {
   //                         ...content,
@@ -216,7 +216,7 @@ export class SharedNotesService {
   //           }
   //           : {
   //             ...section,
-  //             topics: section.topics.map((content: ITopic) =>
+  //             topics: section.topics.map((content: IContent) =>
   //               content.topicId === contentId
   //                 ? {
   //                   ...content,

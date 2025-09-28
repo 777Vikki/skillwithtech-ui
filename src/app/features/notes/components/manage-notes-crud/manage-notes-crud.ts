@@ -3,7 +3,7 @@ import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
+import { ISection, ISubSection, IContent } from '../../../../core/interfaces/note-interface';
 import { IManageNotesAction, ManageNotesIdType } from '../../../../core/interfaces/manage-notes-action-interface';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
@@ -96,13 +96,13 @@ export class ManageNotesCrud implements OnInit {
   }
 
   addContentOnSubSection(subSection: ISubSection) {
-    const content: ITopic = this.storeService.getDummyContent();
+    const content: IContent = this.storeService.getDummyContent();
     content["sectionId"] = subSection.sectionId;
     content["subSectionId"] = subSection.subSectionId;
     this.addContent(content, '', "Add_Content");
   }
 
-  addContent(content: ITopic, position: string, manageNotesActionId: ManageNotesIdType) {
+  addContent(content: IContent, position: string, manageNotesActionId: ManageNotesIdType) {
     const actions = this.storeService.getManageNotesActions();
     const action = actions.find(d => d.id === manageNotesActionId) ?? undefined;
     this.sharedNotesService.setCurrectActionRowDetail(content, position);
@@ -129,7 +129,7 @@ export class ManageNotesCrud implements OnInit {
     this.sharedNotesService.setCurrentActionObservable(action);
   }
 
-  editContent(content: ITopic) {
+  editContent(content: IContent) {
     const action: IManageNotesAction = {
       name: "Edit Content",
       id: "Edit_Content",
@@ -195,7 +195,7 @@ export class ManageNotesCrud implements OnInit {
     });
   }
 
-  deleteContent(content: ITopic) {
+  deleteContent(content: IContent) {
     this.confirmationService.confirm({
       message: 'Do you really want to delete this record?',
       header: 'Confirmation',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
 import { notesDb, availableNotes, storeCount } from '../../db/notes-db';
@@ -24,8 +24,8 @@ export class BackendService {
     return this.count[type];
   }
 
-  getHeaders(): Observable<INote[]> {
-    const header: INote[] = structuredClone(availableNotes());
+  getHeaders(): Observable<ISubject[]> {
+    const header: ISubject[] = structuredClone(availableNotes());
     return of(structuredClone(header));
   }
 
@@ -78,7 +78,7 @@ export class BackendService {
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
-    let selectedContent: ITopic | undefined;
+    let selectedContent: IContent | undefined;
     if (content.subSectionId > 0) {
       const contents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics
       selectedContent = contents?.find(d => d.topicId === content.topicId);
@@ -93,9 +93,9 @@ export class BackendService {
     return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
-  onDeleteContent(content: ITopic): Observable<IResponse> {
+  onDeleteContent(content: IContent): Observable<IResponse> {
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
-    let selectedContents: ITopic[] = [];
+    let selectedContents: IContent[] = [];
     if (content.subSectionId > 0) {
       selectedContents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []
     } else {
@@ -121,8 +121,8 @@ export class BackendService {
     return of({ status: true, message: 'Success', data: [] });
   }
 
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    let contents: ITopic[] = [];
+  onAddContent(content: IContent, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+    let contents: IContent[] = [];
     let message = '';
     const flatQuestionList = this.getFlatPlainTextContent(this.currentNoteSections);
     if (isBulkContent) {
@@ -173,9 +173,9 @@ export class BackendService {
     }
   }
 
-  onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
+  onAddDescription(topic: IContent, description: string): Observable<IResponse> {
     const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === topic.sectionId);
-    let selectedContent: ITopic | undefined = undefined;
+    let selectedContent: IContent | undefined = undefined;
     if (section) {
       if (topic.subSectionId != null && topic.subSectionId > 0) {
         const subSection = section.subSections.find(d => d.subSectionId === topic.subSectionId) ?? undefined;
@@ -204,7 +204,7 @@ export class BackendService {
     }
   }
 
-  getFlatPlainTextContent(sec: (ISection | ISubSection | ITopic)[]): string[] {
+  getFlatPlainTextContent(sec: (ISection | ISubSection | IContent)[]): string[] {
     let resultContents: string[] = [];
     if (Array.isArray(sec) && sec.length > 0) {
       const rowDetail = sec[0];
@@ -223,7 +223,7 @@ export class BackendService {
           }
         }
       } else if (('sectionId' in rowDetail) && ('subSectionId' in rowDetail) && ('topicId' in rowDetail)) {
-        const contents = sec as ITopic[];
+        const contents = sec as IContent[];
         resultContents = [...resultContents, ...contents.map(d => this.getPlainTextWithTrim(d.text))];
       }
     }

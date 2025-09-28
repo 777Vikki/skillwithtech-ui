@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { ISection, ITopic } from '../../../../core/interfaces/note-interface';
+import { ISection, IContent } from '../../../../core/interfaces/note-interface';
 import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
 // import { TextEditorModal } from '../../../../shared/modals/text-editor-modal/text-editor-modal';
@@ -33,7 +33,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
 
   sections = this.sharedNotesService.currentNoteSections;
   selectedSection: ISection | undefined;
-  selectedTopic: ITopic | undefined;
+  selectedTopic: IContent | undefined;
   isMobileScreen = this.store.checkMobileScreen();
   expandSections: number[] = [];
   expandSubSections: number[] = [];
@@ -182,7 +182,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     this.setQueryParam();
   }
 
-  onSelectContent(topic: ITopic) {
+  onSelectContent(topic: IContent) {
     this.selectedTopic = topic;
     this.setQueryParam();
   }
