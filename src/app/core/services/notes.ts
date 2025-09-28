@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { concatMap, tap, map, delay } from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class NotesService {
       }));
   }
 
-  onAddContent(content: ITopic, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
+  onAddContent(content: IContent, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
     return this.backendService.onAddContent(content, sectionIndex, subSectionIndex, contentIndex, isBulkContent).pipe(
       concatMap(postResult => {
         if (postResult?.status) {
@@ -65,7 +65,7 @@ export class NotesService {
     return this.backendService.onEditContent(content);
   }
 
-  onDeleteContent(content: ITopic): Observable<IResponse> {
+  onDeleteContent(content: IContent): Observable<IResponse> {
     return this.backendService.onDeleteContent(content);
   }
 
@@ -77,7 +77,7 @@ export class NotesService {
     return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
   }
 
-  onAddDescription(topic: ITopic, description: string): Observable<IResponse> {
+  onAddDescription(topic: IContent, description: string): Observable<IResponse> {
     return this.backendService.onAddDescription(topic, description);
   }
 

@@ -1,7 +1,7 @@
 import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, ITopic } from '../../../../core/interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, IContent } from '../../../../core/interfaces/note-interface';
 import { SelectModule } from 'primeng/select';
 import { NotesService } from '../../../../core/services/notes';
 import { ButtonModule } from 'primeng/button';
@@ -37,7 +37,7 @@ export class ManageNotesForm implements OnInit {
 
   sections = this.sharedNotesService.currentNoteSections;
   subSections: ISubSection[] = [];
-  contents: ITopic[] = [];
+  contents: IContent[] = [];
   previewList = signal<IPreview[]>([]);
   duplicatePreviewCount = signal<number>(0)
   currentAction = signal<IManageNotesAction | undefined>(undefined);
@@ -113,7 +113,7 @@ export class ManageNotesForm implements OnInit {
     this.removeFormControls();
     this.subSections = [];
     this.contents = [];
-    const content = this.sharedNotesService.currentActionRow() as ITopic;
+    const content = this.sharedNotesService.currentActionRow() as IContent;
     const position = this.sharedNotesService.applyActionPosition();
     const sectionId = (content?.sectionId != null && content?.sectionId > 0) ? content.sectionId : null;
     const subSectionId = (content?.subSectionId != null && content?.subSectionId > 0) ? content.subSectionId : null;
@@ -166,7 +166,7 @@ export class ManageNotesForm implements OnInit {
     this.removeFormControls();
     this.contents = [];
     this.subSections = [];
-    const content = this.sharedNotesService.currentActionRow() as ITopic;
+    const content = this.sharedNotesService.currentActionRow() as IContent;
     const sectionId = (content?.sectionId != null && content?.sectionId > 0) ? content.sectionId : null;
     const subSectionId = (content?.subSectionId != null && content?.subSectionId > 0) ? content.subSectionId : null;
     const contentId = (content?.topicId != null && content?.topicId > 0) ? content.topicId : null;
@@ -330,7 +330,7 @@ export class ManageNotesForm implements OnInit {
   submitAddContentForm() {
     const formValue = this.notesForm.getRawValue();
     const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
-    const content: ITopic = {
+    const content: IContent = {
       text: editorText,
       sectionId: formValue.sectionId,
       subSectionId: -1,

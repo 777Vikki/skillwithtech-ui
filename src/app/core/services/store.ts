@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ISubject, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
 import { Note } from '../enums/note-enum';
 import { BackendService } from './backend';
 import { Observable, tap } from 'rxjs';
@@ -42,7 +42,7 @@ export class StoreService {
     id: 0,
     sections: []
   }
-  private dummyContent: ITopic = {
+  private dummyContent: IContent = {
     text: '',
     sectionId: 0,
     subSectionId: 0,

@@ -1,7 +1,7 @@
-import { ISection, ISubSection, ITopic } from "./note-interface";
+import { ISection, ISubSection, IContent } from "./note-interface";
 
 export interface IResponse {
     status: boolean;
     message: string;
-    data: (ISection | ISubSection | ITopic)[]
+    data: (ISection | ISubSection | IContent)[]
 }
