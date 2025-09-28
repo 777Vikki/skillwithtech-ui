@@ -19,7 +19,7 @@ export class App {
         console.log(d);
       });
 
-    this.http.get<any>("https://github.com/777Vikki/skillwithtech-db/blob/master/skillWithTech.json")
+    this.http.get<any>("https://777vikki.github.io/skillwithtech-db/blob/master/skillWithTech.json")
       .subscribe(data => {
         console.log("Fetched JSON:", data);
       });
