@@ -1,4 +1,4 @@
-export interface INote { 
+export interface ISubject { 
     name: string;
     type: string;
     id: number;

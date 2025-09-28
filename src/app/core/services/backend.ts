@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
 import { notesDb, availableNotes, storeCount } from '../../db/notes-db';
@@ -24,8 +24,8 @@ export class BackendService {
     return this.count[type];
   }
 
-  getHeaders(): Observable<INote[]> {
-    const header: INote[] = structuredClone(availableNotes());
+  getHeaders(): Observable<ISubject[]> {
+    const header: ISubject[] = structuredClone(availableNotes());
     return of(structuredClone(header));
   }
 

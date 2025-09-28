@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { ISubject, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { Note } from '../enums/note-enum';
 import { BackendService } from './backend';
 import { Observable, tap } from 'rxjs';
@@ -11,7 +11,7 @@ import { IManageNotesAction } from '../interfaces/manage-notes-action-interface'
 export class StoreService {
   backendService = inject(BackendService);
 
-  private headerList: INote[] = [];
+  private headerList: ISubject[] = [];
 
   private manageNotesActions: IManageNotesAction[] = [
     {
@@ -36,7 +36,7 @@ export class StoreService {
     }
   ];
 
-  private dummyNotes: INote = {
+  private dummyNotes: ISubject = {
     name: '',
     type: '',
     id: 0,
@@ -70,8 +70,8 @@ export class StoreService {
     return [...this.headerList].find(note => note.type === Note.ANGULAR);
   }
 
-  getHeaders(): Observable<INote[]> {
-    return this.backendService.getHeaders().pipe(tap((d: INote[]) => {
+  getHeaders(): Observable<ISubject[]> {
+    return this.backendService.getHeaders().pipe(tap((d: ISubject[]) => {
       this.headerList = d;
     }));
   }

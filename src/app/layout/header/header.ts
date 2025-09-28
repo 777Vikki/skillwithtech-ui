@@ -2,7 +2,7 @@ import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { StoreService } from '../../core/services/store';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
-import { INote } from '../../core/interfaces/note-interface';
+import { ISubject } from '../../core/interfaces/note-interface';
 import { NotesService } from '../../core/services/notes';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, first, switchMap } from 'rxjs';
@@ -10,7 +10,7 @@ import { SharedNotesService } from '../../features/notes/services/shared-notes';
 
 interface DropdownChangeEvent {
   originalEvent: Event; // could also use MouseEvent
-  value: INote;           // adjust type as per your data model
+  value: ISubject;           // adjust type as per your data model
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class Header implements OnInit {
   router = inject(Router);
   route = inject(ActivatedRoute);
   notesService = inject(NotesService);
-  headers = signal<INote[]>([]);
+  headers = signal<ISubject[]>([]);
   selectedHeader = this.sharedNotesService.currentNote;
   showProfile = signal<boolean>(false);
   showSettings = signal<boolean>(false);

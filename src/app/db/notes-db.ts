@@ -1,5 +1,5 @@
 import { Note } from "../core/enums/note-enum"
-import { INote, ISection } from "../core/interfaces/note-interface"
+import { ISubject, ISection } from "../core/interfaces/note-interface"
 import { angularMicrofrontendList } from "./testing/angular-microfrontent"
 import { angularList } from "./testing/angular-testing"
 import { azureList } from "./testing/azure-list"
@@ -57,7 +57,7 @@ export const notesDb = (type: string): ISection[]  => {
   return [];
 }
 
-export const availableNotes = (): INote[] => {
+export const availableNotes = (): ISubject[] => {
   return [
     {
       name: "Angular",

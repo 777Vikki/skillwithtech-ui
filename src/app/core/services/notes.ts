@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, INote, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, ITopic } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { concatMap, tap, map, delay } from 'rxjs/operators';
