@@ -1,3 +1,17 @@
+::ng-deep {
+    .note-desc {
+        .note-description-container {
+            .ans-box-header {
+                pre {
+                    overflow: auto;
+                    max-height: 200px;
+                    width: 500px;
+                }
+            }
+        }
+    }
+}
+
 .note-desc {
     .note-description-header {
         padding: 8px;

@@ -43,7 +43,7 @@ export const angularMicrofrontendList = () => {
                     "subSectionId": -1,
                     "noteType": "AngularMicroFrontend",
                     "topicId": 199,
-                    "description": ""
+                    "description": "<p><strong>Webpack 5 Module Federation:</strong></p><p><strong>Module Federation</strong> is a feature introduced in <strong>Webpack 5</strong> that allows multiple <strong>independent builds</strong> to form a single application. Each build (called a <strong>remote</strong>) can expose and consume code dynamically at runtime.</p></br><p><strong>Angular Supports Module Federation:</strong></p><p>Angular doesn’t have native module federation built-in, but it <strong>integrates seamlessly</strong> with Webpack 5.</p><p>👉<a href=\"https://www.npmjs.com/package/@angular-architects/module-federation\" rel=\"noopener noreferrer\" target=\"_blank\"> </a><code><a href=\"https://www.npmjs.com/package/@angular-architects/module-federation\" rel=\"noopener noreferrer\" target=\"_blank\">@angular-architects/module-federation</a> </code></p><p>This package helps Angular apps set up Module Federation with minimal configuration.</p></br></br></br>"
                 }
             ],
             "subSections": []
@@ -59,7 +59,7 @@ export const angularMicrofrontendList = () => {
                     "subSectionId": -1,
                     "noteType": "AngularMicroFrontend",
                     "topicId": 200,
-                    "description": ""
+                    "description": "<p>First, <strong>create a workspace</strong> for the applications using:</p></br><pre data-language=\"plain\">\nng new mono-repo-workspace --create-application=false\n</pre></br><p>Then <strong>change directory</strong> to the workspace:</p></br><pre data-language=\"plain\">\ncd mono-repo-workspace\n</pre></br><p>In the second step, <strong>generate the host (shell) application</strong> using:</p></br><pre data-language=\"plain\">\nng generate application shell --routing --style=scss\n</pre></br><p>And <strong>generate the remote application</strong> using:</p></br><pre data-language=\"plain\">\nng generate application dashboard --routing --style=scss\n</pre></br><p>In the third step, <strong>add the Module Federation plugin</strong> by installing the <strong>official community package</strong>:</p></br><pre data-language=\"plain\">\nnpm install @angular-architects/module-federation --save-dev\n</pre></br><p>Then <strong>add it to each app</strong>:</p></br><p>For the <strong>host</strong>:</p></br><pre data-language=\"plain\">\nng add @angular-architects/module-federation --project shell --type host\n</pre></br><p>For the <strong>remote</strong>:</p></br><pre data-language=\"plain\">\nng add @angular-architects/module-federation --project dashboard --type remote\n</pre></br><p>This will generate <code><strong>webpack.config.js</strong></code> and <code><strong>webpack.prod.config.js</strong></code> in both apps.</p>"
                 },
                 {
                     "text": "<p>How do you share Angular libraries (like Angular core, RxJS, Material) across Micro Frontends?</p>",
