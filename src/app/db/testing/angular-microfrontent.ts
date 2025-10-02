@@ -75,7 +75,7 @@ export const angularMicrofrontendList = () => {
                     "subSectionId": -1,
                     "noteType": "AngularMicroFrontend",
                     "topicId": 202,
-                    "description": ""
+                    "description": "<p>In Angular Micro Frontends, routing is managed at two levels. The <strong>host application</strong> defines the top-level routes and lazy-loads each Micro Frontend using <code>loadChildren</code> with Module Federation, while configuring the remotes in <code>webpack.config.js</code>. </p></br><p>Each <strong>remote application</strong> defines its own child routes using <code>RouterModule.forChild()</code> and exposes its modules in <code>webpack.config.js</code>. Navigation between MFEs then works the same as standard Angular routing.</p>"
                 },
                 {
                     "text": "<p>What’s the difference between using Angular Elements (Web Components) vs Module Federation?</p>",
@@ -147,7 +147,7 @@ export const angularMicrofrontendList = () => {
                     "subSectionId": -1,
                     "noteType": "AngularMicroFrontend",
                     "topicId": 209,
-                    "description": ""
+                    "description": "<p>Micro Frontends can communicate with each other in several ways:</p></br><ul><li><strong>Shared State (NgRx / Redux):</strong> A global store in the host (Shell) can manage application-wide state, and each MFE can register feature stores.</li><li><strong>Shared Services (DI + Module Federation):</strong> Provide a singleton service (e.g., <code>UserService</code>) in the host and consume it across MFEs. This ensures data consistency like user session or theme.</li><li><strong>Custom Events / DOM Events:</strong> MFEs can dispatch and listen to browser events (<code>CustomEvent</code>, <code>window.postMessage</code>) for loose coupling when they don’t share runtime.</li><li><strong>URL / Query Params:</strong> MFEs can communicate indirectly through route parameters or query strings, useful for cross-navigation.</li><li><strong>Global Event Bus (RxJS / Pub-Sub):</strong> A shared RxJS Subject or Event Bus can broadcast events between MFEs.</li></ul>"
                 },
                 {
                     "text": "<p>How do you handle duplicate dependencies across Micro Frontends?</p>",
