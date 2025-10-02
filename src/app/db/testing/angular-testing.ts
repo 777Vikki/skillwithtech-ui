@@ -158,6 +158,14 @@ export const angularList = () => {
                     "description": "<p><strong>track</strong> in an <code>@for</code> loop is used to <strong>uniquely identify</strong> each <strong>element</strong> in the <strong>list</strong>, which <strong>improves performance</strong> during <strong>DOM updates</strong>.</p></br><p>When using <strong>track</strong>, <strong>Angular</strong> knows which <strong>items</strong> are <strong>unchanged</strong> and which are <strong>added or removed</strong>. It only <strong>updates the necessary DOM elements</strong> without <strong>re-rendering the entire list</strong>.</p></br><p>Using an <strong>object</strong> with <strong>track</strong> is <strong>not ideal</strong> because if the <strong>object</strong> is <strong>replaced</strong> or <strong>mutated</strong>, Angular may <strong>unnecessarily re-render</strong> it.</p></br><pre data-language=\"plain\">\nthis.items = [...this.items];\n</pre></br><p>This creates a <strong>new array</strong> with the same <strong>objects</strong>, but since the <strong>object references</strong> have changed, Angular treats them as <strong>different</strong> and <strong>re-renders the entire list</strong>.</p></br></br>"
                 },
                 {
+                    "text": "<p>How does Angular handle trackBy in ngFor?</p>",
+                    "sectionId": 6,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 217,
+                    "description": ""
+                },
+                {
                     "text": "<p>With old syntax </p></br><pre data-language=\"plain\">\n&lt;div *ngFor=&quot;let product of products; trackBy: product.id&quot;&gt; \n   {{ product.name }} \n&lt;/div&gt; \n</pre></br><p>Why do we get an error?</p>",
                     "sectionId": 6,
                     "subSectionId": -1,
@@ -573,6 +581,14 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 76,
                     "description": "<p>Zone.js detects <strong>clicks</strong>, <strong>input events</strong>, and other <strong>DOM events</strong>, as well as when an <strong>asynchronous task</strong> has completed, and informs <strong>NgZone</strong>: &#39;Hey, something changed, maybe run <strong>change detection</strong>.&#39; <strong>NgZone</strong> then tells <strong>Angular</strong> to run <strong>change detection</strong>.</p></br><p>If we enable the <strong>OnPush Change Detection Strategy</strong>, <strong>Angular</strong> only checks a <strong>component</strong> when one of the following happens: the <strong>component</strong> triggers an <strong>event</strong> (click, input), an <strong>@Input</strong> property changes (<strong>reference changes</strong>), or an <strong>asynchronous task</strong> has completed.</p></br><p>Otherwise, <strong>Angular</strong> skips checking the <strong>component</strong>, improving <strong>performance</strong>.</p></br><pre data-language=\"plain\">\nEnable OnPush Strategy\n\nimport { ChangeDetectionStrategy, Component } from &#39;@angular/core&#39;;\n\n@Component({\n  selector: &#39;app-child&#39;,\n  templateUrl: &#39;./child.component.html&#39;,\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class ChildComponent { }\n</pre></br>"
+                },
+                {
+                    "text": "<p>How do you optimize change detection with OnPush strategy?</p>",
+                    "sectionId": 13,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 215,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -725,6 +741,38 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 203,
                     "description": "<p>I can use <strong>RxJS </strong><code><strong>race</strong></code><strong> </strong>operator.</p></br><p>In <strong>RxJS</strong>, the <code><strong>race</strong></code><strong> operator</strong> is used to <strong>subscribe to multiple observables simultaneously</strong>, but <strong>only the first observable to emit a value wins</strong>, and all other observables are <strong>unsubscribed/canceled automatically</strong>.</p></br><pre data-language=\"plain\">\nimport { Component } from &#39;@angular/core&#39;;\nimport { HttpClient } from &#39;@angular/common/http&#39;;\nimport { race, Observable } from &#39;rxjs&#39;;\n\n@Component({\n  selector: &#39;app-api-race&#39;,\n  template: `&lt;button (click)=&quot;callApis()&quot;&gt;Call API&lt;/button&gt;`\n})\nexport class ApiRaceComponent {\n  private apiCalls: Observable&lt;any&gt;[] = [];\n\n  constructor(private http: HttpClient) {}\n\n  callApis() {\n    // Create a new API call on every click\n    const apiCall = this.http.get(&#39;http://localhost:3000/long-api&#39;);\n    this.apiCalls.push(apiCall);\n\n    // Run race on all API calls\n    race(...this.apiCalls).subscribe({\n      next: (res) =&gt; {\n        console.log(&#39;First response wins:&#39;, res);\n        // Cancel all other pending API calls\n        this.apiCalls = [];\n      },\n      error: (err) =&gt; console.log(err)\n    });\n  }\n}\n</pre>"
+                },
+                {
+                    "text": "<p>How do you reduce bundle size in Angular Apps?</p></br>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 220,
+                    "description": ""
+                },
+                {
+                    "text": "<p>How to debug memory leaks in Angular apps?</p>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 222,
+                    "description": ""
+                },
+                {
+                    "text": "<p>How do you structure a large scale Angular project?</p>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 225,
+                    "description": ""
+                },
+                {
+                    "text": "<p>How do you ensure your code is modular, reusable and maintainable?</p>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 226,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -932,7 +980,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 22,
-                    "description": ""
+                    "description": "<p>To test an Angular component with <code>@Input()</code> and <code>@Output()</code>, we use the Angular TestBed and Jasmine/Karma.</p><ul><li>For <code>@Input()</code>: we set the input property directly on the component instance or via a host test component, then trigger <code>fixture.detectChanges()</code> and assert the rendered output.</li><li>For <code>@Output()</code>: we subscribe to the EventEmitter or use <code>spyOn</code> to check that the event was emitted with the correct value when an action occurs.</li></ul></br><pre data-language=\"plain\">\n// child.component.ts\n\n@Component({\n  selector: &#39;app-child&#39;,\n  template: `&lt;button (click)=&quot;sendMessage()&quot;&gt;Send&lt;/button&gt;`\n})\nexport class ChildComponent {\n  @Input() message!: string;\n  @Output() notify = new EventEmitter&lt;string&gt;();\n\n  sendMessage() {\n    this.notify.emit(this.message);\n  }\n}\n</pre></br></br><pre data-language=\"plain\">\nTest spec\n\ndescribe(&#39;ChildComponent&#39;, () =&gt; {\n  let component: ChildComponent;\n  let fixture: ComponentFixture&lt;ChildComponent&gt;;\n\n  beforeEach(async () =&gt; {\n    await TestBed.configureTestingModule({\n      declarations: [ChildComponent]\n    }).compileComponents();\n\n    fixture = TestBed.createComponent(ChildComponent);\n    component = fixture.componentInstance;\n  });\n\n  it(&#39;should render input message&#39;, () =&gt; {\n    component.message = &#39;Hello&#39;;\n    fixture.detectChanges();\n    expect(component.message).toBe(&#39;Hello&#39;);\n  });\n\n  it(&#39;should emit output event&#39;, () =&gt; {\n    spyOn(component.notify, &#39;emit&#39;);\n    component.message = &#39;Hi&#39;;\n    component.sendMessage();\n    expect(component.notify.emit).toHaveBeenCalledWith(&#39;Hi&#39;);\n  });\n});\n</pre></br>"
                 },
                 {
                     "text": "<p>What is <span style=\"color: rgb(0, 138, 0);\">ComponentFixture</span> in Angular testing, and why is it used?</p>",
@@ -965,6 +1013,14 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 26,
                     "description": "<p><code>spyOn</code> is used to watch or mock methods of an existing object. It helps us test without calling the real implementation. For example, <code>spyOn(service, &#39;getData&#39;).and.returnValue(mockData)</code>.</p></br><p><code>createSpyObj</code> is used when we want to mock an entire dependency or service. Instead of creating real objects, we create a fake one with multiple spy methods, like <code>jasmine.createSpyObj(&#39;UserService&#39;, [&#39;getUser&#39;, &#39;saveUser&#39;])</code>.</p></br><p>The key difference is: <code>spyOn</code> works on existing objects, while <code>createSpyObj</code> creates a new fake object.</p>"
+                },
+                {
+                    "text": "<p>How do you mock a service in Angular unit testing?</p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 224,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -1012,6 +1068,14 @@ export const angularList = () => {
                             "noteType": "Angular",
                             "topicId": 170,
                             "description": "<p>In <strong>Angular v14+</strong>, <strong>standalone components</strong> can be <strong>lazy-loaded</strong> directly using <code><strong>loadComponent</strong></code>, without needing to wrap them inside an <strong>NgModule</strong>.</p></br><pre data-language=\"plain\">\nimport { Routes } from &#39;@angular/router&#39;;\n\nconst routes: Routes = [\n  {\n    path: &#39;user&#39;,\n    loadComponent: () =&gt;\n      import(&#39;./user/user.component&#39;).then(m =&gt; m.UserComponent)\n  }\n];\n</pre></br>"
+                        },
+                        {
+                            "text": "<p>How to migrate an app from NgModule to standalone components?</p>",
+                            "sectionId": 39,
+                            "subSectionId": 10,
+                            "noteType": "Angular",
+                            "topicId": 223,
+                            "description": ""
                         }
                     ]
                 },
@@ -1070,6 +1134,54 @@ export const angularList = () => {
             "noteType": "Angular",
             "topics": [],
             "subSections": [
+                {
+                    "name": "<p><strong>Tree Shaking</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 14,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p>What is tree shaking and how does Angular Support it?</p>",
+                            "sectionId": 37,
+                            "subSectionId": 14,
+                            "noteType": "Angular",
+                            "topicId": 216,
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "<p><strong>Smart and Dumb Components</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 15,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p>What&#39;s the difference between smart and dumb components?</p>",
+                            "sectionId": 37,
+                            "subSectionId": 15,
+                            "noteType": "Angular",
+                            "topicId": 218,
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "<p><strong>Environment</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 16,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">How do you manage multi-environment configurations in Angular?</span></p>",
+                            "sectionId": 37,
+                            "subSectionId": 16,
+                            "noteType": "Angular",
+                            "topicId": 221,
+                            "description": ""
+                        }
+                    ]
+                },
                 {
                     "name": "<p><strong>Tokens</strong></p>",
                     "sectionId": 37,
