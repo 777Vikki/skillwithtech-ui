@@ -852,7 +852,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 12,
-                    "description": ""
+                    "description": "<p><strong>&#39;describe&#39;</strong> is a <strong>test suite</strong> (a <strong>folder</strong> or <strong>box</strong>) in <strong>Jasmine</strong>. It <strong>groups together related test cases</strong> (<strong>it blocks</strong>) and helps <strong>organize tests logically</strong>.</p>"
                 },
                 {
                     "text": "<p>What is beforeEach in Jasmine?</p>",
@@ -860,7 +860,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 13,
-                    "description": ""
+                    "description": "<p><strong>beforeEach</strong> is a <strong>special function</strong> provided by <strong>Jasmine</strong> (and <strong>Jest</strong>, <strong>Mocha</strong>, etc.). It <strong>runs before every</strong> <strong>‘it’ block</strong> (<strong>spec/test case</strong>) inside a <strong>describe block</strong>. It’s used to <strong>set up common code</strong> needed by <strong>multiple tests</strong>.</p>"
                 },
                 {
                     "text": "<p>What is TestBed in Angular Unit Testing?</p>",
@@ -876,7 +876,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 15,
-                    "description": ""
+                    "description": "<p><strong>‘it’</strong> defines a <strong>test case</strong>. It takes a <strong>description string</strong> that states the <strong>expected behavior</strong>, and a <strong>function</strong> that contains the <strong>test logic</strong> with <strong>expect</strong>.</p>"
                 },
                 {
                     "text": "<p>What is ‘expect’ in Jasmin?</p>",
@@ -884,7 +884,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 16,
-                    "description": ""
+                    "description": "<p>In <strong>Angular unit testing</strong>, the <strong>expect</strong> function <strong>verifies</strong> that the <strong>actual result</strong> matches the <strong>expected result</strong> using <strong>matchers</strong>.</p>"
                 },
                 {
                     "text": "<p>Can you describe some matchers?</p>",
@@ -932,7 +932,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 22,
-                    "description": ""
+                    "description": "<p>In <strong>input property unit test cases</strong>, we test using <strong>mock data</strong>.</p><p>First, we use <code><strong>describe</strong></code> to define the component test suite and create an <strong>instance of the component</strong>.</p><p>Then, we <strong>assign mock data</strong> to the <strong>input property</strong> of the component.</p><p>After that, we call <code><strong>fixture.detectChanges()</strong></code> to trigger <strong>change detection</strong> and update the template.</p><p>Finally, we use <code><strong>expect(nameElement.textContent).toContain(mockUser.name)</strong></code> to verify that the template displays the <strong>expected value</strong>.</p>"
                 },
                 {
                     "text": "<p>What is <span style=\"color: rgb(0, 138, 0);\">ComponentFixture</span> in Angular testing, and why is it used?</p>",
@@ -940,7 +940,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 23,
-                    "description": ""
+                    "description": "<p><strong>ComponentFixture</strong> allows us to:</p><ul><li><strong>Access the component instance</strong></li><li><strong>Access the native DOM element</strong> using <code><strong>fixture.nativeElement</strong></code> for <strong>DOM testing</strong></li><li><strong>Trigger change detection</strong> using <code><strong>fixture.detectChanges()</strong></code></li></ul></br>"
                 },
                 {
                     "text": "<p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">What is the use of </span><span style=\"color: rgb(24, 128, 56); background-color: transparent;\">spyOn()</span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> in Jasmine?</span></p>",
@@ -948,7 +948,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 24,
-                    "description": "<p><code>spyOn</code> is a <strong>Jasmine function</strong> used in Angular unit tests.</p></br><p>It <strong>spies on methods</strong> of components, services, or other objects.</p></br><p>It allows you to <strong>track method calls</strong> and <strong>mock return values</strong> without executing the real implementation.</p>"
+                    "description": "<p><code><strong>spyOn()</strong></code> is used to <strong>spy on an existing method</strong> of a <strong>real object or service</strong>.</p><p>It tracks calls, arguments, and return values — and optionally allows you to mock its behavior.</p></br><pre data-language=\"plain\">\nit(&#39;should call getUsers method&#39;, () =&gt; {\n  const userService = TestBed.inject(UserService);\n  spyOn(userService, &#39;getUsers&#39;).and.returnValue(of(mockUsers));\n\n  component.loadUsers();\n\n  expect(userService.getUsers).toHaveBeenCalled();\n});\n</pre></br><p>✅ <strong>Key Points:</strong></p><ul><li>Works on <strong>existing objects</strong>.</li><li>Replaces only the <strong>specific method</strong> you spy on.</li><li>You can <strong>mock return values</strong> or <strong>verify calls</strong>.</li></ul></br><p><strong>“Used to spy”</strong> means <strong>to watch, track, or monitor a function’s behavior</strong> during a test — <strong>without actually running its real implementation</strong></p>"
                 },
                 {
                     "text": "<p>What is the use of createSpyObject() in Jasmine?</p>",
@@ -956,15 +956,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 25,
-                    "description": ""
-                },
-                {
-                    "text": "<p>Explain Jasmine <span style=\"color: rgb(0, 138, 0);\">spyOn </span>and <span style=\"color: rgb(0, 138, 0);\">createSpyObj </span>in Angular Unit Testing.</p>",
-                    "sectionId": 24,
-                    "subSectionId": -1,
-                    "noteType": "Angular",
-                    "topicId": 26,
-                    "description": "<p><code>spyOn</code> is used to watch or mock methods of an existing object. It helps us test without calling the real implementation. For example, <code>spyOn(service, &#39;getData&#39;).and.returnValue(mockData)</code>.</p></br><p><code>createSpyObj</code> is used when we want to mock an entire dependency or service. Instead of creating real objects, we create a fake one with multiple spy methods, like <code>jasmine.createSpyObj(&#39;UserService&#39;, [&#39;getUser&#39;, &#39;saveUser&#39;])</code>.</p></br><p>The key difference is: <code>spyOn</code> works on existing objects, while <code>createSpyObj</code> creates a new fake object.</p>"
+                    "description": "<p><code><strong>createSpyObject()</strong></code> is used to <strong>create a completely fake object</strong> with one or more <strong>spy methods</strong> — without needing a real class or instance.</p></br><pre data-language=\"plain\">\nit(&#39;should call save method of mock service&#39;, () =&gt; {\n  const mockService = jasmine.createSpyObj(&#39;UserService&#39;, [&#39;save&#39;]);\n  mockService.save.and.returnValue(of(true));\n\n  component = new UserComponent(mockService);\n  component.saveUser();\n\n  expect(mockService.save).toHaveBeenCalled();\n});\n</pre></br><p>✅ <strong>Key Points:</strong></p><ul><li>Creates a <strong>mock object from scratch</strong>.</li><li>Ideal when you want <strong>complete control</strong> over dependencies.</li><li>Doesn’t require the <strong>real class</strong> or <strong>Angular TestBed</strong>.</li></ul></br>"
                 }
             ],
             "subSections": [
