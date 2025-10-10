@@ -41,15 +41,10 @@ export class BackendService {
   }
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
-    const avaibaleSection = this.currentNoteSections.find(d => this.getPlainTextWithTrim(d.name) === this.getPlainTextWithTrim(section.name));
-    if (avaibaleSection) {
-      return of({ status: false, message: 'Section is already added.', data: [] });
-    } else {
-      section.sectionId = this.getCount("section");
-      this.currentNoteSections.splice(index, 0, section);
-      this.storeSection(this.currentNoteSections);
-      return of({ status: true, message: 'Success', data: [section] });
-    }
+    section.sectionId = this.getCount("section");
+    this.currentNoteSections.splice(index, 0, section);
+    this.storeSection(this.currentNoteSections);
+    return of({ status: true, message: 'Success', data: [section] });
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
@@ -124,32 +119,18 @@ export class BackendService {
   onAddContent(content: IContent, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
     let contents: IContent[] = [];
     let message = '';
-    const flatQuestionList = this.getFlatPlainTextContent(this.currentNoteSections);
     if (isBulkContent) {
       let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
       if (requestContents.length > 0) {
-        const filterRequestContents = requestContents.filter(d => !flatQuestionList.includes(this.getPlainTextWithTrim(d)));
-        if (filterRequestContents.length > 0) {
-          if (filterRequestContents.length !== requestContents.length) {
-            message = (requestContents.length - filterRequestContents.length) + ' Content(s) are dublicates.';
-            requestContents = filterRequestContents;
-          }
-          contents = requestContents.map(d => {
-            return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
-          });
-        } else {
-          return of({ status: true, message: 'All Contents are dublicates.', data: [] });
-        }
+        contents = requestContents.map(d => {
+          return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
+        });
       } else {
         return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
       }
     } else {
-      if (flatQuestionList.includes(this.getPlainTextWithTrim(content.text))) {
-        return of({ status: false, message: 'Contant is dublicated.', data: [] });
-      } else {
-        content.topicId = this.getCount("topic");
-        contents = [content]
-      }
+      content.topicId = this.getCount("topic");
+      contents = [content];
     }
     if (subSectionIndex > -1) {
       this.currentNoteSections[sectionIndex].subSections[subSectionIndex].topics.splice(contentIndex, 0, ...contents);
@@ -157,20 +138,15 @@ export class BackendService {
       this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
     }
     this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: message ? message : 'Success', data: isBulkContent? [] : [...contents] });
+    return of({ status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [...contents] });
   }
 
   onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
     const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
-    const availableSubSection = currentSubSections.find((subSec: ISubSection) => this.getPlainTextWithTrim(subSec.name) === this.getPlainTextWithTrim(subSection.name));
-    if (availableSubSection) {
-      return of({ status: false, message: 'Sub Section is already added in Current Section.', data: [] });
-    } else {
-      subSection.subSectionId = this.getCount("subSection");
-      currentSubSections.splice(subSectionIndex, 0, subSection);
-      this.storeSection(this.currentNoteSections);
-      return of({ status: true, message: 'Success', data: [subSection] });
-    }
+    subSection.subSectionId = this.getCount("subSection");
+    currentSubSections.splice(subSectionIndex, 0, subSection);
+    this.storeSection(this.currentNoteSections);
+    return of({ status: true, message: 'Success', data: [subSection] });
   }
 
   onAddDescription(topic: IContent, description: string): Observable<IResponse> {
@@ -202,37 +178,5 @@ export class BackendService {
     if (this.currentNoteKey) {
       localStorage.setItem(this.currentNoteKey, data);
     }
-  }
-
-  getFlatPlainTextContent(sec: (ISection | ISubSection | IContent)[]): string[] {
-    let resultContents: string[] = [];
-    if (Array.isArray(sec) && sec.length > 0) {
-      const rowDetail = sec[0];
-      if (('sectionId' in rowDetail) && !('subSectionId' in rowDetail) && !('topicId' in rowDetail)) {
-        const sections = sec as ISection[];
-        for (let i = 0; i < sections.length; i++) {
-          if (sections[i].topics?.length) {
-            resultContents = [...resultContents, ...this.getFlatPlainTextContent(sections[i].topics)];
-          }
-        }
-      } else if (('sectionId' in rowDetail) && ('subSectionId' in rowDetail) && !('topicId' in rowDetail)) {
-        const subSections = sec as ISubSection[];
-        for (let i = 0; i < subSections.length; i++) {
-          if (subSections[i].topics.length) {
-            resultContents = [...resultContents, ...this.getFlatPlainTextContent(subSections[i].topics)];
-          }
-        }
-      } else if (('sectionId' in rowDetail) && ('subSectionId' in rowDetail) && ('topicId' in rowDetail)) {
-        const contents = sec as IContent[];
-        resultContents = [...resultContents, ...contents.map(d => this.getPlainTextWithTrim(d.text))];
-      }
-    }
-    return resultContents;
-  }
-
-  getPlainTextWithTrim(rawHtml: string): string {
-    let doc = new DOMParser().parseFromString(rawHtml, 'text/html');
-    let plainText = doc.body.textContent || "";
-    return plainText.trim();
   }
 }
