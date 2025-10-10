@@ -11,7 +11,7 @@ export const htmlList = () => {
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 180,
-                    "description": ""
+                    "description": "<p>HTML is a <strong>markup language</strong>, not a programming language.</p><p>It uses <strong>tags</strong> (like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;div&gt;</code>, etc.) to <strong>define the structure and content</strong> of a web page.</p></br><p>Here’s a simple HTML example:</p></br><p>&lt;!DOCTYPE html&gt;</p><p>&lt;html&gt;</p><p>  &lt;head&gt;</p><p>    &lt;title&gt;My First Web Page&lt;/title&gt;</p><p>  &lt;/head&gt;</p><p>  &lt;body&gt;</p><p>    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;</p><p>    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;</p><p>    &lt;a href=&quot;https://www.google.com&quot;&gt;Go to Google&lt;/a&gt;</p><p>  &lt;/body&gt;</p><p>&lt;/html&gt;</p></br><p><strong>Explanation:</strong></p><ul><li><code>&lt;!DOCTYPE html&gt;</code> → Defines the document type (HTML5)</li><li><code>&lt;html&gt;</code> → Root element</li><li><code>&lt;head&gt;</code> → Contains meta info (like title, links, scripts)</li><li><code>&lt;body&gt;</code> → Contains visible page content</li></ul></br><p>🔹<strong>HTML Works With:</strong></p><p><strong>CSS</strong> → for styling and layout</p><p><strong>JavaScript</strong> → for interactivity and dynamic behavior</p>"
                 },
                 {
                     "text": "<p>What is the difference between inline, block, and inline-block elements?</p>",
@@ -43,7 +43,7 @@ export const htmlList = () => {
                     "subSectionId": -1,
                     "noteType": "HTML",
                     "topicId": 184,
-                    "description": ""
+                    "description": "<p>A <strong>Web Component</strong> is a <strong>set of web platform features</strong> that allows you to create <strong>reusable, encapsulated, and custom HTML elements</strong> that work across modern browsers.</p>"
                 },
                 {
                     "text": "<p>Difference between id and class attributes in HTML?</p>",
