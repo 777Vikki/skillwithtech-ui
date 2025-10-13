@@ -151,6 +151,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     let sectionId = 0;
     let subSectionId = 0;
     let contentId = 0;
+    let notesId = this.sharedNotesService.currentNote()?.id ?? 0;
     if (this.selectedTopic) {
       sectionId = this.selectedTopic.sectionId;
       subSectionId = this.selectedTopic.subSectionId;
@@ -161,7 +162,8 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     const queryParamRequest = {
       sectionId: sectionId,
       subSectionId: subSectionId,
-      contentId: contentId
+      contentId: contentId,
+      notesId: notesId
     };
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
