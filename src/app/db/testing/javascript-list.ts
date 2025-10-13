@@ -212,6 +212,110 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 202,
                     "description": "<pre data-language=\"plain\">\nconst counter = () =&gt; {\n    let count = 0;\n    return {\n        increment: () =&gt; {\n            count++;\n            console.log(count);\n        },\n        decrement: function() {\n            count--;\n            console.log(count);\n        }  \n    };\n};\n\nconst counterControl = counter();\ncounterControl.increment();\ncounterControl.decrement();\n</pre>"
+                },
+                {
+                    "text": "<p>What is a factorial, and how is it calculated?</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 221,
+                    "description": "<pre data-language=\"plain\">\nfunction factorial(n) {\n    if (n &lt; 0) return -1; // Factorial not defined for negative numbers\n    let result = 1;\n    for (let i = 2; i &lt;= n; i++) {\n        result *= i;\n    }\n    return result;\n}\n\nconsole.log(factorial(5)); // Output: 120\n</pre></br><pre data-language=\"plain\">\nfunction factorial(n) {\n    if (n &lt; 0) return -1;\n    if (n === 0 || n === 1) return 1;\n    return n * factorial(n - 1);\n}\n\nconsole.log(factorial(5)); // Output: 120\n</pre></br></br>"
+                },
+                {
+                    "text": "<p>What is the difference between sorting strings and numbers in JavaScript?</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 222,
+                    "description": "<pre data-language=\"plain\">\nlet users = [\n  { name: &#39;Alice&#39;, age: 25 },\n  { name: &#39;Bob&#39;, age: 20 },\n  { name: &#39;Charlie&#39;, age: 30 }\n];\n</pre></br><p><strong>Sort by Age (Ascending)</strong></p><pre data-language=\"plain\">\nusers.sort((a, b) =&gt; a.age - b.age);\nconsole.log(users);\n/* Output:\n[\n  { name: &#39;Bob&#39;, age: 20 },\n  { name: &#39;Alice&#39;, age: 25 },\n  { name: &#39;Charlie&#39;, age: 30 }\n]\n*/\n</pre></br><p><strong>Sort by Name (Alphabetical)</strong></p><pre data-language=\"plain\">\nusers.sort((a, b) =&gt; a.name.localeCompare(b.name));\nconsole.log(users);\n/* Output:\n[\n  { name: &#39;Alice&#39;, age: 25 },\n  { name: &#39;Bob&#39;, age: 20 },\n  { name: &#39;Charlie&#39;, age: 30 }\n]\n*/\n</pre></br></br><p><strong>Tips:</strong></p><ol><li>Always use a comparison function for numbers or custom sorting.</li><li>localeCompare is useful for string sorting with international characters.</li><li>Sorting mutates the original array; to avoid that, use array.slice().sort().</li></ol>"
+                },
+                {
+                    "text": "<p>Can you sort array using bubble sort?</p></br>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 223,
+                    "description": "<p>Bubble Sort repeatedly compares adjacent elements and <strong>swaps them</strong> if they are in the wrong order.</p><ul><li>Time complexity: <strong>O(n²)</strong></li><li>Space complexity: <strong>O(1)</strong></li><li>Stable sort: <strong>Yes</strong></li></ul></br><pre data-language=\"plain\">\nfunction bubbleSort(arr) {\n    let n = arr.length;\n    for (let i = 0; i &lt; n - 1; i++) {\n        // Last i elements are already sorted\n        for (let j = 0; j &lt; n - i - 1; j++) {\n            if (arr[j] &gt; arr[j + 1]) {\n                // Swap arr[j] and arr[j+1]\n                let temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n    return arr;\n}\n\nlet numbers = [5, 2, 9, 1, 7];\nconsole.log(bubbleSort(numbers)); // Output: [1, 2, 5, 7, 9]\n</pre>"
+                },
+                {
+                    "text": "<p>Can you sort array using quick sort?</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 224,
+                    "description": "<pre data-language=\"plain\">\nfunction quickSort(arr) {\n    if (arr.length &lt;= 1) return arr; // Base case\n\n    const pivot = arr[arr.length - 1]; // Choose last element as pivot\n    const left = [];\n    const right = [];\n\n    for (let i = 0; i &lt; arr.length - 1; i++) {\n        if (arr[i] &lt; pivot) {\n            left.push(arr[i]);\n        } else {\n            right.push(arr[i]);\n        }\n    }\n\n    // Recursively sort left and right, then combine\n    return [...quickSort(left), pivot, ...quickSort(right)];\n}\n\n// Example usage\nlet numbers = [5, 2, 9, 1, 7];\nconsole.log(quickSort(numbers)); // Output: [1, 2, 5, 7, 9]\n</pre></br>"
+                },
+                {
+                    "text": "<p>Can you remove duplicate number from array?</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 225,
+                    "description": "<p><strong>Using Set (Simplest &amp; Modern Way):</strong></p><pre data-language=\"plain\">\nlet numbers = [1, 2, 2, 3, 4, 4, 5];\n\nlet uniqueNumbers = [...new Set(numbers)];\nconsole.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]\n</pre></br><p><strong>Using filter() and indexOf():</strong></p><pre data-language=\"plain\">\nlet numbers = [1, 2, 2, 3, 4, 4, 5];\n\nlet uniqueNumbers = numbers.filter((value, index, arr) =&gt; {\n    return arr.indexOf(value) === index;\n});\n\nconsole.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]\n</pre></br><p><strong>Using Object/Map (Good for large arrays):</strong></p><pre data-language=\"plain\">\nlet numbers = [1, 2, 2, 3, 4, 4, 5];\nlet seen = {};\nlet uniqueNumbers = [];\n\nfor (let num of numbers) {\n    if (!seen[num]) {\n        uniqueNumbers.push(num);\n        seen[num] = true;\n    }\n}\n\nconsole.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]\n</pre>"
+                },
+                {
+                    "text": "<p>Find the <strong>largest/smallest number</strong> in an array.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 226,
+                    "description": "<p><strong>Using Math.max and Math.min:</strong></p><pre data-language=\"plain\">\nlet numbers = [5, 2, 9, 1, 7];\n\nlet largest = Math.max(...numbers);\nlet smallest = Math.min(...numbers);\n\nconsole.log(&quot;Largest:&quot;, largest); // Output: 9\nconsole.log(&quot;Smallest:&quot;, smallest); // Output: 1\n</pre></br><p><strong>Using a Loop (Classic Approach)</strong></p><pre data-language=\"plain\">\nlet numbers = [5, 2, 9, 1, 7];\n\nlet largest = numbers[0];\nlet smallest = numbers[0];\n\nfor (let i = 1; i &lt; numbers.length; i++) {\n    if (numbers[i] &gt; largest) largest = numbers[i];\n    if (numbers[i] &lt; smallest) smallest = numbers[i];\n}\n\nconsole.log(&quot;Largest:&quot;, largest); // Output: 9\nconsole.log(&quot;Smallest:&quot;, smallest); // Output: 1\n</pre></br>"
+                },
+                {
+                    "text": "<p>Find <strong>second largest/smallest element</strong>.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 227,
+                    "description": "<pre data-language=\"plain\">\nlet numbers = [5, 2, 9, 1, 7];\n\nlet largest = -Infinity;\nlet secondLargest = -Infinity;\nlet smallest = Infinity;\nlet secondSmallest = Infinity;\n\nfor (let num of numbers) {\n    // For largest and second largest\n    if (num &gt; largest) {\n        secondLargest = largest;\n        largest = num;\n    } else if (num &gt; secondLargest &amp;&amp; num !== largest) {\n        secondLargest = num;\n    }\n\n    // For smallest and second smallest\n    if (num &lt; smallest) {\n        secondSmallest = smallest;\n        smallest = num;\n    } else if (num &lt; secondSmallest &amp;&amp; num !== smallest) {\n        secondSmallest = num;\n    }\n}\n\nconsole.log(&quot;Second Largest:&quot;, secondLargest);   // Output: 7\nconsole.log(&quot;Second Smallest:&quot;, secondSmallest); // Output: 2\n</pre></br>"
+                },
+                {
+                    "text": "<p>Count the <strong>number of vowels/consonants</strong> in a string.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 228,
+                    "description": "<pre data-language=\"plain\">\nlet str = &quot;Hello World&quot;;\n\nlet vowelsCount = 0;\nlet consonantsCount = 0;\n\n// Convert string to lowercase for easy comparison\nlet lowerStr = str.toLowerCase();\n\nfor (let char of lowerStr) {\n    if (char &gt;= &#39;a&#39; &amp;&amp; char &lt;= &#39;z&#39;) { // Consider only alphabets\n        if (&quot;aeiou&quot;.includes(char)) {\n            vowelsCount++;\n        } else {\n            consonantsCount++;\n        }\n    }\n}\n\nconsole.log(&quot;Vowels:&quot;, vowelsCount);       // Output: 3\nconsole.log(&quot;Consonants:&quot;, consonantsCount); // Output: 7\n</pre>"
+                },
+                {
+                    "text": "<p>Check if a number is a <strong>perfect number</strong>.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 229,
+                    "description": "<pre data-language=\"plain\">\nfunction isPerfectNumber(num) {\n    if (num &lt;= 1) return false; // 1 or negative numbers are not perfect\n\n    let sum = 0;\n    for (let i = 1; i &lt;= num / 2; i++) { // only check up to num/2\n        if (num % i === 0) {\n            sum += i;\n        }\n    }\n\n    return sum === num;\n}\n\n// Test\nconsole.log(isPerfectNumber(6));  // true\nconsole.log(isPerfectNumber(28)); // true\nconsole.log(isPerfectNumber(12)); // false\n</pre></br>"
+                },
+                {
+                    "text": "<p>Implement <strong>flattening of nested arrays</strong>.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 230,
+                    "description": "<p><strong>Using Array.prototype.flat() (Modern &amp; Simple):</strong></p><pre data-language=\"plain\">\nlet nestedArray = [1, [2, [3, 4], 5], 6];\n\n// Use flat() with Infinity to flatten all levels\nlet flattened = nestedArray.flat(Infinity);\n\nconsole.log(flattened); // Output: [1, 2, 3, 4, 5, 6]\n</pre></br><p><strong>Using Recursion (Classic Interview Approach):</strong></p><pre data-language=\"plain\">\nfunction flattenArray(arr) {\n    let result = [];\n    for (let item of arr) {\n        if (Array.isArray(item)) {\n            result = result.concat(flattenArray(item)); // Recursive call\n        } else {\n            result.push(item);\n        }\n    }\n    return result;\n}\n\nlet nestedArray = [1, [2, [3, 4], 5], 6];\nconsole.log(flattenArray(nestedArray)); // Output: [1, 2, 3, 4, 5, 6]\n</pre></br>"
+                },
+                {
+                    "text": "<p>Implement <strong>debounce</strong> and <strong>throttle</strong> functions.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 231,
+                    "description": ""
+                },
+                {
+                    "text": "<p>Write <strong>memoization</strong> function for optimization.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 232,
+                    "description": ""
+                },
+                {
+                    "text": "<p>Find <strong>integer </strong>vs <strong>Non-Integer</strong> Rational Numbers.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 233,
+                    "description": "<pre data-language=\"plain\">\nlet arr = [1, 2.5, 3/2, -4, 0.75];\n\nlet integers = arr.filter(num =&gt; Number.isInteger(num));\nlet nonIntegers = arr.filter(num =&gt; !Number.isInteger(num));\n\nconsole.log(&quot;Integers:&quot;, integers);       // [1, -4]\nconsole.log(&quot;Non-Integers:&quot;, nonIntegers); // [2.5, 1.5, 0.75]\n</pre></br>"
                 }
             ],
             "subSections": []
