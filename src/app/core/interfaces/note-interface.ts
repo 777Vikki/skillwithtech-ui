@@ -1,4 +1,27 @@
-export interface ISubject { 
+export interface ISubject1 {
+    id: number;
+    title: string;
+    description?: string;
+    sections: ISection1[];
+}
+
+export interface ISection1 {
+    subjectId: number;
+    sectionId: number;
+    rootId: number;
+    title: string;
+    qaData: IQuestionAnswer[];
+    subSections: ISection1[];
+}
+
+export interface IQuestionAnswer {
+    id: number;
+    sectionId: number;
+    question: string;
+    answerList: string[];
+}
+
+export interface ISubject {
     name: string;
     type: string;
     id: number;
