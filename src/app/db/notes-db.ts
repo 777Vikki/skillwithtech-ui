@@ -6,14 +6,15 @@ import { azureList } from "./testing/azure-list"
 import { htmlList } from "./testing/htmlList"
 import { javascriptList } from "./testing/javascript-list"
 import { ngrxList } from "./testing/ngrx-list"
+import { practiceList } from "./testing/practice"
 import { rxjsList } from "./testing/rxjs-list"
 import { typescriptList } from "./testing/typescript-list"
 
 export const storeCount = () => {
   return {
-    section: 50,
-    subSection: 16,
-    topic: 240,
+    section: 53,
+    subSection: 18,
+    topic: 255,
   }
 }
 
@@ -72,6 +73,12 @@ const notes = (): ISubject[] => {
       type: Note.ANGULAR_MICROFRONTEND,
       id: 9,
       sections: angularMicrofrontendList()
+    },
+    {
+      name: "Practice Set",
+      type: Note.PRACTICE_SET,
+      id: 10,
+      sections: practiceList(),
     }
   ]
 }
