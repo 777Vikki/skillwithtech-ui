@@ -17,6 +17,22 @@ export const javascriptList = () => {
             "subSections": []
         },
         {
+            "name": "<p><strong>Call(), apply() and bind()</strong></p>",
+            "sectionId": 54,
+            "noteType": "JavaScript",
+            "topics": [
+                {
+                    "text": "<p>Explain the difference between <strong>call()</strong>, <strong>apply()</strong>, and <strong>bind()</strong> methods in <strong>JavaScript</strong>. When would you use each?</p>",
+                    "sectionId": 54,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 256,
+                    "description": "<p>In JavaScript, <strong>call</strong>, <strong>apply</strong>, and <strong>bind</strong> are methods that allow you to control the context (<strong>this</strong> value) in which a function is executed.</p></br><pre data-language=\"plain\">\nfunction greet(city, country) {\n    console.log(this.name + &#39; from &#39; + city + &#39;, &#39; + country);\n}\nconst person = {\n    name: &#39;Alice&#39;\n};\n\n</pre></br><p>The <strong>call()</strong> method invokes a function with a specified <strong>this</strong> value and arguments passed <strong>individually</strong>.</p></br><pre data-language=\"plain\">\ngreet.call(person, &#39;Delhi&#39;, &#39;India&#39;); // Alice from Delhi, India\n</pre></br><p>The <strong>apply()</strong> method invokes a function with a specified <strong>this</strong> value and arguments passed as an <strong>array</strong>.</p></br><pre data-language=\"plain\">\ngreet.apply(person, [&#39;Los Angeles&#39;, &#39;U.S.&#39;]); // Alice from Los Angeles, U.S.\n</pre></br><p>The <strong>bind()</strong> method creates a <strong>new function</strong> with a given <strong>this</strong> value and optional arguments, <strong>without immediately invoking</strong> it.</p></br><pre data-language=\"plain\">\nconst detail = greet.bind(person, &#39;Moscow&#39;);\ndetail(&#39;Russia&#39;); // Alice from Moscow, Russia\n</pre>"
+                }
+            ],
+            "subSections": []
+        },
+        {
             "name": "<p><strong>Closure</strong></p>",
             "sectionId": 45,
             "noteType": "JavaScript",
@@ -147,7 +163,23 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 209,
-                    "description": "<p><strong>Regular functions</strong> have a <code><strong>this</strong></code> value. It depends on <strong>how the function is called</strong>, whereas <strong>arrow functions</strong> do not have their own <code><strong>this</strong></code> value. They <strong>inherit </strong><code><strong>this</strong></code> from their surrounding (<strong>lexical scope</strong>).</p></br><pre data-language=\"plain\">\nconst obj = {\n  value: 10,\n  regularFunc: function() {\n    console.log(this.value); // &#39;this&#39; refers to obj\n  },\n  arrowFunc: () =&gt; {\n    console.log(this.value); // &#39;this&#39; refers to outer scope (e.g., window in browser)\n  }\n};\n\nobj.regularFunc(); // Output: 10\nobj.arrowFunc();   // Output: undefined\n</pre></br><p>We can use <code><strong>arguments</strong></code> in <strong>regular functions</strong>. It gives access to all <strong>passed arguments</strong>, whereas <strong>arrow functions</strong> do not have <code><strong>arguments</strong></code>. <strong>Rest parameters (</strong><code><strong>...args</strong></code><strong>)</strong> can be used instead.</p></br></br><p>A <strong>regular function</strong> can be used as a <strong>constructor</strong> with the <code><strong>new</strong></code> keyword that creates <strong>instances</strong>, whereas an <strong>arrow function</strong> cannot be used as a <strong>constructor</strong>.</p></br><p>// Correct: Regular function as constructor</p><p>function Person(name) {</p><p>  this.name = name;</p><p>}</p><p>const p = new Person(&quot;Vivek&quot;);</p><p>console.log(p.name); // &quot;Vivek&quot;</p></br><pre data-language=\"plain\">\n// ❌ Incorrect: Arrow function cannot be used as constructor\nconst PersonArrow = (name) =&gt; {\n  this.name = name;\n};\nconst p2 = new PersonArrow(&quot;Vivek&quot;); // TypeError\n</pre></br>"
+                    "description": "<p><strong>Regular functions</strong> have a <code><strong>this</strong></code> value. It depends on <strong>how the function is called</strong>, whereas <strong>arrow functions</strong> do not have their own <code><strong>this</strong></code> value. They <strong>inherit </strong><code><strong>this</strong></code> from their surrounding (<strong>lexical scope</strong>).</p></br><pre data-language=\"plain\">\nconst obj = {\n  value: 10,\n  regularFunc: function() {\n    console.log(this.value); // &#39;this&#39; refers to obj\n  },\n  arrowFunc: () =&gt; {\n    console.log(this.value); // &#39;this&#39; refers to outer scope (e.g., window in browser)\n  }\n};\n\nobj.regularFunc(); // Output: 10\nobj.arrowFunc();   // Output: undefined\n</pre></br><p>We can use <code><strong>arguments</strong></code> in <strong>regular functions</strong>. It gives access to all <strong>passed arguments</strong>, whereas <strong>arrow functions</strong> do not have <code><strong>arguments</strong></code>. <strong>Rest parameters (</strong><code><strong>...args</strong></code><strong>)</strong> can be used instead.</p></br></br><p>A <strong>regular function</strong> can be used as a <strong>constructor</strong> with the <code><strong>new</strong></code> keyword that creates <strong>instances</strong>, whereas an <strong>arrow function</strong> cannot be used as a <strong>constructor</strong>.</p></br><pre data-language=\"plain\">\n// Correct: Regular function as constructor\nfunction Person(name) {\n  this.name = name;\n}\nconst p = new Person(&quot;Vivek&quot;);\nconsole.log(p.name); // &quot;Vivek&quot;\n</pre></br><pre data-language=\"plain\">\n// ❌ Incorrect: Arrow function cannot be used as constructor\nconst PersonArrow = (name) =&gt; {\n  this.name = name;\n};\nconst p2 = new PersonArrow(&quot;Vivek&quot;); // TypeError\n</pre>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>map(), forEach(), filter() and reduce()</strong></p>",
+            "sectionId": 55,
+            "noteType": "JavaScript",
+            "topics": [
+                {
+                    "text": "<p>What is the <strong>difference</strong> between <strong>map()</strong>, <strong>forEach()</strong>, <strong>filter()</strong>, and <strong>reduce()</strong> in <strong>JavaScript</strong>? Can you give a <strong>small example</strong> for each?</p>",
+                    "sectionId": 55,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 260,
+                    "description": "<p>const numbers = [1, 2, 3];</p></br><p><strong>map():</strong> Transforms each element in an array and returns a new array of the same length. Does not mutate the original array.</p></br><pre data-language=\"plain\">\nconst doubled = numbers.map(num =&gt; num * 2);\nconsole.log(doubled); // [2, 4, 6]\n</pre></br><p><strong>forEach():</strong> Iterates over each element in an array to perform an operation. Always returns undefined. Does not mutate the original array (unless done manually).</p></br><pre data-language=\"plain\">\nnumbers.forEach(num =&gt; console.log(num * 2));\n// Output: 2, 4, 6 (just logs, no returned array)\n</pre></br><p><strong>filter():</strong> Returns a new array containing only the elements that satisfy the provided condition (true). Does not mutate the original array.</p></br><pre data-language=\"plain\">\nconst even = numbers.filter(num =&gt; num % 2 === 0);\nconsole.log(even); // [2]\n</pre></br><p><strong>reduce():</strong> Reduces the array to a single value (which can be a number, string, object, array, etc.) based on the accumulator logic. Does not mutate the original array.</p></br><pre data-language=\"plain\">\nconst sum = numbers.reduce((acc, num) =&gt; acc + num, 0);\nconsole.log(sum); // 6\n</pre>"
                 }
             ],
             "subSections": []
@@ -316,6 +348,22 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 233,
                     "description": "<pre data-language=\"plain\">\nlet arr = [1, 2.5, 3/2, -4, 0.75];\n\nlet integers = arr.filter(num =&gt; Number.isInteger(num));\nlet nonIntegers = arr.filter(num =&gt; !Number.isInteger(num));\n\nconsole.log(&quot;Integers:&quot;, integers);       // [1, -4]\nconsole.log(&quot;Non-Integers:&quot;, nonIntegers); // [2.5, 1.5, 0.75]\n</pre></br>"
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Can you </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">check</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> if a </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">property exists</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> in an </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">object</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 258,
+                    "description": ""
+                },
+                {
+                    "text": "<p>Can you <strong>implement</strong> a <strong>deep copy</strong> manually?</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 259,
+                    "description": ""
                 }
             ],
             "subSections": []
