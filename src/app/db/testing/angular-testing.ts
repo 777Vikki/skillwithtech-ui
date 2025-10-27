@@ -957,6 +957,22 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 25,
                     "description": "<p><code><strong>createSpyObject()</strong></code> is used to <strong>create a completely fake object</strong> with one or more <strong>spy methods</strong> — without needing a real class or instance.</p></br><pre data-language=\"plain\">\nit(&#39;should call save method of mock service&#39;, () =&gt; {\n  const mockService = jasmine.createSpyObj(&#39;UserService&#39;, [&#39;save&#39;]);\n  mockService.save.and.returnValue(of(true));\n\n  component = new UserComponent(mockService);\n  component.saveUser();\n\n  expect(mockService.save).toHaveBeenCalled();\n});\n</pre></br><p>✅ <strong>Key Points:</strong></p><ul><li>Creates a <strong>mock object from scratch</strong>.</li><li>Ideal when you want <strong>complete control</strong> over dependencies.</li><li>Doesn’t require the <strong>real class</strong> or <strong>Angular TestBed</strong>.</li></ul></br>"
+                },
+                {
+                    "text": "<p>Suppose you have a parent component passing a value to a child component via <code>@Input()</code>. How would you write a unit test to verify that the child receives the correct value?</p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 261,
+                    "description": "<p>Here I will write a unit test in the parent component and describe the fixture and component for <code>ParentComponent</code> using <code>TestBed.createComponent(Parent)</code> for the fixture and <code>fixture.componentInstance</code> for the component instance.</p></br><p>Then I will access the child component instance using <code>fixture.debugElement.query</code> and pass <code>By.directive</code> with <code>ChildComponent</code>. This gives the child component instance.</p></br><p>Now I will change the property value with mock data, like <code>component.name = &#39;Vivek&#39;</code>, then run <code>fixture.detectChanges();</code> to update the value, and finally check if the expected value is the same as the mock value using <code>expect(childComponent.userName).toBe(&#39;Vivek&#39;)</code>.</p></br><p>Link: <a href=\"https://github.com/777Vikki/Angular-Unit-Testing/blob/1-input-communication/src/app/parent/parent.spec.ts\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/777Vikki/Angular-Unit-Testing/blob/1-input-communication/src/app/parent/parent.spec.ts</a></p>"
+                },
+                {
+                    "text": "<p>How do you test a service call inside a component in Angular?</p>",
+                    "sectionId": 24,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 262,
+                    "description": "<p>We mock the service method using spyOn() so no real API is called.</p><p>Then we trigger the component function that uses the service.</p><p>If the service is called with a single parameter, then I will check using:</p><p><code> expect(userService.getUserDetail).toHaveBeenCalledWith(1);</code></p><p>If the service is called with multiple parameters, then I will check using:</p><p><code> expect(userService.multiplyTwoNumber).toHaveBeenCalledWith(5, 13);</code></p></br><p>Link: <a href=\"https://github.com/777Vikki/Angular-Unit-Testing/blob/2-call-service-from-component/src/app/user-component/user-component.spec.ts\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/777Vikki/Angular-Unit-Testing/blob/2-call-service-from-component/src/app/user-component/user-component.spec.ts</a></p>"
                 }
             ],
             "subSections": []
