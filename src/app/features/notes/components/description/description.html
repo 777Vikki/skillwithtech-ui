@@ -1,6 +1,10 @@
 <div class="note-desc">
     <div class="note-description-header">
-        <h3>Description</h3>
+        <h3>Description
+            @if(reOrderCount.length) {
+                <span>: {{reOrderCount.join(', ')}}</span>
+            }
+        </h3>
     </div>
     <div class="note-description-container">
         @if(topic) {
@@ -8,10 +12,10 @@
             <div class="ans-box">
                 <div class="ans-box-header">
                     <div [innerHTML]="topic.text"></div>
-                    @if(topic.description && !isMobile) {
+                    @if(description && !isMobile) {
                     <div class="center-align-between">
-                        <p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" />
-                        @if(topic && showReorderSectionIds.includes(topic.sectionId)) {
+                        <p-button (click)="onEdit()" label="Edit Answer" severity="success" />
+                        @if(topic && !isShowEditor && showReorderSectionIds.includes(topic.sectionId)) {
                         <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"
                             [pTooltip]="'Reorder Descriptions'"
                             tooltipPosition="left"> change_circle
@@ -21,9 +25,9 @@
                     }
                 </div>
                 <div class="topic-description">
-                    @if(!isShowEditor && topic.description) {
-                    <div [innerHTML]="topic.description"></div>
-                    } @else if(!isShowEditor && !topic.description) {
+                    @if(!isShowEditor && description) {
+                    <div [innerHTML]="description"></div>
+                    } @else if(!isShowEditor && !description) {
                     <div class="no-ans ">
                         <div class="no-ans-item">
                             <div>No Answer is added.</div>
@@ -37,7 +41,7 @@
                     }
                     @if(isShowEditor) {
                     <div>
-                        <app-text-editor [editorText]="topic.description" [showCancleBtn]="true"
+                        <app-text-editor [editorText]="description" [showCancleBtn]="true"
                             (emitEditorText)="editorText($event)" [editorStyle]="{'height': '258px'}"
                             (onCancleEditor)="isShowEditor=false"></app-text-editor>
                     </div>

@@ -95,6 +95,22 @@ export const practiceList = () => {
                     ]
                 }
             ]
+        },
+        {
+            "name": "<p><strong>Company&#39;s Practice Set</strong></p>",
+            "sectionId": 57,
+            "noteType": "PracticeSet",
+            "topics": [
+                {
+                    "text": "<p>Cognizant (1-6)</p>",
+                    "sectionId": 57,
+                    "subSectionId": -1,
+                    "noteType": "PracticeSet",
+                    "topicId": 278,
+                    "description": "<p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">1️⃣ T</span>ell me about <strong>yourself</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">.</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">2️⃣ </span>What is your <strong>role</strong> and <strong>responsibility</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">3️⃣ </span>How can you <strong>secure</strong> your <strong>Angular Application</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">4️⃣ </span>What is difference between <strong>canActivate</strong> and <strong>canLoad</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">5️⃣ </span>Do you have experience working with <strong>Node service</strong> in your <strong>Angular project</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">6️⃣ </span> How to <strong>test</strong> a <strong>component</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">7️⃣ </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">8️⃣ </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">9️⃣</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">🔟 </span></p>"
+                }
+            ],
+            "subSections": []
         }
     ];
 }

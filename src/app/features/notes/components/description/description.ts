@@ -17,9 +17,11 @@ export class Description implements OnInit, OnChanges {
 
   @Output() emitEditorText = new EventEmitter<string>();
 
-  showReorderSectionIds = [53];
+  showReorderSectionIds = [53, 57];
   isShowEditor: boolean = false;
+  description: string | undefined;
   isMobile = this.storeService.checkMobileScreen();
+  reOrderCount: number[] = [];
 
   ngOnInit(): void {
 
@@ -27,6 +29,8 @@ export class Description implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["topic"]) {
+      this.description = this.topic?.description ?? '';
+      this.reOrderCount = [];
       this.isShowEditor = false;
     }
   }
@@ -36,17 +40,33 @@ export class Description implements OnInit, OnChanges {
     this.emitEditorText.emit(text);
   }
 
+  onEdit() {
+    this.isShowEditor = true;
+    this.description = this.topic?.description;
+    this.reOrderCount = [];
+  }
+
   onChangeOrder() {
-    const descriptions = this.topic?.description.match(/<p>.*?<\/p>/g);
-
-    if (descriptions) {
-      for (let i = descriptions.length - 1; i > 0; i--) {
+    const isPreContent = this.topic && this.topic.description.includes('<pre') && this.topic.description.includes('</pre>')
+    if (isPreContent) {
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [descriptions[i], descriptions[j]] = [descriptions[j], descriptions[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]]; // swap
       }
+      this.reOrderCount = arr;
+    } else {
+      const descriptions = this.topic?.description.match(/<p>.*?<\/p>/g);
 
-      if (this.topic) {
-        this.topic.description = descriptions.join("");
+      if (descriptions) {
+        for (let i = descriptions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [descriptions[i], descriptions[j]] = [descriptions[j], descriptions[i]];
+        }
+
+        if (this.topic) {
+          this.description = descriptions.join("");
+        }
       }
     }
   }
