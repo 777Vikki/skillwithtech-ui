@@ -9,7 +9,15 @@
                 <div class="ans-box-header">
                     <div [innerHTML]="topic.text"></div>
                     @if(topic.description && !isMobile) {
-                    <div><p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" /></div>
+                    <div class="center-align-between">
+                        <p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" />
+                        @if(topic && showReorderSectionIds.includes(topic.sectionId)) {
+                        <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"
+                            [pTooltip]="'Reorder Descriptions'"
+                            tooltipPosition="left"> change_circle
+                        </span>
+                        }
+                    </div>
                     }
                 </div>
                 <div class="topic-description">
