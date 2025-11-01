@@ -589,6 +589,14 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 76,
                     "description": "<p>Zone.js detects <strong>clicks</strong>, <strong>input events</strong>, and other <strong>DOM events</strong>, as well as when an <strong>asynchronous task</strong> has completed, and informs <strong>NgZone</strong>: &#39;Hey, something changed, maybe run <strong>change detection</strong>.&#39; <strong>NgZone</strong> then tells <strong>Angular</strong> to run <strong>change detection</strong>.</p></br><p>If we enable the <strong>OnPush Change Detection Strategy</strong>, <strong>Angular</strong> only checks a <strong>component</strong> when one of the following happens: the <strong>component</strong> triggers an <strong>event</strong> (click, input), an <strong>@Input</strong> property changes (<strong>reference changes</strong>), or an <strong>asynchronous task</strong> has completed.</p></br><p>Otherwise, <strong>Angular</strong> skips checking the <strong>component</strong>, improving <strong>performance</strong>.</p></br><pre data-language=\"plain\">\nEnable OnPush Strategy\n\nimport { ChangeDetectionStrategy, Component } from &#39;@angular/core&#39;;\n\n@Component({\n  selector: &#39;app-child&#39;,\n  templateUrl: &#39;./child.component.html&#39;,\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class ChildComponent { }\n</pre></br>"
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">If Angular does not use </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">zone.js</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, who manages </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">change detection</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 13,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 267,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -677,6 +685,14 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 154,
                     "description": "<p><code>ContentChildren</code> is used to get references to <strong>multiple elements or components projected into a component</strong> via <code>&lt;ng-content&gt;</code>. It returns a <strong>QueryList</strong> and becomes available after <strong>ngAfterContentInit</strong>.</p></br><p><strong>Accessing multiple projected elements</strong></p><pre data-language=\"plain\">\n@Component({\n  selector: &#39;child-comp&#39;,\n  template: `&lt;ng-content&gt;&lt;/ng-content&gt;`\n})\nexport class ChildComponent implements AfterContentInit {\n  @ContentChildren(&#39;projected&#39;) projectedItems!: QueryList&lt;ElementRef&gt;;\n\n  ngAfterContentInit() {\n    this.projectedItems.forEach(item =&gt; \n      console.log(item.nativeElement.textContent)\n    );\n  }\n}\n</pre></br><pre data-language=\"plain\">\n&lt;!-- Parent Component Template --&gt;\n&lt;child-comp&gt;\n  &lt;p #projected&gt;Item 1&lt;/p&gt;\n  &lt;p #projected&gt;Item 2&lt;/p&gt;\n&lt;/child-comp&gt;\n</pre>"
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Content Projection</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> in Angular?</span></p>",
+                    "sectionId": 16,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 270,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -741,6 +757,14 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 203,
                     "description": "<p>We can use RxJS operator <strong>race</strong>, in which all observables execute simultaneously. If any one observable <strong>emits first (either value or completion)</strong>, all the other observables will be canceled or unsubscribed.</p></br><pre data-language=\"plain\">\nimport { Component } from &#39;@angular/core&#39;;\nimport { HttpClient } from &#39;@angular/common/http&#39;;\nimport { race, Observable } from &#39;rxjs&#39;;\n\n@Component({\n  selector: &#39;app-api-race&#39;,\n  template: `&lt;button (click)=&quot;callApis()&quot;&gt;Call API&lt;/button&gt;`\n})\nexport class ApiRaceComponent {\n  private apiCalls: Observable&lt;any&gt;[] = [];\n\n  constructor(private http: HttpClient) {}\n\n  callApis() {\n    // Create a new API call on every click\n    const apiCall = this.http.get(&#39;http://localhost:3000/long-api&#39;);\n    this.apiCalls.push(apiCall);\n\n    // Run race on all API calls\n    race(...this.apiCalls).subscribe({\n      next: (res) =&gt; {\n        console.log(&#39;First response wins:&#39;, res);\n        // Cancel all other pending API calls\n        this.apiCalls = [];\n      },\n      error: (err) =&gt; console.log(err)\n    });\n  }\n}\n</pre>"
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">If the application takes a long time to </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">load</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, how can you </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">optimize</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> its performance?</span></p>",
+                    "sectionId": 18,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 269,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -797,6 +821,54 @@ export const angularList = () => {
                     "noteType": "Angular",
                     "topicId": 160,
                     "description": "<p><strong>Ahead-of-Time (AOT) compilation</strong> is the process where Angular compiles <strong>TypeScript code</strong> and <strong>HTML templates</strong> into efficient <strong>JavaScript code</strong> during <strong>build time</strong>, <strong>before the browser downloads and runs the application</strong>.</p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Caching, Webpack, SSR and Auth</strong></p>",
+            "sectionId": 56,
+            "noteType": "Angular",
+            "topics": [
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">caching</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, and how do you implement </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">caching</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> in Angular?</span></p>",
+                    "sectionId": 56,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 272,
+                    "description": ""
+                },
+                {
+                    "text": "<p><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is Webpack</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, and how is it used in </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Angular</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 56,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 273,
+                    "description": "<p><strong>Webpack</strong> is a <strong>module bundler</strong> — it takes all the files and dependencies in your Angular project (like TypeScript, HTML, SCSS, images, etc.) and bundles them into optimized JavaScript files that the browser can understand and load efficiently.</p></br><p><strong>How Webpack is used in Angular:</strong></p><p>Angular uses Webpack <strong>under the hood</strong> through the <strong>Angular CLI</strong>.</p><p>You don’t manually configure Webpack — it’s already integrated and managed internally by Angular CLI (<code>@angular/cli</code>).</p><p>When you run Angular CLI commands, Webpack is working behind the scenes:</p><table style=\"border: 1px solid #000;\"><tbody><tr><td data-row=\"1\"></td></tr><tr><td data-row=\"2\"> <code>ng serve</code></td><td data-row=\"2\">Starts a <strong>Webpack Dev Server</strong> for live reloading during development.</td></tr><tr><td data-row=\"3\"><code>ng build</code></td><td data-row=\"3\">Uses Webpack to bundle and optimize code (tree-shaking, minification, lazy loading).</td></tr><tr><td data-row=\"4\"><code>ng test</code></td><td data-row=\"4\">Webpack bundles test files before running them.</td></tr></tbody></table></br>"
+                },
+                {
+                    "text": "<p><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is SSR (Server-Side Rendering)</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, and why is it used in Angular?</span></p>",
+                    "sectionId": 56,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 274,
+                    "description": ""
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What are the </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">benefits of SSR</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> in terms of </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">SEO</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> and </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">performance</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 56,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 275,
+                    "description": ""
+                },
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Can you explain </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">Auth</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 56,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 276,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -997,7 +1069,16 @@ export const angularList = () => {
             "name": "<p><strong>Angular v14-19 Feature</strong></p>",
             "sectionId": 39,
             "noteType": "Angular",
-            "topics": [],
+            "topics": [
+                {
+                    "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">new features</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> have you used in the </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">latest version of Angular</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p>",
+                    "sectionId": 39,
+                    "subSectionId": -1,
+                    "noteType": "Angular",
+                    "topicId": 268,
+                    "description": ""
+                }
+            ],
             "subSections": [
                 {
                     "name": "<p><strong>Angular 14 Features</strong></p>",
@@ -1170,7 +1251,7 @@ export const angularList = () => {
                             "subSectionId": 16,
                             "noteType": "Angular",
                             "topicId": 237,
-                            "description": "<p>In our project, we follow an <strong>Agile model with a Continuous Integration (CI) process</strong>.</p></br><p>All our tasks, including user stories and bugs, are managed through <strong>Jira</strong>, where they are assigned priorities such as <em>Low, Medium, High,</em> or <em>Highest</em>. We plan our work in sprints, and each sprint includes development, testing, and review activities.</p></br><p>For testing purposes, the application is <strong>deployed twice a day</strong> to the QA environment. This helps testers verify the latest code changes frequently and ensures that integration issues are identified early — which is the core idea of <strong>Continuous Integration</strong>.</p></br><p>However, <strong>production deployment happens once every three months</strong>, following a planned release cycle. So, while we practice Continuous Integration, we do <strong>not have full Continuous Deployment</strong> — the production releases are scheduled.</p></br><p>Overall, our approach combines <strong>Agile methodology with Continuous Integration (CI)</strong> for faster feedback and better code stability.</p>"
+                            "description": "<p>In our project, we follow the <strong>Agile model</strong>, specifically the <strong>Scrum process</strong>.</p><p> Our development is divided into <strong>sprints</strong>, usually of <strong>two weeks</strong>.</p></br><p>At the beginning of each sprint, we conduct a <strong>Sprint Planning Meeting</strong> to discuss and finalize the features or tasks to be developed.</p></br><p>Every day, we have a <strong>daily stand-up meeting</strong> where each team member shares their progress, challenges, and plans for the day.</p></br><p>Once the sprint ends, we conduct a <strong>Sprint Review</strong> to demonstrate the completed work to stakeholders and get feedback.</p><p>Then, we have a <strong>Sprint Retrospective</strong> to identify what went well, what didn’t, and how we can improve in the next sprint.</p></br><p>This process helps us deliver features incrementally, respond quickly to changes in requirements, and maintain good collaboration between developers, testers, and product owners.</p>"
                         },
                         {
                             "text": "<p>What is Agile Model?</p>",
@@ -1195,6 +1276,30 @@ export const angularList = () => {
                             "noteType": "Angular",
                             "topicId": 240,
                             "description": "<p><strong>DevOps</strong> is a combination of <strong>Development (Dev)</strong> and <strong>Operations (Ops)</strong>.</p><p> It is a <strong>culture and set of practices</strong> that brings <strong>developers and operations teams together</strong> to build, test, and release software <strong>faster, more reliably, and with better collaboration</strong>.</p>"
+                        },
+                        {
+                            "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is Solid Principle?</span></p>",
+                            "sectionId": 37,
+                            "subSectionId": 16,
+                            "noteType": "Angular",
+                            "topicId": 277,
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "<p><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">CORS (Cross-Origin Resource Sharing)</strong></p>",
+                    "sectionId": 37,
+                    "subSectionId": 19,
+                    "noteType": "Angular",
+                    "topics": [
+                        {
+                            "text": "<p><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">What is CORS (Cross-Origin Resource Sharing)</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">, and why do we face </span><strong style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">CORS errors</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> in Angular applications?</span></p>",
+                            "sectionId": 37,
+                            "subSectionId": 19,
+                            "noteType": "Angular",
+                            "topicId": 271,
+                            "description": ""
                         }
                     ]
                 }
