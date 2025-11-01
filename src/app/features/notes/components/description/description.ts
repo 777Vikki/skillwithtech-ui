@@ -3,11 +3,11 @@ import { IContent } from '../../../../core/interfaces/note-interface';
 import { TextEditor } from '../../../../shared/components/text-editor/text-editor';
 import { ButtonModule } from 'primeng/button';
 import { StoreService } from '../../../../core/services/store';
-import { ActivatedRoute } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-description',
-  imports: [TextEditor, ButtonModule],
+  imports: [TextEditor, ButtonModule, TooltipModule],
   templateUrl: './description.html',
   styleUrl: './description.scss'
 })

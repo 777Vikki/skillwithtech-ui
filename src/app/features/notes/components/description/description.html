@@ -12,7 +12,9 @@
                     <div class="center-align-between">
                         <p-button (click)="isShowEditor = true" label="Edit Answer" severity="success" />
                         @if(topic && showReorderSectionIds.includes(topic.sectionId)) {
-                        <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"> change_circle
+                        <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"
+                            [pTooltip]="'Reorder Descriptions'"
+                            tooltipPosition="left"> change_circle
                         </span>
                         }
                     </div>
