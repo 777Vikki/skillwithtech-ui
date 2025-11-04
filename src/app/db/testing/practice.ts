@@ -1,6 +1,30 @@
 export const practiceList = () => {
     return [
         {
+            "name": "<p><strong>Basic </strong></p>",
+            "sectionId": 59,
+            "noteType": "PracticeSet",
+            "topics": [
+                {
+                    "text": "<p>Can you tell me about yourself?</p>",
+                    "sectionId": 59,
+                    "subSectionId": -1,
+                    "noteType": "PracticeSet",
+                    "topicId": 280,
+                    "description": "<p>Thank you for the opportunity to introduce myself.</p></br><p>My name is Vivek Kumar Maurya, and I’m a Frontend Developer with around 6 years of experience, primarily working on <strong>Angular, JavaScript, TypeScript, HTML, SCSS, and RxJS</strong>.</p></br><p>In my current role, I work extensively on <strong>building scalable web applications</strong> using Angular with <strong>standalone components and NgRx</strong> for state management. I handle <strong>end-to-end development</strong>, including <strong>requirement analysis, UI implementation, API integration, and performance optimization</strong>.</p></br><p>I also collaborate closely with backend teams and clients to ensure smooth project delivery. Over the years, I’ve gained strong expertise in <strong>Angular best practices</strong>, <strong>code optimization</strong>, and <strong>maintaining clean, reusable architecture</strong>.</p></br><p>I’m passionate about writing efficient, maintainable code and staying updated with the latest Angular releases.</p><p>Currently, I’m looking for a role where I can <strong>contribute my frontend expertise</strong>, <strong>mentor junior developers</strong>, and work on challenging projects that push my technical boundaries.</p>"
+                },
+                {
+                    "text": "<p>Can you explain your last project including role and responsibility?</p>",
+                    "sectionId": 59,
+                    "subSectionId": -1,
+                    "noteType": "PracticeSet",
+                    "topicId": 281,
+                    "description": "<p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">In my second company, I worked on a </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Company Management System</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> that handled </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">third-party vendors and partners</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">. The system enabled secure information exchange, </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">task assignment with tracking</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">, and </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">role-based access control</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> for data privacy.</span></p></br><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">My role was to </span><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">implement key Angular modules, develop reusable components, manage state with NgRx, and optimize performance</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">.</span></p>"
+                }
+            ],
+            "subSections": []
+        },
+        {
             "name": "<p><strong>Angular Practice Set</strong></p>",
             "sectionId": 53,
             "noteType": "PracticeSet",

@@ -12,9 +12,9 @@ import { typescriptList } from "./testing/typescript-list"
 
 export const storeCount = () => {
   return {
-    section: 58,
+    section: 59,
     subSection: 19,
-    topic: 279,
+    topic: 281,
   }
 }
 

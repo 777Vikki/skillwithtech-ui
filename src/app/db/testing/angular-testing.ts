@@ -596,7 +596,7 @@ export const angularList = () => {
                     "subSectionId": -1,
                     "noteType": "Angular",
                     "topicId": 267,
-                    "description": ""
+                    "description": "<p>When you disable zones (e.g., using <code>bootstrapApplication(AppComponent, { ngZone: &#39;noop&#39; })</code>), Angular will <strong>not</strong> run change detection automatically.</p></br><p>You have to handle it manually using one of these:</p></br><p>✅ <strong>ChangeDetectorRef: </strong>You can inject it and manually call:</p><pre data-language=\"plain\">\nconstructor(private cdr: ChangeDetectorRef) {}\n\nsomeAsyncOperation() {\n  fetch(&#39;...&#39;).then(() =&gt; {\n    // update some data\n    this.data = &#39;updated&#39;;\n    this.cdr.detectChanges(); // manually trigger CD\n  });\n}\n</pre></br><p>✅ <strong>ApplicationRef: </strong>You can run a global CD:</p><pre data-language=\"plain\">\nconstructor(private appRef: ApplicationRef) {}\n\nmanualRefresh() {\n  this.appRef.tick(); // run CD across the app\n}\n</pre></br><p>✅ <code>signal</code> or <code>computed</code> (in Angular 16+): When using <strong>signals</strong>, Angular automatically tracks dependencies — <strong>you don’t need </strong><code><strong>zone.js</strong></code> or manual <code>detectChanges()</code> for most cases.</p><pre data-language=\"plain\">\ncount = signal(0);\nincrease() {\n  this.count.update(c =&gt; c + 1); // view auto-updates even without zones\n}\n</pre></br>"
                 }
             ],
             "subSections": []
