@@ -1,9 +1,13 @@
-<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [(visible)]="visible" [style]="{ width: '65rem' }">
+<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [(visible)]="visible"
+    [style]="{ width: modalWidth }">
     <ng-template #header>
         <div>
 
             <div [innerHTML]="content?.text"></div>
+            @if(!isMobileScreen) {
             <div><span class="material-symbols-outlined open-link" (click)="onNavigate()">open_in_new</span></div>
+            }
+
         </div>
     </ng-template>
     @if(content?.description) {

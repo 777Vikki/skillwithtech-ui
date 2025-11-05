@@ -91,7 +91,8 @@
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
             <div [innerHTML]="content.text"></div>
-            <span class="material-symbols-outlined" [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
+            <span class="material-symbols-outlined"
+                [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
                 [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
                 'check_circle' : 'pending'}}</span>
         </div>
@@ -102,7 +103,8 @@
     <div class="note-topic">
         <div class="note-topic-item" (click)="onExpandTopic(content.topicId); $event.stopPropagation()">
             <div class="note-topic-content">
-                <span class="material-symbols-outlined" [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
+                <span class="material-symbols-outlined"
+                    [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
                     [ngClass]="{'status-icon-pending': !content.description, 'status-icon-ans': content.description}">{{content.description?
                     'check_circle' : 'pending'}}</span>
                 <div [innerHTML]="content.text"></div>
@@ -112,7 +114,7 @@
         </div>
         @if(expandTopics.includes(content.topicId)) {
         @if(content.description) {
-        <div class="note-description-item" [innerHTML]="content.description"></div>
+        <div class="note-description-item" (click)="onViewAnswer($event)" [innerHTML]="content.description"></div>
         } @else {
         <div class="note-description-item">No Answer.</div>
         }
@@ -121,6 +123,9 @@
 </ng-template>
 <p-toast />
 
-<!-- @if(show) {
-<app-text-editor-modal [header]="actions?.header" (closeModal)="onCloseModal($event)" />
-} -->
+@if(visibleDescriptionModal) {
+<app-description-modal [modalWidth]="'22rem'" [visible]="visibleDescriptionModal" [content]="descriptionModalData"
+    (emitClose)="visibleDescriptionModal = $event">
+
+</app-description-modal>
+}

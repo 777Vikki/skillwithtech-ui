@@ -3,6 +3,7 @@ import { DialogModule } from 'primeng/dialog';
 import { IContent } from '../../../core/interfaces/note-interface';
 import { NotesService } from '../../../core/services/notes';
 import { Router } from '@angular/router';
+import { StoreService } from '../../../core/services/store';
 
 @Component({
   selector: 'app-description-modal',
@@ -12,11 +13,15 @@ import { Router } from '@angular/router';
 })
 export class DescriptionModal {
   noteService = inject(NotesService);
+  store = inject(StoreService);
   router = inject(Router);
 
   @Input() content: IContent | undefined;
   @Input() visible: boolean = false;
+  @Input() modalWidth: string = '65rem';
   @Output() emitClose = new EventEmitter<boolean>();
+
+  isMobileScreen = this.store.checkMobileScreen();
 
   onNavigate() {
     const url = this.router.serializeUrl(
