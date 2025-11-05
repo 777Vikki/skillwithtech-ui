@@ -1,13 +1,14 @@
-import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { IContent } from '../../../core/interfaces/note-interface';
 import { NotesService } from '../../../core/services/notes';
 import { Router } from '@angular/router';
 import { StoreService } from '../../../core/services/store';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-description-modal',
-  imports: [DialogModule],
+  imports: [DialogModule, ButtonModule],
   templateUrl: './description-modal.html',
   styleUrl: './description-modal.scss'
 })

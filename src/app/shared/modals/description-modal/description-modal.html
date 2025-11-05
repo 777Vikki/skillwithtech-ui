@@ -1,4 +1,4 @@
-<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [(visible)]="visible"
+<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [position]="isMobileScreen? 'center' : 'top'" [(visible)]="visible"
     [style]="{ width: modalWidth }">
     <ng-template #header>
         <div>
@@ -15,4 +15,9 @@
     } @else {
     <div>No answer added.</div>
     }
+    <ng-template #footer>
+        @if(isMobileScreen) {
+            <p-button label="Cancel" [text]="true" severity="secondary" (click)="onClose()" />
+        }
+    </ng-template>
 </p-dialog>
