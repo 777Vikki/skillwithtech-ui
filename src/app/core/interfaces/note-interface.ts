@@ -15,6 +15,7 @@ export interface ISection {
 
 export interface IContent {
     text: string;
+    noteId?: number;
     sectionId: number;
     subSectionId: number;
     noteType: string;

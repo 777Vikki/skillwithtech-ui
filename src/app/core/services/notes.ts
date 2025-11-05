@@ -92,6 +92,10 @@ export class NotesService {
     return EMPTY;
   }
 
+  getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
+    return this.backendService.getContent(noteId, sectionId, subSectionId, contentId);
+  }
+
   removeUnusedTag(text: string) {
     let editorText = text.replace(/&nbsp;/g, ' ').replace(/(<p>\s*<\/p>)/g, '</br>');
     editorText = editorText === '</br>' ? '' : editorText;

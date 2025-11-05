@@ -4,15 +4,18 @@ import { TextEditor } from '../../../../shared/components/text-editor/text-edito
 import { ButtonModule } from 'primeng/button';
 import { StoreService } from '../../../../core/services/store';
 import { TooltipModule } from 'primeng/tooltip';
+import { DescriptionModal } from '../../../../shared/modals/description-modal/description-modal';
+import { NotesService } from '../../../../core/services/notes';
 
 @Component({
   selector: 'app-description',
-  imports: [TextEditor, ButtonModule, TooltipModule],
+  imports: [TextEditor, ButtonModule, DescriptionModal, TooltipModule],
   templateUrl: './description.html',
   styleUrl: './description.scss'
 })
 export class Description implements OnInit, OnChanges {
   private storeService = inject(StoreService);
+  private notesService = inject(NotesService);
   @Input() topic: IContent | undefined;
 
   @Output() emitEditorText = new EventEmitter<string>();
@@ -22,6 +25,8 @@ export class Description implements OnInit, OnChanges {
   description: string | undefined;
   isMobile = this.storeService.checkMobileScreen();
   reOrderCount: number[] = [];
+  visibleDescriptionModal: boolean = false;
+  descriptionModalData: IContent | undefined;
 
   ngOnInit(): void {
 
@@ -44,6 +49,29 @@ export class Description implements OnInit, OnChanges {
     this.isShowEditor = true;
     this.description = this.topic?.description;
     this.reOrderCount = [];
+  }
+
+  onViewAnswer(event: MouseEvent) {
+    const target = event.target as HTMLAnchorElement;
+    if (target.href) {
+      const parsedUrl = new URL(target.href);
+      const params = parsedUrl.searchParams;
+      const sectionId = params.get('sectionId');
+      const subSectionId = params.get('subSectionId');
+      const contentId = params.get('contentId');
+      const notesId = params.get('notesId');
+      if (notesId && sectionId && contentId) {
+        event.preventDefault();
+        this.visibleDescriptionModal = true;
+        this.notesService.getContent(+notesId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
+          .subscribe(response => {
+            if(response.status && response.data.length) {
+              this.descriptionModalData = response.data[0] as IContent;
+              this.descriptionModalData.noteId = +notesId;
+            }
+          })
+      }
+    }
   }
 
   onChangeOrder() {

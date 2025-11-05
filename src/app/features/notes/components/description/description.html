@@ -2,7 +2,7 @@
     <div class="note-description-header">
         <h3>Description
             @if(reOrderCount.length) {
-                <span>: {{reOrderCount.join(', ')}}</span>
+            <span>: {{reOrderCount.join(', ')}}</span>
             }
         </h3>
     </div>
@@ -17,8 +17,7 @@
                         <p-button (click)="onEdit()" label="Edit Answer" severity="success" />
                         @if(topic && !isShowEditor && showReorderSectionIds.includes(topic.sectionId)) {
                         <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"
-                            [pTooltip]="'Reorder Descriptions'"
-                            tooltipPosition="left"> change_circle
+                            [pTooltip]="'Reorder Descriptions'" tooltipPosition="left"> change_circle
                         </span>
                         }
                     </div>
@@ -26,7 +25,7 @@
                 </div>
                 <div class="topic-description">
                     @if(!isShowEditor && description) {
-                    <div [innerHTML]="description"></div>
+                    <div [innerHTML]="description" (click)="onViewAnswer($event)"></div>
                     } @else if(!isShowEditor && !description) {
                     <div class="no-ans ">
                         <div class="no-ans-item">
@@ -52,3 +51,11 @@
         }
     </div>
 </div>
+@if(visibleDescriptionModal) {
+<app-description-modal
+    [visible]="visibleDescriptionModal"
+    [content]="descriptionModalData"
+    (emitClose)="visibleDescriptionModal = $event">
+
+</app-description-modal>
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
-import { notesDb, availableNotes, storeCount } from '../../db/notes-db';
+import { notesDb, notesDbById, availableNotes, storeCount } from '../../db/notes-db';
 
 type Count = 'section' | 'subSection' | 'topic';
 
@@ -38,6 +38,30 @@ export class BackendService {
     }
     this.currentNoteSections = notesDb(type);
     return of(structuredClone(this.currentNoteSections));
+  }
+
+  getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
+    const sections = notesDbById(noteId);
+    if (sections && sections.length) {
+      const selectedSection = sections.find(d => d.sectionId === sectionId);
+      if (selectedSection) {
+        if (subSectionId > -1) {
+          const selectedSubSection = selectedSection.subSections.find(d => d.subSectionId === subSectionId);
+          if (selectedSubSection) {
+            const selectedContent = selectedSubSection.topics.find(d => d.topicId === contentId);
+            if (selectedContent) {
+              return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+            }
+          }
+        } else {
+          const selectedContent = selectedSection.topics.find(d => d.topicId === contentId);
+          if (selectedContent) {
+            return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+          }
+        }
+      }
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onAddSection(section: ISection, index: number): Observable<IResponse> {
