@@ -1,4 +1,4 @@
-<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [(visible)]="visible"
+<p-dialog header="Description" [modal]="true" (onHide)="onClose()" [position]="isMobileScreen? 'center' : 'top'" [(visible)]="visible"
     [style]="{ width: modalWidth }">
     <ng-template #header>
         <div>
