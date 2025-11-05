@@ -1,0 +1,15 @@
+::ng-deep {
+    .p-dialog-header {
+        border-bottom: 1px solid black;
+        font-weight: 600;
+    }
+
+    .p-dialog-content {
+        padding-top: 20px;
+    }
+}
+
+.open-link {
+    cursor: pointer;
+    color: blue;
+}

@@ -185,6 +185,22 @@ export const javascriptList = () => {
             "subSections": []
         },
         {
+            "name": "<p><strong>Math built-in object</strong></p>",
+            "sectionId": 58,
+            "noteType": "JavaScript",
+            "topics": [
+                {
+                    "text": "<p>What is Math?</p>",
+                    "sectionId": 58,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 279,
+                    "description": "<p><strong>Math</strong> is a <strong>built-in object</strong> in JavaScript</p><p>that is used to <strong>perform mathematical operations</strong>, such as:</p></br><table style=\"border: 1px solid #000;\"><tbody><tr><td data-row=\"2\"><code>Math.floor()</code></td><td data-row=\"2\">Round <strong>down</strong></td><td data-row=\"2\"><code>Math.floor(4.9)</code> → <code>4</code></td></tr><tr><td data-row=\"3\"><code>Math.ceil()</code></td><td data-row=\"3\">Round <strong>up</strong></td><td data-row=\"3\"><code>Math.ceil(4.1)</code> → <code>5</code></td></tr><tr><td data-row=\"4\"><code>Math.round()</code></td><td data-row=\"4\">Round to <strong>nearest integer</strong></td><td data-row=\"4\"><code>Math.round(4.5)</code> → <code>5</code></td></tr><tr><td data-row=\"5\"><code>Math.trunc()</code></td><td data-row=\"5\">Remove decimal part</td><td data-row=\"5\"><code>Math.trunc(4.9)</code> → <code>4</code></td></tr><tr><td data-row=\"6\"><code>Math.random()</code></td><td data-row=\"6\">Generate random number (0–1)</td><td data-row=\"6\"><code>Math.random()</code> → <code>0.54</code></td></tr><tr><td data-row=\"7\"><code>Math.max()</code></td><td data-row=\"7\">Find maximum value</td><td data-row=\"7\"><code>Math.max(5,10,2)</code> → <code>10</code></td></tr><tr><td data-row=\"8\"><code>Math.min()</code></td><td data-row=\"8\">Find minimum value</td><td data-row=\"8\"><code>Math.min(5,10,2)</code> → <code>2</code></td></tr><tr><td data-row=\"9\"><code>Math.sqrt()</code></td><td data-row=\"9\">Square root</td><td data-row=\"9\"><code>Math.sqrt(9)</code> → <code>3</code></td></tr><tr><td data-row=\"10\"><code>Math.pow()</code></td><td data-row=\"10\">Power</td><td data-row=\"10\"><code>Math.pow(2,3)</code> → <code>8</code></td></tr></tbody></table>"
+                }
+            ],
+            "subSections": []
+        },
+        {
             "name": "<p><strong>Coding: Find Result and Explain</strong></p>",
             "sectionId": 47,
             "noteType": "JavaScript",
@@ -355,7 +371,7 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 258,
-                    "description": ""
+                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n    },\n  },\n  active: false,\n};\n\nfunction checkValue(obj, value) {\n  if (typeof obj !== &quot;object&quot; || obj === null) return false;\n\n  for (const key in obj) {\n    if (key === value) return true;\n\n    if (typeof obj[key] === &quot;object&quot; &amp;&amp; obj[key] !== null) {\n      const found = checkValue(obj[key], value);\n      if (found) return true; // ✅ only return if found true\n    }\n  }\n  return false; // ✅ must explicitly return false at the end\n}\n\nconsole.log(checkValue(data, &#39;pin&#39;));\n</pre>"
                 },
                 {
                     "text": "<p>Can you <strong>implement</strong> a <strong>deep copy</strong> manually?</p>",
@@ -363,7 +379,7 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 259,
-                    "description": ""
+                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n    },\n  },\n  active: false,\n};\n\nfunction deepClone(obj) {\n    let copyObj = {};\n    if(typeof obj !== &#39;object&#39; || obj === null) return obj;\n    \n    for(const key in obj) {\n        if(typeof obj[key] !== &#39;object&#39; || obj[key] === null) {\n            copyObj[key] = obj[key];   \n        } else {\n            copyObj = {...copyObj, [key]: deepClone(obj[key])}\n        }\n    }\n    return copyObj;\n}\nconst cloneObj = deepClone(data);\nconsole.log(&#39;Object: &#39;, data);\nconsole.log(&#39;ConeObj: &#39;, cloneObj);\n</pre></br><p>If you also want to handle <strong>arrays</strong>, <strong>dates</strong>, <strong>maps</strong>, and <strong>sets</strong>, you can extend it — but for normal JSON-style data (objects, arrays, strings, numbers, booleans, null), this version is 100% correct and efficient.</p>"
                 }
             ],
             "subSections": []

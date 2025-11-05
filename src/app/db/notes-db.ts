@@ -12,9 +12,9 @@ import { typescriptList } from "./testing/typescript-list"
 
 export const storeCount = () => {
   return {
-    section: 57,
-    subSection: 19,
-    topic: 278,
+    section: 59,
+    subSection: 20,
+    topic: 284,
   }
 }
 
@@ -94,4 +94,8 @@ export const availableNotes = (): ISubject[] => {
 
 export const notesDb = (type: string): ISection[] => {
   return [...notes()].find(d => d.type === type)?.sections ?? [];
+}
+
+export const notesDbById = (id: number): ISection[] => {
+  return [...notes()].find(d => d.id === id)?.sections ?? [];
 }
