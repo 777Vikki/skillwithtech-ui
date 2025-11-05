@@ -15,4 +15,9 @@
     } @else {
     <div>No answer added.</div>
     }
+    <ng-template #footer>
+        @if(isMobileScreen) {
+            <p-button label="Cancel" [text]="true" severity="secondary" (click)="onClose()" />
+        }
+    </ng-template>
 </p-dialog>
