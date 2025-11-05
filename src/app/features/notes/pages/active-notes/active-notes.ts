@@ -8,16 +8,16 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { Description } from '../../components/description/description';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SharedNotesService } from '../../services/shared-notes';
+import { DescriptionModal } from '../../../../shared/modals/description-modal/description-modal';
 
 @Component({
   selector: 'app-active-notes',
-  imports: [NgClass, NgTemplateOutlet, Toast, Description, CardModule, TooltipModule],
+  imports: [NgClass, NgTemplateOutlet, Toast, Description, CardModule, TooltipModule, DescriptionModal],
   templateUrl: './active-notes.html',
   styleUrl: './active-notes.scss',
   providers: [MessageService]
@@ -39,6 +39,8 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   expandSubSections: number[] = [];
   expandTopics: number[] = [];
   isSectionCollapse: boolean = false;
+  visibleDescriptionModal: boolean = false;
+  descriptionModalData: IContent | undefined;
 
   ngOnInit(): void {
     this.sharedNotesService.getCurrentNoteSectionsObservable().pipe(takeUntilDestroyed(this.destroyRef))
@@ -64,6 +66,29 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     if (contentId > -1) {
       const element = document.getElementById('content_' + contentId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  onViewAnswer(event: MouseEvent) {
+    const target = event.target as HTMLAnchorElement;
+    if (target.href) {
+      const parsedUrl = new URL(target.href);
+      const params = parsedUrl.searchParams;
+      const sectionId = params.get('sectionId');
+      const subSectionId = params.get('subSectionId');
+      const contentId = params.get('contentId');
+      const notesId = params.get('notesId');
+      if (notesId && sectionId && contentId) {
+        event.preventDefault();
+        this.visibleDescriptionModal = true;
+        this.noteService.getContent(+notesId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
+          .subscribe(response => {
+            if(response.status && response.data.length) {
+              this.descriptionModalData = response.data[0] as IContent;
+              this.descriptionModalData.noteId = +notesId;
+            }
+          })
+      }
     }
   }
 

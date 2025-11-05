@@ -53,6 +53,7 @@
 </div>
 @if(visibleDescriptionModal) {
 <app-description-modal
+    [modalWidth]="'65rem'"
     [visible]="visibleDescriptionModal"
     [content]="descriptionModalData"
     (emitClose)="visibleDescriptionModal = $event">
