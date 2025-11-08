@@ -1,7 +1,7 @@
 import { Note } from "../core/enums/note-enum"
 import { ISubject, ISection } from "../core/interfaces/note-interface"
 import { angularMicrofrontendList } from "./testing/angular-microfrontent"
-import { angularList } from "./testing/angular-testing"
+import { angularList } from "./testing/angular-list"
 import { azureList } from "./testing/azure-list"
 import { htmlList } from "./testing/htmlList"
 import { javascriptList } from "./testing/javascript-list"
@@ -9,12 +9,13 @@ import { ngrxList } from "./testing/ngrx-list"
 import { practiceList } from "./testing/practice"
 import { rxjsList } from "./testing/rxjs-list"
 import { typescriptList } from "./testing/typescript-list"
+import { angularUnitTestList } from "./testing/angular-unit-test-list"
 
 export const storeCount = () => {
   return {
-    section: 59,
+    section: 60,
     subSection: 20,
-    topic: 284,
+    topic: 286,
   }
 }
 
@@ -25,6 +26,12 @@ const notes = (): ISubject[] => {
       type: Note.ANGULAR,
       id: 1,
       sections: angularList(),
+    },
+    {
+      name: "Angular Unit Test",
+      type: Note.ANGULAR_UNIT_TEST,
+      id: 11,
+      sections: angularUnitTestList(),
     },
     {
       name: "NgRx",
