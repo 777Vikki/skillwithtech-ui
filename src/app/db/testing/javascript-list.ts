@@ -185,7 +185,31 @@ export const javascriptList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Math built-in object</strong></p>",
+            "name": "<p><strong>Currying</strong></p>",
+            "sectionId": 61,
+            "noteType": "JavaScript",
+            "topics": [
+                {
+                    "text": "<p>What is <strong>currying </strong>in JavaScript?</p>",
+                    "sectionId": 61,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 291,
+                    "description": "<p><strong>Currying</strong> in <strong>JavaScript</strong> is the process of <strong>transforming a function</strong> with <strong>multiple arguments</strong> into a <strong>sequence of functions</strong>, each taking <strong>one argument at a time</strong>.</p></br><pre data-language=\"plain\">\n// Currying using Closure\nfunction multiply(a) {\n  return function(b) {\n    return a * b;\n  };\n}\n// Usage\nconst multiplyByTwo = multiply(2);\nconsole.log(multiplyByTwo(5)); // Output: 10\nconst multiplyByFive = multiply(5);\nconsole.log(multiplyByFive(5)); // Output: 25\n</pre></br><pre data-language=\"plain\">\n// Currying using Bind method\nfunction multiply(a, b) {\n    return a * b;\n}\n// Usage\nconst multiplyByTwo = multiply.bind(this, 2);\nconsole.log(multiplyByTwo(5)); // Output: 10\nconst multiplyByFive = multiply.bind(null, 5);\nconsole.log(multiplyByFive(5)); // Output: 25\n// the bind method: The first argument is always the ‘this’ context for the function being bound.\n// Since this is not used in the function, we can pass null as the ‘this’ context.\n</pre></br>"
+                },
+                {
+                    "text": "<p>sum(1)(2)(3)(4)..( n)()</p>",
+                    "sectionId": 61,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 292,
+                    "description": "<pre data-language=\"plain\">\nlet sum = function(a) {\n    return function (b) {\n        if(b) {\n            return sum(a+b);\n        } else {\n            return a;\n        }\n    };\n};\nconsole.log(sum(1)(2)(3)(4)(5)()); // 15\nconsole.log(5); // 5\nconsole.log(sum(2)(4)(5)(8)()); // 19\n</pre></br><pre data-language=\"plain\">\nlet sum = a =&gt; b =&gt; b? sum(a+b) : a;\nconsole.log(sum(1)(2)(3)(4)(5)()); // 15\nconsole.log(5); // 5\nconsole.log(sum(2)(4)(5)(8)()); // 19\n</pre>"
+                }
+            ],
+            "subSections": []
+        },
+        {
+            "name": "<p><strong>Built-in Methods</strong></p>",
             "sectionId": 58,
             "noteType": "JavaScript",
             "topics": [
@@ -196,6 +220,14 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 279,
                     "description": "<p><strong>Math</strong> is a <strong>built-in object</strong> in JavaScript</p><p>that is used to <strong>perform mathematical operations</strong>, such as:</p></br><table style=\"border: 1px solid #000;\"><tbody><tr><td data-row=\"2\"><code>Math.floor()</code></td><td data-row=\"2\">Round <strong>down</strong></td><td data-row=\"2\"><code>Math.floor(4.9)</code> → <code>4</code></td></tr><tr><td data-row=\"3\"><code>Math.ceil()</code></td><td data-row=\"3\">Round <strong>up</strong></td><td data-row=\"3\"><code>Math.ceil(4.1)</code> → <code>5</code></td></tr><tr><td data-row=\"4\"><code>Math.round()</code></td><td data-row=\"4\">Round to <strong>nearest integer</strong></td><td data-row=\"4\"><code>Math.round(4.5)</code> → <code>5</code></td></tr><tr><td data-row=\"5\"><code>Math.trunc()</code></td><td data-row=\"5\">Remove decimal part</td><td data-row=\"5\"><code>Math.trunc(4.9)</code> → <code>4</code></td></tr><tr><td data-row=\"6\"><code>Math.random()</code></td><td data-row=\"6\">Generate random number (0–1)</td><td data-row=\"6\"><code>Math.random()</code> → <code>0.54</code></td></tr><tr><td data-row=\"7\"><code>Math.max()</code></td><td data-row=\"7\">Find maximum value</td><td data-row=\"7\"><code>Math.max(5,10,2)</code> → <code>10</code></td></tr><tr><td data-row=\"8\"><code>Math.min()</code></td><td data-row=\"8\">Find minimum value</td><td data-row=\"8\"><code>Math.min(5,10,2)</code> → <code>2</code></td></tr><tr><td data-row=\"9\"><code>Math.sqrt()</code></td><td data-row=\"9\">Square root</td><td data-row=\"9\"><code>Math.sqrt(9)</code> → <code>3</code></td></tr><tr><td data-row=\"10\"><code>Math.pow()</code></td><td data-row=\"10\">Power</td><td data-row=\"10\"><code>Math.pow(2,3)</code> → <code>8</code></td></tr></tbody></table>"
+                },
+                {
+                    "text": "<p>What is Object built-in method?</p>",
+                    "sectionId": 58,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 290,
+                    "description": "<table style=\"border: 1px solid #000;\"><tbody><tr><td data-row=\"1\">Method Returns / Does Includes inherited?</td></tr><tr><td data-row=\"2\"> <code>Object.keys()</code></td><td data-row=\"2\">Array of keys</td><td data-row=\"2\">❌</td></tr><tr><td data-row=\"3\"><code>Object.values()</code></td><td data-row=\"3\">Array of values</td><td data-row=\"3\">❌</td></tr><tr><td data-row=\"4\"><code>Object.entries()</code></td><td data-row=\"4\">Array of [key, value]</td><td data-row=\"4\">❌</td></tr><tr><td data-row=\"5\"><code>Object.assign()</code></td><td data-row=\"5\">Copies props to target</td><td data-row=\"5\">❌</td></tr><tr><td data-row=\"6\"><code>Object.create()</code></td><td data-row=\"6\">Creates new object with prototype</td><td data-row=\"6\">—</td></tr><tr><td data-row=\"7\"><code>Object.freeze()</code></td><td data-row=\"7\">Makes object immutable</td><td data-row=\"7\">—</td></tr><tr><td data-row=\"8\"><code>Object.seal()</code></td><td data-row=\"8\">Prevents add/remove, allows modify</td><td data-row=\"8\">—</td></tr><tr><td data-row=\"9\"><code>Object.hasOwn()</code></td><td data-row=\"9\">Checks own property</td><td data-row=\"9\">❌</td></tr><tr><td data-row=\"10\"><code>Object.getOwnPropertyNames()</code></td><td data-row=\"10\">All own (even non-enumerable)</td><td data-row=\"10\">❌</td></tr><tr><td data-row=\"11\"><code>Object.getPrototypeOf()</code></td><td data-row=\"11\">Gets prototype</td><td data-row=\"11\">—</td></tr><tr><td data-row=\"12\"><code>Object.fromEntries()</code></td><td data-row=\"12\">Converts [key, value] array → object</td><td data-row=\"12\">—</td></tr></tbody></table></br>"
                 }
             ],
             "subSections": []
@@ -339,7 +371,15 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 230,
-                    "description": "<p><strong>Using Array.prototype.flat() (Modern &amp; Simple):</strong></p><pre data-language=\"plain\">\nlet nestedArray = [1, [2, [3, 4], 5], 6];\n\n// Use flat() with Infinity to flatten all levels\nlet flattened = nestedArray.flat(Infinity);\n\nconsole.log(flattened); // Output: [1, 2, 3, 4, 5, 6]\n</pre></br><p><strong>Using Recursion (Classic Interview Approach):</strong></p><pre data-language=\"plain\">\nfunction flattenArray(arr) {\n    let result = [];\n    for (let item of arr) {\n        if (Array.isArray(item)) {\n            result = result.concat(flattenArray(item)); // Recursive call\n        } else {\n            result.push(item);\n        }\n    }\n    return result;\n}\n\nlet nestedArray = [1, [2, [3, 4], 5], 6];\nconsole.log(flattenArray(nestedArray)); // Output: [1, 2, 3, 4, 5, 6]\n</pre></br>"
+                    "description": "<p><strong>Using Array.prototype.flat() (Modern &amp; Simple):</strong></p><pre data-language=\"plain\">\nlet nestedArray = [1, [2, [3, 4], 5], 6];\n\n// Use flat() with Infinity to flatten all levels\nlet flattened = nestedArray.flat(Infinity);\n\nconsole.log(flattened); // Output: [1, 2, 3, 4, 5, 6]\n</pre></br><p><strong>Using Recursion (Classic Interview Approach):</strong></p><pre data-language=\"plain\">\nconst array = [1, [2, [3, 4], 5], 6, [[[7, [8, 9, [10, 11, 12]]]]]];\n\nfunction flattenArray(nestedArray, targetArray = []) {\n    for(const item of nestedArray) {\n        if(Array.isArray(item)) {\n            flattenArray(item, targetArray);\n        } else {\n            targetArray.push(item);\n        }\n    }\n    return targetArray;\n}\nconsole.log(flattenArray(array));\n</pre>"
+                },
+                {
+                    "text": "<p>Implement <strong>flattening </strong>of <strong>nested object</strong>.</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 287,
+                    "description": "<pre data-language=\"plain\">\nconst nestedObject = {\n    a: 1, \n    b: {\n        c: [1, 4, 5],\n        d: 4,\n        e: {\n            f: [1, 2, 3]\n        },\n        g: null\n    }\n}\n\nfunction flattenObj(nestedObj, targetKey = &#39;&#39;, result = {}) {\n    for(const [key, value] of Object.entries(nestedObj)) {\n        const newKey = targetKey? `${targetKey}.${key}` : key;\n        if(typeof value === &#39;object&#39; &amp;&amp; !Array.isArray(value) &amp;&amp; value !== null) {\n            flattenObj(value, newKey, result);\n        } else {\n            result[newKey] = value;\n        }\n    }\n    return result;\n}\nconsole.log(flattenObj(nestedObject));\n</pre></br>"
                 },
                 {
                     "text": "<p>Implement <strong>debounce</strong> and <strong>throttle</strong> functions.</p>",
@@ -371,7 +411,7 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 258,
-                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n    },\n  },\n  active: false,\n};\n\nfunction checkValue(obj, value) {\n  if (typeof obj !== &quot;object&quot; || obj === null) return false;\n\n  for (const key in obj) {\n    if (key === value) return true;\n\n    if (typeof obj[key] === &quot;object&quot; &amp;&amp; obj[key] !== null) {\n      const found = checkValue(obj[key], value);\n      if (found) return true; // ✅ only return if found true\n    }\n  }\n  return false; // ✅ must explicitly return false at the end\n}\n\nconsole.log(checkValue(data, &#39;pin&#39;));\n</pre>"
+                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n      phoneNumbers: [125425, 5468987, 6547526]\n    },\n  },\n  active: false,\n};\n\nfunction hasKey(nestedObj, targetKey) {\n    for(const [key, value] of Object.entries(nestedObj)) {\n        if(key === targetKey) return true;\n        \n        if(typeof value === &#39;object&#39; &amp;&amp; !Array.isArray(value) &amp;&amp; value !== null) {\n            if(hasKey(value, targetKey)) return true; \n        }\n    }\n    return false;\n}\n\nconsole.log(hasKey(data, &#39;phoneNumbers&#39;));\n</pre>"
                 },
                 {
                     "text": "<p>Can you <strong>implement</strong> a <strong>deep copy</strong> manually?</p>",
@@ -379,7 +419,15 @@ export const javascriptList = () => {
                     "subSectionId": -1,
                     "noteType": "JavaScript",
                     "topicId": 259,
-                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n    },\n  },\n  active: false,\n};\n\nfunction deepClone(obj) {\n    let copyObj = {};\n    if(typeof obj !== &#39;object&#39; || obj === null) return obj;\n    \n    for(const key in obj) {\n        if(typeof obj[key] !== &#39;object&#39; || obj[key] === null) {\n            copyObj[key] = obj[key];   \n        } else {\n            copyObj = {...copyObj, [key]: deepClone(obj[key])}\n        }\n    }\n    return copyObj;\n}\nconst cloneObj = deepClone(data);\nconsole.log(&#39;Object: &#39;, data);\nconsole.log(&#39;ConeObj: &#39;, cloneObj);\n</pre></br><p>If you also want to handle <strong>arrays</strong>, <strong>dates</strong>, <strong>maps</strong>, and <strong>sets</strong>, you can extend it — but for normal JSON-style data (objects, arrays, strings, numbers, booleans, null), this version is 100% correct and efficient.</p>"
+                    "description": "<pre data-language=\"plain\">\nconst data = {\n  user: {\n    name: &quot;Vivek&quot;,\n    details: {\n      age: 31,\n      city: {\n          cityName: &#39;Varanasi&#39;,\n          pin: 221112\n      },\n      phoneNumbers: [125425, 5468987, 6547526]\n    },\n  },\n  active: false,\n};\nfunction deepClone(nestedObj) {\n    const result = {};\n    for(const [key, value] of Object.entries(nestedObj)) {\n        if(typeof value === &#39;object&#39; &amp;&amp; !Array.isArray(value) &amp;&amp; value !== null) {\n            result[key] = deepClone(value);\n        } else {\n            result[key] = value;\n        }\n    }\n    return result;\n}\nconsole.log(deepClone(data));\n</pre></br><p>If you also want to handle <strong>arrays</strong>, <strong>dates</strong>, <strong>maps</strong>, and <strong>sets</strong>, you can extend it — but for normal JSON-style data (objects, arrays, strings, numbers, booleans, null), this version is 100% correct and efficient.</p>"
+                },
+                {
+                    "text": "<p>Can you implement a <strong>curry function</strong></p><p>// curry(add)(1)(2)(3) should equal add(1, 2, 3)</p></br><p>function curry(fn) {</p><p>}</p></br><p>function add(a, b, c) {</p><p>return a + b + c;</p><p>}</p></br><p>const curriedAdd = curry(add);</p><p>console.log(curriedAdd(1)(2)(3)); // 6</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 288,
+                    "description": "<pre data-language=\"plain\">\nfunction curry(fn) {\n  return function curried(...args) {\n    // If enough arguments have been provided, call the original function\n    if (args.length &gt;= fn.length) {\n      return fn(...args);\n    }\n    // Otherwise, return a function that collects more arguments\n    return function (...nextArgs) {\n      return curried(...args, ...nextArgs);\n    };\n  };\n}\n\nfunction add(a, b, c) {\n  return a + b + c;\n}\n\nconst curriedAdd = curry(add);\n\nconsole.log(curriedAdd(1)(2)(3)); // 6\nconsole.log(curriedAdd(1, 2)(3)); // 6\nconsole.log(curriedAdd(1)(2, 3)); // 6\n</pre></br>"
                 }
             ],
             "subSections": []
