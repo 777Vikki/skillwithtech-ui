@@ -14,11 +14,11 @@ export class App {
   http = inject(HttpClient);
 
   ngOnInit() {
-    const api = 'https://vivekmaurya.github.io/data-api/subject-list.json'
-    this.http.get('https://777vikki.github.io/skillwithtech-data/subject-list.json?ts=' + new Date().getTime())
-      .subscribe(d => {
-        console.log(d);
-      });
+    // const api = 'https://vivekmaurya.github.io/data-api/subject-list.json'
+    // this.http.get('https://777vikki.github.io/skillwithtech-data/subject-list.json?ts=' + new Date().getTime())
+    //   .subscribe(d => {
+    //     console.log(d);
+    //   });
 
   }
 }
