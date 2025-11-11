@@ -13,9 +13,9 @@ import { angularUnitTestList } from "./testing/angular-unit-test-list"
 
 export const storeCount = () => {
   return {
-    section: 60,
+    section: 61,
     subSection: 20,
-    topic: 286,
+    topic: 292,
   }
 }
 
