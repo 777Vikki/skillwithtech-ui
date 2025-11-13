@@ -41,7 +41,14 @@ export class BackendService {
   }
 
   getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    const sections = notesDbById(noteId);
+    let sections: ISection[] = notesDbById(noteId);
+    const type = sections.length > 0? sections[0].noteType : '';
+    if(type) {
+      const localStoragedata = localStorage.getItem(type);
+      if(localStoragedata) {
+        if(localStoragedata) sections = JSON.parse(localStoragedata);
+      }
+    }
     if (sections && sections.length) {
       const selectedSection = sections.find(d => d.sectionId === sectionId);
       if (selectedSection) {
