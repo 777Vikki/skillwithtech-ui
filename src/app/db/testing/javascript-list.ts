@@ -428,6 +428,14 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 288,
                     "description": "<pre data-language=\"plain\">\nfunction curry(fn) {\n  return function curried(...args) {\n    // If enough arguments have been provided, call the original function\n    if (args.length &gt;= fn.length) {\n      return fn(...args);\n    }\n    // Otherwise, return a function that collects more arguments\n    return function (...nextArgs) {\n      return curried(...args, ...nextArgs);\n    };\n  };\n}\n\nfunction add(a, b, c) {\n  return a + b + c;\n}\n\nconst curriedAdd = curry(add);\n\nconsole.log(curriedAdd(1)(2)(3)); // 6\nconsole.log(curriedAdd(1, 2)(3)); // 6\nconsole.log(curriedAdd(1)(2, 3)); // 6\n</pre></br>"
+                },
+                {
+                    "text": "<p>Check Brackets are balance or not?</p><p>a = [&#39;[&#39;, &#39;{&#39;, &#39;(&#39;, &#39;)&#39;, &#39;}&#39;, &#39;]&#39;];</p>",
+                    "sectionId": 48,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 296,
+                    "description": "<pre data-language=\"plain\">\nfunction isBalanced(brackets) {\n  const stack = [];\n  const pairs = {\n    &#39;)&#39;: &#39;(&#39;,\n    &#39;}&#39;: &#39;{&#39;,\n    &#39;]&#39;: &#39;[&#39;\n  };\n\n  for (let char of brackets) {\n    if ([&#39;(&#39;, &#39;{&#39;, &#39;[&#39;].includes(char)) {\n      stack.push(char);\n    } else if ([&#39;)&#39;, &#39;}&#39;, &#39;]&#39;].includes(char)) {\n      if (stack.length === 0 || stack[stack.length - 1] !== pairs[char]) {\n        return false;\n      }\n      stack.pop();\n    }\n  }\n\n  return stack.length === 0;\n}\n\n// ✅ Test cases\nconsole.log(isBalanced([&#39;[&#39;, &#39;{&#39;, &#39;(&#39;, &#39;)&#39;, &#39;}&#39;, &#39;]&#39;])); // true\nconsole.log(isBalanced([&#39;[&#39;, &#39;(&#39;, &#39;]&#39;, &#39;)&#39;]));           // false\nconsole.log(isBalanced([&#39;{&#39;, &#39;[&#39;, &#39;]&#39;, &#39;}&#39;]));           // true\nconsole.log(isBalanced([&#39;(&#39;, &#39;)&#39;, &#39;[&#39;, &#39;}&#39;, &#39;]&#39;]));      // false\n</pre>"
                 }
             ],
             "subSections": []
