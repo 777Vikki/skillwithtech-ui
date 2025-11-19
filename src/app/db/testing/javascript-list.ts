@@ -228,6 +228,22 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 290,
                     "description": "<table style=\"border: 1px solid #000;\"><tbody><tr><td data-row=\"1\">Method Returns / Does Includes inherited?</td></tr><tr><td data-row=\"2\"> <code>Object.keys()</code></td><td data-row=\"2\">Array of keys</td><td data-row=\"2\">❌</td></tr><tr><td data-row=\"3\"><code>Object.values()</code></td><td data-row=\"3\">Array of values</td><td data-row=\"3\">❌</td></tr><tr><td data-row=\"4\"><code>Object.entries()</code></td><td data-row=\"4\">Array of [key, value]</td><td data-row=\"4\">❌</td></tr><tr><td data-row=\"5\"><code>Object.assign()</code></td><td data-row=\"5\">Copies props to target</td><td data-row=\"5\">❌</td></tr><tr><td data-row=\"6\"><code>Object.create()</code></td><td data-row=\"6\">Creates new object with prototype</td><td data-row=\"6\">—</td></tr><tr><td data-row=\"7\"><code>Object.freeze()</code></td><td data-row=\"7\">Makes object immutable</td><td data-row=\"7\">—</td></tr><tr><td data-row=\"8\"><code>Object.seal()</code></td><td data-row=\"8\">Prevents add/remove, allows modify</td><td data-row=\"8\">—</td></tr><tr><td data-row=\"9\"><code>Object.hasOwn()</code></td><td data-row=\"9\">Checks own property</td><td data-row=\"9\">❌</td></tr><tr><td data-row=\"10\"><code>Object.getOwnPropertyNames()</code></td><td data-row=\"10\">All own (even non-enumerable)</td><td data-row=\"10\">❌</td></tr><tr><td data-row=\"11\"><code>Object.getPrototypeOf()</code></td><td data-row=\"11\">Gets prototype</td><td data-row=\"11\">—</td></tr><tr><td data-row=\"12\"><code>Object.fromEntries()</code></td><td data-row=\"12\">Converts [key, value] array → object</td><td data-row=\"12\">—</td></tr></tbody></table></br>"
+                },
+                {
+                    "text": "<p>event + Regex</p>",
+                    "sectionId": 58,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 297,
+                    "description": "<pre data-language=\"plain\">\n&lt;input type=&quot;text&quot; (input)=&quot;onInputChangeNumber($event)&quot;/&gt;\n\n// Only Numeric Validation\nonInputChangeNumber(event: any) {\n     const initial = event.target.value;\n     event.target.value = initial.replace(/[^0-9]/g, &#39;&#39;);\n}\n\n// Only Letters Validation\nevent.target.value = initial.replace(/[^a-zA-Z]/g, &#39;&#39;);\n\n// Allow Letters + Space\nevent.target.value = initial.replace(/[^a-zA-Z ]/g, &#39;&#39;);\n\n// Allow Letters + Space + Dot\nevent.target.value = initial.replace(/[^a-zA-Z .]/g, &#39;&#39;);\n\n// Allow Letters + Number\nevent.target.value = initial.replace(/[^a-zA-Z 0-9]/g, &#39;&#39;);\n</pre></br>"
+                },
+                {
+                    "text": "<p>Validators + Regex</p>",
+                    "sectionId": 58,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 298,
+                    "description": "<pre data-language=\"true\">\n// Only Numeric Validation:\nValidators.pattern(/^[0-9]+$/)\n\n// Only Character Validation:\nValidators.pattern(/^[a-zA-Z]*$/)\n\n// Character + Space + dot Validation:\nValidators.pattern(/^[a-zA-Z .]*$/)\n</pre>"
                 }
             ],
             "subSections": []

@@ -10,12 +10,13 @@ import { practiceList } from "./testing/practice"
 import { rxjsList } from "./testing/rxjs-list"
 import { typescriptList } from "./testing/typescript-list"
 import { angularUnitTestList } from "./testing/angular-unit-test-list"
+import { cssList } from "./testing/css-list"
 
 export const storeCount = () => {
   return {
-    section: 61,
+    section: 64,
     subSection: 20,
-    topic: 296,
+    topic: 351,
   }
 }
 
@@ -67,7 +68,7 @@ const notes = (): ISubject[] => {
       name: "CSS",
       type: Note.CSS,
       id: 7,
-      sections: [],
+      sections: cssList(), 
     },
     {
       name: "CI/CD pipelines with Azure",
@@ -91,7 +92,7 @@ const notes = (): ISubject[] => {
 }
 
 export const availableNotes = (): ISubject[] => {
-  const filterNotes: string[] = [Note.CSS, Note.AZURE];
+  const filterNotes: string[] = [Note.AZURE];
   const headers = [...notes()].filter(s => !filterNotes.includes(s.type)).map(d => {
     d.sections = [];
     return d;
