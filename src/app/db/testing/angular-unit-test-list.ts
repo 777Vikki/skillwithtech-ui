@@ -188,6 +188,14 @@ export const angularUnitTestList = () => {
                     "noteType": "AngularUnitTest",
                     "topicId": 295,
                     "description": "<p>When testing HTTP-based services, we use <code>HttpTestingController</code> from <code>HttpClientTestingModule</code> to intercept and mock HTTP requests. It allows us to test the service logic without making real API calls. We verify requests using <code>expectOne()</code>, provide mock data using <code>flush()</code>, and ensure no pending requests remain using <code>verify()</code>.</p></br><p>Link: <a href=\"https://github.com/777Vikki/Angular-Unit-Testing/blob/4-verify-http-in-service/src/app/user-service.spec.ts\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/777Vikki/Angular-Unit-Testing/blob/4-verify-http-in-service/src/app/user-service.spec.ts</a></p>"
+                },
+                {
+                    "text": "<p>How do you simulate a click event in Angular unit tests?</p>",
+                    "sectionId": 60,
+                    "subSectionId": -1,
+                    "noteType": "AngularUnitTest",
+                    "topicId": 352,
+                    "description": "<p><strong>✅ 1. Using By.css(&#39;#getUserDetailBtn&#39;):</strong></p><pre data-language=\"plain\">\nimport { By } from &quot;@angular/platform-browser&quot;\n\nit(&#39;should call getUserDetail when button is clicked&#39;, () =&gt; {\n  const spy = spyOn(component, &#39;getUserDetail&#39;);\n\n  const btn = fixture.debugElement.query(By.css(&#39;#getUserDetailBtn&#39;));\n  btn.triggerEventHandler(&#39;click&#39;, null);\n\n  expect(spy).toHaveBeenCalled();\n});\n</pre></br><p><code>fixture.debugElement.query(By.css(&#39;#getUserDetailBtn&#39;))</code> is used to <strong>find an element from the component’s template during unit testing</strong>.</p></br><p><strong>✅ 2. Using nativeElement (not recommended but valid):</strong></p><pre data-language=\"plain\">\nit(&#39;should call getUserDetail when button clicked&#39;, () =&gt; {\n  const spy = spyOn(component, &#39;getUserDetail&#39;);\n\n  const btn: HTMLButtonElement =\n    fixture.nativeElement.querySelector(&#39;#getUserDetailBtn&#39;);\n  btn.click();\n\n  expect(spy).toHaveBeenCalled();\n});\n</pre></br><p><strong>Note:</strong> Use <code>By.css()</code> because it works consistently with Angular’s change detection and DebugElement.</p>"
                 }
             ],
             "subSections": []
