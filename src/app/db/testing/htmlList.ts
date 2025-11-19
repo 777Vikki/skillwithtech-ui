@@ -14,6 +14,14 @@ export const htmlList = () => {
                     "description": "<p>HTML is a <strong>markup language</strong>, not a programming language.</p><p>It uses <strong>tags</strong> (like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;div&gt;</code>, etc.) to <strong>define the structure and content</strong> of a web page.</p></br><p>Here’s a simple HTML example:</p></br><p>&lt;!DOCTYPE html&gt;</p><p>&lt;html&gt;</p><p>  &lt;head&gt;</p><p>    &lt;title&gt;My First Web Page&lt;/title&gt;</p><p>  &lt;/head&gt;</p><p>  &lt;body&gt;</p><p>    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;</p><p>    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;</p><p>    &lt;a href=&quot;https://www.google.com&quot;&gt;Go to Google&lt;/a&gt;</p><p>  &lt;/body&gt;</p><p>&lt;/html&gt;</p></br><p><strong>Explanation:</strong></p><ul><li><code>&lt;!DOCTYPE html&gt;</code> → Defines the document type (HTML5)</li><li><code>&lt;html&gt;</code> → Root element</li><li><code>&lt;head&gt;</code> → Contains meta info (like title, links, scripts)</li><li><code>&lt;body&gt;</code> → Contains visible page content</li></ul></br><p>🔹<strong>HTML Works With:</strong></p><p><strong>CSS</strong> → for styling and layout</p><p><strong>JavaScript</strong> → for interactivity and dynamic behavior</p>"
                 },
                 {
+                    "text": "<p>Why is DOCTYPE required?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 300,
+                    "description": ""
+                },
+                {
                     "text": "<p>What is the difference between inline, block, and inline-block elements?</p>",
                     "sectionId": 41,
                     "subSectionId": -1,
@@ -68,6 +76,62 @@ export const htmlList = () => {
                     "noteType": "HTML",
                     "topicId": 187,
                     "description": "<p><code>&lt;div&gt;</code>: <strong>Block-level container</strong>.</p></br><p> <code>&lt;span&gt;</code>: <strong>Inline container</strong> for <strong>styling specific text/part</strong>.</p>"
+                },
+                {
+                    "text": "<p>What is localStorage and sessionStorage?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 301,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the difference between <code>&lt;script&gt;</code> at head vs body?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 302,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the purpose of the <code>&lt;meta&gt;</code> tag?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 303,
+                    "description": ""
+                },
+                {
+                    "text": "<p> What is the viewport meta tag?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 304,
+                    "description": ""
+                },
+                {
+                    "text": "<p>Difference between &lt;link&gt; and &lt;a&gt; tag?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 305,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the use of <code>&lt;template&gt;</code> tag?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 316,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the shadow DOM?</p>",
+                    "sectionId": 41,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 317,
+                    "description": ""
                 }
             ],
             "subSections": []
@@ -110,6 +174,14 @@ export const htmlList = () => {
             "noteType": "HTML",
             "topics": [
                 {
+                    "text": "<p>Difference between HTML and HTML5?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 299,
+                    "description": ""
+                },
+                {
                     "text": "<p>What is srcset?</p>",
                     "sectionId": 43,
                     "subSectionId": -1,
@@ -132,6 +204,94 @@ export const htmlList = () => {
                     "noteType": "HTML",
                     "topicId": 193,
                     "description": "<p><code>&lt;img src=&quot;...&quot;&gt;</code> → <strong>for images</strong>.</p><p><code>&lt;script src=&quot;...&quot;&gt;</code> → <strong>for JavaScript files</strong>.</p><p><code>&lt;iframe src=&quot;...&quot;&gt;</code> → <strong>for embedding pages</strong>.</p><p><code>&lt;audio src=&quot;...&quot;&gt;</code> / <code>&lt;video src=&quot;...&quot;&gt;</code> → <strong>for media</strong>.</p><p><code>&lt;source src=&quot;...&quot;&gt;</code> → <strong>inside &lt;audio&gt; or &lt;video&gt;</strong>.</p>"
+                },
+                {
+                    "text": "<p>What is HTML5 Canvas?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 306,
+                    "description": ""
+                },
+                {
+                    "text": "<p> What is SVG?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 307,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the purpose of <code>data-*</code> attributes?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 308,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What are custom data attributes used for?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 309,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is accessibility (A11Y)?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 310,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is ARIA?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 311,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is lazy loading in HTML?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 312,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the difference between <code>&lt;b&gt;</code> vs <code>&lt;strong&gt;</code> and <code>&lt;i&gt;</code> vs <code>&lt;em&gt;</code>?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 313,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What is the purpose of <code>rel=&quot;noopener noreferrer&quot;</code>?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 314,
+                    "description": ""
+                },
+                {
+                    "text": "<p>What are self-closing tags?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 315,
+                    "description": ""
+                },
+                {
+                    "text": "<p>How does HTML5 support offline storage?</p>",
+                    "sectionId": 43,
+                    "subSectionId": -1,
+                    "noteType": "HTML",
+                    "topicId": 318,
+                    "description": ""
                 }
             ],
             "subSections": []
