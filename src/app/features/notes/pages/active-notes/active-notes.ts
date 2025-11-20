@@ -85,7 +85,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
           .subscribe(response => {
             if(response.status && response.data.length) {
               this.descriptionModalData = response.data[0] as IContent;
-              this.descriptionModalData.noteId = +notesId;
+              this.descriptionModalData.subjectId = +notesId;
             }
           })
       }
@@ -131,23 +131,23 @@ export class ActiveNotes implements OnInit, AfterViewInit {
         const subSectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : 0;
         if (contentId != null && contentId > 0) {
           if (subSectionId != null && subSectionId > 0 && this.selectedSection?.subSections) {
-            const availableSubSection = this.selectedSection?.subSections.find(d => d.subSectionId === subSectionId);
-            if (availableSubSection && availableSubSection.topics.length) {
-              this.selectedTopic = availableSubSection.topics.find(d => d.topicId === contentId);
+            const availableSubSection = this.selectedSection?.subSections.find(d => d.sectionId === subSectionId);
+            if (availableSubSection && availableSubSection.contents.length) {
+              this.selectedTopic = availableSubSection.contents.find(d => d.contentId === contentId);
             }
           }
           if (!this.selectedTopic) {
-            this.selectedTopic = this.selectedSection.topics.find(d => d.topicId === contentId);
+            this.selectedTopic = this.selectedSection.contents.find(d => d.contentId === contentId);
           }
         }
       }
     }
     if (!this.selectedSection) {
       this.selectedSection = this.sections().length ? this.sections()[0] : undefined;
-      if (this.selectedSection?.topics.length) {
-        this.selectedTopic = this.selectedSection.topics[0]
-      } else if (this.selectedSection?.subSections.length && this.selectedSection.subSections[0].topics.length) {
-        this.selectedTopic = this.selectedSection.subSections[0].topics[0];
+      if (this.selectedSection?.contents.length) {
+        this.selectedTopic = this.selectedSection.contents[0]
+      } else if (this.selectedSection?.subSections.length && this.selectedSection.subSections[0].contents.length) {
+        this.selectedTopic = this.selectedSection.subSections[0].contents[0];
       }
     }
     this.setQueryParam();
@@ -179,8 +179,8 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     let notesId = this.sharedNotesService.currentNote()?.id ?? 0;
     if (this.selectedTopic) {
       sectionId = this.selectedTopic.sectionId;
-      subSectionId = this.selectedTopic.subSectionId;
-      contentId = this.selectedTopic.topicId;
+      subSectionId = this.selectedTopic.sectionId;
+      contentId = this.selectedTopic.contentId;
     } else if (this.selectedSection) {
       sectionId = this.selectedSection.sectionId;
     }
@@ -193,16 +193,16 @@ export class ActiveNotes implements OnInit, AfterViewInit {
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
     setTimeout(() => {
-      this.scrollActiveNotes(-1, -1, this.selectedTopic?.topicId ?? -1);
+      this.scrollActiveNotes(-1, -1, this.selectedTopic?.contentId ?? -1);
     });
   }
 
   onSelectSection(section: ISection) {
     this.selectedSection = section;
-    let availableContent = this.selectedSection.topics?.length ? this.selectedSection.topics[0] : undefined;
+    let availableContent = this.selectedSection.contents?.length ? this.selectedSection.contents[0] : undefined;
     if (!availableContent) {
       if (this.selectedSection.subSections?.length) {
-        availableContent = this.selectedSection.subSections[0].topics?.length ? this.selectedSection.subSections[0].topics[0] : undefined;
+        availableContent = this.selectedSection.subSections[0].contents?.length ? this.selectedSection.subSections[0].contents[0] : undefined;
       }
     }
     this.selectedTopic = availableContent;

@@ -27,7 +27,7 @@ export interface IEditSectionRequest {
     name: string;
     parentSectionId: number;
     sectionId: number;
-    noteType: string;
+    subjectId: number;
 }
 
 export interface IEditContentRequest {

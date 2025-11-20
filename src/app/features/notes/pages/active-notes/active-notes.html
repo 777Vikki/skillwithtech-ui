@@ -25,19 +25,19 @@
                 <h3>Content</h3>
             </div>
             <div class="note-topic-container" #contentScrollContainer>
-                @let contents = selectedSection?.topics || [];
-                @for(content of contents; track content.topicId; let i = $index) {
+                @let contents = selectedSection?.contents || [];
+                @for(content of contents; track content.contentId; let i = $index) {
                 <ng-container
                     *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
                 }
                 @let subSections = selectedSection?.subSections || [];
-                @for(subSection of subSections; track subSection.subSectionId) {
+                @for(subSection of subSections; track subSection.sectionId) {
                 <div class="note-subsection-item">
                     <div class="note-subsection-title">Sub Section: </div>
                     <div class="note-subsection-text" [innerHTML]="subSection.name"></div>
                 </div>
-                @let contents = subSection?.topics || [];
-                @for(content of contents; track content.topicId; let i = $index) {
+                @let contents = subSection?.contents || [];
+                @for(content of contents; track content.contentId; let i = $index) {
                 <ng-container
                     *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
                 }
@@ -60,18 +60,18 @@
                 </div>
             </div>
             @if(expandSections.includes(section.sectionId)) {
-            @for(content of section.topics; track content.topicId) {
+            @for(content of section.contents; track content.contentId) {
             <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
             }
-            @for(subSection of section.subSections; track subSection.subSectionId) {
+            @for(subSection of section.subSections; track subSection.sectionId) {
             <div class="note-sub-section">
-                <div class="note-subsection-item" (click)="onExpandSubSection(subSection.subSectionId)">
+                <div class="note-subsection-item" (click)="onExpandSubSection(subSection.sectionId)">
                     <div [innerHTML]="subSection.name"></div>
-                    <div><span class="material-symbols-outlined">{{expandSubSections.includes(subSection.subSectionId)?
+                    <div><span class="material-symbols-outlined">{{expandSubSections.includes(subSection.sectionId)?
                             'keyboard_arrow_up' : 'keyboard_arrow_down'}}</span></div>
                 </div>
-                @for(content of subSection.topics; track content.topicId) {
-                @if(expandSubSections.includes(subSection.subSectionId)) {
+                @for(content of subSection.contents; track content.contentId) {
+                @if(expandSubSections.includes(subSection.sectionId)) {
                 <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
                 }
                 }
@@ -87,7 +87,7 @@
 
 <ng-template #activeNotesTableContent let-content="content" let-index="index">
     <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectContent(content)"
-        [ngClass]="{'selected': selectedTopic?.topicId === content.topicId}">
+        [ngClass]="{'selected': selectedTopic?.contentId === content.contentId}">
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
             <div [innerHTML]="content.text"></div>

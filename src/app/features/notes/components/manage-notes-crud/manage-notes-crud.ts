@@ -3,7 +3,7 @@ import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ISection, ISubSection, IContent } from '../../../../core/interfaces/note-interface';
+import { ISection, IContent } from '../../../../core/interfaces/note-interface';
 import { IManageNotesAction, ManageNotesIdType } from '../../../../core/interfaces/manage-notes-action-interface';
 import { IResponse } from '../../../../core/interfaces/response-interface';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
@@ -77,12 +77,12 @@ export class ManageNotesCrud implements OnInit {
   }
 
   addSubSectOnSection(section: ISection) {
-    const subSection: ISubSection = this.storeService.getDummySubSection();
-    subSection['sectionId'] = section.sectionId;
+    const subSection: ISection = this.storeService.getDummySection();
+    subSection['parentSectionId'] = section.sectionId;
     this.addSubSection(subSection, '');
   }
 
-  addSubSection(subSection: ISubSection, position: string) {
+  addSubSection(subSection: ISection, position: string) {
     const actions = this.storeService.getManageNotesActions();
     const action = actions.find(d => d.id === "Add_Sub_Section") ?? undefined;
     this.sharedNotesService.setCurrectActionRowDetail(subSection, position);
@@ -95,10 +95,10 @@ export class ManageNotesCrud implements OnInit {
     this.addContent(content, '', "Add_Content");
   }
 
-  addContentOnSubSection(subSection: ISubSection) {
+  addContentOnSubSection(subSection: ISection) {
     const content: IContent = this.storeService.getDummyContent();
+    content["parentSectionId"] = subSection.parentSectionId;
     content["sectionId"] = subSection.sectionId;
-    content["subSectionId"] = subSection.subSectionId;
     this.addContent(content, '', "Add_Content");
   }
 
@@ -119,7 +119,7 @@ export class ManageNotesCrud implements OnInit {
     this.sharedNotesService.setCurrentActionObservable(action);
   }
 
-  editSubSection(subSection: ISubSection) {
+  editSubSection(subSection: ISection) {
     const action: IManageNotesAction = {
       name: "Edit Sub Section",
       id: "Edit_Sub_Section",

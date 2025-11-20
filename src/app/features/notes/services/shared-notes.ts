@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { IManageNotesAction } from '../../../core/interfaces/manage-notes-action-interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ISubject, ISection, ISubSection, IContent } from '../../../core/interfaces/note-interface';
+import { ISubject, ISection, IContent } from '../../../core/interfaces/note-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { ISubject, ISection, ISubSection, IContent } from '../../../core/interfa
 export class SharedNotesService {
   private _manageNoteCurrentAction = signal<IManageNotesAction | undefined>(undefined);
   private _currentNoteSections = signal<ISection[]>([]);
-  private _currentActionRow = signal<ISection | ISubSection | IContent | undefined>(undefined);
+  private _currentActionRow = signal<ISection | IContent | undefined>(undefined);
   private _applyActionPosition = signal<string>('');
   private _currentNote = signal<ISubject | undefined>(undefined);
 
@@ -36,7 +36,7 @@ export class SharedNotesService {
     this._manageNoteActionBehaviourSub.next(action);
   }
 
-  setCurrectActionRowDetail(row: ISection | ISubSection | IContent | undefined, position: string) {
+  setCurrectActionRowDetail(row: ISection | IContent | undefined, position: string) {
     this._currentActionRow.set(row);
     this._applyActionPosition.set(position);
   }
@@ -72,22 +72,23 @@ export class SharedNotesService {
   deleteConten(content: IContent) {
     this._currentNoteSections.update((sections: ISection[]) =>
       sections.map((section: ISection) =>
-        content.subSectionId > -1
+        content.parentSectionId > 0
           ? {
             ...section,
+            topics: section.contents.filter((contentData: IContent) => contentData.contentId !== content.contentId)
+           }           
+           : {
+            ...section,
             subSections: section.subSections.map((subSection) =>
-              subSection.subSectionId === content.subSectionId
+              subSection.sectionId === content.sectionId
                 ? {
                   ...subSection,
-                  topics: subSection.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
+                  contents: subSection.contents.filter((contentData: IContent) => contentData.contentId !== content.contentId)
                 }
                 : subSection
             )
           }
-          : {
-            ...section,
-            topics: section.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
-          }
+          
       )
     )
   }
@@ -107,18 +108,18 @@ export class SharedNotesService {
   }
 
   updateSubSectionText(text: string, sectionId: number, subSectionId: number) {
-    this.updateSections((section) =>
-      section.sectionId === sectionId
-        ? {
-          ...section,
-          subSections: section.subSections.map((subSection) =>
-            subSection.subSectionId === subSectionId
-              ? { ...subSection, name: text }
-              : subSection
-          ),
-        }
-        : section
-    );
+    // this.updateSections((section) =>
+    //   section.sectionId === sectionId
+    //     ? {
+    //       ...section,
+    //       subSections: section.subSections.map((subSection) =>
+    //         subSection.subSectionId === subSectionId
+    //           ? { ...subSection, name: text }
+    //           : subSection
+    //       ),
+    //     }
+    //     : section
+    // );
   }
 
   updateContentText(
@@ -127,34 +128,34 @@ export class SharedNotesService {
     subSectionId: number,
     contentId: number
   ) {
-    this.updateSections((section) => {
-      if (section.sectionId !== sectionId) return section;
+    // this.updateSections((section) => {
+    //   if (section.sectionId !== sectionId) return section;
 
-      if (subSectionId > 0) {
-        // Update inside subsection
-        return {
-          ...section,
-          subSections: section.subSections.map((subSection) =>
-            subSection.subSectionId === subSectionId
-              ? {
-                ...subSection,
-                topics: subSection.topics.map((topic) =>
-                  topic.topicId === contentId ? { ...topic, text } : topic
-                ),
-              }
-              : subSection
-          ),
-        };
-      }
+    //   if (subSectionId > 0) {
+    //     // Update inside subsection
+    //     return {
+    //       ...section,
+    //       subSections: section.subSections.map((subSection) =>
+    //         subSection.subSectionId === subSectionId
+    //           ? {
+    //             ...subSection,
+    //             topics: subSection.topics.map((topic) =>
+    //               topic.topicId === contentId ? { ...topic, text } : topic
+    //             ),
+    //           }
+    //           : subSection
+    //       ),
+    //     };
+    //   }
 
-      // Update directly inside section
-      return {
-        ...section,
-        topics: section.topics.map((topic) =>
-          topic.topicId === contentId ? { ...topic, text } : topic
-        ),
-      };
-    });
+    //   // Update directly inside section
+    //   return {
+    //     ...section,
+    //     topics: section.topics.map((topic) =>
+    //       topic.topicId === contentId ? { ...topic, text } : topic
+    //     ),
+    //   };
+    // });
   }
 
 

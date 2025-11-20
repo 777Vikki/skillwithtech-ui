@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { EMPTY, Observable, of } from 'rxjs';
 import { concatMap, tap, map, delay } from 'rxjs/operators';
@@ -59,7 +59,7 @@ export class NotesService {
       }));
   }
 
-  onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
+  onEditSubSection(subSection: IEditSectionRequest): Observable<IResponse> {
     return this.backendService.onEditSubSection(subSection);
   }
 

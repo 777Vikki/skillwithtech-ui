@@ -2,280 +2,283 @@ export const cssList = () => {
     return [
         {
             "name": "<p><strong>Responsive UI</strong></p>",
-            "sectionId": 64,
-            "noteType": "CSS",
-            "topics": [
+            "subjectId": 8,
+            "sectionId": 62,
+            "parentSectionId": 0,
+            "contents": [
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 62,
+                    "parentSectionId": 0,
                     "text": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">How do you make a webpage responsive?</span></p>",
-                    "sectionId": 64,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 348,
-                    "description": ""
+                    "contentId": 241
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 62,
+                    "parentSectionId": 0,
                     "text": "<p>What are media queries?</p>",
-                    "sectionId": 64,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 349,
-                    "description": ""
+                    "contentId": 242
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 62,
+                    "parentSectionId": 0,
                     "text": "<p>What is the difference between max-width and min-width?</p>",
-                    "sectionId": 64,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 350,
-                    "description": ""
+                    "contentId": 243
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 62,
+                    "parentSectionId": 0,
                     "text": "<p>What breakpoints do you usually use?</p>",
-                    "sectionId": 64,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 351,
-                    "description": ""
+                    "contentId": 244
                 }
             ],
             "subSections": []
         },
         {
             "name": "<p><strong>CSS</strong></p>",
-            "sectionId": 62,
-            "noteType": "CSS",
-            "topics": [
+            "subjectId": 8,
+            "sectionId": 63,
+            "parentSectionId": 0,
+            "contents": [
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is the CSS Box Model?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 319,
-                    "description": ""
+                    "contentId": 245
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is specificity in CSS?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 320,
-                    "description": ""
+                    "contentId": 246
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>How do you center a div (horizontally &amp; vertically)?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 321,
-                    "description": ""
+                    "contentId": 247
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>Difference between <code>display: none</code> vs <code>visibility: hidden</code>?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 322,
-                    "description": ""
+                    "contentId": 248
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is the difference between <code>relative</code>, <code>absolute</code>, and <code>fixed</code>?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 323,
-                    "description": ""
+                    "contentId": 249
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p> What is Flexbox?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 324,
-                    "description": ""
+                    "contentId": 250
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is CSS Grid?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 325,
-                    "description": ""
+                    "contentId": 251
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>Difference between Flexbox and Grid?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 326,
-                    "description": ""
+                    "contentId": 252
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What are pseudo-classes?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 327,
-                    "description": ""
+                    "contentId": 253
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What are pseudo-elements?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 328,
-                    "description": ""
+                    "contentId": 254
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is the z-index?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 329,
-                    "description": ""
+                    "contentId": 255
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is <code>calc()</code> function?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 330,
-                    "description": ""
+                    "contentId": 256
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is responsive design?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 331,
-                    "description": ""
+                    "contentId": 257
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is <code>rem</code>, <code>em</code>, <code>%</code>, <code>vh</code>, <code>vw</code>?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 332,
-                    "description": ""
+                    "contentId": 258
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is <code>overflow</code>?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 333,
-                    "description": ""
+                    "contentId": 259
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>What is <code>object-fit</code> used for?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 334,
-                    "description": ""
+                    "contentId": 260
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 63,
+                    "parentSectionId": 0,
                     "text": "<p>Difference between <code>border-box</code> vs <code>content-box</code>?</p>",
-                    "sectionId": 62,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 335,
-                    "description": ""
+                    "contentId": 261
                 }
             ],
             "subSections": []
         },
         {
             "name": "<p><strong>SCSS / SASS</strong></p>",
-            "sectionId": 63,
-            "noteType": "CSS",
-            "topics": [
+            "subjectId": 8,
+            "sectionId": 64,
+            "parentSectionId": 0,
+            "contents": [
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What is SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 336,
-                    "description": ""
+                    "contentId": 262
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What are SCSS variables?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 337,
-                    "description": ""
+                    "contentId": 263
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What is nesting in SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 338,
-                    "description": ""
+                    "contentId": 264
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What is a mixin in SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 339,
-                    "description": ""
+                    "contentId": 265
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What are SCSS functions?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 340,
-                    "description": ""
+                    "contentId": 266
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What is <code>@extend</code> in SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 341,
-                    "description": ""
+                    "contentId": 267
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What are partials in SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 342,
-                    "description": ""
+                    "contentId": 268
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>Difference between <code>@use</code>, <code>@import</code>, <code>@forward</code>?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 343,
-                    "description": ""
+                    "contentId": 269
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>How does SCSS help performance?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 344,
-                    "description": ""
+                    "contentId": 270
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>What is the difference between SASS and SCSS syntax?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 345,
-                    "description": ""
+                    "contentId": 271
                 },
                 {
+                    "description": "",
+                    "subjectId": 8,
+                    "sectionId": 64,
+                    "parentSectionId": 0,
                     "text": "<p>How to write media queries in SCSS?</p>",
-                    "sectionId": 63,
-                    "subSectionId": -1,
-                    "noteType": "CSS",
-                    "topicId": 346,
-                    "description": ""
+                    "contentId": 272
                 }
             ],
             "subSections": []

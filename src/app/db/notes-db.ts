@@ -24,67 +24,67 @@ const notes = (): ISubject[] => {
   return [
     {
       name: "Angular",
-      type: Note.ANGULAR,
       id: 1,
+      links: [],
       sections: angularList(),
     },
     {
       name: "Angular Unit Test",
-      type: Note.ANGULAR_UNIT_TEST,
+      links: [],
       id: 11,
       sections: angularUnitTestList(),
     },
     {
       name: "NgRx",
-      type: Note.NGRX,
+      links: [],
       id: 2,
       sections: ngrxList(),
     },
     {
       name: "RxJS",
-      type: Note.RXJS,
+      links: [],
       id: 3,
       sections: rxjsList(),
     },
     {
       name: "JavaScript",
-      type: Note.JAVASCRIPT,
+      links: [],
       id: 4,
       sections: javascriptList(),
     },
     {
       name: "TypeScript",
-      type: Note.TYPESCRIPT,
+      links: [],
       id: 5,
       sections: typescriptList(),
     },
     {
       name: "HTML",
-      type: Note.HTML,
+      links: [],
       id: 6,
       sections: htmlList(),
     },
     {
       name: "CSS",
-      type: Note.CSS,
+      links: [],
       id: 7,
       sections: cssList(), 
     },
     {
       name: "CI/CD pipelines with Azure",
-      type: Note.AZURE,
+      links: [],
       id: 8,
       sections: azureList(),
     },
     {
       name: "Micro Frontend in Angular",
-      type: Note.ANGULAR_MICROFRONTEND,
+      links: [],
       id: 9,
       sections: angularMicrofrontendList()
     },
     {
       name: "Practice Set",
-      type: Note.PRACTICE_SET,
+      links: [],
       id: 10,
       sections: practiceList(),
     }
@@ -92,16 +92,16 @@ const notes = (): ISubject[] => {
 }
 
 export const availableNotes = (): ISubject[] => {
-  const filterNotes: string[] = [Note.AZURE];
-  const headers = [...notes()].filter(s => !filterNotes.includes(s.type)).map(d => {
+  const filterNotes: number[] = [];
+  const headers = [...notes()].filter(s => !filterNotes.includes(s.id)).map(d => {
     d.sections = [];
     return d;
   });
   return headers;
 }
 
-export const notesDb = (type: string): ISection[] => {
-  return [...notes()].find(d => d.type === type)?.sections ?? [];
+export const notesDb = (id: number): ISection[] => {
+  return [...notes()].find(d => d.id === id)?.sections ?? [];
 }
 
 export const notesDbById = (id: number): ISection[] => {
