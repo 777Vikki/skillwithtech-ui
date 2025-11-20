@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="note-description">
-            <app-description [topic]="selectedTopic" (emitEditorText)="onAddDescription($event)"></app-description>
+            <app-description [topic]="selectedContent" (emitEditorText)="onAddDescription($event)"></app-description>
         </div>
     </div>
     } @else {
@@ -86,8 +86,8 @@
 </div>
 
 <ng-template #activeNotesTableContent let-content="content" let-index="index">
-    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectContent(content)"
-        [ngClass]="{'selected': selectedTopic?.contentId === content.contentId}">
+    <div class="note-topic-item" [id]="'content_' + content.contentId" (click)="onSelectContent(content)"
+        [ngClass]="{'selected': selectedContent?.contentId === content.contentId}">
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
             <div [innerHTML]="content.text"></div>
@@ -101,7 +101,7 @@
 
 <ng-template #activeNotesRowContent let-content="content">
     <div class="note-topic">
-        <div class="note-topic-item" (click)="onExpandTopic(content.topicId); $event.stopPropagation()">
+        <div class="note-topic-item" (click)="onExpandTopic(content.contentId); $event.stopPropagation()">
             <div class="note-topic-content">
                 <span class="material-symbols-outlined"
                     [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
@@ -109,10 +109,10 @@
                     'check_circle' : 'pending'}}</span>
                 <div [innerHTML]="content.text"></div>
             </div>
-            <span class="material-symbols-outlined expand-icon"> {{expandTopics.includes(content.topicId)?
+            <span class="material-symbols-outlined expand-icon"> {{expandContents.includes(content.topicId)?
                 'expand_circle_up' : 'expand_circle_down'}} </span>
         </div>
-        @if(expandTopics.includes(content.topicId)) {
+        @if(expandContents.includes(content.contentId)) {
         @if(content.description) {
         <div class="note-description-item" (click)="onViewAnswer($event)" [innerHTML]="content.description"></div>
         } @else {

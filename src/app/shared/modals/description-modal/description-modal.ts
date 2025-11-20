@@ -27,7 +27,7 @@ export class DescriptionModal {
   onNavigate() {
     const url = this.router.serializeUrl(
     this.router.createUrlTree(['/notes/active-notes'], {
-      queryParams: { notesId: this.content?.subjectId, sectionId: this.content?.sectionId, subSectionId: this.content?.sectionId, contentId: this.content?.contentId }
+      queryParams: { subjectId: this.content?.subjectId, sectionId: this.content?.sectionId, subSectionId: this.content?.sectionId, contentId: this.content?.contentId }
     })
   );
   window.open(url, '_blank');

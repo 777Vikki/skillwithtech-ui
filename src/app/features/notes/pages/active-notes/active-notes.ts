@@ -33,11 +33,11 @@ export class ActiveNotes implements OnInit, AfterViewInit {
 
   sections = this.sharedNotesService.currentNoteSections;
   selectedSection: ISection | undefined;
-  selectedTopic: IContent | undefined;
+  selectedContent: IContent | undefined;
   isMobileScreen = this.store.checkMobileScreen();
   expandSections: number[] = [];
   expandSubSections: number[] = [];
-  expandTopics: number[] = [];
+  expandContents: number[] = [];
   isSectionCollapse: boolean = false;
   visibleDescriptionModal: boolean = false;
   descriptionModalData: IContent | undefined;
@@ -58,12 +58,12 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   }
 
   scrollActiveNotes(sectionId: number, subsectionId: number, contentId: number) {
-    if (sectionId > -1) {
+    if (sectionId > 0) {
       const element = document.getElementById('section_' + sectionId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    if (contentId > -1) {
+    if (contentId > 0) {
       const element = document.getElementById('content_' + contentId);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -77,15 +77,15 @@ export class ActiveNotes implements OnInit, AfterViewInit {
       const sectionId = params.get('sectionId');
       const subSectionId = params.get('subSectionId');
       const contentId = params.get('contentId');
-      const notesId = params.get('notesId');
-      if (notesId && sectionId && contentId) {
+      const subjectId = params.get('subjectId');
+      if (subjectId && sectionId && contentId) {
         event.preventDefault();
         this.visibleDescriptionModal = true;
-        this.noteService.getContent(+notesId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
+        this.noteService.getContent(+subjectId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
           .subscribe(response => {
             if(response.status && response.data.length) {
               this.descriptionModalData = response.data[0] as IContent;
-              this.descriptionModalData.subjectId = +notesId;
+              this.descriptionModalData.subjectId = +subjectId;
             }
           })
       }
@@ -110,34 +110,34 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     }
   }
 
-  onExpandTopic(topicId: number) {
-    const index = this.expandTopics.indexOf(topicId);
+  onExpandTopic(contentId: number) {
+    const index = this.expandContents.indexOf(contentId);
     if (index >= 0) {
-      this.expandTopics.splice(index, 1);
+      this.expandContents.splice(index, 1);
     } else {
-      this.expandTopics.push(topicId);
+      this.expandContents.push(contentId);
     }
   }
 
   resetSelectedValue() {
     this.selectedSection = undefined;
-    this.selectedTopic = undefined;
+    this.selectedContent = undefined;
     const routeQueryParams = this.route.snapshot.queryParams;
-    const selectedSectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : 0;
+    const selectedSectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
     if (selectedSectionId != null && selectedSectionId > 0) {
-      this.selectedSection = this.sections().find(d => d.sectionId === selectedSectionId) ?? undefined;
+      this.selectedSection = this.sections()?.find(d => d.sectionId === selectedSectionId) ?? undefined;
       if (this.selectedSection) {
-        const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : 0;
-        const subSectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : 0;
+        const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
+        const subSectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : -1;
         if (contentId != null && contentId > 0) {
           if (subSectionId != null && subSectionId > 0 && this.selectedSection?.subSections) {
             const availableSubSection = this.selectedSection?.subSections.find(d => d.sectionId === subSectionId);
             if (availableSubSection && availableSubSection.contents.length) {
-              this.selectedTopic = availableSubSection.contents.find(d => d.contentId === contentId);
+              this.selectedContent = availableSubSection.contents.find(d => d.contentId === contentId);
             }
           }
-          if (!this.selectedTopic) {
-            this.selectedTopic = this.selectedSection.contents.find(d => d.contentId === contentId);
+          if (!this.selectedContent) {
+            this.selectedContent = this.selectedSection.contents.find(d => d.contentId === contentId);
           }
         }
       }
@@ -145,42 +145,23 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     if (!this.selectedSection) {
       this.selectedSection = this.sections().length ? this.sections()[0] : undefined;
       if (this.selectedSection?.contents.length) {
-        this.selectedTopic = this.selectedSection.contents[0]
+        this.selectedContent = this.selectedSection.contents[0];
       } else if (this.selectedSection?.subSections.length && this.selectedSection.subSections[0].contents.length) {
-        this.selectedTopic = this.selectedSection.subSections[0].contents[0];
+        this.selectedContent = this.selectedSection.subSections[0].contents[0];
       }
     }
     this.setQueryParam();
-
-
-
-
-
-    //   if (this.sections.length) {
-    //     const availableSection = this.selectedSection ? this.sections.find(s => s.sectionId === this.selectedSection?.sectionId) : this.sections[0];
-    //     this.selectedSection = availableSection || this.sections[0];
-    //     if (this.selectedSection.topics.length) {
-    //       const availableTopic = this.selectedTopic ? this.selectedSection.topics.find(t => t.topicId === this.selectedTopic?.topicId) : this.selectedSection.topics[0];
-    //       this.selectedTopic = availableTopic || this.selectedSection.topics[0];
-    //     } else {
-    //       this.selectedTopic = undefined;
-    //     }
-    //   } else {
-    //     this.selectedSection = undefined;
-    //     this.selectedTopic = undefined;
-    //   }
-
   }
 
   setQueryParam() {
     let sectionId = 0;
     let subSectionId = 0;
     let contentId = 0;
-    let notesId = this.sharedNotesService.currentNote()?.id ?? 0;
-    if (this.selectedTopic) {
-      sectionId = this.selectedTopic.sectionId;
-      subSectionId = this.selectedTopic.sectionId;
-      contentId = this.selectedTopic.contentId;
+    let subjectId = this.sharedNotesService.currentNote()?.id ?? 0;
+    if (this.selectedContent) {
+      sectionId = this.selectedContent.parentSectionId > 0? this.selectedContent.parentSectionId : this.selectedContent.sectionId;
+      subSectionId = this.selectedContent.parentSectionId > 0? this.selectedContent.sectionId : -1;
+      contentId = this.selectedContent.contentId;
     } else if (this.selectedSection) {
       sectionId = this.selectedSection.sectionId;
     }
@@ -188,12 +169,12 @@ export class ActiveNotes implements OnInit, AfterViewInit {
       sectionId: sectionId,
       subSectionId: subSectionId,
       contentId: contentId,
-      notesId: notesId
+      subjectId: subjectId
     };
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
     setTimeout(() => {
-      this.scrollActiveNotes(-1, -1, this.selectedTopic?.contentId ?? -1);
+      this.scrollActiveNotes(-1, -1, this.selectedContent?.contentId ?? -1);
     });
   }
 
@@ -205,18 +186,18 @@ export class ActiveNotes implements OnInit, AfterViewInit {
         availableContent = this.selectedSection.subSections[0].contents?.length ? this.selectedSection.subSections[0].contents[0] : undefined;
       }
     }
-    this.selectedTopic = availableContent;
+    this.selectedContent = availableContent;
     this.setQueryParam();
   }
 
   onSelectContent(topic: IContent) {
-    this.selectedTopic = topic;
+    this.selectedContent = topic;
     this.setQueryParam();
   }
 
   onAddDescription(text: string) {
-    if (this.selectedTopic) {
-      this.noteService.onAddDescription(this.selectedTopic, text).subscribe((res: IResponse) => {
+    if (this.selectedContent) {
+      this.noteService.onAddDescription(this.selectedContent, text).subscribe((res: IResponse) => {
         if (res?.status) {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Description is successfully updated.' });
           this.noteService.getSections().subscribe();

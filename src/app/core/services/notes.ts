@@ -94,8 +94,9 @@ export class NotesService {
     return EMPTY;
   }
 
-  getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    return this.backendService.getContent(noteId, sectionId, subSectionId, contentId);
+  getContent(subjectId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
+    // return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   removeUnusedTag(text: string) {

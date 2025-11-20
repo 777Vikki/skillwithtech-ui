@@ -37,7 +37,7 @@ export class Header implements OnInit {
     )
     .pipe(first())
     .subscribe(d => {
-      const subjectId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
+      const subjectId = this.route.snapshot.queryParams["subjectId"]? +this.route.snapshot.queryParams["subjectId"] : -1;
       this.headers.set(d);
       if (subjectId != null && subjectId > 0) {
         const currentHeader = this.headers().find(d => d.id === subjectId) ?? this.store.primaryHeader();
@@ -54,7 +54,7 @@ export class Header implements OnInit {
   onNavigation(path: string) {
 
     const queryParamRequest: any = {
-      queryParams: {notesId: this.selectedHeader()?.id}
+      queryParams: {subjectId: this.selectedHeader()?.id}
     }
     if(path === '../') {
       queryParamRequest['relativeTo'] = this.route;
@@ -67,7 +67,7 @@ export class Header implements OnInit {
 
     // this.router.navigate([], {
     //     relativeTo: this.route,      // stay on current route
-    //     queryParams: { NotesId: this.selectedHeader.id },      // update ID
+    //     queryParams: { subjectId: this.selectedHeader.id },      // update ID
     //     // queryParamsHandling: 'merge' // keep other query params
     //   });
   }
