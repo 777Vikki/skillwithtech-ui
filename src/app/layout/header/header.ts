@@ -37,10 +37,10 @@ export class Header implements OnInit {
     )
     .pipe(first())
     .subscribe(d => {
-      const notesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
+      const subjectId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
       this.headers.set(d);
-      if (notesId != null && notesId > 0) {
-        const currentHeader = this.headers().find(d => d.id === notesId) ?? this.store.primaryHeader();
+      if (subjectId != null && subjectId > 0) {
+        const currentHeader = this.headers().find(d => d.id === subjectId) ?? this.store.primaryHeader();
         this.sharedNotesService.setCurrentNote(currentHeader);
       } else {
         this.sharedNotesService.setCurrentNote(this.store.primaryHeader());
