@@ -1,17 +1,18 @@
-import { inject, Injectable } from '@angular/core';
-import { ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
-import { Note } from '../enums/note-enum';
+import { inject, Injectable, signal } from '@angular/core';
+import { ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { Observable, tap } from 'rxjs';
 import { IManageNotesAction } from '../interfaces/manage-notes-action-interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
+  private http = inject(HttpClient);
   backendService = inject(BackendService);
 
-  private headerList: ISubject[] = [];
+  private headerList = signal<ISubject[]>([]);
 
   private manageNotesActions: IManageNotesAction[] = [
     {
@@ -36,56 +37,45 @@ export class StoreService {
     }
   ];
 
-  private dummyNotes: ISubject = {
-    name: '',
-    type: '',
+  private dummySubject: ISubject = {
     id: 0,
-    sections: []
+    links: [],
+    name: '',
+    sections: [],
   }
   private dummyContent: IContent = {
     text: '',
     sectionId: 0,
-    subSectionId: 0,
-    noteType: '',
-    topicId: 0,
+    parentSectionId: 0,
+    subjectId: 0,
+    contentId: 0,
     description: ''
   };
   private dummySection: ISection = {
     name: '',
+    subjectId: 0,
     sectionId: 0,
-    noteType: '',
-    topics: [],
+    parentSectionId: 0,
+    contents: [],
     subSections: []
   }
 
-  private dummySubSection: ISubSection = {
-    name: '',
-    sectionId: 0,
-    subSectionId: 0,
-    noteType: '',
-    topics: [],
-  }
-
   primaryHeader() {
-    return [...this.headerList].find(note => note.type === Note.ANGULAR);
+    return [...this.headerList()].find(note => note.id === 1);
   }
 
   getHeaders(): Observable<ISubject[]> {
-    return this.backendService.getHeaders().pipe(tap((d: ISubject[]) => {
-      this.headerList = d;
+    return this.http.get<ISubject[]>('/subject_list.json').pipe(tap((d: ISubject[]) => {
+      this.headerList.set(d);
     }));
   }
 
-  getDummyNotes() {
-    return { ...this.dummyNotes }
+  getDummySubject() {
+    return { ...this.dummySubject }
   }
 
   getDummySection() {
     return { ...this.dummySection };
-  }
-
-  getDummySubSection() {
-    return { ...this.dummySubSection };
   }
 
   getDummyContent() {

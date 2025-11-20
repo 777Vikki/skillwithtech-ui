@@ -1,16 +1,18 @@
 import { inject, Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { BackendService } from './backend';
-import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { concatMap, tap, map, delay } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
 import { SharedNotesService } from '../../features/notes/services/shared-notes';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
+  private http = inject(HttpClient);
   private sharedNotesService = inject(SharedNotesService);
   private backendService = inject(BackendService);
 
@@ -31,7 +33,7 @@ export class NotesService {
     return this.backendService.onEditSection(section);
   }
 
-  onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
+  onAddSubSection(subSection: ISection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
     return this.backendService.onAddSubSection(subSection, sectionIndex, subSectionIndex).pipe(
       concatMap(postResult => {
         if (postResult?.status) {
@@ -83,8 +85,8 @@ export class NotesService {
 
   getSections(): Observable<ISection[]> {
     const selectedNote = this.sharedNotesService.currentNote();
-    if (selectedNote?.type) {
-      return this.backendService.getSections(selectedNote.type).pipe(tap(sections => {
+    if(Array.isArray(selectedNote?.links) && selectedNote?.links.length > 0) {
+      return this.http.get<ISection[]>(selectedNote.links[0]).pipe(tap(sections => {
         console.log(sections);
         this.sharedNotesService.setCurrentNoteSections(sections);
       }));
