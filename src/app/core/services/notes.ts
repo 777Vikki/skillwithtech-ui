@@ -88,6 +88,7 @@ export class NotesService {
     if(Array.isArray(selectedNote?.links) && selectedNote?.links.length > 0) {
       return this.http.get<ISection[]>(selectedNote.links[0]).pipe(tap(sections => {
         console.log(sections);
+        this.sharedNotesService.setSubjectLoading(false);
         this.sharedNotesService.setCurrentNoteSections(sections);
       }));
     }

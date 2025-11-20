@@ -12,6 +12,7 @@ export class SharedNotesService {
   private _currentActionRow = signal<ISection | IContent | undefined>(undefined);
   private _applyActionPosition = signal<string>('');
   private _currentNote = signal<ISubject | undefined>(undefined);
+  private _subjectLoading = signal<boolean>(true);
 
   private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(this._manageNoteCurrentAction());
   private currentNoteSectionsBehaviourSub = new BehaviorSubject<ISection[]>(this._currentNoteSections());
@@ -21,7 +22,7 @@ export class SharedNotesService {
   currentNote = this._currentNote.asReadonly();
   currentNoteSections = this._currentNoteSections.asReadonly();
   manageNoteCurrentAction = this._manageNoteCurrentAction.asReadonly();
-
+  subjectLoading = this._subjectLoading.asReadonly();
 
   getCurrentActionObservable(): Observable<IManageNotesAction | undefined> {
     return this._manageNoteActionBehaviourSub.asObservable();
@@ -39,6 +40,10 @@ export class SharedNotesService {
   setCurrectActionRowDetail(row: ISection | IContent | undefined, position: string) {
     this._currentActionRow.set(row);
     this._applyActionPosition.set(position);
+  }
+
+  setSubjectLoading(loading: boolean) {
+    this._subjectLoading.set(loading);
   }
 
   setCurrentNote(note: ISubject | undefined) {

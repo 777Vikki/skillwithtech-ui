@@ -45,7 +45,9 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.sharedNotesService.getCurrentNoteSectionsObservable().pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        this.resetSelectedValue();
+        if(!this.sharedNotesService.subjectLoading()) {
+          this.resetSelectedValue();
+        }
       })
   }
 
