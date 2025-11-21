@@ -1,9 +1,7 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
-import { notesDb, notesDbById, availableNotes, storeCount } from '../../db/notes-db';
-import { SharedNotesService } from '../../features/notes/services/shared-notes';
 
 type Count = 'subject' | 'section' | 'content';
 
