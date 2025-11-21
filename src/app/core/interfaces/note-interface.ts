@@ -1,51 +1,38 @@
-export interface ISubject { 
+export interface ISubject {
     name: string;
-    type: string;
+    links: string[];
     id: number;
-    sections: ISection[];
+    sections: ISection[]
 }
 
 export interface ISection {
     name: string;
+    subjectId: number;
     sectionId: number;
-    noteType: string;
-    topics: IContent[];
-    subSections: ISubSection[];
+    subSectionId: number;
+    subSections: ISection[];
+    contents: IContent[];
 }
 
 export interface IContent {
-    text: string;
-    noteId?: number;
-    sectionId: number;
-    subSectionId: number;
-    noteType: string;
-    topicId: number;
     description: string;
-}
-export interface ISubSection {
-    name: string;
+    subjectId: number;
     sectionId: number;
     subSectionId: number;
-    noteType: string;
-    topics: IContent[];
+    contentId: number;
+    text: string;
 }
 
 export interface IEditSectionRequest {
     name: string;
-    sectionId: number;
-    noteType: string;
-}
-
-export interface IEditSubSectionRequest {
-    name: string;
-    sectionId: number;
     subSectionId: number;
-    noteType: string;
+    sectionId: number;
+    subjectId: number;
 }
 
 export interface IEditContentRequest {
     text: string;
     sectionId: number;
     subSectionId: number;
-    topicId: number;
+    contentId: number;
 }

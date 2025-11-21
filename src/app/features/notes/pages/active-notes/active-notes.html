@@ -25,8 +25,8 @@
                 <h3>Content</h3>
             </div>
             <div class="note-topic-container" #contentScrollContainer>
-                @let contents = selectedSection?.topics || [];
-                @for(content of contents; track content.topicId; let i = $index) {
+                @let contents = selectedSection?.contents || [];
+                @for(content of contents; track content.contentId; let i = $index) {
                 <ng-container
                     *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
                 }
@@ -36,8 +36,8 @@
                     <div class="note-subsection-title">Sub Section: </div>
                     <div class="note-subsection-text" [innerHTML]="subSection.name"></div>
                 </div>
-                @let contents = subSection?.topics || [];
-                @for(content of contents; track content.topicId; let i = $index) {
+                @let contents = subSection?.contents || [];
+                @for(content of contents; track content.contentId; let i = $index) {
                 <ng-container
                     *ngTemplateOutlet="activeNotesTableContent; context: { content: content, index: i }"></ng-container>
                 }
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="note-description">
-            <app-description [topic]="selectedTopic" (emitEditorText)="onAddDescription($event)"></app-description>
+            <app-description [topic]="selectedContent" (emitEditorText)="onAddDescription($event)"></app-description>
         </div>
     </div>
     } @else {
@@ -60,7 +60,7 @@
                 </div>
             </div>
             @if(expandSections.includes(section.sectionId)) {
-            @for(content of section.topics; track content.topicId) {
+            @for(content of section.contents; track content.contentId) {
             <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
             }
             @for(subSection of section.subSections; track subSection.subSectionId) {
@@ -70,7 +70,7 @@
                     <div><span class="material-symbols-outlined">{{expandSubSections.includes(subSection.subSectionId)?
                             'keyboard_arrow_up' : 'keyboard_arrow_down'}}</span></div>
                 </div>
-                @for(content of subSection.topics; track content.topicId) {
+                @for(content of subSection.contents; track content.contentId) {
                 @if(expandSubSections.includes(subSection.subSectionId)) {
                 <ng-container *ngTemplateOutlet="activeNotesRowContent; context: { content: content }"></ng-container>
                 }
@@ -86,8 +86,8 @@
 </div>
 
 <ng-template #activeNotesTableContent let-content="content" let-index="index">
-    <div class="note-topic-item" [id]="'content_' + content.topicId" (click)="onSelectContent(content)"
-        [ngClass]="{'selected': selectedTopic?.topicId === content.topicId}">
+    <div class="note-topic-item" [id]="'content_' + content.contentId" (click)="onSelectContent(content)"
+        [ngClass]="{'selected': selectedContent?.contentId === content.contentId}">
         <div class="note-topic-index"><strong>{{ index + 1 }}.</strong></div>
         <div class="note-topic-content">
             <div [innerHTML]="content.text"></div>
@@ -101,7 +101,7 @@
 
 <ng-template #activeNotesRowContent let-content="content">
     <div class="note-topic">
-        <div class="note-topic-item" (click)="onExpandTopic(content.topicId); $event.stopPropagation()">
+        <div class="note-topic-item" (click)="onExpandContent(content.contentId); $event.stopPropagation()">
             <div class="note-topic-content">
                 <span class="material-symbols-outlined"
                     [pTooltip]="content.description? 'Answered' : 'Answer not added yet'" tooltipPosition="left"
@@ -109,10 +109,10 @@
                     'check_circle' : 'pending'}}</span>
                 <div [innerHTML]="content.text"></div>
             </div>
-            <span class="material-symbols-outlined expand-icon"> {{expandTopics.includes(content.topicId)?
+            <span class="material-symbols-outlined expand-icon"> {{expandContents.includes(content.contentId)?
                 'expand_circle_up' : 'expand_circle_down'}} </span>
         </div>
-        @if(expandTopics.includes(content.topicId)) {
+        @if(expandContents.includes(content.contentId)) {
         @if(content.description) {
         <div class="note-description-item" (click)="onViewAnswer($event)" [innerHTML]="content.description"></div>
         } @else {

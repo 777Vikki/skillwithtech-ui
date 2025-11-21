@@ -1,7 +1,7 @@
 import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISection, ISubSection, IContent } from '../../../../core/interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, ISection, IContent } from '../../../../core/interfaces/note-interface';
 import { SelectModule } from 'primeng/select';
 import { NotesService } from '../../../../core/services/notes';
 import { ButtonModule } from 'primeng/button';
@@ -36,7 +36,7 @@ export class ManageNotesForm implements OnInit {
   private messageService = inject(MessageService);
 
   sections = this.sharedNotesService.currentNoteSections;
-  subSections: ISubSection[] = [];
+  subSections: ISection[] = [];
   contents: IContent[] = [];
   previewList = signal<IPreview[]>([]);
   duplicatePreviewCount = signal<number>(0)
@@ -95,7 +95,7 @@ export class ManageNotesForm implements OnInit {
     this.subSections = [];
     this.contents = [];
     this.removeFormControls();
-    const subSection: ISubSection | undefined = this.sharedNotesService.currentActionRow() as ISubSection;
+    const subSection: ISection | undefined = this.sharedNotesService.currentActionRow() as ISection;
     const position = this.sharedNotesService.applyActionPosition();
     const sectionId = (subSection?.sectionId != null && subSection?.sectionId > 0) ? subSection.sectionId : null;
     const subSectionId = (subSection?.subSectionId != null && subSection?.subSectionId > 0) ? subSection.subSectionId : null;
@@ -117,13 +117,13 @@ export class ManageNotesForm implements OnInit {
     const position = this.sharedNotesService.applyActionPosition();
     const sectionId = (content?.sectionId != null && content?.sectionId > 0) ? content.sectionId : null;
     const subSectionId = (content?.subSectionId != null && content?.subSectionId > 0) ? content.subSectionId : null;
-    const contentId = (content?.topicId != null && content?.topicId > 0) ? content.topicId : null;
+    const contentId = (content?.contentId != null && content?.contentId > 0) ? content.contentId : null;
     if (sectionId) {
       if (subSectionId) {
         this.subSections = sectionId ? (this.sections().find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
-        this.contents = subSectionId ? (this.subSections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []) : [];
+        this.contents = subSectionId ? (this.subSections.find(d => d.subSectionId === content.subSectionId)?.contents ?? []) : [];
       } else {
-        this.contents = sectionId ? (this.sections().find(d => d.sectionId === content.sectionId)?.topics ?? []) : [];
+        this.contents = sectionId ? (this.sections().find(d => d.sectionId === content.sectionId)?.contents ?? []) : [];
       }
     }
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
@@ -153,7 +153,7 @@ export class ManageNotesForm implements OnInit {
     this.removeFormControls();
     this.contents = [];
     this.subSections = [];
-    const subSection = this.sharedNotesService.currentActionRow() as ISubSection;
+    const subSection = this.sharedNotesService.currentActionRow() as ISection;
     const sectionId = (subSection?.sectionId != null && subSection?.sectionId > 0) ? subSection.sectionId : null;
     const subSectionId = (subSection?.subSectionId != null && subSection?.subSectionId > 0) ? subSection.subSectionId : null;
     this.subSections = sectionId ? (this.sections().find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
@@ -169,13 +169,13 @@ export class ManageNotesForm implements OnInit {
     const content = this.sharedNotesService.currentActionRow() as IContent;
     const sectionId = (content?.sectionId != null && content?.sectionId > 0) ? content.sectionId : null;
     const subSectionId = (content?.subSectionId != null && content?.subSectionId > 0) ? content.subSectionId : null;
-    const contentId = (content?.topicId != null && content?.topicId > 0) ? content.topicId : null;
+    const contentId = (content?.contentId != null && content?.contentId > 0) ? content.contentId : null;
     if (subSectionId) {
       this.subSections = sectionId ? (this.sections().find(d => d.sectionId === sectionId)?.subSections ?? []) : [];
       this.notesForm.addControl('subSectionId', new FormControl({ value: subSectionId, disabled: true }));
-      this.contents = this.subSections.find(d => d.subSectionId === subSectionId)?.topics ?? [];
+      this.contents = this.subSections.find(d => d.subSectionId === subSectionId)?.contents ?? [];
     } else {
-      this.contents = sectionId ? (this.sections().find(d => d.sectionId === content.sectionId)?.topics || []) : [];
+      this.contents = sectionId ? (this.sections().find(d => d.sectionId === content.sectionId)?.contents || []) : [];
     }
     this.notesForm.addControl('sectionId', new FormControl({ value: sectionId, disabled: true }));
     this.notesForm.addControl('text', new FormControl(content.text, [Validators.required]));
@@ -186,7 +186,7 @@ export class ManageNotesForm implements OnInit {
     this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
       if (value != null && value > 0) {
         this.subSections = this.sections().find(d => d.sectionId === value)?.subSections ?? [];
-        this.contents = this.sections().find(d => d.sectionId === value)?.topics ?? [];
+        this.contents = this.sections().find(d => d.sectionId === value)?.contents ?? [];
       } else {
         this.subSections = [];
         this.contents = [];
@@ -198,7 +198,7 @@ export class ManageNotesForm implements OnInit {
     });
 
     this.notesForm.get('subSectionId')?.valueChanges.subscribe(value => {
-      this.contents = (value != null && value > 0) ? (this.subSections.find(d => d.subSectionId === value)?.topics ?? []) : this.contents;
+      this.contents = (value != null && value > 0) ? (this.subSections.find(d => d.subSectionId === value)?.contents ?? []) : this.contents;
       this.notesForm.patchValue({
         contentId: null,
       });
@@ -275,8 +275,9 @@ export class ManageNotesForm implements OnInit {
     const section: ISection = {
       name: editorText,
       sectionId: 0,
-      noteType: this.sharedNotesService.currentNote()?.type ?? '',
-      topics: [],
+      subSectionId: -1,
+      subjectId: this.sharedNotesService.currentNote()?.id ?? -1,
+      contents: [],
       subSections: [],
     };
     const index = this.sections().length > 0 ? this.sections().findIndex(d => d.sectionId === formValue.sectionId) + Number(formValue.position) : 0;
@@ -298,12 +299,13 @@ export class ManageNotesForm implements OnInit {
   submitAddSubSectionForm() {
     const formValue = this.notesForm.getRawValue();
     const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
-    const subSection: ISubSection = {
+    const subSection: ISection = {
       name: editorText,
       sectionId: formValue.sectionId,
       subSectionId: 0,
-      noteType: this.sharedNotesService.currentNote()?.type ?? '',
-      topics: [],
+      subjectId: this.sharedNotesService.currentNote()?.id ?? -1,
+      contents: [],
+      subSections: [],
     };
     const sectionIndex = this.sections().findIndex(d => d.sectionId === formValue.sectionId);
     let subSectionIndex = 0;
@@ -334,8 +336,8 @@ export class ManageNotesForm implements OnInit {
       text: editorText,
       sectionId: formValue.sectionId,
       subSectionId: -1,
-      noteType: this.sharedNotesService.currentNote()?.type ?? '',
-      topicId: -1,
+      subjectId: this.sharedNotesService.currentNote()?.id ?? -1,
+      contentId: -1,
       description: ''
     };
     const sectionIndex = this.sections().findIndex(d => d.sectionId === formValue.sectionId);
@@ -348,12 +350,12 @@ export class ManageNotesForm implements OnInit {
     }
 
     if (formValue.contentId > 0) {
-      contentIndex = this.contents.length > 0 ? this.contents.findIndex(d => d.topicId === formValue.contentId) + Number(formValue.position) : 0;
+      contentIndex = this.contents.length > 0 ? this.contents.findIndex(d => d.contentId === formValue.contentId) + Number(formValue.position) : 0;
     } else {
       if (subSectionIndex > -1) {
-        contentIndex = this.subSections[subSectionIndex].topics.length;
+        contentIndex = this.subSections[subSectionIndex].contents.length;
       } else {
-        contentIndex = this.sections()[sectionIndex].topics.length;
+        contentIndex = this.sections()[sectionIndex].contents.length;
       }
     }
     const isBulkContent = this.currentAction()?.id === "Add_Bulk_Content";
@@ -397,7 +399,8 @@ export class ManageNotesForm implements OnInit {
     const section: IEditSectionRequest = {
       name: editorText,
       sectionId: formValue.sectionId,
-      noteType: this.sharedNotesService.currentNote()?.type ?? ''
+      subSectionId: -1,
+      subjectId: this.sharedNotesService.currentNote()?.id ?? -1
     };
     this.notesService.onEditSection(section).subscribe((res: IResponse) => {
       if (res?.status) {
@@ -412,11 +415,11 @@ export class ManageNotesForm implements OnInit {
   submitEditSubSectionForm() {
     const formValue = this.notesForm.getRawValue();
     const editorText = this.notesService.removeUnusedTag(formValue.text ?? '');
-    const subSection: IEditSubSectionRequest = {
+    const subSection: IEditSectionRequest = {
       name: editorText,
       sectionId: formValue.sectionId,
       subSectionId: formValue.subSectionId,
-      noteType: this.sharedNotesService.currentNote()?.type ?? '',
+      subjectId: this.sharedNotesService.currentNote()?.id ?? -1,
     }
     this.notesService.onEditSubSection(subSection).subscribe((res: IResponse) => {
       if (res?.status) {
@@ -435,11 +438,11 @@ export class ManageNotesForm implements OnInit {
       text: editorText,
       sectionId: formValue.sectionId,
       subSectionId: formValue.subSectionId,
-      topicId: formValue.contentId
+      contentId: formValue.contentId
     }
     this.notesService.onEditContent(content).subscribe((res: IResponse) => {
       if (res?.status) {
-        this.sharedNotesService.updateContentText(editorText, content.sectionId, content.subSectionId, content.topicId)
+        this.sharedNotesService.updateContentText(editorText, content.sectionId, content.subSectionId, content.contentId)
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Content is successfully updated.' });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });

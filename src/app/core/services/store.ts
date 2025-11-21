@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
-import { Note } from '../enums/note-enum';
+import { ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { BackendService } from './backend';
 import { Observable, tap } from 'rxjs';
 import { IManageNotesAction } from '../interfaces/manage-notes-action-interface';
@@ -10,8 +9,6 @@ import { IManageNotesAction } from '../interfaces/manage-notes-action-interface'
 })
 export class StoreService {
   backendService = inject(BackendService);
-
-  private headerList: ISubject[] = [];
 
   private manageNotesActions: IManageNotesAction[] = [
     {
@@ -38,42 +35,34 @@ export class StoreService {
 
   private dummyNotes: ISubject = {
     name: '',
-    type: '',
     id: 0,
+    links: [],
     sections: []
   }
   private dummyContent: IContent = {
     text: '',
-    sectionId: 0,
+    sectionId: -1,
     subSectionId: 0,
-    noteType: '',
-    topicId: 0,
+    subjectId: -1,
+    contentId: -1,
     description: ''
   };
   private dummySection: ISection = {
     name: '',
-    sectionId: 0,
-    noteType: '',
-    topics: [],
+    sectionId: -1,
+    subSectionId: -1,
+    subjectId: -1,
+    contents: [],
     subSections: []
   }
 
-  private dummySubSection: ISubSection = {
+  private dummySubSection: ISection = {
     name: '',
-    sectionId: 0,
-    subSectionId: 0,
-    noteType: '',
-    topics: [],
-  }
-
-  primaryHeader() {
-    return [...this.headerList].find(note => note.type === Note.ANGULAR);
-  }
-
-  getHeaders(): Observable<ISubject[]> {
-    return this.backendService.getHeaders().pipe(tap((d: ISubject[]) => {
-      this.headerList = d;
-    }));
+    sectionId: -1,
+    subSectionId: -1,
+    subjectId: -1,
+    contents: [],
+    subSections: []
   }
 
   getDummyNotes() {

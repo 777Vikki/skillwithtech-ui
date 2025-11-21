@@ -1,220 +1,168 @@
 export const angularMicrofrontendList = () => {
     return [
         {
-            "name": "<p><strong>Core Concepts</strong></p>",
-            "sectionId": 44,
-            "noteType": "AngularMicroFrontend",
-            "topics": [
+            "name": "<p><strong>Basic </strong></p>",
+            "subjectId": 13,
+            "sectionId": 84,
+            "subSectionId": -1,
+            "subSections": [],
+            "contents": [
                 {
-                    "text": "<p>What are Micro Frontends, and why do we need them?</p>",
-                    "sectionId": 44,
+                    "description": "<p>Thank you for the opportunity to introduce myself.</p></br><p>My name is Vivek Kumar Maurya, and I’m a Frontend Developer with around 6 years of experience, primarily working on <strong>Angular, JavaScript, TypeScript, HTML, SCSS, and RxJS</strong>.</p></br><p>In my current role, I work extensively on <strong>building scalable web applications</strong> using Angular with <strong>standalone components and NgRx</strong> for state management. I handle <strong>end-to-end development</strong>, including <strong>requirement analysis, UI implementation, API integration, and performance optimization</strong>.</p></br><p>I also collaborate closely with backend teams and clients to ensure smooth project delivery. Over the years, I’ve gained strong expertise in <strong>Angular best practices</strong>, <strong>code optimization</strong>, and <strong>maintaining clean, reusable architecture</strong>.</p></br><p>I’m passionate about writing efficient, maintainable code and staying updated with the latest Angular releases.</p><p>Currently, I’m looking for a role where I can <strong>contribute my frontend expertise</strong>, <strong>mentor junior developers</strong>, and work on challenging projects that push my technical boundaries.</p>",
+                    "subjectId": 13,
+                    "sectionId": 84,
                     "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 195,
-                    "description": "<p><a href=\"https://chatgpt.com/c/68d6a5a3-0d6c-8330-9a6c-f1b654eeddf2\" rel=\"noopener noreferrer\" target=\"_blank\">https://chatgpt.com/c/68d6a5a3-0d6c-8330-9a6c-f1b654eeddf2</a></p></br><p><strong>Micro Frontends:</strong></p><p>Micro Frontends (MFE) is an <strong>architectural style</strong> where a frontend application is split into <strong>smaller, independent, self-contained apps (micro apps)</strong>.</p></br><p>Each micro app is responsible for a specific business domain or feature, and they come together to form a larger application.</p></br><p><strong>Why do we need Micro Frontends?</strong></p></br><ol><li><strong>Scalability</strong><ul><li>Large teams can work on different parts of the app without stepping on each other’s code.</li><li>Each team owns one micro frontend.</li></ul></li><li><strong>Independent Deployment</strong><ul><li>A micro app can be deployed <strong>without redeploying the whole application</strong>.</li><li>Faster release cycles and easier hotfixes.</li></ul></li><li><strong>Technology Agnostic</strong><ul><li>Different teams can use <strong>different frontend frameworks/libraries</strong> (Angular, React, Vue, etc.) if needed.</li><li>Useful in large organizations with mixed tech stacks.</li></ul></li><li><strong>Faster Development</strong><ul><li>Teams can work in <strong>parallel</strong> on different micro frontends.</li><li>Reduces dependency bottlenecks.</li></ul></li><li><strong>Code Maintainability</strong><ul><li>Smaller codebases are easier to maintain and refactor.</li><li>Each micro frontend has its own <strong>repo, build pipeline, and CI/CD</strong>.</li></ul></li><li><strong>Resilience</strong><ul><li>If one micro frontend fails, it doesn’t necessarily break the entire app.</li></ul></li></ol></br>"
+                    "contentId": 324,
+                    "text": "<p>Can you tell me about yourself?</p>"
                 },
                 {
-                    "text": "<p>How do Micro Frontends differ from a monolithic Angular app?</p>",
-                    "sectionId": 44,
+                    "description": "<p class=\"ql-align-justify\"><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">In my second company, I worked on a </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">Company Management System</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> that handled </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">third-party vendors and partners</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">. The system enabled secure information exchange, </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">task assignment with tracking</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">, and </span><strong style=\"color: rgb(0, 0, 0); background-color: transparent;\">role-based access control</strong><span style=\"color: rgb(0, 0, 0); background-color: transparent;\"> for data privacy.</span></p>",
+                    "subjectId": 13,
+                    "sectionId": 84,
                     "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 196,
-                    "description": "<p><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">Micro Frontends (MFE) </strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">is an </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">architectural style</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\"> where a frontend application is split into </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">smaller, independent, self-contained apps (micro apps)</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">.</span></p></br><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">Each micro app is responsible for a specific business domain or feature, and they come together to form a larger application.</span></p></br></br></br><p>A <strong>Monolithic Angular app</strong> is a <strong>single, large frontend application</strong> built as one unified codebase, where all features, modules, and components reside together. It’s the traditional way of building Angular applications.</p>"
+                    "contentId": 325,
+                    "text": "<p>Can you explain your last project?</p>"
                 },
                 {
-                    "text": "<p>What are the main advantages and disadvantages of Micro Frontends?</p>",
-                    "sectionId": 44,
+                    "description": "<p>In my last project, I worked as an <strong>Angular Developer</strong>, and my primary role was to design, develop, and maintain front-end modules using <strong>Angular 15+</strong> with <strong>standalone components</strong> and <strong>NgRx</strong> for state management.</p></br><p>🔹 <strong>Key Responsibilities:</strong></p><ol><li><strong>Developed reusable components</strong> and implemented <strong>responsive UI</strong> using Angular, HTML, SCSS, and TypeScript.</li><li><strong>Integrated RESTful APIs</strong> and handled all <strong>CRUD operations</strong>, error handling, and response mapping.</li><li><strong>Implemented authentication (</strong>Authentication is the process of <strong>verifying the user’s identity) and authorization (</strong>Authorization defines what <strong>resources or features</strong> a user can access <em>after</em> they are authenticated.<strong>)</strong> using route guards, interceptors, and JWT tokens.</li><li>Worked on <strong>NgRx</strong> for centralized state management — managing actions, reducers, selectors, and effects.</li><li>Used <strong>RxJS operators</strong> effectively and ensured <strong>proper unsubscription</strong> to avoid memory leaks.</li><li>Optimized app performance using <strong>lazy loading</strong>, <strong>onPush change detection</strong>, and <strong>trackBy</strong> in loops.</li><li>Collaborated with backend developers and QA teams to <strong>analyze requirements, debug issues,</strong> and deliver high-quality features.</li><li>Participated in <strong>code reviews</strong>, provided constructive feedback, and followed best practices and coding standards.</li><li>Used <strong>Git</strong> for version control and worked in an <strong>Agile environment</strong> with daily stand-ups and sprint planning.</li><li>Contributed to <strong>UI/UX improvements</strong> based on client feedback and usability testing.</li></ol>",
+                    "subjectId": 13,
+                    "sectionId": 84,
                     "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 197,
-                    "description": "<p>Micro Frontends are an architectural approach where a large frontend app is split into smaller, independent modules owned by different teams. The main advantages are <strong>independent development and deployment</strong>, <strong>scalability of teams and code</strong>, <strong>technology flexibility</strong>, <strong>easier maintenance</strong>, <strong>incremental upgrades</strong>, and <strong>failure isolation</strong>, meaning one part failing won’t break the whole app.</p></br><p> On the downside, they introduce <strong>complexity in integration and routing</strong>, <strong>setup overhead</strong>, potential <strong>performance issues</strong> if not optimized, <strong>consistency challenges</strong> in UI/UX across teams, and <strong>more complex end-to-end testing</strong>.</p><p> Overall, they are ideal for large applications with multiple teams, but not always necessary for smaller projects.</p>"
+                    "contentId": 326,
+                    "text": "<p>What is role and responsibility in project?</p>"
                 },
                 {
-                    "text": "<p>What approaches are commonly used to implement Micro Frontends in Angular (Module Federation, Angular Elements, iFrames, single-spa)?</p>",
-                    "sectionId": 44,
+                    "description": "<p>When I do a <strong>code review</strong>, I follow a <strong>structured and collaborative process</strong> to ensure <strong>code quality, maintainability, and consistency</strong>.</p></br><p>🧩 <strong>1. Understand the Context: </strong>I make sure I understand <strong>what problem the code is solving</strong> and the <strong>expected outcome</strong> before reviewing the changes.</p></br><p>🔍 <strong>2. Review Code Structure and Readability: </strong>I check if the code is <strong>clean, modular, and easy to read</strong>.</p><p> I also ensure that <strong>naming conventions</strong>, <strong>indentation</strong>, and <strong>file organization</strong> follow project standards.</p></br><p>🧠 <strong>3. Check Functionality and Logic: </strong>I go through the <strong>logic step-by-step</strong> to ensure it <strong>works as intended</strong>.</p><p> I validate <strong>edge cases</strong>, <strong>error handling</strong>, and <strong>boundary conditions</strong> to make sure the implementation is robust.</p></br><p>⚡ <strong>4. Performance and Optimization: </strong></p><p>I review the code to ensure that:</p><ul><li><strong>Signals</strong> are used effectively (if applicable).</li><li><strong>Lazy loading</strong> is implemented where suitable.</li><li><strong>trackBy</strong> is used in <code>*ngFor</code> loops to improve performance.</li><li><strong>Observables are unsubscribed</strong> when necessary to prevent memory leaks.</li></ul>",
+                    "subjectId": 13,
+                    "sectionId": 84,
                     "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 198,
-                    "description": "<p>Module Federation is currently the most popular approach for Angular apps because it allows independent deployment with shared dependencies.</p>"
-                },
-                {
-                    "text": "<p>What is Webpack 5 Module Federation, and how does Angular support it?</p>",
-                    "sectionId": 44,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 199,
-                    "description": "<p><strong>Webpack 5 Module Federation:</strong></p><p><strong>Module Federation</strong> is a feature introduced in <strong>Webpack 5</strong> that allows multiple <strong>independent builds</strong> to form a single application. Each build (called a <strong>remote</strong>) can expose and consume code dynamically at runtime.</p></br><p><strong>Angular Supports Module Federation:</strong></p><p>Angular doesn’t have native module federation built-in, but it <strong>integrates seamlessly</strong> with Webpack 5.</p><p>👉<a href=\"https://www.npmjs.com/package/@angular-architects/module-federation\" rel=\"noopener noreferrer\" target=\"_blank\"> </a><code><a href=\"https://www.npmjs.com/package/@angular-architects/module-federation\" rel=\"noopener noreferrer\" target=\"_blank\">@angular-architects/module-federation</a> </code></p><p>This package helps Angular apps set up Module Federation with minimal configuration.</p></br></br></br>"
+                    "contentId": 327,
+                    "text": "<p>What steps do you follow for a code review?</p>"
                 }
-            ],
-            "subSections": []
+            ]
         },
         {
-            "name": "<p><strong>Angular-Specific</strong></p>",
-            "sectionId": 45,
-            "noteType": "AngularMicroFrontend",
-            "topics": [
+            "name": "<p><strong>Angular Practice Set</strong></p>",
+            "subjectId": 13,
+            "sectionId": 85,
+            "subSectionId": -1,
+            "subSections": [
                 {
-                    "text": "<p>How do you configure Angular with Module Federation (host and remote apps)?</p>",
-                    "sectionId": 45,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 200,
-                    "description": "<p>First, <strong>create a workspace</strong> for the applications using:</p></br><pre data-language=\"plain\">\nng new mono-repo-workspace --create-application=false\n</pre></br><p>Then <strong>change directory</strong> to the workspace:</p></br><pre data-language=\"plain\">\ncd mono-repo-workspace\n</pre></br><p>In the second step, <strong>generate the host (shell) application</strong> using:</p></br><pre data-language=\"plain\">\nng generate application shell --routing --style=scss\n</pre></br><p>And <strong>generate the remote application</strong> using:</p></br><pre data-language=\"plain\">\nng generate application dashboard --routing --style=scss\n</pre></br><p>In the third step, <strong>add the Module Federation plugin</strong> by installing the <strong>official community package</strong>:</p></br><pre data-language=\"plain\">\nnpm install @angular-architects/module-federation --save-dev\n</pre></br><p>Then <strong>add it to each app</strong>:</p></br><p>For the <strong>host</strong>:</p></br><pre data-language=\"plain\">\nng add @angular-architects/module-federation --project shell --type host\n</pre></br><p>For the <strong>remote</strong>:</p></br><pre data-language=\"plain\">\nng add @angular-architects/module-federation --project dashboard --type remote\n</pre></br><p>This will generate <code><strong>webpack.config.js</strong></code> and <code><strong>webpack.prod.config.js</strong></code> in both apps.</p>"
+                    "name": "<p><strong>Angular Set 1</strong></p>",
+                    "subjectId": 13,
+                    "sectionId": 85,
+                    "subSectionId": 86,
+                    "subSections": [],
+                    "contents": [
+                        {
+                            "description": "<p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">1️⃣ </span>What is <strong>Angular</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">2️⃣ </span>What is <strong>Angular Application load flow</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">3️⃣ </span>What are <strong>templates</strong> in Angular?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">4️⃣ </span>What is the difference between <strong>reactive forms</strong> and <strong>template-driven forms</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">5️⃣ </span>What is a <strong>FormGroup</strong>, <strong>FormControl</strong>, <strong>FormArray</strong> in Angular <strong>Reactive Forms</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">6️⃣ </span>How to <strong>create a new form</strong> with <strong>name</strong>, <strong>email</strong>, and <strong>phoneNumber controls</strong> every time a <strong>button is clicked</strong>.</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">7️⃣ </span>What is the difference between <strong>ng-template</strong> and <strong>ng-container</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">8️⃣ </span>What is a <strong>Restful API</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">9️⃣ </span>What are <strong>HTTP Status Codes</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">🔟 </span>Which model or process is followed in your project?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 328,
+                            "text": "<p>Basic + Form</p>"
+                        },
+                        {
+                            "description": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">1️⃣ Can you tell me how a router works? </span><a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=11&amp;subSectionId=-1&amp;contentId=168&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">View1</a>  <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=11&amp;subSectionId=6&amp;contentId=146&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View2</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">2️⃣ </span>How can you <strong>optimize Angular Application</strong> for <strong>better performance</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=18&amp;subSectionId=-1&amp;contentId=46&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">3️⃣ </span>If on a <strong>button click</strong> I hit an <strong>API</strong> and the <strong>API takes 2 minutes</strong> and I keep clicking the button, then when I get a <strong>response</strong>, how can I <strong>cancel all other API calls</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=18&amp;subSectionId=-1&amp;contentId=203&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">4️⃣ </span>What is the role of a <strong>compiler</strong> in <strong>Angular</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=20&amp;subSectionId=-1&amp;contentId=159&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">5️⃣ </span>How do <strong>components communicate</strong> with each other in a <strong>large-scale Angular application</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=15&amp;subSectionId=-1&amp;contentId=45&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">6️⃣ </span>Create a <strong>registration form</strong> with fields: <strong>name</strong>, <strong>email</strong>, <strong>password</strong>, and <strong>confirmPassword</strong>. Apply <strong>validations</strong> for <strong>required fields</strong>, and ensure <strong>password</strong> and <strong>confirmPassword match</strong>. How will you do it in <strong>Angular</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=12&amp;subSectionId=-1&amp;contentId=247&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">7️⃣ </span>If I need to <strong>filter some item</strong> at every <strong>keystroke</strong> of user, how can we implement with <strong>Event binding approach</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=12&amp;subSectionId=-1&amp;contentId=245&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">8️⃣ </span>What is the <strong>Interceptor</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=19&amp;subSectionId=-1&amp;contentId=155&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">9️⃣ </span>What is the purpose of <strong>Angular CLI</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=2&amp;subSectionId=-1&amp;contentId=30&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>🔟</p><pre data-language=\"plain\">\nthis.myForm.get(&#39;email&#39;)?.valueChanges.subscribe(\n        value =&gt; { console.log(&#39;Email changed:&#39;, value); }\n);\n</pre><p>How to <strong>optimize</strong> this when <strong>valueChanges</strong> fires on every <strong>keystroke</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=12&amp;subSectionId=-1&amp;contentId=71&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 329,
+                            "text": "<p>Basic+Form+Interceptor</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ How does <strong>data binding</strong> work in <strong>Angular</strong>?</p><p>2️⃣ Explain <strong>two-way binding</strong>.</p><p>3️⃣ What is an <strong>Angular Pipe</strong>?</p><p>4️⃣ What is the difference between <strong>Pure</strong> and <strong>Impure Pipe</strong>?</p><p>5️⃣ What is a <strong>directive</strong>?</p><p>6️⃣ What is a <strong>HostListener</strong> and <strong>HostBinding</strong>?</p><p>7️⃣ What are <strong>lifecycle hooks</strong> in <strong>Angular</strong>?</p><p>8️⃣ How to access <strong>route parameters</strong>, <strong>query parameters</strong>, and <strong>static route data</strong>?</p><p>9️⃣ What are <strong>Angular Guards</strong>?</p><p>🔟 What is <strong>ViewChild</strong> and <strong>ContentChild</strong>?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 330,
+                            "text": "<p>Basic + Data Binding + Pipes + Directice + LifeCycle Hook + Guard</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ Why do we use <strong>trackBy</strong> in *<strong>ngFor</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=6&amp;subSectionId=-1&amp;contentId=37&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>2️⃣ How can we create <strong>custom Directive</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=6&amp;subSectionId=-1&amp;contentId=44&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>3️⃣ Explain <strong>Dependency Injection (DI)</strong> in <strong>Angular</strong>. <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=7&amp;subSectionId=-1&amp;contentId=87&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>4️⃣ Why is <strong>constructor()</strong> called first in Angular? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=8&amp;subSectionId=-1&amp;contentId=144&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>5️⃣ How do you create a <strong>custom pipe</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=10&amp;subSectionId=-1&amp;contentId=79&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>6️⃣ What is the <strong>drawback</strong> of an <strong>AsyncPipe</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=10&amp;subSectionId=-1&amp;contentId=81&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>7️⃣ <span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">How can we secure JWT token?</span></p><p>8️⃣ How does Angular’s <strong>change detection</strong> mechanism work? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=13&amp;subSectionId=-1&amp;contentId=73&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View1</a> <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=13&amp;subSectionId=-1&amp;contentId=75&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View2</a></p><p>9️⃣ How to <strong>test Service</strong> in <strong>Component</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=24&amp;subSectionId=-1&amp;contentId=262&amp;notesId=1\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>🔟 How to <strong>test API</strong>? </p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 331,
+                            "text": "<p>Basic + Directive + DI + Pipe + Form + Change Detection + Unit Testing</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ What is <strong>JavaScript</strong>?</p><p>2️⃣ What are <strong>closures</strong> in JavaScript?</p><p>3️⃣ Can you implement <strong>increment</strong> and <strong>decrement</strong> count using <strong>closures</strong> in <strong>Angular</strong>?</p><p>4️⃣ What is <strong>Hoisting</strong> in JavaScript?</p><p>5️⃣ What is <strong>TypeScript</strong>?</p><p>6️⃣ Difference between <strong>type</strong> vs <strong>interface</strong> — and <strong>when to use</strong> each.</p><p>7️⃣ Difference between <strong>any</strong>, <strong>unknown</strong>, <strong>never</strong>.</p><p>8️⃣ What is the difference between <strong>inline</strong>, <strong>block</strong>, and <strong>inline-block</strong> elements?</p><p>9️⃣ Difference between <strong>&lt;div&gt;</strong> and <strong>&lt;span&gt;</strong> tags?</p><p>🔟 What are <strong>selectors</strong>?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 332,
+                            "text": "<p>JavaScript + TypeScript + HTML + CSS</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ What is a <strong>Promise</strong>? How do Promises differ from <strong>callbacks</strong>?</p><p>2️⃣ Can you write a simple example of creating and using a <strong>Promise</strong>?</p><p>3️⃣ How do <strong>arrow functions</strong> differ from <strong>regular functions</strong>?</p><p>4️⃣ <strong>Generics</strong> – why needed? Real example with <strong>Angular services</strong> (e.g., <strong>HttpClient</strong>).</p><p>5️⃣ Difference between <strong>any</strong>, <strong>unknown</strong>, <strong>never</strong>.</p><p>6️⃣ What is <strong>NgRx</strong> in Angular?</p><p>7️⃣ Difference between <strong>Subject</strong>, <strong>BehaviorSubject</strong>, <strong>ReplaySubject</strong>, and <strong>AsyncSubject</strong> in <strong>RxJS</strong>?</p><p>8️⃣ What are <strong>Observables</strong> in Angular?</p><p>9️⃣ Explain <strong>five RxJS operators</strong> with <strong>example</strong>.</p><p>🔟 How to <strong>chain HTTP calls</strong> in <strong>sequence</strong> using <strong>RxJS</strong>?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 333,
+                            "text": "<p>JavaScript + TypeScript + NgRx + RxJS</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ What is <strong>Generics</strong>? Show <strong>Angular HttpClient</strong> example. <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=40&amp;subSectionId=-1&amp;contentId=178&amp;notesId=5\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>2️⃣ What are <strong>decorators</strong>? Example: <strong>@Injectable</strong>, <strong>@Component</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=40&amp;subSectionId=-1&amp;contentId=179&amp;notesId=5\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>3️⃣ What are <strong>tuple types</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=40&amp;subSectionId=-1&amp;contentId=263&amp;notesId=5\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>4️⃣ What are <strong>Enums</strong> and where are they <strong>used</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=40&amp;subSectionId=-1&amp;contentId=264&amp;notesId=5\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>5️⃣ What are <strong>semantic HTML tags</strong>? Give <strong>examples</strong>. <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=41&amp;subSectionId=-1&amp;contentId=182&amp;notesId=6\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>6️⃣ What is <strong>srcset</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=43&amp;subSectionId=-1&amp;contentId=191&amp;notesId=6\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>7️⃣ How do you handle <strong>memory leaks</strong> with <strong>Observables</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=31&amp;subSectionId=-1&amp;contentId=125&amp;notesId=3\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>8️⃣ What is the difference between <strong>tap</strong> and <strong>map</strong>? <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=33&amp;subSectionId=-1&amp;contentId=265&amp;notesId=3\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>9️⃣ Explain <strong>mergeMap</strong>, <strong>concatMap</strong>, <strong>switchMap</strong>, and <strong>forkJoin</strong>. <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=33&amp;subSectionId=-1&amp;contentId=194&amp;notesId=3\" rel=\"noopener noreferrer\" target=\"_blank\">View</a></p><p>🔟 Explain <strong>NgRx Flow</strong> (<strong>Redux Pattern</strong> in Angular). <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=34&amp;subSectionId=-1&amp;contentId=133&amp;notesId=2\" rel=\"noopener noreferrer\" target=\"_blank\">View1</a> <a href=\"https://skillwithtech.vercel.app/notes/active-notes?sectionId=34&amp;subSectionId=5&amp;contentId=140&amp;notesId=2\" rel=\"noopener noreferrer\" target=\"_blank\">View2</a></p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 334,
+                            "text": "<p>TypeScript + HTML + RxJS + NgRx</p>"
+                        },
+                        {
+                            "description": "<p>1️⃣ Can you write <strong>sample code</strong> for a <strong>custom Directive</strong>?</p><p>2️⃣ Can you write <strong>sample code</strong> for a <strong>custom Pipe</strong>?</p><p>3️⃣ Can you write a <strong>custom validation</strong> to check whether <strong>password</strong> and <strong>confirmPassword</strong> <strong>match</strong> in Angular?</p><p>4️⃣ Can you <strong>implement</strong> an <strong>Auth Guard</strong> in <strong>Angular</strong>?</p><p>5️⃣ Can you <strong>implement Lazy Loading</strong> using a <strong>Module </strong>and <strong>Standalone Component</strong>?</p><p>6️⃣ How can you <strong>implement auto save</strong>?</p><p>7️⃣ Can you explain how to implement <strong>Preloading</strong> in <strong>Angular</strong>?</p><p>8️⃣ What is a <strong>Resolver</strong> and how to <strong>implement</strong> it?</p><p>9️⃣ If I have <strong>multiple API calls</strong>, how can I handle <strong>success</strong> and <strong>failure</strong> <strong>in one place</strong>?</p><p>🔟 On <strong>button click</strong>, I call an <strong>API</strong> that takes <strong>2 minutes</strong>.</p><p>If I keep clicking the button, how can I <strong>cancel previous API calls</strong> when the latest response arrives?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 335,
+                            "text": "<p>Basic + Directive + Pipe + Form + Loading + Guard </p>"
+                        },
+                        {
+                            "description": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">1️⃣ </span>Explain the difference between <strong>call()</strong>, <strong>apply()</strong>, and <strong>bind()</strong> methods in <strong>JavaScript</strong>.</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">2️⃣ </span></p><pre data-language=\"plain\">\nconst detail = {\n    name: &quot;Vivek&quot;,\n    getName: function() {\n        console.log(&#39;My name is&#39;, this.name);\n    }\n};\n\ndetail.getName(); // My name is Vivek\nsetTimeout(detail.getName) // My name is undefined\n</pre></br><p>Why <strong>is</strong> the output <strong>different</strong>, and how <strong>can</strong> we <strong>fix</strong> this?</p></br><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">3️⃣ </span></p><pre data-language=\"plain\">\nconst detail = {\n    name: &quot;Vivek&quot;,\n    getName: function() {\n        console.log(&#39;My name is&#39;, this.name);\n    },\n    getNameArrow: () =&gt; {\n        console.log(&#39;My name is&#39;, this.name);\n    }\n};\n\ndetail.getName(); // My name is Vivek\ndetail.getNameArrow(); // My name is undefined\n</pre></br><p>Why <strong>is</strong> the output <strong>different?</strong></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">4️⃣ </span>What is a <strong>shallow copy</strong> and a <strong>deep copy</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">5️⃣ </span><strong>How many ways</strong> can we <strong>mock data</strong> in <strong>unit testing</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">6️⃣ </span>What is a <strong>microservice architecture</strong>, and how does it differ from a monolithic architecture?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">7️⃣ </span>How does a <strong>frontend communicate with multiple microservices</strong>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">8️⃣ </span>What is the <strong>difference</strong> between <strong>map()</strong>, <strong>forEach()</strong>, <strong>filter()</strong>, and <strong>reduce()</strong> in <strong>JavaScript</strong>? Can you give a <strong>small example</strong> for each?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">9️⃣ Which model your project followed?</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">🔟 What is Solid Principle?</span></p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 336,
+                            "text": "<p>JavaScript + Unit Testing + Microservices</p>"
+                        },
+                        {
+                            "description": "<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">1️⃣ </span><strong>What is Webpack</strong>, and how is it used in <strong>Angular</strong>?<span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\"> </span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">2️⃣ </span><strong>What is SSR (Server-Side Rendering)</strong>, and why is it used in Angular?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">3️⃣ </span>What are the <strong>benefits of SSR</strong> in terms of <strong>SEO</strong> and <strong>performance</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">4️⃣ </span><strong>What is CORS (Cross-Origin Resource Sharing)</strong>, and why do we face <strong>CORS errors</strong> in Angular applications?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">5️⃣ </span>Can you explain <strong>Auth</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">6️⃣ </span>If Angular does not use <strong>zone.js</strong>, who manages <strong>change detection</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">7️⃣ </span>What <strong>new features</strong> have you used in the <strong>latest version of Angular</strong>?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">8️⃣ </span>What is <strong>caching</strong>, and how do you implement <strong>caching</strong> in Angular?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">9️⃣ </span>If the application takes a long time to <strong>load</strong>, how can you <strong>optimize</strong> its performance?</p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">🔟</span>What is <strong>Content Projection</strong> in Angular?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 86,
+                            "contentId": 337,
+                            "text": "<p>Angular Advance</p>"
+                        }
+                    ]
                 },
                 {
-                    "text": "<p>How do you share Angular libraries (like Angular core, RxJS, Material) across Micro Frontends?</p>",
-                    "sectionId": 45,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 201,
-                    "description": "<p>In a Micro Frontend architecture with Angular, we avoid bundling Angular core, RxJS, and Material in each MFE. We use Webpack Module Federation to share these libraries. We mark Angular libraries as <code>singleton: true</code> to ensure only one instance exists across MFEs and use <code>strictVersion: true</code> to avoid version conflicts. This approach reduces bundle size, prevents runtime errors, and ensures consistent behavior across apps.</p></br><pre data-language=\"plain\">\nshared: share({\n    &quot;@angular/core&quot;: { singleton: true, strictVersion: true },\n    &quot;@angular/common&quot;: { singleton: true, strictVersion: true },\n    &quot;@angular/router&quot;: { singleton: true, strictVersion: true },\n    &quot;rxjs&quot;: { singleton: true },\n    &quot;@angular/material&quot;: { singleton: true }\n  })\n</pre></br><p>OR</p></br><pre data-language=\"plain\">\nshared: { \n...shareAll({ singleton: true, strictVersion: true, requiredVersion: &#39;auto&#39; }), \n},\n</pre></br><p><code>shareAll</code> is a helper from <code>@angular-architects/module-federation</code>and it automatically marks <strong>all dependencies from </strong><code><strong>package.json</strong></code> as shared. </p>"
-                },
-                {
-                    "text": "<p>How do you set up routing between multiple Micro Frontends in Angular?</p>",
-                    "sectionId": 45,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 202,
-                    "description": ""
-                },
-                {
-                    "text": "<p>What’s the difference between using Angular Elements (Web Components) vs Module Federation?</p>",
-                    "sectionId": 45,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 203,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you manage state across different Micro Frontends (NgRx, shared services, custom events)?</p>",
-                    "sectionId": 45,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 204,
-                    "description": ""
+                    "name": "<p><strong>Angular Set 2</strong></p>",
+                    "subjectId": 13,
+                    "sectionId": 85,
+                    "subSectionId": 87,
+                    "subSections": [],
+                    "contents": [
+                        {
+                            "description": "<p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">1️⃣ What is difference between </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">Observable </strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">and </span><strong style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">Signals</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">2️⃣ </span>Can you explain how<strong> dependency injection </strong>works?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">3️⃣ How can you manage state in Angular Application?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">4️⃣ How to overwrite a service for testing or in a feature module?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">5️⃣ What are the benefits of lazy loading?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">6️⃣ What is the difference between </span><code style=\"color: rgb(0, 0, 0); background-color: rgb(236, 236, 236);\">CanActivateChild</code><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\"> and </span><code style=\"color: rgb(0, 0, 0); background-color: rgb(236, 236, 236);\">CanLoad</code><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">7️⃣ </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">8️⃣ </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">9️⃣ </span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">🔟 </span></p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 87,
+                            "contentId": 338,
+                            "text": "<p>Basic + Observable</p>"
+                        },
+                        {
+                            "description": "<p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">1️⃣ </span>How can you <strong>secure</strong> your <strong>Angular Application</strong><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">2️⃣ </span>What is difference between <strong>canActivate</strong> and <strong>canLoad</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">3️⃣ </span>Do you have experience working with <strong>Node service</strong> in your <strong>Angular project</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">4️⃣ </span>How to <strong>test</strong> a <strong>component</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\">?</span></p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">5️⃣ </span>What is the maximum number of lines you would keep in a single file like <code>user.ts</code>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">6️⃣ </span>Can you tell me the order of Angular lifecycle hooks?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">7️⃣ </span>What is the difference between <code>ngOnInit</code> and <code>constructor</code>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">8️⃣ </span>When do you implement <code>ngDoCheck</code>?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">9️⃣ </span>What are the design patterns available for service design?</p><p><span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);\">🔟 </span>How does hierarchical injector scope work?</p>",
+                            "subjectId": 13,
+                            "sectionId": 85,
+                            "subSectionId": 87,
+                            "contentId": 339,
+                            "text": "<p>Cognizant (1-4) + Hexaware (5-10)</p>"
+                        }
+                    ]
                 }
             ],
-            "subSections": []
-        },
-        {
-            "name": "<p><strong>Integration &amp; Communication</strong></p>",
-            "sectionId": 46,
-            "noteType": "AngularMicroFrontend",
-            "topics": [
-                {
-                    "text": "<p>How can Micro Frontends communicate with each other?</p>",
-                    "sectionId": 46,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 205,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you handle authentication and authorization in Micro Frontend architecture?</p>",
-                    "sectionId": 46,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 206,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you manage CSS/style isolation in Angular Micro Frontends?</p>",
-                    "sectionId": 46,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 207,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you integrate Angular Micro Frontends with React/Vue Micro Frontends?</p>",
-                    "sectionId": 46,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 208,
-                    "description": ""
-                }
-            ],
-            "subSections": []
-        },
-        {
-            "name": "<p><strong>Performance &amp; Deployment</strong></p>",
-            "sectionId": 47,
-            "noteType": "AngularMicroFrontend",
-            "topics": [
-                {
-                    "text": "<p>What are the performance challenges in Micro Frontends, and how do you optimize them?</p>",
-                    "sectionId": 47,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 209,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you handle duplicate dependencies across Micro Frontends?</p>",
-                    "sectionId": 47,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 210,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you ensure version compatibility of shared libraries in Module Federation?</p>",
-                    "sectionId": 47,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 211,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How do you manage CI/CD for multiple Micro Frontends?</p>",
-                    "sectionId": 47,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 212,
-                    "description": ""
-                }
-            ],
-            "subSections": []
-        },
-        {
-            "name": "<p><strong>Scenario / Advanced</strong></p>",
-            "sectionId": 48,
-            "noteType": "AngularMicroFrontend",
-            "topics": [
-                {
-                    "text": "<p>If two Micro Frontends use different Angular versions, how do you make them work together?</p>",
-                    "sectionId": 48,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 213,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How would you migrate an existing monolithic Angular app into Micro Frontends?</p>",
-                    "sectionId": 48,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 214,
-                    "description": ""
-                },
-                {
-                    "text": "<p>How would you rollback a specific Micro Frontend if a deployment fails?</p>",
-                    "sectionId": 48,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 215,
-                    "description": ""
-                },
-                {
-                    "text": "<p>What are some real-world challenges you faced (or might face) in Micro Frontend implementation?</p>",
-                    "sectionId": 48,
-                    "subSectionId": -1,
-                    "noteType": "AngularMicroFrontend",
-                    "topicId": 216,
-                    "description": ""
-                }
-            ],
-            "subSections": []
+            "contents": []
         }
     ];
 }

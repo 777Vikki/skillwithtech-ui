@@ -19,8 +19,8 @@
                 }
             </div>
         </div>
-        @if(section?.topics?.length) {
-        <ng-container *ngTemplateOutlet="manageNotesContent; context: { topics: section.topics }"></ng-container>
+        @if(section?.contents?.length) {
+        <ng-container *ngTemplateOutlet="manageNotesContent; context: { contents: section.contents }"></ng-container>
         }
         @if(section?.subSections?.length) {
         @for(subSection of section.subSections; track subSection.subSectionId; let subSectionIndex = $index) {
@@ -43,8 +43,8 @@
                     }
                 </div>
             </div>
-            @if(subSection?.topics?.length) {
-            <ng-container *ngTemplateOutlet="manageNotesContent; context: { topics: subSection.topics }"></ng-container>
+            @if(subSection?.contents?.length) {
+            <ng-container *ngTemplateOutlet="manageNotesContent; context: { contents: subSection.contents }"></ng-container>
             }
         </div>
         }
@@ -53,23 +53,23 @@
     }
 </div>
 
-<ng-template #manageNotesContent let-topics="topics">
-    @for(topic of topics; track topic.topicId) {
-    @if(topic.text) {
+<ng-template #manageNotesContent let-contents="contents">
+    @for(content of contents; track content.contentId) {
+    @if(content.text) {
     <div class="content-text center-align-between"
-        [ngClass]="{'active-row': activeRow().type === 'content' && topic.topicId === activeRow().id}"
-        [id]="'manage-content-' + topic.topicId">
-        <div [innerHTML]="topic.text"></div>
+        [ngClass]="{'active-row': activeRow().type === 'content' && content.contentId === activeRow().id}"
+        [id]="'manage-content-' + content.contentId">
+        <div [innerHTML]="content.text"></div>
         <div class="menu-container">
             <span class="material-symbols-outlined link"
-                (click)="toggleMenu(topic.topicId, 'content'); $event.stopPropagation()"> more_vert
+                (click)="toggleMenu(content.contentId, 'content'); $event.stopPropagation()"> more_vert
             </span>
-            @if(openToggle().id === topic.topicId && openToggle().type === 'content') {
+            @if(openToggle().id === content.contentId && openToggle().type === 'content') {
             <ul class="menu-list">
-                <li (click)="addContent(topic, '0', 'Add_Content')">Add Content Above</li>
-                <li (click)="addContent(topic, '1', 'Add_Content')">Add Content Below</li>
-                <li (click)="editContent(topic)">Edit Content</li>
-                <li (click)="deleteContent(topic)">Delete Content</li>
+                <li (click)="addContent(content, '0', 'Add_Content')">Add Content Above</li>
+                <li (click)="addContent(content, '1', 'Add_Content')">Add Content Below</li>
+                <li (click)="editContent(content)">Edit Content</li>
+                <li (click)="deleteContent(content)">Delete Content</li>
             </ul>
             }
         </div>

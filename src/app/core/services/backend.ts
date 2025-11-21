@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, IEditSubSectionRequest, ISubject, ISection, ISubSection, IContent } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
 import { notesDb, notesDbById, availableNotes, storeCount } from '../../db/notes-db';
@@ -12,6 +12,7 @@ type Count = 'section' | 'subSection' | 'topic';
 export class BackendService {
   private currentNoteSections: ISection[] = [];
   private currentNoteKey: string | undefined;
+  private currentNoteId: number | undefined;
   private count = storeCount();
 
   private getCount(type: Count) {
@@ -29,45 +30,45 @@ export class BackendService {
     return of(structuredClone(header));
   }
 
-  getSections(type: string): Observable<ISection[]> {
-    this.currentNoteKey = type;
-    const data = localStorage.getItem(type);
-    if (data) {
-      this.currentNoteSections = JSON.parse(data);
-      return of(JSON.parse(data));
-    }
-    this.currentNoteSections = notesDb(type);
-    return of(structuredClone(this.currentNoteSections));
-  }
+  // getSections(id: number): Observable<ISection[]> {
+  //   this.currentNoteId = id;
+  //   // const data = localStorage.getItem(type);
+  //   if (data) {
+  //     this.currentNoteSections = JSON.parse(data);
+  //     return of(JSON.parse(data));
+  //   }
+  //   this.currentNoteSections = notesDb(type);
+  //   return of(structuredClone(this.currentNoteSections));
+  // }
 
   getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    let sections: ISection[] = notesDbById(noteId);
-    const type = sections.length > 0? sections[0].noteType : '';
-    if(type) {
-      const localStoragedata = localStorage.getItem(type);
-      if(localStoragedata) {
-        if(localStoragedata) sections = JSON.parse(localStoragedata);
-      }
-    }
-    if (sections && sections.length) {
-      const selectedSection = sections.find(d => d.sectionId === sectionId);
-      if (selectedSection) {
-        if (subSectionId > -1) {
-          const selectedSubSection = selectedSection.subSections.find(d => d.subSectionId === subSectionId);
-          if (selectedSubSection) {
-            const selectedContent = selectedSubSection.topics.find(d => d.topicId === contentId);
-            if (selectedContent) {
-              return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
-            }
-          }
-        } else {
-          const selectedContent = selectedSection.topics.find(d => d.topicId === contentId);
-          if (selectedContent) {
-            return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
-          }
-        }
-      }
-    }
+    // let sections: ISection[] = notesDbById(noteId);
+    // const type = sections.length > 0? sections[0].noteType : '';
+    // if(type) {
+    //   const localStoragedata = localStorage.getItem(type);
+    //   if(localStoragedata) {
+    //     if(localStoragedata) sections = JSON.parse(localStoragedata);
+    //   }
+    // }
+    // if (sections && sections.length) {
+    //   const selectedSection = sections.find(d => d.sectionId === sectionId);
+    //   if (selectedSection) {
+    //     if (subSectionId > -1) {
+    //       const selectedSubSection = selectedSection.subSections.find(d => d.subSectionId === subSectionId);
+    //       if (selectedSubSection) {
+    //         const selectedContent = selectedSubSection.contents.find(d => d.contentId === contentId);
+    //         if (selectedContent) {
+    //           return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+    //         }
+    //       }
+    //     } else {
+    //       const selectedContent = selectedSection.contents.find(d => d.contentId === contentId);
+    //       if (selectedContent) {
+    //         return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+    //       }
+    //     }
+    //   }
+    // }
     return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
@@ -89,7 +90,7 @@ export class BackendService {
 
   }
 
-  onEditSubSection(subSection: IEditSubSectionRequest): Observable<IResponse> {
+  onEditSubSection(subSection: IEditSectionRequest): Observable<IResponse> {
     const subSections = this.currentNoteSections.find(d => d.sectionId === subSection.sectionId)?.subSections;
     if (subSections) {
       const subSec = subSections.find(d => d.subSectionId === subSection.subSectionId);
@@ -106,10 +107,10 @@ export class BackendService {
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
     let selectedContent: IContent | undefined;
     if (content.subSectionId > 0) {
-      const contents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics
-      selectedContent = contents?.find(d => d.topicId === content.topicId);
+      const contents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.contents
+      selectedContent = contents?.find(d => d.contentId === content.contentId);
     } else {
-      selectedContent = section?.topics.find(d => d.topicId === content.topicId);
+      selectedContent = section?.contents.find(d => d.contentId === content.contentId);
     }
     if (selectedContent) {
       selectedContent.text = content.text;
@@ -123,11 +124,11 @@ export class BackendService {
     const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
     let selectedContents: IContent[] = [];
     if (content.subSectionId > 0) {
-      selectedContents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []
+      selectedContents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.contents ?? []
     } else {
-      selectedContents = section?.topics ?? [];
+      selectedContents = section?.contents ?? [];
     }
-    const index = selectedContents.findIndex(d => d.topicId === content.topicId);
+    const index = selectedContents.findIndex(d => d.contentId === content.contentId);
     if (index > -1) {
       selectedContents.splice(index, 1);
     }
@@ -160,19 +161,19 @@ export class BackendService {
         return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
       }
     } else {
-      content.topicId = this.getCount("topic");
+      content.contentId = this.getCount("topic");
       contents = [content];
     }
     if (subSectionIndex > -1) {
-      this.currentNoteSections[sectionIndex].subSections[subSectionIndex].topics.splice(contentIndex, 0, ...contents);
+      this.currentNoteSections[sectionIndex].subSections[subSectionIndex].contents.splice(contentIndex, 0, ...contents);
     } else {
-      this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
+      this.currentNoteSections[sectionIndex].contents.splice(contentIndex, 0, ...contents);
     }
     this.storeSection(this.currentNoteSections);
     return of({ status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [...contents] });
   }
 
-  onAddSubSection(subSection: ISubSection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
+  onAddSubSection(subSection: ISection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
     const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
     subSection.subSectionId = this.getCount("subSection");
     currentSubSections.splice(subSectionIndex, 0, subSection);
@@ -180,28 +181,28 @@ export class BackendService {
     return of({ status: true, message: 'Success', data: [subSection] });
   }
 
-  onAddDescription(topic: IContent, description: string): Observable<IResponse> {
-    const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === topic.sectionId);
+  onAddDescription(content: IContent, description: string): Observable<IResponse> {
+    const section: ISection | undefined = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
     let selectedContent: IContent | undefined = undefined;
     if (section) {
-      if (topic.subSectionId != null && topic.subSectionId > 0) {
-        const subSection = section.subSections.find(d => d.subSectionId === topic.subSectionId) ?? undefined;
-        if (subSection && subSection.topics.length) {
-          selectedContent = subSection.topics.find(d => d.topicId === topic.topicId);
+      if (content.subSectionId != null && content.subSectionId > 0) {
+        const subSection = section.subSections.find(d => d.subSectionId === content.subSectionId) ?? undefined;
+        if (subSection && subSection.contents.length) {
+          selectedContent = subSection.contents.find(d => d.contentId === content.contentId);
         }
       }
-      if (!selectedContent && section.topics.length) {
-        selectedContent = section.topics.find(d => d.topicId === topic.topicId) ?? undefined;
+      if (!selectedContent && section.contents.length) {
+        selectedContent = section.contents.find(d => d.contentId === content.contentId) ?? undefined;
       }
       if (selectedContent) {
         selectedContent.description = description;
         this.storeSection(this.currentNoteSections);
-        return of({ status: true, message: 'Success', data: [topic] });
+        return of({ status: true, message: 'Success', data: [content] });
       } else {
-        return of({ status: false, message: 'data is not added.', data: [topic] });
+        return of({ status: false, message: 'data is not added.', data: [content] });
       }
     }
-    return of({ status: false, message: 'data is not added.', data: [topic] });
+    return of({ status: false, message: 'data is not added.', data: [content] });
   }
 
   storeSection(sections: ISection[]) {

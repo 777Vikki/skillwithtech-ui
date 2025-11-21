@@ -20,11 +20,11 @@ interface DropdownChangeEvent {
   styleUrl: './header.scss'
 })
 export class Header implements OnInit {
-  sharedNotesService = inject(SharedNotesService);
-  store = inject(StoreService);
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  notesService = inject(NotesService);
+  private sharedNotesService = inject(SharedNotesService);
+  private store = inject(StoreService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private notesService = inject(NotesService);
   headers = signal<ISubject[]>([]);
   selectedHeader = this.sharedNotesService.currentNote;
   showProfile = signal<boolean>(false);
@@ -33,17 +33,17 @@ export class Header implements OnInit {
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      switchMap(() => this.store.getHeaders()),
+      switchMap(() => this.notesService.getSubjectList()),
     )
     .pipe(first())
     .subscribe(d => {
-      const notesId = this.route.snapshot.queryParams["notesId"]? +this.route.snapshot.queryParams["notesId"] : -1;
+      const subjectId = this.route.snapshot.queryParams["subjectId"]? +this.route.snapshot.queryParams["subjectId"] : -1;
       this.headers.set(d);
-      if (notesId != null && notesId > 0) {
-        const currentHeader = this.headers().find(d => d.id === notesId) ?? this.store.primaryHeader();
+      if (subjectId != null && subjectId > 0) {
+        const currentHeader = this.headers().find(d => d.id === subjectId) ?? this.headers()[0];
         this.sharedNotesService.setCurrentNote(currentHeader);
       } else {
-        this.sharedNotesService.setCurrentNote(this.store.primaryHeader());
+        this.sharedNotesService.setCurrentNote(this.headers()[0]);
       }
       if (this.selectedHeader()) {
         this.notesService.getSections().subscribe();
