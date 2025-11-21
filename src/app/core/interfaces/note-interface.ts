@@ -36,3 +36,9 @@ export interface IEditContentRequest {
     subSectionId: number;
     contentId: number;
 }
+
+export interface ICount {
+    subject: number;
+    section: number;
+    content: number;
+}

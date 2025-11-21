@@ -31,6 +31,7 @@ export class Header implements OnInit {
   showSettings = signal<boolean>(false);
 
   ngOnInit(): void {
+    this.notesService.getCountDetail().subscribe();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       switchMap(() => this.notesService.getSubjectList()),

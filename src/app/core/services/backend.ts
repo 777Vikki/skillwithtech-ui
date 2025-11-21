@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IEditContentRequest, IEditSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
+import { IEditContentRequest, IEditSectionRequest, ISection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
-import { notesDb, notesDbById, availableNotes, storeCount } from '../../db/notes-db';
 
-type Count = 'section' | 'subSection' | 'topic';
+type Count = 'subject' | 'section' | 'content';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,11 @@ export class BackendService {
   private currentNoteSections: ISection[] = [];
   private currentNoteKey: string | undefined;
   private currentNoteId: number | undefined;
-  private count = storeCount();
+  private count = {
+    "subject": 13,
+    "section": 87,
+    "content": 339
+  };
 
   private getCount(type: Count) {
     const data = localStorage.getItem("count");
@@ -24,22 +27,6 @@ export class BackendService {
     localStorage.setItem("count", JSON.stringify(this.count));
     return this.count[type];
   }
-
-  getHeaders(): Observable<ISubject[]> {
-    const header: ISubject[] = structuredClone(availableNotes());
-    return of(structuredClone(header));
-  }
-
-  // getSections(id: number): Observable<ISection[]> {
-  //   this.currentNoteId = id;
-  //   // const data = localStorage.getItem(type);
-  //   if (data) {
-  //     this.currentNoteSections = JSON.parse(data);
-  //     return of(JSON.parse(data));
-  //   }
-  //   this.currentNoteSections = notesDb(type);
-  //   return of(structuredClone(this.currentNoteSections));
-  // }
 
   getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
     // let sections: ISection[] = notesDbById(noteId);
@@ -70,24 +57,6 @@ export class BackendService {
     //   }
     // }
     return of({ status: false, message: 'Detail is not found.', data: [] });
-  }
-
-  onAddSection(section: ISection, index: number): Observable<IResponse> {
-    section.sectionId = this.getCount("section");
-    this.currentNoteSections.splice(index, 0, section);
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [section] });
-  }
-
-  onEditSection(section: IEditSectionRequest): Observable<IResponse> {
-    const sec = this.currentNoteSections.find(d => d.sectionId === section.sectionId);
-    if (sec) {
-      sec.name = section.name;
-      this.storeSection(this.currentNoteSections);
-      return of({ status: true, message: 'Success', data: [] });
-    }
-    return of({ status: false, message: 'Detail is not found.', data: [] });
-
   }
 
   onEditSubSection(subSection: IEditSectionRequest): Observable<IResponse> {
@@ -146,39 +115,6 @@ export class BackendService {
     this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
     this.storeSection(this.currentNoteSections);
     return of({ status: true, message: 'Success', data: [] });
-  }
-
-  onAddContent(content: IContent, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    let contents: IContent[] = [];
-    let message = '';
-    if (isBulkContent) {
-      let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
-      if (requestContents.length > 0) {
-        contents = requestContents.map(d => {
-          return Object.assign({}, content, { text: d, topicId: this.getCount("topic") });
-        });
-      } else {
-        return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
-      }
-    } else {
-      content.contentId = this.getCount("topic");
-      contents = [content];
-    }
-    if (subSectionIndex > -1) {
-      this.currentNoteSections[sectionIndex].subSections[subSectionIndex].contents.splice(contentIndex, 0, ...contents);
-    } else {
-      this.currentNoteSections[sectionIndex].contents.splice(contentIndex, 0, ...contents);
-    }
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [...contents] });
-  }
-
-  onAddSubSection(subSection: ISection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
-    subSection.subSectionId = this.getCount("subSection");
-    currentSubSections.splice(subSectionIndex, 0, subSection);
-    this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: 'Success', data: [subSection] });
   }
 
   onAddDescription(content: IContent, description: string): Observable<IResponse> {

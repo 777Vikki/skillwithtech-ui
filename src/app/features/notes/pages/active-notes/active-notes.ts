@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ISection, IContent } from '../../../../core/interfaces/note-interface';
 import { StoreService } from '../../../../core/services/store';
 import { NotesService } from '../../../../core/services/notes';
@@ -21,7 +21,7 @@ import { DescriptionModal } from '../../../../shared/modals/description-modal/de
   styleUrl: './active-notes.scss',
   providers: [MessageService]
 })
-export class ActiveNotes implements OnInit, AfterViewInit {
+export class ActiveNotes implements OnInit {
   private sharedNotesService = inject(SharedNotesService);
   private store = inject(StoreService);
   private noteService = inject(NotesService);
@@ -40,32 +40,34 @@ export class ActiveNotes implements OnInit, AfterViewInit {
   isSectionCollapse: boolean = false;
   visibleDescriptionModal: boolean = false;
   descriptionModalData: IContent | undefined;
+  isScrollAction = false;
 
   ngOnInit(): void {
     this.sharedNotesService.getCurrentNoteSectionsObservable().pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        this.resetSelectedValue();
+        if(!this.sharedNotesService.loadingSubject()) {
+          this.resetSelectedValue();
+        }
       })
   }
 
-  ngAfterViewInit(): void {
-    const routeQueryParams = this.route.snapshot.queryParams;
-    const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : -1;
-    const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : -1;
-
-    this.scrollActiveNotes(sectionId, -1, contentId);
-  }
-
   scrollActiveNotes(sectionId: number, subsectionId: number, contentId: number) {
+    if(this.isScrollAction) {
+      return;
+    }
+    this.isScrollAction = true;
     if (sectionId > -1) {
       const element = document.getElementById('section_' + sectionId);
+      console.log('Element Section: ', element);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     if (contentId > -1) {
       const element = document.getElementById('content_' + contentId);
+      console.log('Element Content: ', element);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    console.log('Section Id: ', sectionId, 'Cotent Id: ', contentId);
   }
 
   onViewAnswer(event: MouseEvent) {
@@ -157,7 +159,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
     let sectionId = 0;
     let subSectionId = 0;
     let contentId = 0;
-    let notesId = this.sharedNotesService.currentNote()?.id ?? 0;
+    let subjectId = this.sharedNotesService.currentNote()?.id ?? 0;
     if (this.selectedContent) {
       sectionId = this.selectedContent.sectionId;
       subSectionId = this.selectedContent.subSectionId;
@@ -169,13 +171,13 @@ export class ActiveNotes implements OnInit, AfterViewInit {
       sectionId: sectionId,
       subSectionId: subSectionId,
       contentId: contentId,
-      notesId: notesId
+      subjectId: subjectId
     };
 
     this.router.navigate(['../'], { relativeTo: this.route, queryParams: queryParamRequest, queryParamsHandling: 'merge' });
     setTimeout(() => {
-      this.scrollActiveNotes(-1, -1, this.selectedContent?.contentId ?? -1);
-    });
+      this.scrollActiveNotes(sectionId, -1, this.selectedContent?.contentId ?? -1);
+    }, 300);
   }
 
   onSelectSection(section: ISection) {
