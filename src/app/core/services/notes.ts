@@ -84,8 +84,9 @@ export class NotesService {
   }
 
   getSections(): Observable<ISection[]> {
+    this.sharedNotesService.setSubjectLoading(true);
     const selectedNote = this.sharedNotesService.currentNote();
-    if(Array.isArray(selectedNote?.links) && selectedNote?.links.length > 0) {
+    if (Array.isArray(selectedNote?.links) && selectedNote?.links.length > 0) {
       return this.http.get<ISection[]>(selectedNote.links[0]).pipe(tap(sections => {
         console.log(sections);
         this.sharedNotesService.setSubjectLoading(false);
@@ -96,7 +97,25 @@ export class NotesService {
   }
 
   getContent(subjectId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    // return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
+    const selectedSubject = this.sharedNotesService.subjectList().find(d => d.id === subjectId) ?? undefined;
+    if (selectedSubject) {
+      return this.http.get<ISection[]>(selectedSubject.links[0]).pipe(map(sections => {
+        let content: IContent | undefined;
+        const selectedSection = sections.find(section => section.sectionId === sectionId);
+        if (subSectionId > 0) {
+          content = selectedSection?.subSections.find(subSection => subSection.sectionId === subSectionId)
+                      ?.contents.find(content => content.contentId === contentId)
+                      ?? undefined;
+        } else {
+          content = selectedSection?.contents.find(content => content.contentId === contentId)
+        }
+        if(content) {
+          return { status: true, message: 'Success', data: [content]  }
+        } else {
+          return { status: false, message: 'Detail is not found.', data: [] }
+        }
+      }));
+    }
     return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 

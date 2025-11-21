@@ -48,7 +48,7 @@ export class ActiveNotes implements OnInit, AfterViewInit {
         if(!this.sharedNotesService.subjectLoading()) {
           this.resetSelectedValue();
         }
-      })
+      });
   }
 
   ngAfterViewInit(): void {

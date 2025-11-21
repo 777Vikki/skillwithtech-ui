@@ -67,7 +67,6 @@ export class Description implements OnInit, OnChanges {
           .subscribe(response => {
             if(response.status && response.data.length) {
               this.descriptionModalData = response.data[0] as IContent;
-              this.descriptionModalData.subjectId = +subjectId;
             }
           })
       }
