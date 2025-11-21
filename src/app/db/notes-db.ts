@@ -12,12 +12,13 @@ import { typescriptList } from "./testing/typescript-list"
 import { angularUnitTestList } from "./testing/angular-unit-test-list"
 import { cssList } from "./testing/css-list"
 import { angularVersionFeatureList } from "./testing/angular-version-features-list"
+import { AngularRelatedFrontend } from "./testing/angular-related-frontend"
 
 export const storeCount = () => {
   return {
-    section: 72,
-    subSection: 21,
-    topic: 364,
+    section: 75,
+    subSection: 29,
+    topic: 383,
   }
 }
 
@@ -34,6 +35,12 @@ const notes = (): ISubject[] => {
       type: Note.ANGULAR_VERSION_FEATURES,
       id: 12,
       sections: angularVersionFeatureList(),
+    },
+    {
+      name: "Advanced Angular",
+      type: Note.ANGULAR_RELATED_FRONTEND,
+      id: 12,
+      sections: AngularRelatedFrontend(),
     },
     {
       name: "Angular Unit Test",

@@ -11,4 +11,5 @@ export enum Note {
     PRACTICE_SET = "PracticeSet",
     ANGULAR_UNIT_TEST = "AngularUnitTest",
     ANGULAR_VERSION_FEATURES = "AngularVersionFeatures",
+    ANGULAR_RELATED_FRONTEND = "AngularRelatedFrontend",
 }
