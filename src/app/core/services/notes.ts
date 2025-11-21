@@ -8,6 +8,8 @@ import { AbstractControl, Validators } from '@angular/forms';
 import { SharedNotesService } from '../../features/notes/services/shared-notes';
 import { HttpClient } from '@angular/common/http';
 
+type Count = 'subject' | 'section' | 'content';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +24,7 @@ export class NotesService {
         if (postResult.status) {
           return this.getSections().pipe(
             map(() => postResult)
-          )
+          );
         } else {
           return of(postResult);
         }
@@ -39,7 +41,7 @@ export class NotesService {
         if (postResult?.status) {
           return this.getSections().pipe(
             map(() => postResult)
-          )
+          );
         } else {
           return of(postResult);
         }
@@ -85,10 +87,19 @@ export class NotesService {
 
   getSections(): Observable<ISection[]> {
     this.sharedNotesService.setSubjectLoading(true);
-    const selectedNote = this.sharedNotesService.currentNote();
-    if (Array.isArray(selectedNote?.links) && selectedNote?.links.length > 0) {
-      return this.http.get<ISection[]>(selectedNote.links[0]).pipe(tap(sections => {
+    const selectedSubject = this.sharedNotesService.currentNote();
+    const key = selectedSubject?.name.split(" ").map(d => d.trim()).join("_") + '_' + selectedSubject?.id;
+    const localStorageSections = localStorage.getItem(key);
+    if (localStorageSections) {
+      const sections: ISection[] = JSON.parse(localStorageSections);
+      this.backendService.setBackendBasicData(sections, key);;
+      this.sharedNotesService.setSubjectLoading(false);
+      this.sharedNotesService.setCurrentNoteSections(sections);
+      return of(sections);
+    } else if (Array.isArray(selectedSubject?.links) && selectedSubject?.links.length > 0) {
+      return this.http.get<ISection[]>(selectedSubject.links[0]).pipe(tap(sections => {
         console.log(sections);
+        this.backendService.setBackendBasicData(sections, key);;
         this.sharedNotesService.setSubjectLoading(false);
         this.sharedNotesService.setCurrentNoteSections(sections);
       }));
@@ -104,13 +115,13 @@ export class NotesService {
         const selectedSection = sections.find(section => section.sectionId === sectionId);
         if (subSectionId > 0) {
           content = selectedSection?.subSections.find(subSection => subSection.sectionId === subSectionId)
-                      ?.contents.find(content => content.contentId === contentId)
-                      ?? undefined;
+            ?.contents.find(content => content.contentId === contentId)
+            ?? undefined;
         } else {
           content = selectedSection?.contents.find(content => content.contentId === contentId)
         }
-        if(content) {
-          return { status: true, message: 'Success', data: [content]  }
+        if (content) {
+          return { status: true, message: 'Success', data: [content] }
         } else {
           return { status: false, message: 'Detail is not found.', data: [] }
         }

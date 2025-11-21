@@ -278,7 +278,7 @@ export class ManageNotesForm implements OnInit {
       sectionId: -1,
       subjectId: this.sharedNotesService.currentNote()?.id ?? -1,
       contents: [],
-      subSections: [],
+      subSections: [], 
     };
     const index = this.sections().length > 0 ? this.sections().findIndex(d => d.sectionId === formValue.sectionId) + Number(formValue.position) : 0;
     this.notesService.onAddSection(section, index).subscribe((res: IResponse) => {

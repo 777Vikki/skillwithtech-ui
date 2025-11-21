@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, ISubject, ISection, IContent } from '../interfaces/note-interface';
 import { Observable, of } from 'rxjs';
 import { IResponse } from '../interfaces/response-interface';
 import { notesDb, notesDbById, availableNotes, storeCount } from '../../db/notes-db';
+import { SharedNotesService } from '../../features/notes/services/shared-notes';
 
-type Count = 'section' | 'subSection' | 'topic';
+type Count = 'subject' | 'section' | 'content';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  private currentNoteSections: ISection[] = [];
-  private currentNoteKey: string | undefined;
-  private count = storeCount();
+  private currentSections: ISection[] = [];
+  private currentSubjectKey: string | undefined;
+  private count = {
+    subject: 4,
+    section: 2,
+    content: 4,
+  };
+
+  setBackendBasicData(sections: ISection[], key: string) {
+    this.currentSections = structuredClone(sections);
+    this.currentSubjectKey = key;
+  }
 
   private getCount(type: Count) {
     const data = localStorage.getItem("count");
@@ -24,73 +34,26 @@ export class BackendService {
     return this.count[type];
   }
 
-  getHeaders(): Observable<ISubject[]> {
-    const header: ISubject[] = structuredClone(availableNotes());
-    return of(structuredClone(header));
-  }
-
-  getSections(type: string): Observable<ISection[]> {
-    this.currentNoteKey = type;
-    // const data = localStorage.getItem(type);
-    // if (data) {
-    //   this.currentNoteSections = JSON.parse(data);
-    //   return of(JSON.parse(data));
-    // }
-    // this.currentNoteSections = notesDb(type);
-    return of(structuredClone(this.currentNoteSections));
-  }
-
-  getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    let sections: ISection[] = notesDbById(noteId);
-    // const type = sections.length > 0? sections[0].noteType : '';
-    // if(type) {
-    //   const localStoragedata = localStorage.getItem(type);
-    //   if(localStoragedata) {
-    //     if(localStoragedata) sections = JSON.parse(localStoragedata);
-    //   }
-    // }
-    // if (sections && sections.length) {
-    //   const selectedSection = sections.find(d => d.sectionId === sectionId);
-    //   if (selectedSection) {
-    //     if (subSectionId > -1) {
-    //       const selectedSubSection = selectedSection.subSections.find(d => d.subSectionId === subSectionId);
-    //       if (selectedSubSection) {
-    //         const selectedContent = selectedSubSection.topics.find(d => d.topicId === contentId);
-    //         if (selectedContent) {
-    //           return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
-    //         }
-    //       }
-    //     } else {
-    //       const selectedContent = selectedSection.topics.find(d => d.topicId === contentId);
-    //       if (selectedContent) {
-    //         return of({ status: true, message: 'Success', data: [structuredClone(selectedContent)] });
-    //       }
-    //     }
-    //   }
-    // }
-    return of({ status: false, message: 'Detail is not found.', data: [] });
-  }
-
   onAddSection(section: ISection, index: number): Observable<IResponse> {
     section.sectionId = this.getCount("section");
-    this.currentNoteSections.splice(index, 0, section);
-    this.storeSection(this.currentNoteSections);
+    this.currentSections.splice(index, 0, section);
+    this.storeSection(this.currentSections);
     return of({ status: true, message: 'Success', data: [section] });
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
-    const sec = this.currentNoteSections.find(d => d.sectionId === section.sectionId);
-    if (sec) {
-      sec.name = section.name;
-      this.storeSection(this.currentNoteSections);
-      return of({ status: true, message: 'Success', data: [] });
-    }
+    // const sec = this.currentNoteSections.find(d => d.sectionId === section.sectionId);
+    // if (sec) {
+    //   sec.name = section.name;
+    //   this.storeSection(this.currentNoteSections);
+    //   return of({ status: true, message: 'Success', data: [] });
+    // }
     return of({ status: false, message: 'Detail is not found.', data: [] });
 
   }
 
   onEditSubSection(subSection: IEditSectionRequest): Observable<IResponse> {
-    const subSections = this.currentNoteSections.find(d => d.sectionId === subSection.sectionId)?.subSections;
+    // const subSections = this.currentNoteSections.find(d => d.sectionId === subSection.sectionId)?.subSections;
     // if (subSections) {
     //   const subSec = subSections.find(d => d.subSectionId === subSection.subSectionId);
     //   if (subSec) {
@@ -103,8 +66,8 @@ export class BackendService {
   }
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
-    const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
-    let selectedContent: IContent | undefined;
+    // const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
+    // let selectedContent: IContent | undefined;
     // if (content.subSectionId > 0) {
     //   const contents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics
     //   selectedContent = contents?.find(d => d.topicId === content.topicId);
@@ -120,8 +83,8 @@ export class BackendService {
   }
 
   onDeleteContent(content: IContent): Observable<IResponse> {
-    const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
-    let selectedContents: IContent[] = [];
+    // const section = this.currentNoteSections.find(d => d.sectionId === content.sectionId);
+    // let selectedContents: IContent[] = [];
     // if (content.subSectionId > 0) {
     //   selectedContents = section?.subSections.find(d => d.subSectionId === content.subSectionId)?.topics ?? []
     // } else {
@@ -136,20 +99,20 @@ export class BackendService {
   }
 
   onDeleteSection(index: number) {
-    this.currentNoteSections.splice(index, 1);
-    this.storeSection(this.currentNoteSections);
+    // this.currentNoteSections.splice(index, 1);
+    // this.storeSection(this.currentNoteSections);
     return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number) {
-    this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
-    this.storeSection(this.currentNoteSections);
+    // this.currentNoteSections[sectionIndex].subSections.splice(subSectionIndex, 1);
+    // this.storeSection(this.currentNoteSections);
     return of({ status: true, message: 'Success', data: [] });
   }
 
   onAddContent(content: IContent, sectionIndex: number, subSectionIndex: number, contentIndex: number, isBulkContent: boolean): Observable<IResponse> {
-    let contents: IContent[] = [];
-    let message = '';
+    // let contents: IContent[] = [];
+    // let message = '';
     // if (isBulkContent) {
     //   let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
     //   if (requestContents.length > 0) {
@@ -169,11 +132,12 @@ export class BackendService {
     //   this.currentNoteSections[sectionIndex].topics.splice(contentIndex, 0, ...contents);
     // }
     // this.storeSection(this.currentNoteSections);
-    return of({ status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [...contents] });
+    let message;
+    return of({ status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [] });
   }
 
   onAddSubSection(subSection: ISection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
+    // const currentSubSections = this.currentNoteSections[sectionIndex]?.subSections ?? [];
     // subSection.subSectionId = this.getCount("subSection");
     // currentSubSections.splice(subSectionIndex, 0, subSection);
     // this.storeSection(this.currentNoteSections);
@@ -206,8 +170,8 @@ export class BackendService {
 
   storeSection(sections: ISection[]) {
     const data = JSON.stringify(sections);
-    if (this.currentNoteKey) {
-      localStorage.setItem(this.currentNoteKey, data);
+    if (this.currentSubjectKey) {
+      localStorage.setItem(this.currentSubjectKey, data);
     }
   }
 }
