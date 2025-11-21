@@ -11,12 +11,13 @@ import { rxjsList } from "./testing/rxjs-list"
 import { typescriptList } from "./testing/typescript-list"
 import { angularUnitTestList } from "./testing/angular-unit-test-list"
 import { cssList } from "./testing/css-list"
+import { angularVersionFeatureList } from "./testing/angular-version-features-list"
 
 export const storeCount = () => {
   return {
-    section: 64,
-    subSection: 20,
-    topic: 352,
+    section: 72,
+    subSection: 21,
+    topic: 364,
   }
 }
 
@@ -27,6 +28,12 @@ const notes = (): ISubject[] => {
       type: Note.ANGULAR,
       id: 1,
       sections: angularList(),
+    },
+    {
+      name: "Angular Version Features",
+      type: Note.ANGULAR_VERSION_FEATURES,
+      id: 12,
+      sections: angularVersionFeatureList(),
     },
     {
       name: "Angular Unit Test",

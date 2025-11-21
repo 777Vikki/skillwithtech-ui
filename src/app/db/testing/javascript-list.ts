@@ -97,7 +97,7 @@ export const javascriptList = () => {
             "subSections": []
         },
         {
-            "name": "<p><strong>Promise</strong></p>",
+            "name": "<p><strong>Promise and async/await</strong></p>",
             "sectionId": 50,
             "noteType": "JavaScript",
             "topics": [
@@ -140,9 +140,34 @@ export const javascriptList = () => {
                     "noteType": "JavaScript",
                     "topicId": 214,
                     "description": "<pre data-language=\"plain\">\n// Creating a Promise that resolves after 2 seconds\n\nconst myPromise = new Promise((resolve, reject) =&gt; {\n  setTimeout(() =&gt; {\n    const success = true; // change to false to test rejection\n    if (success) {\n      resolve(&#39;Operation successful!&#39;);\n    } else {\n      reject(&#39;Operation failed!&#39;);\n    }\n  }, 2000);\n});\n\n// Using the Promise\n\nmyPromise\n  .then((message) =&gt; {\n    console.log(message);  // Runs if resolved\n  })\n  .catch((error) =&gt; {\n    console.error(error);  // Runs if rejected\n  });\n</pre>"
+                },
+                {
+                    "text": "<p>What is difference between <strong>async/await</strong> and <strong>Promises</strong>?</p>",
+                    "sectionId": 50,
+                    "subSectionId": -1,
+                    "noteType": "JavaScript",
+                    "topicId": 364,
+                    "description": "<p>async/await is built on top of Promises and only improves readability and error handling. Promises use chaining, while async/await uses synchronous-looking code with try/catch. They both work the same under the hood, async/await just makes async code cleaner and easier to write.</p>"
                 }
             ],
-            "subSections": []
+            "subSections": [
+                {
+                    "name": "<p><strong>async/await</strong></p>",
+                    "sectionId": 50,
+                    "subSectionId": 21,
+                    "noteType": "JavaScript",
+                    "topics": [
+                        {
+                            "text": "<p>What is async/await?</p>",
+                            "sectionId": 50,
+                            "subSectionId": 21,
+                            "noteType": "JavaScript",
+                            "topicId": 363,
+                            "description": "<p><strong>async/await</strong> is a feature in JavaScript (introduced in ES8) that makes working with asynchronous code <strong>easier</strong>, <strong>cleaner</strong>, and <strong>more readable</strong>.</p></br><p>It is basically <strong>a cleaner way to use Promises</strong>.</p></br><p><strong>async keyword: </strong>When you add <strong>async</strong> before a function, that function always returns a <strong>Promise</strong>.</p><pre data-language=\"plain\">\nasync function test() {\n  return &quot;Hello&quot;;\n}\n\ntest().then(res =&gt; console.log(res)); \n</pre></br><p><strong>await keyword: </strong><code>await</code> is used <strong>inside async functions</strong> only. It <strong>pauses execution</strong> until a Promise is resolved.</p><pre data-language=\"plain\">\nasync function getData() {\n  const result = await fetchData(); // waits here\n  console.log(result);\n}\n</pre>"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "<p><strong>Arrow function</strong></p>",

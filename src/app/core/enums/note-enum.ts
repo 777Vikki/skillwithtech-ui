@@ -9,5 +9,6 @@ export enum Note {
     AZURE = "AZURE",
     ANGULAR_MICROFRONTEND = "AngularMicroFrontend",
     PRACTICE_SET = "PracticeSet",
-    ANGULAR_UNIT_TEST = "AngularUnitTest"
+    ANGULAR_UNIT_TEST = "AngularUnitTest",
+    ANGULAR_VERSION_FEATURES = "AngularVersionFeatures",
 }
