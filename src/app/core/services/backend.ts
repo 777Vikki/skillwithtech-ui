@@ -35,17 +35,17 @@ export class BackendService {
   onAddSection(section: ISection, index: number): Observable<IResponse> {
     section.sectionId = this.getCount("section");
     this.currentSections.splice(index, 0, section);
-    this.storeSection(this.currentSections);
+    this.storeSection();
     return of({ status: true, message: 'Success', data: [section] });
   }
 
   onEditSection(section: IEditSectionRequest): Observable<IResponse> {
-    // const sec = this.currentNoteSections.find(d => d.sectionId === section.sectionId);
-    // if (sec) {
-    //   sec.name = section.name;
-    //   this.storeSection(this.currentNoteSections);
-    //   return of({ status: true, message: 'Success', data: [] });
-    // }
+    const sec = this.currentSections.find(d => d.sectionId === section.sectionId);
+    if (sec) {
+      sec.name = section.name;
+      this.storeSection();
+      return of({ status: true, message: 'Success', data: [] });
+    }
     return of({ status: false, message: 'Detail is not found.', data: [] });
 
   }
@@ -97,8 +97,8 @@ export class BackendService {
   }
 
   onDeleteSection(index: number) {
-    // this.currentNoteSections.splice(index, 1);
-    // this.storeSection(this.currentNoteSections);
+    this.currentSections.splice(index, 1);
+    this.storeSection();
     return of({ status: true, message: 'Success', data: [] });
   }
 
@@ -166,8 +166,8 @@ export class BackendService {
     return of({ status: false, message: 'data is not added.', data: [] });
   }
 
-  storeSection(sections: ISection[]) {
-    const data = JSON.stringify(sections);
+  storeSection() {
+    const data = JSON.stringify(this.currentSections);
     if (this.currentSubjectKey) {
       localStorage.setItem(this.currentSubjectKey, data);
     }

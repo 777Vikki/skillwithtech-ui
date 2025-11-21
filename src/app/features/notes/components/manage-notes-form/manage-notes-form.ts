@@ -404,7 +404,7 @@ export class ManageNotesForm implements OnInit {
     };
     this.notesService.onEditSection(section).subscribe((res: IResponse) => {
       if (res?.status) {
-        this.sharedNotesService.updateSectionText(section.name, section.sectionId)
+        this.sharedNotesService.updateSectionText(section.name, section.sectionId);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Section is successfully updated.' });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
