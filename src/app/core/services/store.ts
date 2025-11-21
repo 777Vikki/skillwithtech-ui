@@ -53,9 +53,9 @@ export class StoreService {
   };
   private dummySection: ISection = {
     name: '',
-    subjectId: 0,
-    sectionId: 0,
-    parentSectionId: 0,
+    subjectId: -1,
+    sectionId: -1,
+    parentSectionId: -1,
     contents: [],
     subSections: []
   }

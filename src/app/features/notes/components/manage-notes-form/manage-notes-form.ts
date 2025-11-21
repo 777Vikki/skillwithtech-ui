@@ -97,9 +97,9 @@ export class ManageNotesForm implements OnInit {
     this.removeFormControls();
     const subSection: ISection | undefined = this.sharedNotesService.currentActionRow() as ISection;
     const position = this.sharedNotesService.applyActionPosition();
-    const sectionId = (subSection?.sectionId != null && subSection?.sectionId > 0) ? subSection.sectionId : null;
+    const sectionId = (subSection?.parentSectionId != null && subSection?.parentSectionId > 0) ? subSection.parentSectionId : null;
     const subSectionId = (subSection?.sectionId != null && subSection?.sectionId > 0) ? subSection.sectionId : null;
-    this.subSections = sectionId ? (this.sections().find(d => d.sectionId === subSection?.sectionId)?.subSections ?? []) : [];
+    this.subSections = sectionId ? (this.sections().find(d => d.sectionId === subSection?.parentSectionId)?.subSections ?? []) : [];
     this.notesForm.addControl('sectionId', new FormControl(sectionId, [Validators.required]));
     this.notesForm.addControl('subSectionId', new FormControl(subSectionId));
     this.notesForm.addControl('text', new FormControl('', [Validators.required]));
@@ -239,14 +239,14 @@ export class ManageNotesForm implements OnInit {
   }
 
   setSubSectionControl() {
-    this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
+    this.notesForm.get('parentSectionId')?.valueChanges.subscribe(value => {
       this.subSections = (value != null && value > 0) ? (this.sections().find(d => d.sectionId === value)?.subSections ?? []) : [];
       this.notesForm.patchValue({
         subSectionId: null,
       });
     });
 
-    this.notesForm.get('subSectionId')?.valueChanges.subscribe(value => {
+    this.notesForm.get('sectionId')?.valueChanges.subscribe(value => {
       if (value != null && value > 0) {
         if (!this.notesForm.get('position')) {
           this.notesForm.addControl('position', new FormControl('', [Validators.required]));
