@@ -7,15 +7,15 @@
         </h3>
     </div>
     <div class="note-description-container">
-        @if(topic) {
+        @if(content) {
         <div class="ans-container">
             <div class="ans-box">
                 <div class="ans-box-header">
-                    <div [innerHTML]="topic.text"></div>
+                    <div [innerHTML]="content.text"></div>
                     @if(description && !isMobile) {
                     <div class="center-align-between">
                         <p-button (click)="onEdit()" label="Edit Answer" severity="success" />
-                        @if(topic && !isShowEditor && showReorderSectionIds.includes(topic.sectionId)) {
+                        @if(content && !isShowEditor && showReorderContentIds()?.includes(content.contentId)) {
                         <span class="material-symbols-outlined cursor-pointer" (click)="onChangeOrder()"
                             [pTooltip]="'Reorder Descriptions'" tooltipPosition="left"> change_circle
                         </span>

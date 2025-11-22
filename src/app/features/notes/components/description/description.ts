@@ -6,6 +6,7 @@ import { StoreService } from '../../../../core/services/store';
 import { TooltipModule } from 'primeng/tooltip';
 import { DescriptionModal } from '../../../../shared/modals/description-modal/description-modal';
 import { NotesService } from '../../../../core/services/notes';
+import { SharedNotesService } from '../../services/shared-notes';
 
 @Component({
   selector: 'app-description',
@@ -16,11 +17,12 @@ import { NotesService } from '../../../../core/services/notes';
 export class Description implements OnInit, OnChanges {
   private storeService = inject(StoreService);
   private notesService = inject(NotesService);
-  @Input() topic: IContent | undefined;
+  private sharedNotesService = inject(SharedNotesService);
+  @Input() content: IContent | undefined;
 
   @Output() emitEditorText = new EventEmitter<string>();
 
-  showReorderSectionIds = [53, 57];
+  showReorderContentIds = this.sharedNotesService.activeReorderContentIdList;
   isShowEditor: boolean = false;
   description: string | undefined;
   isMobile = this.storeService.checkMobileScreen();
@@ -29,12 +31,21 @@ export class Description implements OnInit, OnChanges {
   descriptionModalData: IContent | undefined;
 
   ngOnInit(): void {
+    if(this.showReorderContentIds() === undefined) {
+      this.getReorderContentIds();
+    }
+  }
 
+  getReorderContentIds() {
+    this.notesService.getReorderContentIds()
+      .subscribe(response => {
+        this.sharedNotesService.setActiveReorderContentIdList(response);
+      })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["topic"]) {
-      this.description = this.topic?.description ?? '';
+    if (changes["content"]) {
+      this.description = this.content?.description ?? '';
       this.reOrderCount = [];
       this.isShowEditor = false;
     }
@@ -47,7 +58,7 @@ export class Description implements OnInit, OnChanges {
 
   onEdit() {
     this.isShowEditor = true;
-    this.description = this.topic?.description;
+    this.description = this.content?.description;
     this.reOrderCount = [];
   }
 
@@ -76,7 +87,7 @@ export class Description implements OnInit, OnChanges {
   }
 
   onChangeOrder() {
-    const isPreContent = this.topic && this.topic.description.includes('<pre') && this.topic.description.includes('</pre>')
+    const isPreContent = this.content && this.content.description.includes('<pre') && this.content.description.includes('</pre>')
     if (isPreContent) {
       const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       for (let i = arr.length - 1; i > 0; i--) {
@@ -85,7 +96,7 @@ export class Description implements OnInit, OnChanges {
       }
       this.reOrderCount = arr;
     } else {
-      const descriptions = this.topic?.description.match(/<p>.*?<\/p>/g);
+      const descriptions = this.content?.description.match(/<p>.*?<\/p>/g);
 
       if (descriptions) {
         for (let i = descriptions.length - 1; i > 0; i--) {
@@ -93,7 +104,7 @@ export class Description implements OnInit, OnChanges {
           [descriptions[i], descriptions[j]] = [descriptions[j], descriptions[i]];
         }
 
-        if (this.topic) {
+        if (this.content) {
           this.description = descriptions.join("");
         }
       }

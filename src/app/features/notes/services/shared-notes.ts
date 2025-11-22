@@ -14,6 +14,7 @@ export class SharedNotesService {
   private _currentNote = signal<ISubject | undefined>(undefined);
   private _subjectList = signal<ISubject[]>([]);
   private _loadingSubject = signal<boolean>(true);
+  private _activeReorderContentIdList = signal<number[] | undefined>(undefined);
 
   private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(this._manageNoteCurrentAction());
   private currentNoteSectionsBehaviourSub = new BehaviorSubject<ISection[]>(this._currentNoteSections());
@@ -25,6 +26,7 @@ export class SharedNotesService {
   manageNoteCurrentAction = this._manageNoteCurrentAction.asReadonly();
   subjectList = this._subjectList.asReadonly();
   loadingSubject = this._loadingSubject.asReadonly();
+  activeReorderContentIdList = this._activeReorderContentIdList.asReadonly();
 
   getCurrentActionObservable(): Observable<IManageNotesAction | undefined> {
     return this._manageNoteActionBehaviourSub.asObservable();
@@ -60,6 +62,11 @@ export class SharedNotesService {
   setloadingSubject(loading: boolean) {
     this._loadingSubject.set(loading);
   }
+
+  setActiveReorderContentIdList(ids: number[]) {
+    this._activeReorderContentIdList.set(ids);
+  }
+
   deleteSection(sectionIndex: number) {
     this._currentNoteSections.update((sections: ISection[]) =>
       sections.filter((section: ISection, index: number) => sectionIndex !== index)
@@ -166,77 +173,4 @@ export class SharedNotesService {
       };
     });
   }
-
-
-  // updateSectionText(text: string, sectionId: number) {
-  //   this._currentNoteSections.update((sections: ISection[]) =>
-  //     sections.map((section: ISection) =>
-  //       section.sectionId === sectionId
-  //         ? {
-  //           ...section,
-  //           name: text
-  //         }
-  //         : section
-  //     )
-  //   );
-  // }
-
-  // updateSubSectionText(text: string, sectionId: number, subSectionId: number) {
-  //   this._currentNoteSections.update((sections: ISection[]) =>
-  //     sections.map((section) =>
-  //       section.sectionId === sectionId
-  //         ? {
-  //           ...section,
-  //           subSections: section.subSections.map((subsection: ISubSection) =>
-  //             subsection.subSectionId === subSectionId
-  //               ? {
-  //                 ...subsection,
-  //                 name: text
-  //               }
-  //               : subsection
-  //           )
-  //         }
-  //         : section
-  //     )
-  //   );
-  // }
-
-  // updateContentText(text: string, sectionId: number, subSectionId: number, contentId: number) {
-  //   this._currentNoteSections.update((sections: ISection[]) =>
-  //     sections.map((section: ISection) =>
-  //       section.sectionId === sectionId
-  //         ? subSectionId > 0
-  //           ? {
-  //             ...section,
-  //             subSections: section.subSections.map((subSection: ISubSection) =>
-  //               subSection.subSectionId === subSectionId
-  //                 ? {
-  //                   ...subSection,
-  //                   topics: subSection.topics.map((content: IContent) =>
-  //                     content.topicId === contentId
-  //                       ? {
-  //                         ...content,
-  //                         text: text
-  //                       }
-  //                       : content
-  //                   )
-  //                 }
-  //                 : subSection
-  //             )
-  //           }
-  //           : {
-  //             ...section,
-  //             topics: section.topics.map((content: IContent) =>
-  //               content.topicId === contentId
-  //                 ? {
-  //                   ...content,
-  //                   text: text
-  //                 }
-  //                 : content
-  //             )
-  //           }
-  //         : section
-  //     )
-  //   )
-  // }
 }

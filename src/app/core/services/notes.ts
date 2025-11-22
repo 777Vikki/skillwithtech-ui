@@ -268,6 +268,10 @@ export class NotesService {
     return undefined;
   }
 
+  getReorderContentIds(): Observable<number[]> {
+    return this.http.get<number[]>('/active_reorder_content_id.json');
+  }
+
   private getLocalStorageKey(subject: ISubject): string {
     if (subject) {
       return subject.id + '_' + subject.name.split(" ").map(d => d.trim()).join("_");
