@@ -1,14 +1,11 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ISubject, ISection, IContent } from '../interfaces/note-interface';
-import { BackendService } from './backend';
-import { Observable, tap } from 'rxjs';
 import { IManageNotesAction } from '../interfaces/manage-notes-action-interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  backendService = inject(BackendService);
 
   private manageNotesActions: IManageNotesAction[] = [
     {

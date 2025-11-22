@@ -30,6 +30,8 @@ export class ActiveNotes implements OnInit {
   private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
 
+  private isScrollAction = false;
+
   sections = this.sharedNotesService.currentNoteSections;
   selectedSection: ISection | undefined;
   selectedContent: IContent | undefined;
@@ -40,11 +42,12 @@ export class ActiveNotes implements OnInit {
   isSectionCollapse: boolean = false;
   visibleDescriptionModal: boolean = false;
   descriptionModalData: IContent | undefined;
-  isScrollAction = false;
 
   ngOnInit(): void {
-    this.sharedNotesService.getCurrentNoteSectionsObservable().pipe(takeUntilDestroyed(this.destroyRef))
+    this.sharedNotesService.getCurrentNoteSectionsObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
+        console.log('#ActiveNotes');
         if(!this.sharedNotesService.loadingSubject()) {
           this.resetSelectedValue();
         }
@@ -58,16 +61,13 @@ export class ActiveNotes implements OnInit {
     this.isScrollAction = true;
     if (sectionId > -1) {
       const element = document.getElementById('section_' + sectionId);
-      console.log('Element Section: ', element);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     if (contentId > -1) {
       const element = document.getElementById('content_' + contentId);
-      console.log('Element Content: ', element);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    console.log('Section Id: ', sectionId, 'Cotent Id: ', contentId);
   }
 
   onViewAnswer(event: MouseEvent) {
@@ -208,6 +208,5 @@ export class ActiveNotes implements OnInit {
         }
       });
     }
-
   }
 }

@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { IEditContentRequest, IEditSectionRequest, ISection, IContent, ISubject, ICount } from '../interfaces/note-interface';
-import { BackendService } from './backend';
 import { EMPTY, Observable, of } from 'rxjs';
-import { concatMap, tap, map, delay } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { IResponse } from '../interfaces/response-interface';
 import { AbstractControl, Validators } from '@angular/forms';
 import { SharedNotesService } from '../../features/notes/services/shared-notes';
@@ -16,7 +15,6 @@ type Count = 'subject' | 'section' | 'content';
 export class NotesService {
   private http = inject(HttpClient);
   private sharedNotesService = inject(SharedNotesService);
-  private backendService = inject(BackendService);
   private count: ICount = {
     subject: 0,
     section: 0,
@@ -39,19 +37,9 @@ export class NotesService {
     sections.splice(index, 0, section);
     this.storeSection(sections);
     return this.getSections().pipe(map(() => {
+      console.log('Add Section: ', section);
       return { status: true, message: 'Success', data: [section] }
     }));
-  }
-
-  onEditSection(section: IEditSectionRequest): Observable<IResponse> {
-    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
-    const currentSection = sections.find((sectionData: ISection) => sectionData.sectionId === section.sectionId);
-    if (currentSection) {
-      currentSection.name = section.name;
-      this.storeSection(sections);
-      return of({ status: true, message: 'Success', data: [] });
-    }
-    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onAddSubSection(subSection: ISection, sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
@@ -61,6 +49,7 @@ export class NotesService {
     subSections.splice(subSectionIndex, 0, subSection);
     this.storeSection(sections);
     return this.getSections().pipe(map(() => {
+      console.log('Add Sub Section: ', subSection);
       return { status: true, message: 'Success', data: [subSection] }
     }));
   }
@@ -73,7 +62,7 @@ export class NotesService {
       let requestContents: string[] = content.text?.match(/<p>.*?<\/p>/g) ?? [];
       if (requestContents.length > 0) {
         contents = requestContents.map(d => {
-          return Object.assign({}, content, { text: d, topicId: this.getCount("content") });
+          return Object.assign({}, content, { text: d, contentId: this.getCount("content") });
         });
       } else {
         return of({ status: false, message: 'Text format is not correct. Please see Preview.', data: [] });
@@ -91,32 +80,105 @@ export class NotesService {
     }
     this.storeSection(sections);
     return this.getSections().pipe(map(() => {
+      console.log('Add contents: ', contents);
       return { status: true, message: message ? message : 'Success', data: isBulkContent ? [] : [...contents] }
     }));
   }
 
+  onAddDescription(content: IContent, description: string): Observable<IResponse> {
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+    let section = sections.find((sectionData: ISection) => sectionData.sectionId === content.sectionId);
+    if (section) {
+      if (content.subSectionId > 0) {
+        section = section.subSections.find((subSection: ISection) => content.subSectionId === subSection.subSectionId);
+      }
+
+      if (section) {
+        const contentDetail = section.contents.find((contentData: IContent) => contentData.contentId === content.contentId);
+        if (contentDetail) {
+          contentDetail.description = description;
+          this.storeSection(sections);
+          return of({ status: true, message: 'Success', data: [{ ...contentDetail }] });
+        }
+      }
+    }
+    return of({ status: false, message: 'data is not added.', data: [content] });
+  }
+
+  onEditSection(section: IEditSectionRequest): Observable<IResponse> {
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+    const currentSection = sections.find((sectionData: ISection) => sectionData.sectionId === section.sectionId);
+    if (currentSection) {
+      currentSection.name = section.name;
+      this.storeSection(sections);
+      return of({ status: true, message: 'Success', data: [] });
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
+  }
+
   onEditSubSection(subSection: IEditSectionRequest): Observable<IResponse> {
-    return this.backendService.onEditSubSection(subSection);
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+    const subSectionDetail = sections.find((section: ISection) => section.sectionId === subSection.sectionId)
+      ?.subSections.find((subSec: ISection) => subSec.subSectionId === subSection.subSectionId);
+    if (subSectionDetail) {
+      subSectionDetail.name = subSection.name;
+      this.storeSection(sections);
+      return of({ status: true, message: 'Success', data: [] });
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onEditContent(content: IEditContentRequest): Observable<IResponse> {
-    return this.backendService.onEditContent(content);
-  }
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
 
-  onDeleteContent(content: IContent): Observable<IResponse> {
-    return this.backendService.onDeleteContent(content);
+    let section = sections.find((section: ISection) => section.sectionId === content.sectionId);
+    if (section) {
+      if (content.subSectionId > 0) {
+        section = section.subSections.find((subSection: ISection) => subSection.subSectionId === content.subSectionId);
+      }
+
+      if (section) {
+        const contentDetail = section.contents.find((contentData: IContent) => contentData.contentId === content.contentId);
+        if (contentDetail) {
+          contentDetail.text = content.text;
+          this.storeSection(sections);
+          return of({ status: true, message: 'Success', data: [] });
+        }
+      }
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   onDeleteSection(index: number): Observable<IResponse> {
-    return this.backendService.onDeleteSection(index);
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+    sections.splice(index, 1);
+    this.storeSection(sections);
+    return of({ status: true, message: 'Success', data: [] });
   }
 
   onDeleteSubSection(sectionIndex: number, subSectionIndex: number): Observable<IResponse> {
-    return this.backendService.onDeleteSubSection(sectionIndex, subSectionIndex);
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+    sections[sectionIndex].subSections.splice(subSectionIndex, 1);
+    this.storeSection(sections);
+    return of({ status: true, message: 'Success', data: [] });
   }
 
-  onAddDescription(topic: IContent, description: string): Observable<IResponse> {
-    return this.backendService.onAddDescription(topic, description);
+  onDeleteContent(content: IContent): Observable<IResponse> {
+    const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+
+    let section = sections.find((section: ISection) => section.sectionId === content.sectionId);
+    if (section) {
+      if (content.subSectionId > 0) {
+        section = section.subSections.find((subSection: ISection) => subSection.subSectionId === content.subSectionId);
+      }
+
+      if (section) {
+        section.contents = section.contents.filter((contentData: IContent) => contentData.contentId !== content.contentId)
+        this.storeSection(sections);
+        return of({ status: true, message: 'Success', data: [] });
+      }
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
   }
 
   getSubjectList() {
@@ -141,7 +203,7 @@ export class NotesService {
   getSections(): Observable<ISection[]> {
     this.sharedNotesService.setloadingSubject(true);
     const selectedSubject = this.sharedNotesService.currentNote();
-    const key = selectedSubject?.id + '_' + selectedSubject?.name.split(" ").map(d => d.trim()).join("_");
+    const key = selectedSubject ? this.getLocalStorageKey(selectedSubject) : '';
     const localStorageSections = localStorage.getItem(key);
     if (localStorageSections) {
       this.sharedNotesService.setloadingSubject(false);
@@ -158,8 +220,58 @@ export class NotesService {
     return EMPTY;
   }
 
-  getContent(noteId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
-    return this.backendService.getContent(noteId, sectionId, subSectionId, contentId);
+  getContent(subjectId: number, sectionId: number, subSectionId: number, contentId: number): Observable<IResponse> {
+    const currentSubject = this.sharedNotesService.currentNote();
+    if (currentSubject && currentSubject.id === subjectId) {
+      const sections = structuredClone(this.sharedNotesService.currentNoteSections());
+      const content = this.getContentFromSections(sections, sectionId, subSectionId, contentId)
+      if (content) {
+        return of({ status: true, message: 'Success', data: [structuredClone(content)] });
+      }
+    } else {
+      const subject = this.sharedNotesService.subjectList().find((subjectData: ISubject) => subjectData.id === subjectId);
+      if (subject) {
+        const key = this.getLocalStorageKey(subject);
+        const localStorageSections = localStorage.getItem(key);
+        if (localStorageSections) {
+          const sections: ISection[] = JSON.parse(localStorageSections);
+          const content = this.getContentFromSections(sections, sectionId, subSectionId, contentId)
+          if (content) {
+            return of({ status: true, message: 'Success', data: [structuredClone(content)] });
+          }
+        } else {
+          return this.http.get<ISection[]>(subject.links[0]).pipe(map((sections: ISection[]) => {
+            const content = this.getContentFromSections(sections, sectionId, subSectionId, contentId)
+            if (content) {
+              return { status: true, message: 'Success', data: [structuredClone(content)] };
+            }
+            return { status: false, message: 'Detail is not found.', data: [] };
+          }));
+        }
+      }
+    }
+    return of({ status: false, message: 'Detail is not found.', data: [] });
+  }
+
+  private getContentFromSections(sections: ISection[], sectionId: number, subSectionId: number, contentId: number): IContent | undefined {
+    let section = sections.find((sectionData: ISection) => sectionData.sectionId === sectionId);
+    if (section) {
+      if (subSectionId > 0) {
+        section = section.subSections.find((subSection: ISection) => subSection.subSectionId === subSectionId);
+        if (section) {
+          const content = section.contents.find((contentData: IContent) => contentData.contentId === contentId);
+          return content
+        }
+      }
+    }
+    return undefined;
+  }
+
+  private getLocalStorageKey(subject: ISubject): string {
+    if (subject) {
+      return subject.id + '_' + subject.name.split(" ").map(d => d.trim()).join("_");
+    }
+    return '';
   }
 
   removeUnusedTag(text: string) {
@@ -202,9 +314,9 @@ export class NotesService {
     control.updateValueAndValidity();
   }
 
-  storeSection(sections: ISection[]) {
+  private storeSection(sections: ISection[]) {
     const selectedSubject = this.sharedNotesService.currentNote();
-    const key = selectedSubject?.id + '_' + selectedSubject?.name.split(" ").map(d => d.trim()).join("_");
+    const key = selectedSubject? this.getLocalStorageKey(selectedSubject) : '';
     const data = JSON.stringify(sections);
     if (key) {
       localStorage.setItem(key, data);

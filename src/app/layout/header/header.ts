@@ -55,7 +55,7 @@ export class Header implements OnInit {
   onNavigation(path: string) {
 
     const queryParamRequest: any = {
-      queryParams: {notesId: this.selectedHeader()?.id}
+      queryParams: {subjectId: this.selectedHeader()?.id}
     }
     if(path === '../') {
       queryParamRequest['relativeTo'] = this.route;
@@ -65,12 +65,6 @@ export class Header implements OnInit {
     
     const routerPath = path? [path] : [];
     this.router.navigate(routerPath, queryParamRequest);
-
-    // this.router.navigate([], {
-    //     relativeTo: this.route,      // stay on current route
-    //     queryParams: { NotesId: this.selectedHeader.id },      // update ID
-    //     // queryParamsHandling: 'merge' // keep other query params
-    //   });
   }
 
   onSelectNote(header: DropdownChangeEvent) {

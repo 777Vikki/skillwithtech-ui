@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { IEditContentRequest, IEditSectionRequest, ISection, IContent } from '../../../../core/interfaces/note-interface';
@@ -7,7 +7,6 @@ import { NotesService } from '../../../../core/services/notes';
 import { ButtonModule } from 'primeng/button';
 import { EditorModule } from 'primeng/editor';
 import { IManageNotesAction } from '../../../../core/interfaces/manage-notes-action-interface';
-import { StoreService } from '../../../../core/services/store';
 import { PlainTextPipe } from '../../../../core/pipes/plain-text-pipe';
 import { SharedNotesService } from '../../services/shared-notes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

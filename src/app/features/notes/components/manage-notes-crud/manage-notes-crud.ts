@@ -10,6 +10,7 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { SharedNotesService } from '../../services/shared-notes';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Toast } from 'primeng/toast';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-manage-notes-crud',
@@ -27,23 +28,42 @@ export class ManageNotesCrud implements OnInit {
   private confirmationService = inject(ConfirmationService);
   private destroyRef = inject(DestroyRef);
 
+  private isScrollAction = false;
+
   sections = this.sharedNotesService.currentNoteSections;
   openToggle = signal<{ id: number, type: string }>({ id: 0, type: '' });
   activeRow = signal<{ id: number, type: string }>({ id: 0, type: '' });
 
   ngOnInit() {
+    this.sharedNotesService.getCurrentNoteSectionsObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        console.log('#ManageNotesCrud');
+        if (!this.sharedNotesService.loadingSubject()) {
+          this.setDetailToScroll();
+        }
+      })
   }
 
   ngAfterViewInit(): void {
+
+  }
+
+  setDetailToScroll() {
     const routeQueryParams = this.route.snapshot.queryParams;
     const sectionId = routeQueryParams['sectionId'] ? +routeQueryParams['sectionId'] : 0;
     const contentId = routeQueryParams['contentId'] ? +routeQueryParams['contentId'] : 0;
     const subsectionId = routeQueryParams['subSectionId'] ? +routeQueryParams['subSectionId'] : 0;
-    this.setActiveRow(sectionId, subsectionId, contentId);
-    this.scrollManageViewList(sectionId, subsectionId, contentId);
+    setTimeout(() => {
+      this.setActiveRow(sectionId, subsectionId, contentId);
+      this.scrollManageViewList(sectionId, subsectionId, contentId);
+    }, 300);
   }
 
   setActiveRow(sectionId: number, subsectionId: number, contentId: number) {
+    if(this.isScrollAction) {
+      return;
+    }
     if (contentId != null && contentId > 0) {
       this.activeRow.set({ id: contentId, type: 'content' });
     } else if (subsectionId != null && subsectionId > 0) {
@@ -54,6 +74,10 @@ export class ManageNotesCrud implements OnInit {
   }
 
   scrollManageViewList(sectionId: number, subsectionId: number, contentId: number) {
+    if(this.isScrollAction) {
+      return;
+    }
+    this.isScrollAction = true;
     let elementId = '';
     if (contentId != null && contentId > 0) {
       elementId = "manage-content-" + contentId;
