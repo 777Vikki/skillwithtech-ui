@@ -1,5 +1,6 @@
 <div class="note-container">
     @if(!isMobileScreen) {
+    @if(!loadingSubject()) {
     <div class="disktop-view" [ngClass]="{'collapse-section': isSectionCollapse}">
         <div class="note-section">
             <div class="note-section-header center-align-between">
@@ -48,6 +49,9 @@
             <app-description [topic]="selectedContent" (emitEditorText)="onAddDescription($event)"></app-description>
         </div>
     </div>
+    } @else {
+        <app-active-notes-loader></app-active-notes-loader>
+    }
     } @else {
     <div class="mobile-view">
         @for(section of sections(); track section.sectionId) {

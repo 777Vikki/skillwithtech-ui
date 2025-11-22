@@ -13,10 +13,11 @@ import { MessageService } from 'primeng/api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SharedNotesService } from '../../services/shared-notes';
 import { DescriptionModal } from '../../../../shared/modals/description-modal/description-modal';
+import { ActiveNotesLoader } from '../../../../shared/components/active-notes-loader/active-notes-loader';
 
 @Component({
   selector: 'app-active-notes',
-  imports: [NgClass, NgTemplateOutlet, Toast, Description, CardModule, TooltipModule, DescriptionModal],
+  imports: [NgClass, NgTemplateOutlet, Toast, Description, CardModule, TooltipModule, DescriptionModal, ActiveNotesLoader],
   templateUrl: './active-notes.html',
   styleUrl: './active-notes.scss',
   providers: [MessageService]
@@ -42,6 +43,7 @@ export class ActiveNotes implements OnInit {
   isSectionCollapse: boolean = false;
   visibleDescriptionModal: boolean = false;
   descriptionModalData: IContent | undefined;
+  loadingSubject = this.sharedNotesService.loadingSubject;
 
   ngOnInit(): void {
     this.sharedNotesService.getCurrentNoteSectionsObservable()

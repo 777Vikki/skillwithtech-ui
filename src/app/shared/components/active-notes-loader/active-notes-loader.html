@@ -1,0 +1,36 @@
+<div class="disktop-view">
+    <div class="note-section">
+        <div class="note-section-header center-align-between">
+            <h3>Section</h3>
+        </div>
+        <div class="note-section-container">
+            @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; track item) {
+            <div class="note-section-item">
+                <p-skeleton class="mb-2" />
+            </div>
+            }
+        </div>
+    </div>
+    <div class="note-topic">
+        <div class="note-topic-header">
+            <h3>Content</h3>
+        </div>
+        <div class="note-topic-container">
+            @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; track item) {
+            <div class="note-topic-item">
+                <p-skeleton class="mb-2" />
+            </div>
+            }
+        </div>
+    </div>
+    <div class="note-description">
+        <div class="note-desc">
+            <div class="note-description-header">
+                <h3>Description</h3>
+            </div>
+            <div class="note-description-container">
+                <p-skeleton width="100%" height="300px" />
+            </div>
+        </div>
+    </div>
+</div>
