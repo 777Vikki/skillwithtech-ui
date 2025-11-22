@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { IManageNotesAction } from '../../../core/interfaces/manage-notes-action-interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ISubject, ISection, ISubSection, IContent } from '../../../core/interfaces/note-interface';
+import { ISubject, ISection, IContent } from '../../../core/interfaces/note-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,11 @@ import { ISubject, ISection, ISubSection, IContent } from '../../../core/interfa
 export class SharedNotesService {
   private _manageNoteCurrentAction = signal<IManageNotesAction | undefined>(undefined);
   private _currentNoteSections = signal<ISection[]>([]);
-  private _currentActionRow = signal<ISection | ISubSection | IContent | undefined>(undefined);
+  private _currentActionRow = signal<ISection | IContent | undefined>(undefined);
   private _applyActionPosition = signal<string>('');
   private _currentNote = signal<ISubject | undefined>(undefined);
+  private _subjectList = signal<ISubject[]>([]);
+  private _loadingSubject = signal<boolean>(true);
 
   private _manageNoteActionBehaviourSub = new BehaviorSubject<IManageNotesAction | undefined>(this._manageNoteCurrentAction());
   private currentNoteSectionsBehaviourSub = new BehaviorSubject<ISection[]>(this._currentNoteSections());
@@ -21,7 +23,8 @@ export class SharedNotesService {
   currentNote = this._currentNote.asReadonly();
   currentNoteSections = this._currentNoteSections.asReadonly();
   manageNoteCurrentAction = this._manageNoteCurrentAction.asReadonly();
-
+  subjectList = this._subjectList.asReadonly();
+  loadingSubject = this._loadingSubject.asReadonly();
 
   getCurrentActionObservable(): Observable<IManageNotesAction | undefined> {
     return this._manageNoteActionBehaviourSub.asObservable();
@@ -36,7 +39,7 @@ export class SharedNotesService {
     this._manageNoteActionBehaviourSub.next(action);
   }
 
-  setCurrectActionRowDetail(row: ISection | ISubSection | IContent | undefined, position: string) {
+  setCurrectActionRowDetail(row: ISection | IContent | undefined, position: string) {
     this._currentActionRow.set(row);
     this._applyActionPosition.set(position);
   }
@@ -50,6 +53,13 @@ export class SharedNotesService {
     this.currentNoteSectionsBehaviourSub.next(sections);
   }
 
+  setSubjectList(subjects: ISubject[]) {
+    this._subjectList.set(subjects);
+  }
+
+  setloadingSubject(loading: boolean) {
+    this._loadingSubject.set(loading);
+  }
   deleteSection(sectionIndex: number) {
     this._currentNoteSections.update((sections: ISection[]) =>
       sections.filter((section: ISection, index: number) => sectionIndex !== index)
@@ -79,14 +89,14 @@ export class SharedNotesService {
               subSection.subSectionId === content.subSectionId
                 ? {
                   ...subSection,
-                  topics: subSection.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
+                  contents: subSection.contents.filter((contentData: IContent) => contentData.contentId !== content.contentId)
                 }
                 : subSection
             )
           }
           : {
             ...section,
-            topics: section.topics.filter((topic: IContent) => topic.topicId !== content.topicId)
+            contents: section.contents.filter((contentData: IContent) => contentData.contentId !== content.contentId)
           }
       )
     )
@@ -138,8 +148,8 @@ export class SharedNotesService {
             subSection.subSectionId === subSectionId
               ? {
                 ...subSection,
-                topics: subSection.topics.map((topic) =>
-                  topic.topicId === contentId ? { ...topic, text } : topic
+                contents: subSection.contents.map((content) =>
+                  content.contentId === contentId ? { ...content, text } : content
                 ),
               }
               : subSection
@@ -150,8 +160,8 @@ export class SharedNotesService {
       // Update directly inside section
       return {
         ...section,
-        topics: section.topics.map((topic) =>
-          topic.topicId === contentId ? { ...topic, text } : topic
+        contents: section.contents.map((content) =>
+          content.contentId === contentId ? { ...content, text } : content
         ),
       };
     });

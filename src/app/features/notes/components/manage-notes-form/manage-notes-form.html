@@ -41,7 +41,7 @@
             <div class="form-group">
                 <label>Content: </label>
                 <p-select [options]="contents" [showClear]="true" formControlName="contentId"
-                    placeholder="Select Content" optionLabel="text" optionValue="topicId" class="w-full md:w-56">
+                    placeholder="Select Content" optionLabel="text" optionValue="contentId" class="w-full md:w-56">
                     <ng-template let-item #selectedItem>
                         <span>{{item.text | plainText:60}}</span>
                     </ng-template>

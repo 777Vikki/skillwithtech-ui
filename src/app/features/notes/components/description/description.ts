@@ -59,15 +59,15 @@ export class Description implements OnInit, OnChanges {
       const sectionId = params.get('sectionId');
       const subSectionId = params.get('subSectionId');
       const contentId = params.get('contentId');
-      const notesId = params.get('notesId');
-      if (notesId && sectionId && contentId) {
+      const subjectId = params.get('subjectId');
+      if (subjectId && sectionId && contentId) {
         event.preventDefault();
         this.visibleDescriptionModal = true;
-        this.notesService.getContent(+notesId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
+        this.notesService.getContent(+subjectId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
           .subscribe(response => {
             if(response.status && response.data.length) {
               this.descriptionModalData = response.data[0] as IContent;
-              this.descriptionModalData.noteId = +notesId;
+              this.descriptionModalData.subjectId = +subjectId;
             }
           })
       }
