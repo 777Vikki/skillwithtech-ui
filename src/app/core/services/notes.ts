@@ -243,6 +243,7 @@ export class NotesService {
           return this.http.get<ISection[]>(subject.links[0]).pipe(map((sections: ISection[]) => {
             const content = this.getContentFromSections(sections, sectionId, subSectionId, contentId)
             if (content) {
+              console.log('#getContent');
               return { status: true, message: 'Success', data: [structuredClone(content)] };
             }
             return { status: false, message: 'Detail is not found.', data: [] };
@@ -258,10 +259,10 @@ export class NotesService {
     if (section) {
       if (subSectionId > 0) {
         section = section.subSections.find((subSection: ISection) => subSection.subSectionId === subSectionId);
-        if (section) {
-          const content = section.contents.find((contentData: IContent) => contentData.contentId === contentId);
-          return content
-        }
+      }
+      if (section) {
+        const content = section.contents.find((contentData: IContent) => contentData.contentId === contentId);
+        return content
       }
     }
     return undefined;
@@ -316,7 +317,7 @@ export class NotesService {
 
   private storeSection(sections: ISection[]) {
     const selectedSubject = this.sharedNotesService.currentNote();
-    const key = selectedSubject? this.getLocalStorageKey(selectedSubject) : '';
+    const key = selectedSubject ? this.getLocalStorageKey(selectedSubject) : '';
     const data = JSON.stringify(sections);
     if (key) {
       localStorage.setItem(key, data);
