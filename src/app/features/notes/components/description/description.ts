@@ -65,6 +65,7 @@ export class Description implements OnInit, OnChanges {
         this.visibleDescriptionModal = true;
         this.notesService.getContent(+subjectId, +sectionId, subSectionId? +subSectionId : -1, +contentId)
           .subscribe(response => {
+            console.log('#onViewAnswer');
             if(response.status && response.data.length) {
               this.descriptionModalData = response.data[0] as IContent;
               this.descriptionModalData.subjectId = +subjectId;

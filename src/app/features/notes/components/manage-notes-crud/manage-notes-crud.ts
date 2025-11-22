@@ -38,7 +38,6 @@ export class ManageNotesCrud implements OnInit {
     this.sharedNotesService.getCurrentNoteSectionsObservable()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        console.log('#ManageNotesCrud');
         if (!this.sharedNotesService.loadingSubject()) {
           this.setDetailToScroll();
         }

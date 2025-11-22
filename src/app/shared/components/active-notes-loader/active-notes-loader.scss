@@ -1,0 +1,53 @@
+.disktop-view {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.note-section {
+    width: 20%;
+    border-right: 1px solid black;
+}
+
+.note-topic {
+    width: 30%;
+    border-right: 1px solid black;
+}
+
+.note-description {
+    width: 50%;
+}
+
+.note-section-header, .note-topic-header, .note-description-header {
+    padding: 8px;
+    border-bottom: 1px solid black;
+}
+
+.note-section-container, .note-topic-container {
+    overflow-y: auto;
+    height: calc(100vh - 125px);
+}
+
+.note-section-item, .note-topic-item {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.note-description-container {
+    padding: 8px;
+}
+
+.note-desc {
+    .note-description-header {
+        padding: 8px;
+        border-bottom: 1px solid black;
+    }
+}
+
+.note-description-container {
+    padding: 8px;
+}
